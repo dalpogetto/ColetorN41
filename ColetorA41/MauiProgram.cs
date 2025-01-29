@@ -43,6 +43,7 @@ namespace ColetorA41
             builder.Services.AddTransient<EstabTec>();
             builder.Services.AddTransient<DadosNF>();
             builder.Services.AddTransient<ExtrakitView>();
+            builder.Services.AddTransient<LeituraENC>();
             builder.Services.AddTransient<Resumo>();
             builder.Services.AddTransient<ResumoDetalhe>();
 

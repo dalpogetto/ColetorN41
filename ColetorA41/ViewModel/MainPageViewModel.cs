@@ -33,6 +33,12 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"/{nameof(ParamEstabList)}");
         }
 
+        [RelayCommand]
+        async Task ChamarLeituraENC()
+        {
+            await Shell.Current.GoToAsync($"/{nameof(LeituraENC)}");
+        }
+
 
 
     }

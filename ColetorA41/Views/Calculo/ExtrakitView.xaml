@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:ColetorA41.Models"
              x:DataType="viewmodel:CalculoViewModel"
              Title="ExtrakitView">
-    <Grid RowDefinitions="*,70">
+    <Grid RowDefinitions="*,80">
         <ScrollView>
         <StackLayout>
             <Grid RowDefinitions="Auto, *">
@@ -129,31 +129,25 @@
         </ScrollView>
 
         <Grid ColumnDefinitions="100,*,100" Grid.Row="2" BackgroundColor="White">
-            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
-                <Image Source="usuario" WidthRequest="50">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarEstabTecCommand}" />
-                    </Image.GestureRecognizers>
-                </Image>
-                <Label Text="Técnico"/>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
-                <Image Source="informe2" WidthRequest="50">
+            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="End">
+                <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-                <Label Text="Dados NF"/>
+               
             </VerticalStackLayout>
+
+           
             
             <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
-                <Image Source="resumo2" WidthRequest="50">
+                <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarResumoCommand}" />
+                        <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-                <Label Text="Resumo"/>
+                
+                
             </VerticalStackLayout>
         </Grid>
 

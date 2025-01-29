@@ -336,6 +336,12 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
         }
 
+        [RelayCommand]
+        async Task ChamarLeituraENC()
+        {
+            await Shell.Current.GoToAsync($"{nameof(LeituraENC)}");
+        }
+
 
     }
 }

@@ -106,21 +106,26 @@
                 </StackLayout>
             </VerticalStackLayout>
 
-            <Grid ColumnDefinitions="170,*,100" Grid.Row="2" BackgroundColor="White">
-                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                    <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
-                        <Image Source="usuario" WidthRequest="50"></Image>
-                        <Label Text="Técnico"/>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
-                        <Image Source="folder2" WidthRequest="50"></Image>
-                        <Label Text="Extrakit"/>
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-
+            <Grid ColumnDefinitions="100,*,100" Grid.Row="2" BackgroundColor="White">
                 
-            </Grid>
+                    <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
+                        <Image Source="seta_esquerda" WidthRequest="50">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
+                        <Image Source="seta_dupla_esquerda" WidthRequest="80" Margin="0,-18,0,0">
+                              <Image.GestureRecognizers>
+                                 <TapGestureRecognizer Command="{Binding ChamarEstabTecCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+               
+            </VerticalStackLayout>
+           
+        </Grid>
         </Grid>
     
 </ContentPage>
