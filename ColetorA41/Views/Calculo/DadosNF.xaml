@@ -92,8 +92,8 @@
 
         </VerticalStackLayout>
 
-        <Grid ColumnDefinitions="80,*,80" Grid.Row="2" BackgroundColor="White">
-            <VerticalStackLayout  HorizontalOptions="End">
+        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+            <VerticalStackLayout  HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarEstabTecCommand}" />
@@ -102,7 +102,7 @@
                 
             </VerticalStackLayout>
 
-            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
+            <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarExtrakitCommand}" />

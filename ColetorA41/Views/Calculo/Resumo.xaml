@@ -32,7 +32,7 @@
 
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
-                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" />
                         </Frame.GestureRecognizers>
@@ -45,7 +45,7 @@
                         </Grid>
                     </Frame>
 
-                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Green" Padding="1" >
                                 <Label Text="265" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -57,7 +57,7 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
-                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#045B8F" Padding="1" >
                                 <Label Text="0" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -67,7 +67,7 @@
                         </Grid>
                     </Frame>
 
-                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke" >
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Orange" Padding="1" >
                                 <Label Text="6" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -79,7 +79,7 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
-                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#AAC248" Padding="1" >
                                 <Label Text="0" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -89,7 +89,7 @@
                         </Grid>
                     </Frame>
 
-                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#9e3933" Padding="1" >
                                 <Label Text="15" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -106,7 +106,7 @@
                 </StackLayout>
             </VerticalStackLayout>
 
-            <Grid ColumnDefinitions="100,*,100" Grid.Row="2" BackgroundColor="White">
+            <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
                 
                     <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                         <Image Source="seta_esquerda" WidthRequest="50">
@@ -116,7 +116,7 @@
                         </Image>
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
+                    <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
                         <Image Source="seta_dupla_esquerda" WidthRequest="80" Margin="0,-18,0,0">
                               <Image.GestureRecognizers>
                                  <TapGestureRecognizer Command="{Binding ChamarEstabTecCommand}" />

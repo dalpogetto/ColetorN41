@@ -28,7 +28,7 @@
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
                         Source="scanner.png"
-                        HeightRequest="80"
+                        HeightRequest="60"
                         HorizontalOptions="Center" />
                     <Label  Text="Scanner ENC"
                         FontAttributes="Bold"
@@ -37,9 +37,9 @@
                         HorizontalOptions="Center" />
 
                 </HorizontalStackLayout>
-
-                <Entry x:Name="entry"
-                       Margin="20,20"
+                <Border HeightRequest="70" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke"  >
+                    <Entry x:Name="entry"
+                       Margin="20,10"
                        FontSize="18"
                        Text="{Binding NumEnc}"
                        Placeholder="Aguardando leitura de etiqueta...."
@@ -47,6 +47,7 @@
                        ReturnCommand="{Binding LeituraENCCommand}"
                        ReturnCommandParameter="{Binding NumEnc}"
                        TextColor="Black"></Entry>
+                </Border>
 
                 <ActivityIndicator  Grid.Column="0"
                                  IsVisible="{Binding IsBusy}"
@@ -60,75 +61,45 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <ScrollView Grid.Row="1" Margin="5,-80,5,0">
+        <ScrollView Grid.Row="1" Margin="5,0,5,0">
             <StackLayout>
-                <CollectionView x:Name="teste" 
-                                  ItemsSource="{Binding listaENC}" 
-                                 
-                                  >
+                <CollectionView x:Name="collectionParam"
+                 ItemsSource="{Binding listaEnc}" 
+                 SelectionMode="None" 
+                 VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Extrakit">
+                        <DataTemplate x:DataType="models:Enc">
                             <StackLayout>
-                                <Border HeightRequest="70" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
-
-                                    <Grid Padding="5" >
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Label Grid.Row="0"
-                                               Grid.Column="0"
-                                               Text="{Binding itCodigo}"
-                                               FontSize="16"
-                                               FontAttributes="Bold" />
-
-                                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End"  >
-                                            <Label Text="{Binding serieDocto}" FontAttributes="Bold"/>
-                                            <Label Text=" - " FontAttributes="Bold"/>
-                                            <Label Text="{Binding nroDocto}" FontAttributes="Bold"/>
-                                        </HorizontalStackLayout>
-
-                                        <Label Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 Grid.ColumnSpan="2"
-                                                 Grid.RowSpan="2"
-                                                 Text="{Binding descItem}"
-                                                 FontAttributes="Italic"
-                                               HorizontalOptions="Start"
-                                                 VerticalOptions="Start"
-                                               WidthRequest="300"/>
-
-                                        <Frame CornerRadius="10" 
-                                                 HasShadow="True" 
-                                                 Grid.Row="1" 
-                                                 Grid.Column="1" 
-                                                 HorizontalOptions="End" 
-                                                 Margin="10,20,0,0"
-                                                 WidthRequest="40"
-                                                 HeightRequest="30"
-                                                 BackgroundColor="WhiteSmoke"
-                                                 Padding="1" 
-                                                 
-                                                 >
-                                            <Label Text="{Binding qtSaldo}"
-                                                     FontSize="16"
-                                                     FontAttributes="Bold" 
-                                                         VerticalOptions="Center"
-                                                         HorizontalOptions="Center"
-                                                     />
-                                        </Frame>
-
-
-
-                                    </Grid>
-                                </Border>
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem 
+                                                    IconImageSource="trash.png"
+                                                    BackgroundColor="LightCoral"
+                                                    Command="{Binding BindingContext.EliminarCommand, Source={x:Reference mainPage}}"
+                                                    CommandParameter="{Binding .}" />
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Border HeightRequest="80" Margin="0,5" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                                        <Grid ColumnDefinitions="65,*" >
+                                            <Frame HeightRequest="60" WidthRequest="60" Margin="0,2" Padding="5" HasShadow="true" BackgroundColor="WhiteSmoke" CornerRadius="10">
+                                                <Label Text="{Binding flag}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" VerticalTextAlignment="Center" />
+                                            </Frame>
+                                            <Grid Padding="5" RowDefinitions="25,auto,*" ColumnDefinitions="80,80,80" ColumnSpacing="5" Grid.Column="1">
+                                                <!--Chave-->
+                                                <Label Text="{Binding itCodigo}" Grid.ColumnSpan="4" FontSize="16" FontAttributes="Bold" />
+                                                <!--Cabecalho-->
+                                                <Label Text="ENC"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="0"></Label>
+                                                <Label Text="OS"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="1"></Label>
+                                                <Label Text="Chamado"        Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="2"></Label>
+                                                <!--Detalhe-->
+                                                <Label Text="{Binding numEnc}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
+                                                <Label Text="{Binding numOS}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
+                                                <Label Text="{Binding chamado}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </SwipeView>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -137,8 +108,8 @@
 
         </ScrollView>
 
-        <Grid ColumnDefinitions="100,*,100" Grid.Row="2" BackgroundColor="White">
-            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="End">
+        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarExtrakitCommand}" />
@@ -149,7 +120,7 @@
 
 
 
-            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
+            <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoCommand}" />

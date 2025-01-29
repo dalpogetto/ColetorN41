@@ -67,7 +67,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Extrakit">
                             <StackLayout>
-                                <Border HeightRequest="70" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                                <Border HeightRequest="90" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
 
                                     <Grid Padding="5" >
                                         <Grid.RowDefinitions>
@@ -135,8 +135,8 @@
 
         </ScrollView>
 
-        <Grid ColumnDefinitions="100,*,100" Grid.Row="2" BackgroundColor="White">
-            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="End">
+        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />
@@ -147,7 +147,7 @@
 
 
 
-            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
+            <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />

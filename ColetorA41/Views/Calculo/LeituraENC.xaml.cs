@@ -12,4 +12,6 @@ public partial class LeituraENC : ContentPage
         this.BindingContext = viewModel;
         this.vm = viewModel;
     }
+
+    
 }

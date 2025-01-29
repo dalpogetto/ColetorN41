@@ -130,7 +130,7 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         string numEnc;
 
-
+        
 
         public ObservableCollection<Transporte> listaTransporte { get; private set; } = new();
 
@@ -340,7 +340,7 @@ namespace ColetorA41.ViewModel
         async Task ChamarEstabTec()
         {
             //await Shell.Current.DisplayAlert("Aqui", "Entrou", "OK");
-            await Shell.Current.GoToAsync($"{nameof(EstabTec)}");
+            await Shell.Current.GoToAsync($"/{nameof(EstabTec)}");
         }
 
         [RelayCommand]
@@ -377,10 +377,21 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task LeituraENC(string numEnc)
         {
-            var lista = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.entregaSelecionada.nrProcesso.ToString());
-            await Shell.Current.DisplayAlert("Aqui", numEnc, "OK");
+            //var lista = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.entregaSelecionada.nrProcesso.ToString());
+            //await Shell.Current.DisplayAlert("Aqui", numEnc, "OK");
+            this.Mock();
             this.NumEnc = string.Empty;
         }
+
+        public async void Mock()
+        {
+            this.IsBusy = true;
+            this.listaEnc.Add(new Enc {numEnc="12345", chamado = "11111", flag = "OK", itCodigo = "85.111.00024-2b", numOS=8540, mensagem="Mensagem: OK" });
+            this.listaEnc.Add(new Enc {numEnc = "6789", chamado = "", flag = "ERRO", itCodigo = "ENC inválida", itDescricao = "", numOS = 0, mensagem = "" });
+            this.IsBusy = false;
+        }
+
+
 
 
     }

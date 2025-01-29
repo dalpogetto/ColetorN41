@@ -15,8 +15,9 @@ namespace ColetorA41.Models
     }
     public class Enc
     {
+        public string numEnc { get; set; }
         public int numOS { get; set; }
-        public int chamado { get; set; }
+        public string chamado { get; set; }
         public string itCodigo { get; set; }
         public string itDescricao { get; set; }
         public string mensagem { get; set; }
