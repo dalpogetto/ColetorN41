@@ -18,6 +18,7 @@ namespace ColetorA41.Models
     {
         public int codTransp { get; set; }
         public string nomeAbrev { get; set; }
+        public string identific => $"{codTransp} - {nomeAbrev}";
     }
 
 }

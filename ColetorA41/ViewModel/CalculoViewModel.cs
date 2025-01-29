@@ -47,6 +47,8 @@ namespace ColetorA41.ViewModel
                 if (_tecnicoSelecionado != value)
                 {
                     _tecnicoSelecionado = value;
+                    this.ObterEntrega();
+                    
                 }
             }
         }
@@ -85,6 +87,11 @@ namespace ColetorA41.ViewModel
 
         public ObservableCollection<Tecnico> listaTecnico { get; private set; } = new();
 
+        public ObservableCollection<Enc> listaEnc { get; private set; } = new();
+
+        [ObservableProperty]
+        string etiquetaEnc;
+
         //Dados da Nota
         [ObservableProperty]
         string serieEntra;
@@ -102,7 +109,13 @@ namespace ColetorA41.ViewModel
         Transporte transpEntraSelecionado;
 
         [ObservableProperty]
+        ParamEstabel parametroSelecionado;
+
+        [ObservableProperty]
         Transporte transpSaidaSelecionado;
+
+        [ObservableProperty]
+        Entrega entregaSelecionada;
 
         //Login Almoxarifado
         [ObservableProperty]
@@ -113,6 +126,9 @@ namespace ColetorA41.ViewModel
 
         [ObservableProperty]
         string tipoCalculo;
+
+        [ObservableProperty]
+        string numEnc;
 
 
 
@@ -131,6 +147,21 @@ namespace ColetorA41.ViewModel
             this.IsBusy = false;
         }
 
+        public ObservableCollection<Entrega> listaEntrega { get; private set; } = new();
+
+        public async void ObterEntrega()
+        {
+            this.IsBusy = true;
+            var lista = await _service.ObterEntrega(this.TecnicoSelecionado.codTec, this.EstabSelecionado.codEstab);
+
+            this.listaEntrega.Clear();
+            foreach (var item in lista)
+            {
+                this.listaEntrega.Add(item);
+            }
+            this.IsBusy = false;
+        }
+
         public async void ObterParametrosEstab()
         {
             this.IsBusy = true;
@@ -139,6 +170,7 @@ namespace ColetorA41.ViewModel
             {
                 this.TranspEntraSelecionado = this.listaTransporte.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
                 this.TranspSaidaSelecionado = this.listaTransporte.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
+                this.EntregaSelecionada = this.listaEntrega.Where(item => item.codEntrega == parametro.codEntrega).FirstOrDefault();
                 this.SerieEntra = parametro.serieEntra;
                 this.SerieSaida = parametro.serieSai;
                 this.Entrega = parametro.codEntrega;
@@ -164,7 +196,7 @@ namespace ColetorA41.ViewModel
         {
             this.IsBusy = true;
             this.listaExtrakit.Clear();
-            var lista = await _service.ObterExtrakit(this.EstabSelecionado.codEstab, 66222, 1531736);
+            var lista = await _service.ObterExtrakit(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, this.entregaSelecionada.nrProcesso);
             foreach (var item in lista)
             {
                 this.listaExtrakit.Add(item);
@@ -340,6 +372,14 @@ namespace ColetorA41.ViewModel
         async Task ChamarLeituraENC()
         {
             await Shell.Current.GoToAsync($"{nameof(LeituraENC)}");
+        }
+
+        [RelayCommand]
+        async Task LeituraENC(string numEnc)
+        {
+            var lista = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.entregaSelecionada.nrProcesso.ToString());
+            await Shell.Current.DisplayAlert("Aqui", numEnc, "OK");
+            this.NumEnc = string.Empty;
         }
 
 

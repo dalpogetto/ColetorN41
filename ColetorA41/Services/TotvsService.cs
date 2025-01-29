@@ -39,6 +39,13 @@ namespace ColetorA41.Services
             return response.items;
         }
 
+        public async Task<List<Entrega>> ObterEntrega(int codTecnico, string codEstab)
+        {
+            var param = new NameValueCollection { { "codTecnico", codTecnico.ToString() }, { "codEstabel", codEstab } };
+            var response = await GetAsync<EntregaResponse>("apiesaa041/ObterEntrega", param);
+            return response.listaEntrega;
+        }
+
         public async Task<ParamEstabel> ObterParametrosEstab(string codEstabel)
         {
             var param = new NameValueCollection { { "codEstabel", codEstabel } };

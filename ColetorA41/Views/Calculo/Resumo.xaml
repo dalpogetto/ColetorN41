@@ -4,7 +4,7 @@
              x:Class="ColetorA41.Views.Calculo.Resumo"
              Title="Resumo">
   
-        <Grid RowDefinitions="50,*,70">
+        <Grid RowDefinitions="50,*,60">
 
             <Grid RowDefinitions="100, 200">
                 <Rectangle Fill="#D7F0FE" />

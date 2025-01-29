@@ -5,11 +5,10 @@
              xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
              xmlns:models="clr-namespace:ColetorA41.Models"
              x:DataType="viewmodel:CalculoViewModel"
-             Title="ExtrakitView">
-    <Grid RowDefinitions="*,80">
-        <ScrollView>
+             Title="Lista Extrakit">
+    <Grid RowDefinitions="200,*,60">
         <StackLayout>
-            <Grid RowDefinitions="Auto, *">
+            <Grid RowDefinitions="100,200">
                 <Rectangle 
                         VerticalOptions="Start"
                         HeightRequest="100"
@@ -53,18 +52,24 @@
                                  
                                 />
 
-                <CollectionView x:Name="teste"
-                            ItemsSource="{Binding listaExtrakit}" 
-                            SelectionMode="Multiple" 
-                            SelectedItems="{Binding listaExtrakitSelecionados}"
-                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                            >
+
+            </VerticalStackLayout>
+        </StackLayout>
+
+        <ScrollView Grid.Row="1" Margin="5,-80,5,0">
+            <StackLayout>
+                <CollectionView x:Name="teste" 
+                                  ItemsSource="{Binding listaExtrakit}" 
+                                  SelectionMode="Multiple" 
+                                  SelectedItems="{Binding listaExtrakitSelecionados}"
+                                  SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                                  >
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Extrakit">
                             <StackLayout>
-                                <Border HeightRequest="100" Margin="0,2" Padding="5" StrokeShape="RoundRectangle 10">
+                                <Border HeightRequest="70" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
 
-                                    <Grid Padding="5" HeightRequest="90">
+                                    <Grid Padding="5" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
@@ -77,10 +82,10 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Label Grid.Row="0"
-                                   Grid.Column="0"
-                                   Text="{Binding itCodigo}"
-                                   FontSize="16"
-                                   FontAttributes="Bold" />
+                                               Grid.Column="0"
+                                               Text="{Binding itCodigo}"
+                                               FontSize="16"
+                                               FontAttributes="Bold" />
 
                                         <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End"  >
                                             <Label Text="{Binding serieDocto}" FontAttributes="Bold"/>
@@ -89,31 +94,33 @@
                                         </HorizontalStackLayout>
 
                                         <Label Grid.Row="1"
-                                   Grid.Column="0"
-                                   Grid.ColumnSpan="2"
-                                   Grid.RowSpan="2"
-                                   Text="{Binding descItem}"
-                                   FontAttributes="Italic"
-                                   VerticalOptions="Start" />
+                                                 Grid.Column="0"
+                                                 Grid.ColumnSpan="2"
+                                                 Grid.RowSpan="2"
+                                                 Text="{Binding descItem}"
+                                                 FontAttributes="Italic"
+                                               HorizontalOptions="Start"
+                                                 VerticalOptions="Start"
+                                               WidthRequest="300"/>
 
                                         <Frame CornerRadius="10" 
-                                           HasShadow="True" 
-                                           Grid.Row="2" 
-                                           Grid.Column="1" 
-                                           HorizontalOptions="End" 
-                                           Margin="10,0"
-                                           WidthRequest="40"
-                                           HeightRequest="30"
-                                           
-                                           BackgroundColor="WhiteSmoke"
-                                           Padding="1" 
-                                           >
+                                                 HasShadow="True" 
+                                                 Grid.Row="1" 
+                                                 Grid.Column="1" 
+                                                 HorizontalOptions="End" 
+                                                 Margin="10,20,0,0"
+                                                 WidthRequest="40"
+                                                 HeightRequest="30"
+                                                 BackgroundColor="WhiteSmoke"
+                                                 Padding="1" 
+                                                 
+                                                 >
                                             <Label Text="{Binding qtSaldo}"
-                                           FontSize="16"
-                                           FontAttributes="Bold" 
-                                               VerticalOptions="Center"
-                                               HorizontalOptions="Center"
-                                           />
+                                                     FontSize="16"
+                                                     FontAttributes="Bold" 
+                                                         VerticalOptions="Center"
+                                                         HorizontalOptions="Center"
+                                                     /> 
                                         </Frame>
 
 
@@ -124,8 +131,8 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </VerticalStackLayout>
-        </StackLayout>
+            </StackLayout>
+
         </ScrollView>
 
         <Grid ColumnDefinitions="100,*,100" Grid.Row="2" BackgroundColor="White">
@@ -135,19 +142,19 @@
                         <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-               
+
             </VerticalStackLayout>
 
-           
-            
+
+
             <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-                
-                
+
+
             </VerticalStackLayout>
         </Grid>
 

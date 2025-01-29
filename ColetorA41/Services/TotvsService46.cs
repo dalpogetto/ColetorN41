@@ -21,5 +21,27 @@ namespace ColetorA41.Services
             var response = await GetAsync<OrdemServicoResponse>("apiesaa046/ObterDados", param);
             return response.ordens;
         }
+
+        public async Task<List<Enc>> LeituraEnc(string codEstabel, int codTecnico, string numEnc , string nrProcesso)
+        {
+            var param = new NameValueCollection {
+                {"codEstabel", codEstabel },
+                {"codUsuario", codTecnico.ToString() },
+                {"numEnc", numEnc },
+                {"nrProcesso", nrProcesso }
+            };
+            var response = await GetAsync<EncResponse>("apiesaa046/LeituraEnc", param);
+            return response.items;
+        }
+
+        public async Task<bool> Desmarcar(string cRowId, string cItemRowId)
+        {
+            var param = new NameValueCollection {
+                {"cRowId", cRowId },
+                {"cItemRowId", cItemRowId }      
+            };
+            var response = await GetAsync<EncResponse>("apiesaa046/Desmarcar", param);
+            return true;
+        }
     }
 }
