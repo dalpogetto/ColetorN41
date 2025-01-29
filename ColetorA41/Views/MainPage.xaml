@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColetorA41.Views.MainPage"
+             Title="Selecione uma opção"
+             BackgroundColor="WhiteSmoke"
+             >
+    <Grid RowDefinitions="*,400,40" >
+        <Grid RowDefinitions="100, 200">
+            <Rectangle Fill="#D7F0FE" />
+            <Ellipse Grid.Row="1" Fill="#D7F0FE" TranslationY="-110"/>
+        </Grid>
+        <VerticalStackLayout Margin="0,20,0,0">
+
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,80">
+                <Image Source="home.png" HeightRequest="80" HorizontalOptions="Center" Margin="0,0,0,10"/>
+                <Label  Text="Home Page" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20"/>
+            </VerticalStackLayout>
+            <Label
+                Text="Auto Atendimento"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="28"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="ColetorA41"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="ColetorA41"
+                FontSize="18"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center" >
+                        <Image Source="folder2.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                        <Label  Text="Informe" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center" >
+                        <Image Source="calculo.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                        <Label  Text="Cálculo" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarMOnitorCommand}" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center" >
+                        <Image Source="monitor.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                        <Label  Text="Monitor" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarCadEstabelCommand}" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout HorizontalOptions="Center" >
+                        <Image Source="informe2.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                        <Label  Text="Parâmetros" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <Grid RowDefinitions="10" Grid.Row="3" VerticalOptions="End">
+            <Rectangle Fill="#D7F0FE" />
+        </Grid>
+
+
+    </Grid>
+
+
+</ContentPage>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColetorA41.Views.ParamEstab.ParamEstabList"
+             xmlns:models="clr-namespace:ColetorA41.Models"
+             xmlns:viewmodels="clr-namespace:ColetorA41.ViewModel"
+             x:DataType="viewmodels:ParamEstabelViewModel"
+             x:Name="mainPage"
+             Title="Parâmetros Estabelecimentos"
+             
+             BackgroundColor="WhiteSmoke"
+             
+             >
+    
+    <ContentPage.Resources>
+        <Style x:Key="lblCabec" TargetType="Label">
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontAttributes" Value="Italic" />
+            <Setter Property="WidthRequest" Value="80" />
+            <Setter Property="TextColor" Value="black" />
+        </Style>
+
+        <Style x:Key="lblDet" TargetType="Label">
+            <Setter Property="FontSize" Value="Small" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="WidthRequest" Value="80" />
+
+        </Style>
+
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid RowDefinitions="70,*" >
+            <Grid RowDefinitions="100, 200">
+                <Rectangle Fill="#D7F0FE" />
+                <Ellipse Grid.Row="1" Fill="#D7F0FE" TranslationY="-110"/>
+            </Grid>
+
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,10,0,0">
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Image
+                         Source="informe2.png"
+                         SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                         HeightRequest="60"
+                         HorizontalOptions="Center"/>
+
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label 
+                             Text="Parâmetros"
+                             VerticalOptions="Center" 
+                             FontAttributes="Bold"
+                             FontSize="20"
+                             HorizontalOptions="Center" Margin="0,0,0,0"
+                             />
+                            <Button Text="Novo Parâmetro"
+                                    Margin="0,0,0,0" 
+                                    WidthRequest="250" 
+                                    HorizontalOptions="Center" 
+                                    CornerRadius="20"
+                                    Command="{Binding EditarCommand}"
+                                    >   
+                            </Button>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout VerticalOptions="Start" Padding="20" Grid.Row="1">
+                <ActivityIndicator
+                   Grid.Column="0"
+                   IsVisible="{Binding IsBusy}"
+                   HorizontalOptions="Center"
+                   IsRunning="{Binding IsBusy}"
+                   VerticalOptions="Center"
+                  />
+                <CollectionView x:Name="collectionParam"
+                                ItemsSource="{Binding listaParamEstab}" 
+                                SelectionMode="None" 
+                                VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ParamEstabel">
+                            <StackLayout>
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem  
+                                                        IconImageSource="edit.png"
+                                                        BackgroundColor="WhiteSmoke"
+                                                        Command="{Binding BindingContext.EditarCommand, Source={x:Reference mainPage}}"
+                                                        CommandParameter="{Binding .}" />
+                                            <SwipeItem 
+                                                       IconImageSource="trash.png"
+                                                       BackgroundColor="WhiteSmoke"
+                                                       Command="{Binding BindingContext.EliminarCommand, Source={x:Reference mainPage}}"
+                                                       CommandParameter="{Binding .}" />
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Border HeightRequest="80" Margin="0,2" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                                        <Grid ColumnDefinitions="65,*" >
+                                            <Frame HeightRequest="60" WidthRequest="60" Margin="0,2" Padding="5" HasShadow="true" BackgroundColor="WhiteSmoke" CornerRadius="10">
+                                                <Label Text="{Binding codEstabel}" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" VerticalTextAlignment="Center" />
+                                            </Frame>
+                                            <Grid Padding="5" RowDefinitions="25,auto,*" ColumnDefinitions="auto,auto,auto" ColumnSpacing="5" Grid.Column="1">
+                                                <!--Chave-->
+                                                <Label Text="{Binding nomeAbrev}" Grid.ColumnSpan="4" FontSize="16" FontAttributes="Bold" />
+                                                <!--Cabecalho-->
+                                                <Label Text="Ser.Entra"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="0"></Label>
+                                                <Label Text="Ser.Saída"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="1"></Label>
+                                                <Label Text="RPW"        Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="2"></Label>
+                                                <!--Detalhe-->
+                                                <Label Text="{Binding serieEntra}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
+                                                <Label Text="{Binding serieSai}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
+                                                <Label Text="{Binding rpw}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </SwipeView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

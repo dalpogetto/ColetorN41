@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColetorA41.Views.Calculo.Resumo"
+             Title="Resumo">
+  
+        <Grid RowDefinitions="50,*,70">
+
+            <Grid RowDefinitions="100, 200">
+                <Rectangle Fill="#D7F0FE" />
+                <Ellipse Grid.Row="1" Fill="#D7F0FE" TranslationY="-110"/>
+            </Grid>
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,20,0,0">
+                <Image
+                    Source="resumo2.png"
+                    HeightRequest="50"
+                    HorizontalOptions="Center" />
+                <Label Text="Resumo do Cálculo"
+                    FontAttributes="Bold"
+                    FontSize="22"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+
+            </HorizontalStackLayout>
+            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,0,0,0" Grid.Row="1">
+                <HorizontalStackLayout Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}">
+                    <RadioButton Content="Renov Total" Value="1" IsChecked="True"/>
+                    <RadioButton Content="Renov Parcial" Value="2" />
+                    <RadioButton Content="Dev Extrakit" Value="3" />
+
+                </HorizontalStackLayout>
+
+
+                <HorizontalStackLayout HorizontalOptions="Center" >
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                            <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Black" Padding="1" >
+                                <Label Text="297" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                            <Label Text="26 ETs fora do processo" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Label Text="VISÃO GERAL" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                            <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Green" Padding="1" >
+                                <Label Text="265" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Entradas e Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Label Text="RENOVAÇÕES" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="Green"/>
+                        </Grid>
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout HorizontalOptions="Center" >
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                            <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#045B8F" Padding="1" >
+                                <Label Text="0" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Label Text="PAGAMENTO" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="#045B8F"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                            <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Orange" Padding="1" >
+                                <Label Text="6" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Kits convertidos em ETs" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
+                            <Label Text="EXTRAKIT" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="Orange"/>
+                        </Grid>
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout HorizontalOptions="Center" >
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                            <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#AAC248" Padding="1" >
+                                <Label Text="0" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Notas de Entrada + ET + Qtde Ruins" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
+                            <Label Text="SOMENTE ENTRADA" Grid.Row="2" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="#AAC248"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" >
+                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                            <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#9e3933" Padding="1" >
+                                <Label Text="15" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                            <Label Text="Itens e Alternativos sem saldo" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
+                            <Label Text="SEM SALDO" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="#9e3933"/>
+                        </Grid>
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <StackLayout Padding="20" Spacing="10">
+                    <Button Text="Aprovar" CornerRadius="20"></Button>
+                    <Button Text="Aprovar Sem Gerar Saída" CornerRadius="20"></Button>
+                </StackLayout>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="170,*,100" Grid.Row="2" BackgroundColor="White">
+                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                    <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
+                        <Image Source="usuario" WidthRequest="50"></Image>
+                        <Label Text="Técnico"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
+                        <Image Source="folder2" WidthRequest="50"></Image>
+                        <Label Text="Extrakit"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                
+            </Grid>
+        </Grid>
+    
+</ContentPage>

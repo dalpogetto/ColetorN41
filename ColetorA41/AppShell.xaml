@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ColetorA41.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ColetorA41"
+    xmlns:views="clr-namespace:ColetorA41.Views"
+    xmlns:viewsCalc="clr-namespace:ColetorA41.Views.Calculo"
+    Shell.FlyoutBehavior="Flyout"
+    Title="ColetorA41">
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+
+
+                </Grid.RowDefinitions>
+
+                <Grid BackgroundColor="{StaticResource Primary}" Grid.Row="0" HeightRequest="220">
+
+
+                    <Grid HorizontalOptions="Center"
+                          VerticalOptions="Center">
+
+                        <Label Text="Auto Atendimento"
+                           TextColor="White"
+                           FontSize="28"
+                           FontAttributes="Bold"                           
+                           />
+
+                        <Label Text="ColetorA41"
+                           TextColor="White"
+                           FontSize="18"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center" 
+                           Margin="0,40,0,0"/>
+
+                        <VerticalStackLayout VerticalOptions="End">
+                            <Label Text="{Binding EstabSelecionado.identific}"/>
+                            <Label Text="{Binding TecnicoSelecionado.identific}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+
+                </Grid>
+
+            </Grid>
+
+        </DataTemplate>
+
+    </Shell.FlyoutHeaderTemplate>
+
+    <ShellContent
+        Title="Loading"
+        ContentTemplate="{DataTemplate views:Loading}"
+        Route="LoadingPage"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.FlyoutItemIsVisible="False" />
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:Login}"
+        Route="Login"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.FlyoutItemIsVisible="False"/>
+
+    <ShellContent
+        Icon="home"
+        Title="Home Page"
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Icon="informe2"
+        Title="Parâmetros Estabel"
+        ContentTemplate="{DataTemplate views:ParamEstab.ParamEstabList}"
+        Route="ParamEstabList"
+        />
+
+    <ShellContent
+     Icon="calculo"
+     Title="Cálculo"
+     ContentTemplate="{DataTemplate viewsCalc:EstabTec}"
+     Route="ParamEstabList"
+     />
+
+    <!--<FlyoutItem Title="Cálculo" Icon="calculo" Route="Calculo">
+        <Tab Title="Estab/Técnico" Icon="tecnico">
+            <ShellContent Route="EstabTec" ContentTemplate="{DataTemplate viewsCalc:EstabTec}" />
+        </Tab>
+        <Tab Title="Dados NF" Icon="param">
+            <ShellContent Route="DadosNF" ContentTemplate="{DataTemplate viewsCalc:DadosNF}"/>
+        </Tab>
+        <Tab Title="Extrakit" Icon="extrakt">
+            <ShellContent Route="ExtrakitView" ContentTemplate="{DataTemplate viewsCalc:ExtrakitView}" />
+        </Tab>
+        <Tab Title="Resumo" Icon="resumo">
+            <ShellContent Route="Resumo" ContentTemplate="{DataTemplate viewsCalc:Resumo}" />
+        </Tab>
+    </FlyoutItem>-->
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <Border StrokeShape="RoundRectangle 6"  Padding="20" Margin="5,20" 
+                        BackgroundColor="White" >
+
+                    <Border.Shadow>
+                        <Shadow Brush="Gray"
+                    Offset="10,10"
+                    Radius="40"
+                    Opacity="0.8"
+                    />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout HorizontalOptions="CenterAndExpand" Spacing="10" >
+
+                        <Label Text="Usuário logado: SUPER"/>
+                        <Button Text="Logout" Command="{Binding LogoutCommand}"></Button>
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!--<Button Text="Logout SUPER" Margin="20" Command="{Binding LogoutCommand}"></Button>-->
+                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="10">
+                    <Label Text="Versão: 1.0"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center" />
+                    <Image 
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           
+                           Source="versionok"
+                            />
+                </HorizontalStackLayout>
+
+                <Label Text="Validade: 31/12/9999"
+                    HorizontalOptions="Center" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+
+
+</Shell>

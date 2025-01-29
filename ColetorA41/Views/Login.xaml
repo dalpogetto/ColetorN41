@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColetorA41.Views.Login"
+             Title="Login"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="*,450" >
+        <Grid RowDefinitions="*, *">
+            <Rectangle  Stroke="Transparent"
+                        VerticalOptions="Start"
+                        HeightRequest="120"
+                        Fill="{StaticResource Secondary}"
+                     
+                        />
+            <Ellipse 
+                    Grid.Row="1"
+                    x:Name="HeaderShape02"
+                       Fill="{StaticResource Secondary}"
+                       TranslationY="-110"
+                       HeightRequest="200"
+                       VerticalOptions="Start" />
+
+
+        </Grid>
+        <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,20,0,0">
+            <Image Source="login.png" HeightRequest="80" HorizontalOptions="Center" Margin="0,0,0,10"/>
+            <Label  Text="Login Totvs" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout Padding="25" Spacing="25" Grid.Row="1">
+
+            <ActivityIndicator
+        
+                IsVisible="{Binding IsBusy}"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Center"
+                />
+
+            <Entry Text="{Binding Usuario}" Placeholder="Digite seu usuario"  FontAttributes="Bold"/>
+            <Entry Text="{Binding Senha}" Placeholder="Senha" IsPassword="true" FontAttributes="Bold"/>
+            <Label Text="Domínio: DIEBOLD_MASTER"/>
+
+            <Button Text="Login"
+                Command="{Binding LoginCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

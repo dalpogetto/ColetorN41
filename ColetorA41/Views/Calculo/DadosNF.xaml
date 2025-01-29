@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColetorA41.Views.Calculo.DadosNF"
+             Title="DadosNF">
+    <Grid RowDefinitions="200,*,70">
+        <Grid RowDefinitions="100, 200">
+            <Rectangle 
+                        VerticalOptions="Start"
+                        HeightRequest="100"
+                        Fill="#D7F0FE"
+                        />
+            <Ellipse 
+                    Grid.Row="1"
+                    x:Name="HeaderShape02"
+                       Fill="#D7F0FE"
+                       TranslationY="-110"
+                       HeightRequest="200"
+                       VerticalOptions="Start"
+/>
+        </Grid>
+
+        <VerticalStackLayout VerticalOptions="Center" Margin="0,0,0,0">
+            <Image
+            Source="informe2.png"
+            SemanticProperties.Description="Cute dot net bot waving hi to you!"
+            HeightRequest="80"
+            HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+            <Label 
+            Text="Dados Nota Fiscal"
+            VerticalOptions="Center" 
+            FontAttributes="Bold"
+            FontSize="22"
+            HorizontalOptions="Center" Margin="0,0,0,60"
+            />
+
+            <ActivityIndicator
+             Grid.Column="0"
+             IsVisible="{Binding IsBusy}"
+             HorizontalOptions="Center"
+             IsRunning="{Binding IsBusy}"
+             VerticalOptions="Center"
+            />
+
+            
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Padding="20">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
+                <VerticalStackLayout>
+                    <Label Text="Serie Entrada"/>
+                    <Entry Text="{Binding SerieEntra}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Serie Saída"/>
+                    <Entry Text="{Binding SerieSaida}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
+                <VerticalStackLayout>
+                    <Label Text="Entrega"/>
+                    <Entry Text="{Binding Entrega}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="RPW"/>
+                    <Entry Text="{Binding Rpw}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+            <Label Text="Transportadora Entrada"/>
+            <Picker Title="Selecione a transportadora" FontAttributes="Bold" FontSize="16"
+     TitleColor="LightCoral"
+     ItemsSource="{Binding listaTransporte}"  
+     ItemDisplayBinding="{Binding nomeAbrev}"
+     SelectedItem="{Binding TranspEntraSelecionado, Mode=TwoWay}"
+     Margin="0,0,0,20"/>
+
+            <Label Text="Transportadora Saída"/>
+            <Picker Title="Selecione a transportadora" FontAttributes="Bold" FontSize="16"
+     TitleColor="LightCoral"
+     ItemsSource="{Binding listaTransporte}"  
+     ItemDisplayBinding="{Binding nomeAbrev}"
+     SelectedItem="{Binding TranspSaidaSelecionado, Mode=TwoWay}"
+     Margin="0,0,0,20"/>
+
+        </VerticalStackLayout>
+
+        <Grid ColumnDefinitions="80,*,80" Grid.Row="2" BackgroundColor="White">
+            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
+                <Image Source="usuario" WidthRequest="50">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarEstabTecCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Técnico"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
+                <Image Source="folder2" WidthRequest="50">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarExtrakitCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Extrakit"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
