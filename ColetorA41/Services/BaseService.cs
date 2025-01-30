@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -28,6 +29,8 @@ namespace ColetorA41.Services
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
             _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", Ambiente.AliasAppServer);
             _httpClient.DefaultRequestHeaders.Add("CompanyId", Ambiente.EmpresaSelecionada.CodEmpresa);
+            _httpClient.Timeout = Timeout.InfiniteTimeSpan;
+            _httpClient.DefaultRequestHeaders.Connection.Add("Keep-Alive");
         }
 
         protected async Task<T?> GetAsync<T>(string endpoint, NameValueCollection parameters = null)
@@ -56,6 +59,8 @@ namespace ColetorA41.Services
                 response.EnsureSuccessStatusCode();
 
                 var responseContent = await response.Content.ReadAsStringAsync();
+                response.Dispose();
+             
                 return System.Text.Json.JsonSerializer.Deserialize<T>(responseContent);
             }
             catch (Exception ex)
@@ -63,8 +68,14 @@ namespace ColetorA41.Services
                 Debug.WriteLine($"Impossível obter dados: {ex.Message}");
                 //await Shell.Current.DisplayAlert("Erro!", ex.Message, "OK");
                 throw new Exception(ex.Message);
-               // return default;
+                // return default;
             }
+            finally
+            {
+                
+                
+            }
+
         }
 
 
@@ -72,7 +83,6 @@ namespace ColetorA41.Services
         {
             //Montar Request
             var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(Ambiente.PrefixoUrl, metodo)) };
-
             if (requestBody != null)
             {
                 var json = JsonSerializer.Serialize(requestBody);
@@ -96,11 +106,15 @@ namespace ColetorA41.Services
             {
 
                 Debug.WriteLine($"Impossível obter dados: {ex.Message}");
-               // await Shell.Current.DisplayAlert("Erro!", ex.Message, "OK");
+                // await Shell.Current.DisplayAlert("Erro!", ex.Message, "OK");
                 throw new Exception(ex.Message);
-                
-               // return default;
+
+                // return default;
             }
+            finally { 
+               request.Dispose();
+            }
+            
 
         }
 
@@ -122,6 +136,7 @@ namespace ColetorA41.Services
                 await Shell.Current.DisplayAlert("Erro!", "Impossível eliminar registro.", "OK");
                 return null;
             }
+            
         }
 
         /// <summary>

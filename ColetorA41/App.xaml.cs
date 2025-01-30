@@ -9,7 +9,7 @@ namespace ColetorA41
         {
             InitializeComponent();
 
-            MainPage = new AppShell(new AppShellViewModel(new AuthService()));
+            MainPage = new AppShell();
         }
     }
 }

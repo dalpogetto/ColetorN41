@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace ColetorA41.Services
 {
-    public class TotvsService:BaseService
+    public partial class TotvsService:BaseService
     {
-        public TotvsService()
-        {
-        }
 
         public async Task<List<ParamEstabel>> ObterParamEstabelecimentos()
         {

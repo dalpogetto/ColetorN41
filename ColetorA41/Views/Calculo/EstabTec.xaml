@@ -30,9 +30,7 @@
                 IsVisible="{Binding IsBusy}"
                 HorizontalOptions="Center"
                 IsRunning="{Binding IsBusy}"
-                VerticalOptions="Center"
-                
-                />
+                VerticalOptions="Center"/>
 
         </VerticalStackLayout>
         </StackLayout>

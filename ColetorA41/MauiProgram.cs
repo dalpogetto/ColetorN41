@@ -32,6 +32,7 @@ namespace ColetorA41
             builder.Services.AddTransient<TotvsService>();
             builder.Services.AddTransient<TotvsService46>();
             builder.Services.AddTransient<AuthService>();
+         //   builder.Services.AddSingleton<HttpClient>(sp => new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler()));
 
             //Views
             builder.Services.AddSingleton<AppShell>();

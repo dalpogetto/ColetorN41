@@ -11,6 +11,13 @@ namespace ColetorA41.Services
     {
         private const string AuthStateKey = "AuthState";
         private const string InfoLogin = "UsuarioSenhaBase64";
+        private readonly TotvsService _service;
+
+        public AuthService(TotvsService totvsService)
+        {
+            _service = totvsService;
+        }
+
         public async Task<bool> IsAuthenticatedAsync()
         {
             await Task.Delay(2000);
@@ -27,7 +34,7 @@ namespace ColetorA41.Services
             var byteArray = new UTF8Encoding().GetBytes($"{usuario}:{senha}");
             Ambiente.UsuarioSenhaBase64 = Convert.ToBase64String(byteArray);
 
-            var srv = new TotvsService();
+            var srv = _service;                ;
             try
             {
                 

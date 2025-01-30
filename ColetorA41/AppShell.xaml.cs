@@ -9,10 +9,9 @@ namespace ColetorA41
 {
     public partial class AppShell : Shell
     {
-        public AppShell(AppShellViewModel vm)
+        public AppShell()
         {
             InitializeComponent();
-            BindingContext = vm;
 
             Routing.RegisterRoute(nameof(Loading)       , typeof(Loading));
             Routing.RegisterRoute(nameof(Login)         , typeof(Login));

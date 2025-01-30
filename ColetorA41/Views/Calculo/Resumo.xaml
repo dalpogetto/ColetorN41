@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ColetorA41.Views.Calculo.Resumo"
-             Title="Resumo">
+             xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
+             xmlns:models="clr-namespace:ColetorA41.Models"
+             x:DataType="viewmodel:CalculoViewModel"
+             Title="Resumo Cálculo">
   
         <Grid RowDefinitions="50,*,60">
 
@@ -22,7 +25,7 @@
                     HorizontalOptions="Center" />
 
             </HorizontalStackLayout>
-            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,0,0,0" Grid.Row="1">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,0,0,0" Grid.Row="1" HorizontalOptions="Center">
                 <HorizontalStackLayout Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}">
                     <RadioButton Content="Renov Total" Value="1" IsChecked="True"/>
                     <RadioButton Content="Renov Parcial" Value="2" />
@@ -30,17 +33,36 @@
 
                 </HorizontalStackLayout>
 
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <ActivityIndicator
+                  Grid.Column="0"
+                  IsVisible="{Binding IsBusy}"
+                  HorizontalOptions="Center"
+                  IsRunning="{Binding IsBusy}"
+                  VerticalOptions="Center"/>
 
-                <HorizontalStackLayout HorizontalOptions="Center" >
+                <Label Text="Preparando o calculo aguarde ..."
+                        FontAttributes="Bold"
+                        IsVisible="{Binding IsBusy}"
+                        FontSize="18"
+                        Margin="0,0,0,0"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center" />
+
+            </HorizontalStackLayout>
+           
+
+
+            <HorizontalStackLayout HorizontalOptions="Center" >
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" />
+                            <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="1" />
                         </Frame.GestureRecognizers>
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Black" Padding="1" >
-                                <Label Text="297" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Fichas.Geral}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
-                            <Label Text="26 ETs fora do processo" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="{Binding Fichas.GeralExtrakit, StringFormat='{0} ETs fora do processo'} " Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                             <Label Text="VISÃO GERAL" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5"/>
                         </Grid>
                     </Frame>
@@ -48,7 +70,7 @@
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Green" Padding="1" >
-                                <Label Text="265" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Text="{Binding Fichas.Renovacao}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
                             <Label Text="Entradas e Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                             <Label Text="RENOVAÇÕES" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="Green"/>
@@ -60,7 +82,7 @@
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#045B8F" Padding="1" >
-                                <Label Text="0" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Text="{Binding Fichas.Pagto}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
                             <Label Text="Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                             <Label Text="PAGAMENTO" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="#045B8F"/>
@@ -70,7 +92,7 @@
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke" >
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Orange" Padding="1" >
-                                <Label Text="6" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Text="{Binding Fichas.Extrakit}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
                             <Label Text="Kits convertidos em ETs" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
                             <Label Text="EXTRAKIT" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="Orange"/>
@@ -82,7 +104,7 @@
                     <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#AAC248" Padding="1" >
-                                <Label Text="0" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Text="{Binding Fichas.SomenteEntrada}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
                             <Label Text="Notas de Entrada + ET + Qtde Ruins" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
                             <Label Text="SOMENTE ENTRADA" Grid.Row="2" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="#AAC248"/>
@@ -92,7 +114,7 @@
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#9e3933" Padding="1" >
-                                <Label Text="15" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Text="{Binding Fichas.SemSaldo}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
                             <Label Text="Itens e Alternativos sem saldo" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
                             <Label Text="SEM SALDO" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" TextColor="#9e3933"/>

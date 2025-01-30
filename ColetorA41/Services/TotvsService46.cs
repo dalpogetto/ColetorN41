@@ -10,6 +10,8 @@ namespace ColetorA41.Services
 {
     public class TotvsService46 : BaseService
     {
+        
+
         public async Task<List<OrdemServico>> ObterDados(string codEstabel, int codTecnico, string senha = "moto", string origem = "calculo")
         {
             var param = new NameValueCollection {
@@ -26,12 +28,22 @@ namespace ColetorA41.Services
         {
             var param = new NameValueCollection {
                 {"codEstabel", codEstabel },
-                {"codUsuario", codTecnico.ToString() },
+                {"codTecnico", codTecnico.ToString() },
                 {"numEnc", numEnc },
                 {"nrProcesso", nrProcesso }
             };
             var response = await GetAsync<EncResponse>("apiesaa046/LeituraEnc", param);
             return response.items.FirstOrDefault();
+        }
+
+        public async Task<List<Enc>> ObterEncs(string codEstabel, int codTecnico)
+        {
+            var param = new NameValueCollection {
+                {"codEstabel", codEstabel },
+                {"codTecnico", codTecnico.ToString() },
+            };
+            var response = await GetAsync<EncResponse>("apiesaa046/ObterEncs", param);
+            return response.items;
         }
 
         public async Task<bool> Desmarcar(string cRowId, string cItemRowId)

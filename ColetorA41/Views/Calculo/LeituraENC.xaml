@@ -4,8 +4,27 @@
              x:Class="ColetorA41.Views.Calculo.LeituraENC"
              xmlns:models="clr-namespace:ColetorA41.Models"
              xmlns:viewmodels="clr-namespace:ColetorA41.ViewModel"
-            
-             Title="Leitura ENC">
+             xmlns:local="clr-namespace:ColetorA41.Converters"
+             x:Name="leituraEnc"
+             HideSoftInputOnTapped="True"
+             Title="Etiqueta ENC">
+
+    <ContentPage.Resources>
+        <local:StringToColor x:Key="StringToColor" />
+
+        <Style x:Key="lblCabec" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Italic" />
+            <Setter Property="TextColor" Value="black" />
+        </Style>
+
+        <Style x:Key="lblDet" TargetType="Label">
+            <Setter Property="FontSize" Value="Small" />
+            <Setter Property="FontAttributes" Value="Bold" />
+
+        </Style>
+    </ContentPage.Resources>
+    
     <Grid RowDefinitions="200,*,60">
         <StackLayout>
             <Grid RowDefinitions="100,200">
@@ -30,7 +49,7 @@
                         Source="scanner.png"
                         HeightRequest="60"
                         HorizontalOptions="Center" />
-                    <Label  Text="Scanner ENC"
+                    <Label  Text="Leitura ENC"
                         FontAttributes="Bold"
                         FontSize="22"
                         VerticalOptions="Center"  
@@ -48,21 +67,19 @@
                        ReturnCommandParameter="{Binding NumEnc}"
                        TextColor="Black"></Entry>
                 </Border>
-
-                <ActivityIndicator  Grid.Column="0"
-                                 IsVisible="{Binding IsBusy}"
-                                 HorizontalOptions="Center"
-                                 IsRunning="{Binding IsBusy}"
-                                 VerticalOptions="Center"
-                                 
-                                />
-
-
             </VerticalStackLayout>
+            <ActivityIndicator  
+              IsVisible="{Binding IsBusy}"
+              HorizontalOptions="Center"
+              IsRunning="{Binding IsBusy}"
+              VerticalOptions="Center"/>
         </StackLayout>
 
         <ScrollView Grid.Row="1" Margin="5,0,5,0">
+            
             <StackLayout>
+               
+                
                 <CollectionView x:Name="collectionParam"
                  ItemsSource="{Binding listaEnc}" 
                  SelectionMode="None" 
@@ -76,26 +93,31 @@
                                             <SwipeItem 
                                                     IconImageSource="trash.png"
                                                     BackgroundColor="LightCoral"
-                                                    Command="{Binding BindingContext.EliminarCommand, Source={x:Reference mainPage}}"
+                                                    Command="{Binding BindingContext.EliminarEncCommand, Source={x:Reference leituraEnc}}"
                                                     CommandParameter="{Binding .}" />
                                         </SwipeItems>
                                     </SwipeView.RightItems>
-                                    <Border HeightRequest="80" Margin="0,5" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
-                                        <Grid ColumnDefinitions="65,*" >
-                                            <Frame HeightRequest="60" WidthRequest="60" Margin="0,2" Padding="5" HasShadow="true" BackgroundColor="WhiteSmoke" CornerRadius="10">
-                                                <Label Text="{Binding flag}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" VerticalTextAlignment="Center" />
+                                    <Border HeightRequest="90" Margin="0,5" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                                        <Grid ColumnDefinitions="*,auto" >
+                                            <Frame Grid.Column="1" HeightRequest="30" WidthRequest="120" Margin="0,2" Padding="5" HasShadow="true" VerticalOptions="Start"
+                                                   BackgroundColor="{Binding flag, Converter={StaticResource  StringToColor}}" CornerRadius="10">
+                                                <Label Text="{Binding flag}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" />
                                             </Frame>
-                                            <Grid Padding="5" RowDefinitions="25,auto,*" ColumnDefinitions="80,80,80" ColumnSpacing="5" Grid.Column="1">
+                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto,auto" ColumnSpacing="25" Grid.Column="0">
                                                 <!--Chave-->
                                                 <Label Text="{Binding itCodigo}" Grid.ColumnSpan="4" FontSize="16" FontAttributes="Bold" />
                                                 <!--Cabecalho-->
-                                                <Label Text="ENC"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="0"></Label>
-                                                <Label Text="OS"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="1"></Label>
-                                                <Label Text="Chamado"        Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="2"></Label>
+                                                <Label Text="ENC"      Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="0"></Label>
+                                                <Label Text="OS"       Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="1"></Label>
+                                                <Label Text="Chamado"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="2"></Label>
+                                                <Label Text="Nota Saída"       Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="3"></Label>
+                                                <Label Text="Nat Oper"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="4"></Label>
                                                 <!--Detalhe-->
                                                 <Label Text="{Binding numEnc}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
                                                 <Label Text="{Binding numOS}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
                                                 <Label Text="{Binding chamado}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
+                                                <Label Text="{Binding notaSaida}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="3"></Label>
+                                                <Label Text="{Binding natOper}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="4"></Label>
                                             </Grid>
                                         </Grid>
                                     </Border>

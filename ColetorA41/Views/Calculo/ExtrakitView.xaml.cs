@@ -16,6 +16,6 @@ public partial class ExtrakitView : ContentPage
     {
 
         base.OnAppearing();
-        this.vm.ObterExtrakit();
+        //this.vm.ObterExtrakit();
     }
 }

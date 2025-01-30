@@ -16,14 +16,16 @@ public partial class DadosNF : ContentPage
     {
 
         base.OnAppearing();
+        /*
         if ((vm.EstabSelecionado == null) || (vm.TecnicoSelecionado == null))
         {
             await Shell.Current.DisplayAlert("Erro!", "Dados do estabelecimento e técnicos não preenchidos corretamente", "OK");
-            await Shell.Current.GoToAsync("///Calculo");
+            await Shell.Current.GoToAsync($"/{nameof(EstabTec)}");
 
             return;
         }
         this.vm.ObterParametrosEstab();
+        */
     }
 
 }

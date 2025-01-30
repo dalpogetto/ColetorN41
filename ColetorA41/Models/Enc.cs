@@ -22,6 +22,12 @@ namespace ColetorA41.Models
         public string itDescricao { get; set; }
         public string mensagem { get; set; }
         public string flag { get; set; }
+        public string cRowId { get; set; }
+
+        public string cItemRowId { get; set; }
+        public string notaSaida { get; set; }
+
+        public string natOper { get; set; }
 
     }
 }

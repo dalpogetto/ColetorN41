@@ -9,9 +9,7 @@ namespace ColetorA41.Services
 {
     public class TotvsA41Service : BaseService
     {
-        public TotvsA41Service():base()
-        {
-        }
+        
 
         public async Task<List<Estabelecimento>> ObterEstabelecimentos()
         {

@@ -59,7 +59,7 @@ namespace ColetorA41.ViewModel
             var lista = await _service.ObterEstabelecimentos();
 
             this.listaEstab.Clear();
-            foreach (var item in lista) 
+            foreach (var item in lista.OrderBy(x => x.identific)) 
             {
                 this.listaEstab.Add(item);
             }
@@ -78,7 +78,7 @@ namespace ColetorA41.ViewModel
             var lista = await _service.ObterTecEstab(this._estabSelecionado.codEstab);
 
             this.listaTecnico.Clear();
-            foreach (var item in lista)
+            foreach (var item in lista.OrderBy(x => x.identific))
             {
                 this.listaTecnico.Add(item);
             }
@@ -140,7 +140,7 @@ namespace ColetorA41.ViewModel
             var lista = await _service.ObterTransportes();
 
             this.listaTransporte.Clear();
-            foreach (var item in lista)
+            foreach (var item in lista.OrderBy(x => x.identific))
             {
                 this.listaTransporte.Add(item);
             }
@@ -155,7 +155,7 @@ namespace ColetorA41.ViewModel
             var lista = await _service.ObterEntrega(this.TecnicoSelecionado.codTec, this.EstabSelecionado.codEstab);
 
             this.listaEntrega.Clear();
-            foreach (var item in lista)
+            foreach (var item in lista.OrderBy(x=>x.identific))
             {
                 this.listaEntrega.Add(item);
             }
@@ -229,88 +229,6 @@ namespace ColetorA41.ViewModel
             return ok;
         }
 
-        public async void PrepararCalculo()
-        {
-            this.IsBusy = true;
-            //Gerar Numero de Processo se for preciso
-            var calculo = await _service.PrepararCalculo(this.EstabSelecionado.codEstab, 
-                                                         this.TecnicoSelecionado.codTec, 
-                                                         this.NrProcessSelecionado, 
-                                                         this.listaExtrakitSelecionados.ToList());
-
-            //Montar Calculo
-            this.listaCalculo.Clear();
-            foreach (var item in calculo.items)
-            {
-                this.listaCalculo.Add(item);
-            }
-
-            //Montar Sem Saldo
-            this.listaSemSaldo.Clear();
-            foreach (var item in calculo.semsaldo)
-            {
-                this.listaSemSaldo.Add(item);
-            }
-
-            //Montar Resumo
-            this.MontarResumo();
-
-            this.IsBusy = false;
-        }
-
-        public void MontarResumo()
-        {
-          
-            this.listaResumo.Clear();
-            this.listaResumo.Add(new()
-            {
-                id = 1,
-                titulo = "Visão Geral",
-                descricao = $"{1}ETs fora do processo",
-                quantidade = this.listaCalculo.Count(item => !item.soEntrada)
-            });
-
-            this.listaResumo.Add(new()
-            {
-                id = 2,
-                titulo = "Renovações",
-                descricao = "Saídas e Entradas",
-                quantidade = this.listaCalculo.Count(item => item.qtRenovar > 0)
-            });
-
-            this.listaResumo.Add(new()
-            {
-                id = 3,
-                titulo = "Pagamentos",
-                descricao = "Saídas",
-                quantidade = this.listaCalculo.Count(item => item.qtPagar > 0 && !item.soEntrada)
-            });
-
-            this.listaResumo.Add(new()
-            {
-                id = 4,
-                titulo = "Somente Entrada",
-                descricao = "Entradas + ET + Ruins",
-                quantidade = this.listaCalculo.Count(item => item.soEntrada)
-            });
-
-            this.listaResumo.Add(new()
-            {
-                id = 5,
-                titulo = "Extrakit",
-                descricao = "De Kit para ET",
-                quantidade = this.listaCalculo.Count(item => item.qtExtrakit > 0)
-            });
-
-            this.listaResumo.Add(new()
-            {
-                id = 6,
-                titulo = "Sem Saldo",
-                descricao = "Itens/Alternativos Sem Saldo",
-                quantidade = this.listaSemSaldo.Count(item=>item.qtPagar > 0)
-            });
-        }
-
         public Command SelectedChangedCommand
         {
             get
@@ -352,6 +270,13 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarDadosNF()
         {
+            if ((this.EstabSelecionado == null) || (this.TecnicoSelecionado == null))
+            {
+                await Shell.Current.DisplayAlert("Erro!", "Dados do estabelecimento e técnicos não preenchidos corretamente", "OK");
+                //await Shell.Current.GoToAsync($"/{nameof(EstabTec)}");
+                return;
+            }
+            this.ObterParametrosEstab();
             await Shell.Current.GoToAsync($"{nameof(DadosNF)}");
         }
 
@@ -359,40 +284,144 @@ namespace ColetorA41.ViewModel
         async Task ChamarExtrakit()
         {
             //await Shell.Current.DisplayAlert("Aqui", "Entrou", "OK");
+            this.ObterExtrakit();
             await Shell.Current.GoToAsync($"{nameof(ExtrakitView)}");
         }
 
-        [RelayCommand]
-        async Task ChamarResumo()
-        {
-            await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
-        }
+        
 
         [RelayCommand]
         async Task ChamarLeituraENC()
         {
             await Shell.Current.GoToAsync($"{nameof(LeituraENC)}");
+            this.ObterEncs();
+        }
+
+        public async void ObterEncs()
+        {
+            this.IsBusy = false;
+            var lista = await _service46.ObterEncs(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
+            this.listaEnc.Clear();
+            foreach (var item in lista)
+            {
+                this.listaEnc.Add(item);
+            }
+            this.IsBusy = false;
+
         }
 
         [RelayCommand]
         async Task LeituraENC(string numEnc)
         {
-            //var lista = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.entregaSelecionada.nrProcesso.ToString());
-            //await Shell.Current.DisplayAlert("Aqui", numEnc, "OK");
             this.Mock();
+            
+            this.IsBusy = true;
+            if (string.IsNullOrEmpty(numEnc))
+            {
+                this.IsBusy = false;
+                return;
+            }
+
+            var item = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.entregaSelecionada.nrProcesso.ToString());
+            item.numEnc = numEnc;
+            if (item.flag.ToUpper() == "ERRO")
+            {
+                this.IsBusy = false;
+                await Shell.Current.DisplayAlert("Erro ENC", item.mensagem, "OK");
+                return;
+            }
+            this.listaEnc.Add(item);
             this.NumEnc = string.Empty;
+            this.IsBusy = false;
+            
         }
 
         public async void Mock()
         {
             this.IsBusy = true;
             this.listaEnc.Add(new Enc {numEnc="12345", chamado = "11111", flag = "OK", itCodigo = "85.111.00024-2b", numOS=8540, mensagem="Mensagem: OK" });
-            this.listaEnc.Add(new Enc {numEnc = "6789", chamado = "", flag = "ERRO", itCodigo = "ENC inválida", itDescricao = "", numOS = 0, mensagem = "" });
+            this.listaEnc.Add(new Enc {numEnc = "6789", chamado = "", flag = "NOK", itCodigo = "86.555.00024-2b", itDescricao = "", numOS = 0, mensagem = "" });
             this.IsBusy = false;
         }
 
+        [RelayCommand]
+        async Task EliminarEnc(Enc objEnc)
+        {
+            await _service46.Desmarcar(objEnc.cRowId, objEnc.cItemRowId);
+            var item = this.listaEnc.Where(x=>x.numEnc == objEnc.numEnc).FirstOrDefault();
+            this.listaEnc.Remove(item);
+
+        }
+
+        [RelayCommand]
+        async Task ChamarResumo()
+        {
+            this.IsBusy = true;
+            await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+            this.PrepararCalculo();
+            this.IsBusy = false;
+        }
+
+        //Login Almoxarifado
+        [ObservableProperty]
+        LabelResumo fichas = new ();
 
 
+        public async void PrepararCalculo()
+        {
+            this.IsBusy = true;
+            //Gerar Numero de Processo se for preciso
+            var calculo = await _service.PrepararCalculo(this.EstabSelecionado.codEstab,
+                                                         this.TecnicoSelecionado.codTec,
+                                                         this.NrProcessSelecionado,
+                                                         this.listaExtrakitSelecionados.ToList());
 
+            //Montar 
+            this.listaCalculo.Clear();
+            foreach (var item in calculo.items)
+            {
+                this.listaCalculo.Add(item);
+            }
+
+            //Montar Sem Saldo
+            this.listaSemSaldo.Clear();
+            foreach (var item in calculo.semsaldo)
+            {
+                this.listaSemSaldo.Add(item);
+            }
+
+            //Montar Resumo
+            this.AtualizarLabelsContadores();
+
+           
+        }
+
+        public void AtualizarLabelsContadores()
+        {
+            //Geral
+            this.Fichas.Geral = this.listaCalculo.Where(x => !x.soEntrada).Sum(x => x.qtPagar + x.qtRenovar + x.qtExtrakit);
+
+            //Gera Extrakit - Labels 
+            this.Fichas.GeralExtrakit = this.listaExtrakit.Sum(x => x.qtSaldo);
+
+            //Pagamento
+            this.Fichas.Pagto = this.listaCalculo.Where(x => x.qtPagar > 0 && !x.soEntrada).Sum(x => x.qtPagar + x.qtExtrakit);
+
+            //Renovacoes
+            this.Fichas.Renovacao = this.listaCalculo.Where(x => x.qtRenovar > 0).Sum(x => x.qtRenovar);
+
+            //Somente Entrada
+            this.Fichas.SomenteEntrada = this.listaCalculo.Where(x => x.soEntrada).Sum(x => x.qtPagar + x.qtRuim);
+
+            //Extrakit
+            this.Fichas.Extrakit = this.listaCalculo.Where(x => x.qtExtrakit > 0).Sum(x => x.qtExtrakit);
+
+            //Sem Saldo
+            this.Fichas.SemSaldo = this.listaSemSaldo.Sum(x => x.qtPagar);
+
+            this.IsBusy = false;
+
+
+        }
     }
 }
