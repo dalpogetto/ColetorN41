@@ -9,7 +9,9 @@ namespace ColetorA41.Services
 {
     public class TotvsA41Service : BaseService
     {
-        
+        public TotvsA41Service(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+        {
+        }
 
         public async Task<List<Estabelecimento>> ObterEstabelecimentos()
         {

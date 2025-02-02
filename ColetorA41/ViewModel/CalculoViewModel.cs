@@ -6,6 +6,7 @@ using ColetorA41.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ColetorA41.Views.Calculo;
+using Microsoft.Extensions.Configuration;
 
 namespace ColetorA41.ViewModel
 {
@@ -13,13 +14,16 @@ namespace ColetorA41.ViewModel
     {
         private readonly TotvsService _service;
         private readonly TotvsService46 _service46;
+        private readonly IConfiguration _config;
        
       
         public CalculoViewModel(TotvsService totvsService, 
-                                TotvsService46 totvsService46)
+                                TotvsService46 totvsService46,
+                                IConfiguration config)
         {
             _service = totvsService;
             _service46 = totvsService46;
+            _config = config;
             this.ObterEstabelecimentos();
         }
 
@@ -242,6 +246,8 @@ namespace ColetorA41.ViewModel
             }
         }
 
+        public IConfiguration Config { get; }
+
         [RelayCommand]
         private void SelectionChanged()
         {
@@ -258,7 +264,7 @@ namespace ColetorA41.ViewModel
         async Task ChamarEstabTec()
         {
             //await Shell.Current.DisplayAlert("Aqui", "Entrou", "OK");
-            await Shell.Current.GoToAsync($"/{nameof(EstabTec)}");
+            await Shell.Current.GoToAsync($"{nameof(EstabTec)}");
         }
 
         [RelayCommand]
@@ -313,8 +319,6 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task LeituraENC(string numEnc)
         {
-            this.Mock();
-            
             this.IsBusy = true;
             if (string.IsNullOrEmpty(numEnc))
             {
@@ -377,11 +381,12 @@ namespace ColetorA41.ViewModel
                                                          this.listaExtrakitSelecionados.ToList());
 
             //Montar 
-            this.listaCalculo.Clear();
+        /*    this.listaCalculo.Clear();
             foreach (var item in calculo.items)
             {
                 this.listaCalculo.Add(item);
             }
+        */
 
             //Montar Sem Saldo
             this.listaSemSaldo.Clear();

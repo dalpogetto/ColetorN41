@@ -98,7 +98,7 @@
                                                  Grid.ColumnSpan="2"
                                                  Grid.RowSpan="2"
                                                  Text="{Binding descItem}"
-                                                 FontAttributes="Italic"
+                                                 
                                                HorizontalOptions="Start"
                                                  VerticalOptions="Start"
                                                WidthRequest="300"/>

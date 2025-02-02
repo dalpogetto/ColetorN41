@@ -10,6 +10,9 @@ namespace ColetorA41.Services
 {
     public partial class TotvsService:BaseService
     {
+        public TotvsService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+        {
+        }
 
         public async Task<List<ParamEstabel>> ObterParamEstabelecimentos()
         {

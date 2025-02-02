@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -17,20 +19,27 @@ namespace ColetorA41.Services
         /// <summary>
         /// An instance of <see cref="HttpClient"/>.
         /// </summary>
+        protected readonly IHttpClientFactory _httpClientFactory;
         protected readonly HttpClient _httpClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseService"/> class.
         /// </summary>
-        public BaseService()
+        public BaseService(IHttpClientFactory httpClientFactory)
         {
+            _httpClientFactory = httpClientFactory;
+            _httpClient = _httpClientFactory.CreateClient("coletor");
+
+            /*
             _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
             _httpClient.BaseAddress = new Uri(Ambiente.PrefixoUrl);
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
             _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", Ambiente.AliasAppServer);
             _httpClient.DefaultRequestHeaders.Add("CompanyId", Ambiente.EmpresaSelecionada.CodEmpresa);
             _httpClient.Timeout = Timeout.InfiniteTimeSpan;
-            _httpClient.DefaultRequestHeaders.Connection.Add("Keep-Alive");
+            */
+            
+
         }
 
         protected async Task<T?> GetAsync<T>(string endpoint, NameValueCollection parameters = null)
@@ -54,14 +63,13 @@ namespace ColetorA41.Services
 
             try
             {
-                var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
-
+                using var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
                 response.EnsureSuccessStatusCode();
 
-                var responseContent = await response.Content.ReadAsStringAsync();
-                response.Dispose();
-             
-                return System.Text.Json.JsonSerializer.Deserialize<T>(responseContent);
+                
+                using var responseStream = await response.Content.ReadAsStreamAsync();
+                var data = await JsonSerializer.DeserializeAsync<T>(responseStream);
+                return data;
             }
             catch (Exception ex)
             {
@@ -78,29 +86,33 @@ namespace ColetorA41.Services
 
         }
 
-
         protected async Task<TResponse?> PostAsync<TRequest, TResponse>(string metodo, TRequest requestBody = default)
         {
-            //Montar Request
+            /*Montar Request*/
             var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(Ambiente.PrefixoUrl, metodo)) };
             if (requestBody != null)
             {
-                var json = JsonSerializer.Serialize(requestBody);
+                var json = System.Text.Json.JsonSerializer.Serialize(requestBody);
                 request.Content = new StringContent(json, Encoding.UTF8, "application/json");
             }
             try
             {
-                //Executar
                 var response = await _httpClient.SendAsync(request);
-
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new HttpRequestException($"Erro: {response.StatusCode}");
                 }
 
-                var responseJson = await response.Content.ReadAsStringAsync();
-                var responseData = JsonSerializer.Deserialize<TResponse>(responseJson);
-                return responseData;
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await System.Text.Json.JsonSerializer.DeserializeAsync<TResponse>(responseStream);
+                    return data;
+                }
+
+                //var responseJson = await response.Content.ReadAsStringAsync();
+                //var responseData = JsonSerializer.Deserialize<TResponse>(responseJson);
+                //return responseData;
+
             }
             catch (Exception ex)
             {
@@ -111,12 +123,15 @@ namespace ColetorA41.Services
 
                 // return default;
             }
-            finally { 
-               request.Dispose();
+            finally
+            {
+               // request.Dispose();
             }
-            
+
+
 
         }
+
 
 
         protected async Task<HttpResponseMessage?> DeleteAsync(string endpoint)
@@ -128,6 +143,8 @@ namespace ColetorA41.Services
 
             try
             {
+                //var _httpClient = _httpClientFactory.CreateClient("coletor");
+                var _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
                 return await _httpClient.DeleteAsync(endpoint);
             }
             catch (Exception ex)

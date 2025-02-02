@@ -10,7 +10,9 @@ namespace ColetorA41.Services
 {
     public class TotvsService46 : BaseService
     {
-        
+        public TotvsService46(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+        {
+        }
 
         public async Task<List<OrdemServico>> ObterDados(string codEstabel, int codTecnico, string senha = "moto", string origem = "calculo")
         {

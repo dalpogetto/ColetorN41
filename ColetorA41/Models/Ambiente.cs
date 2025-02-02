@@ -17,7 +17,7 @@ namespace ColetorA41.Models
         {
             get
             {
-                return "https://brspupapl01.ad.diebold.com:8543/";        // Desenv
+                return "https://hawebdev.dieboldnixdorf.com.br:8543/";        // Desenv
                 // return "https://brspupapl01.ad.diebold.com:8143/";     // -> Projetos
                 // return "https://brspupapl01.ad.diebold.com:8243/";     // -> Homolog
                 //return "https://totvsapp.dieboldnixdorf.com.br:8143/";  // -> Produção 

@@ -29,7 +29,7 @@ namespace ColetorA41.Models
     public class PrepararCalculoResponse
     {
         public List<Semsaldo> semsaldo { get; set; }
-        public List<Calculo> items { get; set; }
+       // public List<Calculo> items { get; set; }
     }
 
     public class Semsaldo
