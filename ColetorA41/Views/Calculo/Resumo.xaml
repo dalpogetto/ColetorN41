@@ -37,7 +37,7 @@
                     </RadioButton.Behaviors>
                 </RadioButton>
                 <RadioButton Content="Renov Parcial" Value="2" IsChecked="True"/>
-                    <RadioButton Content="Dev Extrakit" Value="3" />
+                <RadioButton Content="Dev Extrakit" Value="3" />
                 </HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center">
@@ -45,11 +45,11 @@
                   Grid.Column="0"
                   IsVisible="{Binding IsBusy}"
                   HorizontalOptions="Center"
-                  HeightRequest="24"
+                  HeightRequest="28"
                   IsRunning="True"
                   VerticalOptions="Center"/>
 
-                <Label Text="Preparando o calculo aguarde ..."
+                <Label Text="Preparando o calculo ..."
                         FontAttributes="Bold"
                         IsVisible="{Binding IsBusy}"
                         FontSize="16"
@@ -131,8 +131,8 @@
                 </HorizontalStackLayout>
 
                 <StackLayout Padding="20" Spacing="10">
-                    <Button Text="{Binding lblAprovar}" CornerRadius="20"></Button>
-                    <Button Text="{Binding lblAprovarSemEntrada}" CornerRadius="20"></Button>
+                <Button Text="{Binding LblAprovar, StringFormat='Aprovar - {0}'} " CornerRadius="20"></Button>
+                <Button Text="{Binding LblAprovarSemEntrada, StringFormat='Aprovar Sem Saída - {0}'} " CornerRadius="20"></Button>
                 </StackLayout>
             </VerticalStackLayout>
 

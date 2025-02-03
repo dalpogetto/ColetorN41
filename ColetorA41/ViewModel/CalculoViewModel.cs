@@ -57,7 +57,7 @@ namespace ColetorA41.ViewModel
             }
         }
 
-        public async void ObterEstabelecimentos()
+        public async Task ObterEstabelecimentos()
         {
             this.IsBusy = true;
             var lista = await _service.ObterEstabelecimentos();
@@ -76,7 +76,7 @@ namespace ColetorA41.ViewModel
 
         public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
 
-        public async void ObterTecnicosEstab()
+        public async Task ObterTecnicosEstab()
         {
             this.IsBusy = true;
             var lista = await _service.ObterTecEstab(this._estabSelecionado.codEstab);
@@ -134,9 +134,7 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         string numEnc;
 
-        [ObservableProperty]
-        bool isCalculo=false;
-
+        
         [ObservableProperty]
         string lblAprovar;
 
@@ -175,7 +173,7 @@ namespace ColetorA41.ViewModel
             this.IsBusy = false;
         }
 
-        public async void ObterParametrosEstab()
+        public async Task ObterParametrosEstab()
         {
             this.IsBusy = true;
             var parametro = await _service.ObterParametrosEstab(this._estabSelecionado.codEstab);
@@ -217,7 +215,7 @@ namespace ColetorA41.ViewModel
             this.IsBusy = false;
         }
 
-        public async void ObterDados()
+        public async Task ObterDados()
         {
             this.IsBusy = true;
             //Gerar Numero de Processo se for preciso
@@ -291,7 +289,8 @@ namespace ColetorA41.ViewModel
                 //await Shell.Current.GoToAsync($"/{nameof(EstabTec)}");
                 return;
             }
-            this.ObterParametrosEstab();
+            await this.ObterParametrosEstab();
+            await this.ObterDados();
             await Shell.Current.GoToAsync($"{nameof(DadosNF)}");
         }
 
@@ -371,7 +370,6 @@ namespace ColetorA41.ViewModel
         async Task ChamarResumo()
         {
             this.IsBusy = true;
-            this.IsCalculo = false;
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
             await this.PrepararCalculo();
             
@@ -385,7 +383,28 @@ namespace ColetorA41.ViewModel
         async Task RadioTipoCalculo(object obj)
         {
             var tipo = (obj as CalculoViewModel).tipoCalculo;
-            this.tipoCalculo = tipo;
+            switch (tipo)
+            {
+                case 1:
+                    {
+                        LblAprovar = "Renovação Total";
+                        LblAprovarSemEntrada = "Renovação Total";
+                    }
+                    break;
+
+                case 2:
+                    {
+                        LblAprovar = "Renovação Parcial";
+                        LblAprovarSemEntrada = "Renovação Parcial";
+                    }
+                    break;
+                case 3:
+                    {
+                        LblAprovar = "ExtraKit";
+                        LblAprovarSemEntrada = "Extrakit";
+                    }
+                    break;
+            }
             await this.AtualizarLabelsContadores(tipo);
         }
 
@@ -418,19 +437,24 @@ namespace ColetorA41.ViewModel
 
         public async Task AtualizarLabelsContadores(int tipoCalculo)
         {
-            this.lblAprovar = "Aprovar -";
-            this.LblAprovarSemEntrada = "Aprovar Sem Gerar Saída -";
 
             this.tipoCalculo = tipoCalculo;
 
             var item = this.listaCalculo.Where(x => x.tipo == tipoCalculo).FirstOrDefault();
             if (item == null) return;
 
+            //Extrakits nao selecionados
+            var totalET = 0;
+            foreach (var x in listaExtrakit)
+            {
+                totalET += x.qtDisp;
+            }
+
             //Geral
-            Fichas.Geral = item.qtGeral;
+            Fichas.Geral = item.qtGeral + totalET;
 
             //Gera Extrakit - Labels
-            Fichas.GeralExtrakit = item.qtGeral;
+            Fichas.GeralExtrakit = totalET;
 
             //Pagamento
             Fichas.Pagto = item.qtPagto;
@@ -448,7 +472,6 @@ namespace ColetorA41.ViewModel
             Fichas.SemSaldo = item.qtSemSaldo;
 
             this.IsBusy = false;
-            this.IsCalculo = true;
 
             //Atualizar tela
             
