@@ -44,7 +44,7 @@
             </Grid>
 
             <VerticalStackLayout Padding="20,10" Margin="0,-300,0,0">
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,20" >
                     <Image
                         Source="scanner.png"
                         HeightRequest="60"
@@ -67,15 +67,16 @@
                        ReturnCommandParameter="{Binding NumEnc}"
                        TextColor="Black"></Entry>
                 </Border>
+                <ActivityIndicator  
+                      IsVisible="{Binding IsBusy}"
+                      HorizontalOptions="Center"
+                      IsRunning="{Binding IsBusy}"
+                      VerticalOptions="Center"/>
             </VerticalStackLayout>
-            <ActivityIndicator  
-              IsVisible="{Binding IsBusy}"
-              HorizontalOptions="Center"
-              IsRunning="{Binding IsBusy}"
-              VerticalOptions="Center"/>
+            
         </StackLayout>
 
-        <ScrollView Grid.Row="1" Margin="5,0,5,0">
+        <ScrollView Grid.Row="1" Margin="15,0">
             
             <StackLayout>
                
@@ -103,7 +104,7 @@
                                                    BackgroundColor="{Binding flag, Converter={StaticResource  StringToColor}}" CornerRadius="10">
                                                 <Label Text="{Binding flag}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" />
                                             </Frame>
-                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto,auto" ColumnSpacing="25" Grid.Column="0">
+                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto,auto" ColumnSpacing="20" Grid.Column="0">
                                                 <!--Chave-->
                                                 <Label Text="{Binding itCodigo}" Grid.ColumnSpan="4" FontSize="16" FontAttributes="Bold" />
                                                 <!--Cabecalho-->

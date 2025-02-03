@@ -18,10 +18,13 @@ namespace ColetorA41
     {
         public static MauiApp CreateMauiApp()
         {
+            NullabilityInfoContext kk = new();
+           
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -30,6 +33,8 @@ namespace ColetorA41
 
             //Registrar Arquivos de configuracao
             builder.AddAppSettings();
+
+            
 
 
 #if DEBUG
@@ -44,12 +49,7 @@ namespace ColetorA41
             //HttpClient
             builder.Services.AddHttpClient("coletor", httpClient =>
             {
-                httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BASE_URL"));
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", builder.Configuration.GetValue<string>("USUARIO_SENHA_BASE64"));
-                httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", builder.Configuration.GetValue<string>("ALIAS_APPSERVER"));
-                httpClient.DefaultRequestHeaders.Add("CompanyId", builder.Configuration.GetValue<string>("EMPRESA_PADRAO"));
-                httpClient.Timeout = Timeout.InfiniteTimeSpan;
-              
+
             }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (m, c, ch, e) => true

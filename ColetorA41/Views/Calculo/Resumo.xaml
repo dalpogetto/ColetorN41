@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
              xmlns:models="clr-namespace:ColetorA41.Models"
              x:DataType="viewmodel:CalculoViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Resumo Cálculo">
   
         <Grid RowDefinitions="50,*,60">
@@ -26,11 +27,17 @@
 
             </HorizontalStackLayout>
             <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,0,0,0" Grid.Row="1" HorizontalOptions="Center">
-                <HorizontalStackLayout Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}">
-                    <RadioButton Content="Renov Total" Value="1" IsChecked="True"/>
-                    <RadioButton Content="Renov Parcial" Value="2" />
+            <HorizontalStackLayout Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" >
+                <RadioButton Content="Renov Total" Value="1" >
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                                 EventName="CheckedChanged"
+                                 Command="{Binding RadioTipoCalculoCommand}"
+                                 CommandParameter="{Binding .}"/>
+                    </RadioButton.Behaviors>
+                </RadioButton>
+                <RadioButton Content="Renov Parcial" Value="2" IsChecked="True"/>
                     <RadioButton Content="Dev Extrakit" Value="3" />
-
                 </HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center">
@@ -38,13 +45,14 @@
                   Grid.Column="0"
                   IsVisible="{Binding IsBusy}"
                   HorizontalOptions="Center"
-                  IsRunning="{Binding IsBusy}"
+                  HeightRequest="24"
+                  IsRunning="True"
                   VerticalOptions="Center"/>
 
                 <Label Text="Preparando o calculo aguarde ..."
                         FontAttributes="Bold"
                         IsVisible="{Binding IsBusy}"
-                        FontSize="18"
+                        FontSize="16"
                         Margin="0,0,0,0"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center" />
@@ -53,7 +61,7 @@
            
 
 
-            <HorizontalStackLayout HorizontalOptions="Center" >
+            <HorizontalStackLayout HorizontalOptions="Center">
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="1" />
@@ -123,8 +131,8 @@
                 </HorizontalStackLayout>
 
                 <StackLayout Padding="20" Spacing="10">
-                    <Button Text="Aprovar" CornerRadius="20"></Button>
-                    <Button Text="Aprovar Sem Gerar Saída" CornerRadius="20"></Button>
+                    <Button Text="{Binding lblAprovar}" CornerRadius="20"></Button>
+                    <Button Text="{Binding lblAprovarSemEntrada}" CornerRadius="20"></Button>
                 </StackLayout>
             </VerticalStackLayout>
 

@@ -1,4 +1,5 @@
 ﻿using ColetorA41.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -10,7 +11,7 @@ namespace ColetorA41.Services
 {
     public partial class TotvsService:BaseService
     {
-        public TotvsService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+        public TotvsService(IHttpClientFactory httpClientFactory, IConfiguration config) : base(httpClientFactory, config)
         {
         }
 
@@ -74,10 +75,10 @@ namespace ColetorA41.Services
             return response.senhaValida;
         }
 
-        public async Task<PrepararCalculoResponse> PrepararCalculo(string codEstabel, int codTecnico, int nrProcess, List<Extrakit> listaET)
+        public async Task<PrepararCalculoResponse> PrepararCalculoMobile(string codEstabel, int codTecnico, int nrProcess, List<Extrakit> listaET)
         {
             var request = new PrepararCalculoRequest { CodEstab = codEstabel, CodTecnico = codTecnico, NrProcess = nrProcess, Extrakit=listaET };
-            var response = await PostAsync<PrepararCalculoRequest, PrepararCalculoResponse>("apiesaa041/PrepararCalculo", request);
+            var response = await PostAsync<PrepararCalculoRequest, PrepararCalculoResponse>("apiesaa041/PrepararCalculoMobile", request);
             return response;
         }
 

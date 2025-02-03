@@ -1,4 +1,5 @@
 ﻿using ColetorA41.Utils;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -21,24 +22,25 @@ namespace ColetorA41.Services
         /// </summary>
         protected readonly IHttpClientFactory _httpClientFactory;
         protected readonly HttpClient _httpClient;
+        private readonly IConfiguration _config;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseService"/> class.
         /// </summary>
-        public BaseService(IHttpClientFactory httpClientFactory)
+        public BaseService(IHttpClientFactory httpClientFactory, IConfiguration config)
         {
+
+            _config = config;
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient("coletor");
-
-            /*
-            _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
             _httpClient.BaseAddress = new Uri(Ambiente.PrefixoUrl);
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
-            _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", Ambiente.AliasAppServer);
-            _httpClient.DefaultRequestHeaders.Add("CompanyId", Ambiente.EmpresaSelecionada.CodEmpresa);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _config["USUARIO_SENHA_BASE64"]);
+            _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", _config["ALIAS_APPSERVER"]);
+            _httpClient.DefaultRequestHeaders.Add("CompanyId", _config["EMPRESA_PADRAO"]);
             _httpClient.Timeout = Timeout.InfiniteTimeSpan;
-            */
-            
+
+
+            //_httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
 
         }
 
@@ -63,7 +65,7 @@ namespace ColetorA41.Services
 
             try
             {
-                using var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
+                var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
                 response.EnsureSuccessStatusCode();
 
                 

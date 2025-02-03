@@ -1,4 +1,5 @@
 ﻿using ColetorA41.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ColetorA41.Services
 {
     public class TotvsA41Service : BaseService
     {
-        public TotvsA41Service(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+        public TotvsA41Service(IHttpClientFactory httpClientFactory, IConfiguration config) : base(httpClientFactory, config)
         {
         }
 

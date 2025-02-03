@@ -18,6 +18,19 @@ namespace ColetorA41.Models
 
     }
 
+    public class Ficha
+    {
+        public int tipo { get; set; }
+        public int qtSemSaldo { get; set; }
+        public int qtGeral { get; set; }
+        public int qtSoEntra { get; set; }
+        public int qtPagto { get; set; }
+        public int qtExtrakit { get; set; }
+        public int qtReno { get; set; }
+
+
+    }
+
     public class PrepararCalculoRequest
     {
         public string CodEstab { get; set; }
@@ -28,8 +41,7 @@ namespace ColetorA41.Models
 
     public class PrepararCalculoResponse
     {
-        public List<Semsaldo> semsaldo { get; set; }
-       // public List<Calculo> items { get; set; }
+        public List<Ficha> items { get; set; }
     }
 
     public class Semsaldo

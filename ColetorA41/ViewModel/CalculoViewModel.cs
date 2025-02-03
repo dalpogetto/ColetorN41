@@ -129,12 +129,21 @@ namespace ColetorA41.ViewModel
         string senhaAlmoxa;
 
         [ObservableProperty]
-        string tipoCalculo;
+        int tipoCalculo;
 
         [ObservableProperty]
         string numEnc;
 
-        
+        [ObservableProperty]
+        bool isCalculo=false;
+
+        [ObservableProperty]
+        string lblAprovar;
+
+        [ObservableProperty]
+        string lblAprovarSemEntrada;
+
+
 
         public ObservableCollection<Transporte> listaTransporte { get; private set; } = new();
 
@@ -219,7 +228,7 @@ namespace ColetorA41.ViewModel
         }
 
         //Calculo
-        public ObservableCollection<Calculo> listaCalculo { get; private set; } = new();
+        public ObservableCollection<Ficha> listaCalculo { get; private set; } = new();
         public ObservableCollection<Semsaldo> listaSemSaldo { get; private set; } = new();
         public ObservableCollection<Models.Resumo> listaResumo { get; private set; } = new();
 
@@ -300,12 +309,12 @@ namespace ColetorA41.ViewModel
         async Task ChamarLeituraENC()
         {
             await Shell.Current.GoToAsync($"{nameof(LeituraENC)}");
-            this.ObterEncs();
+            await this.ObterEncs();
         }
 
-        public async void ObterEncs()
+        public async Task ObterEncs()
         {
-            this.IsBusy = false;
+            this.IsBusy = true;
             var lista = await _service46.ObterEncs(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
             this.listaEnc.Clear();
             foreach (var item in lista)
@@ -337,6 +346,7 @@ namespace ColetorA41.ViewModel
             this.listaEnc.Add(item);
             this.NumEnc = string.Empty;
             this.IsBusy = false;
+           
             
         }
 
@@ -361,9 +371,22 @@ namespace ColetorA41.ViewModel
         async Task ChamarResumo()
         {
             this.IsBusy = true;
+            this.IsCalculo = false;
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
-            this.PrepararCalculo();
-            this.IsBusy = false;
+            await this.PrepararCalculo();
+            
+            //Montar Resumo
+            //await this.AtualizarLabelsContadores(1);
+            
+
+        }
+
+        [RelayCommand]
+        async Task RadioTipoCalculo(object obj)
+        {
+            var tipo = (obj as CalculoViewModel).tipoCalculo;
+            this.tipoCalculo = tipo;
+            await this.AtualizarLabelsContadores(tipo);
         }
 
         //Login Almoxarifado
@@ -371,61 +394,64 @@ namespace ColetorA41.ViewModel
         LabelResumo fichas = new ();
 
 
-        public async void PrepararCalculo()
+        public async Task PrepararCalculo()
         {
             this.IsBusy = true;
             //Gerar Numero de Processo se for preciso
-            var calculo = await _service.PrepararCalculo(this.EstabSelecionado.codEstab,
+            var calculo = await _service.PrepararCalculoMobile(this.EstabSelecionado.codEstab,
                                                          this.TecnicoSelecionado.codTec,
                                                          this.NrProcessSelecionado,
                                                          this.listaExtrakitSelecionados.ToList());
 
             //Montar 
-        /*    this.listaCalculo.Clear();
+            this.listaCalculo.Clear();
             foreach (var item in calculo.items)
             {
                 this.listaCalculo.Add(item);
             }
-        */
 
-            //Montar Sem Saldo
-            this.listaSemSaldo.Clear();
-            foreach (var item in calculo.semsaldo)
-            {
-                this.listaSemSaldo.Add(item);
-            }
+            //Chamar Tela
+            await Task.Delay(100);
+            await this.AtualizarLabelsContadores(2);
 
-            //Montar Resumo
-            this.AtualizarLabelsContadores();
-
-           
         }
 
-        public void AtualizarLabelsContadores()
+        public async Task AtualizarLabelsContadores(int tipoCalculo)
         {
-            //Geral
-            this.Fichas.Geral = this.listaCalculo.Where(x => !x.soEntrada).Sum(x => x.qtPagar + x.qtRenovar + x.qtExtrakit);
+            this.lblAprovar = "Aprovar -";
+            this.LblAprovarSemEntrada = "Aprovar Sem Gerar Saída -";
 
-            //Gera Extrakit - Labels 
-            this.Fichas.GeralExtrakit = this.listaExtrakit.Sum(x => x.qtSaldo);
+            this.tipoCalculo = tipoCalculo;
+
+            var item = this.listaCalculo.Where(x => x.tipo == tipoCalculo).FirstOrDefault();
+            if (item == null) return;
+
+            //Geral
+            Fichas.Geral = item.qtGeral;
+
+            //Gera Extrakit - Labels
+            Fichas.GeralExtrakit = item.qtGeral;
 
             //Pagamento
-            this.Fichas.Pagto = this.listaCalculo.Where(x => x.qtPagar > 0 && !x.soEntrada).Sum(x => x.qtPagar + x.qtExtrakit);
+            Fichas.Pagto = item.qtPagto;
 
             //Renovacoes
-            this.Fichas.Renovacao = this.listaCalculo.Where(x => x.qtRenovar > 0).Sum(x => x.qtRenovar);
+            Fichas.Renovacao = item.qtReno;
 
             //Somente Entrada
-            this.Fichas.SomenteEntrada = this.listaCalculo.Where(x => x.soEntrada).Sum(x => x.qtPagar + x.qtRuim);
+            Fichas.SomenteEntrada = item.qtSoEntra;
 
             //Extrakit
-            this.Fichas.Extrakit = this.listaCalculo.Where(x => x.qtExtrakit > 0).Sum(x => x.qtExtrakit);
+            Fichas.Extrakit = item.qtExtrakit;
 
             //Sem Saldo
-            this.Fichas.SemSaldo = this.listaSemSaldo.Sum(x => x.qtPagar);
+            Fichas.SemSaldo = item.qtSemSaldo;
 
             this.IsBusy = false;
+            this.IsCalculo = true;
 
+            //Atualizar tela
+            
 
         }
     }
