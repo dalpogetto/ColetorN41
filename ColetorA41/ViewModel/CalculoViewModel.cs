@@ -110,6 +110,12 @@ namespace ColetorA41.ViewModel
         string entrega;
 
         [ObservableProperty]
+        int qtdeETSelecionadas;
+
+        [ObservableProperty]
+        int qtdeETNaoSelecionadas;
+
+        [ObservableProperty]
         Transporte transpEntraSelecionado;
 
         [ObservableProperty]
@@ -193,6 +199,8 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         void SelecionarTodosExtrakit()
         {
+            this.listaExtrakitSelecionados.Clear();
+
             foreach (var item in this.listaExtrakit)
             {
                 this.listaExtrakitSelecionados.Add(item);
@@ -202,15 +210,24 @@ namespace ColetorA41.ViewModel
         
 
         [RelayCommand]
-        public void ListaETSelecionada(object obj)
+        public void ListaETSelecionada()
         {
+            this.listaExtrakitNaoSelecionados.Clear();
+            foreach(var item in this.listaExtrakit)
+            {
+                if (this.listaExtrakitSelecionados.OfType<Extrakit>().Where(x=>x.cRowId==item.cRowId).FirstOrDefault() == null)
+                {
+                    this.listaExtrakitNaoSelecionados.Add(item);
+                }
+            }
             QtdeETSelecionadas = listaExtrakitSelecionados.OfType<Extrakit>().Sum(s => s.qtSaldo);
-            QtdeETNaoSelecionadas = 0;
+            QtdeETNaoSelecionadas = listaExtrakitNaoSelecionados.Sum(s => s.qtSaldo);
         }
 
         public ObservableCollection<Extrakit> listaExtrakit { get; private set; } = new();
         public ObservableCollection<object> listaExtrakitSelecionados { get;  set; } = new ();
-        public async void ObterExtrakit()
+        public ObservableCollection<Extrakit> listaExtrakitNaoSelecionados { get; set; } = new();
+        public async Task ObterExtrakit()
         {
             this.IsBusy = true;
             this.listaExtrakit.Clear();
@@ -305,7 +322,8 @@ namespace ColetorA41.ViewModel
         async Task ChamarExtrakit()
         {
             //await Shell.Current.DisplayAlert("Aqui", "Entrou", "OK");
-            this.ObterExtrakit();
+            await this.ObterExtrakit();
+            this.ListaETSelecionada();
             await Shell.Current.GoToAsync($"{nameof(ExtrakitView)}");
         }
 

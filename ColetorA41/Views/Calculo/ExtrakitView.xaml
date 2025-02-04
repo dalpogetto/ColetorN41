@@ -44,6 +44,13 @@
                         WidthRequest="250" 
                         CornerRadius="20"/>
 
+                <HorizontalStackLayout Spacing="50" HorizontalOptions="Center">
+                    <Label Text="{Binding QtdeETSelecionadas, StringFormat='Qtde Selecionadas: {0}'}"></Label>
+
+                    <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Qtde Não Selecionadas: {0}'}"></Label>
+                </HorizontalStackLayout>
+                
+
                 <ActivityIndicator  Grid.Column="0"
                                  IsVisible="{Binding IsBusy}"
                                  HorizontalOptions="Center"
@@ -56,7 +63,7 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <ScrollView Grid.Row="1" Margin="5,-80,5,0">
+        <ScrollView Grid.Row="1" Margin="5,-70,5,0">
             <StackLayout>
                 <CollectionView x:Name="lista" 
                                   ItemsSource="{Binding listaExtrakit}" 
@@ -128,7 +135,7 @@
                                         <VisualStateGroup>
                                             <VisualState Name="Selected">
                                                 <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="AliceBlue" />
+                                                <Setter Property="BackgroundColor" Value="LightYellow" />
                                                     <!--Setter TargetName="seatNumber" Property="Label.TextColor" Value="White" -->
                                                 </VisualState.Setters>
                                             </VisualState>
