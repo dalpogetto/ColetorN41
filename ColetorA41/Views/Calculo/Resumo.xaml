@@ -27,18 +27,62 @@
 
             </HorizontalStackLayout>
             <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,0,0,0" Grid.Row="1" HorizontalOptions="Center">
-            <HorizontalStackLayout Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" >
-                <RadioButton Content="Renov Total" Value="1" >
+            <HorizontalStackLayout Padding="10" Spacing="10" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
+                <RadioButton Content="Total" Value="1">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                                  EventName="CheckedChanged"
                                  Command="{Binding RadioTipoCalculoCommand}"
-                                 CommandParameter="{Binding .}"/>
+                                 CommandParameter="1"/>
                     </RadioButton.Behaviors>
+                    <RadioButton.Triggers>
+                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                            <Setter Property="FontSize" Value="22" />
+                            <Setter Property="FontAttributes" Value="Bold" />
+                        </Trigger>
+                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="False">
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="FontAttributes" Value="None" />
+                        </Trigger>
+                    </RadioButton.Triggers>
                 </RadioButton>
-                <RadioButton Content="Renov Parcial" Value="2" IsChecked="True"/>
-                <RadioButton Content="Dev Extrakit" Value="3" />
-                </HorizontalStackLayout>
+                <RadioButton Content="Parcial" Value="2" IsChecked="True" FontSize="20">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                                  EventName="CheckedChanged"
+                                  Command="{Binding RadioTipoCalculoCommand}"
+                                  CommandParameter="2"/>  
+                    </RadioButton.Behaviors>
+                    <RadioButton.Triggers>
+                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                            <Setter Property="FontSize" Value="22" />
+                            <Setter Property="FontAttributes" Value="Bold" />
+                        </Trigger>
+                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="False">
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="FontAttributes" Value="None" />
+                        </Trigger>
+                    </RadioButton.Triggers>
+                </RadioButton>
+                <RadioButton Content="Dev.Extrakit" Value="3" >
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                                  EventName="CheckedChanged"
+                                  Command="{Binding RadioTipoCalculoCommand}"
+                                  CommandParameter="3"/>
+                    </RadioButton.Behaviors>
+                    <RadioButton.Triggers>
+                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                            <Setter Property="FontSize" Value="22" />
+                            <Setter Property="FontAttributes" Value="Bold" />
+                        </Trigger>
+                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="False">
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="FontAttributes" Value="None" />
+                        </Trigger>
+                    </RadioButton.Triggers>
+                </RadioButton>
+            </HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center">
                 <ActivityIndicator
@@ -146,13 +190,15 @@
                         </Image>
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
+                    <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+               
                         <Image Source="seta_dupla_esquerda" WidthRequest="80" Margin="0,-18,0,0">
                               <Image.GestureRecognizers>
                                  <TapGestureRecognizer Command="{Binding ChamarEstabTecCommand}" />
                             </Image.GestureRecognizers>
                         </Image>
-               
+                    
+
             </VerticalStackLayout>
            
         </Grid>

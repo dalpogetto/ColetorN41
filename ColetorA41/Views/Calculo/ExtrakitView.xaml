@@ -58,15 +58,16 @@
 
         <ScrollView Grid.Row="1" Margin="5,-80,5,0">
             <StackLayout>
-                <CollectionView x:Name="teste" 
+                <CollectionView x:Name="lista" 
                                   ItemsSource="{Binding listaExtrakit}" 
                                   SelectionMode="Multiple" 
                                   SelectedItems="{Binding listaExtrakitSelecionados}"
-                                  SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                                  >
+                                  SelectionChangedCommand="{Binding ListaETSelecionadaCommand}"
+                                 
+                                >
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Extrakit">
-                            <StackLayout>
+                            
                                 <Border HeightRequest="90" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
 
                                     <Grid Padding="5" >
@@ -118,16 +119,28 @@
                                             <Label Text="{Binding qtSaldo}"
                                                      FontSize="16"
                                                      FontAttributes="Bold" 
-                                                         VerticalOptions="Center"
-                                                         HorizontalOptions="Center"
+                                                     VerticalOptions="Center"
+                                                     HorizontalOptions="Center"
                                                      /> 
                                         </Frame>
-
-
-
                                     </Grid>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup>
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="AliceBlue" />
+                                                    <!--Setter TargetName="seatNumber" Property="Label.TextColor" Value="White" -->
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
                                 </Border>
-                            </StackLayout>
+                            
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

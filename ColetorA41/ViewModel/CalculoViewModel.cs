@@ -121,7 +121,6 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         Entrega entregaSelecionada;
 
-        //Login Almoxarifado
         [ObservableProperty]
         int usuarioAlmoxa;
 
@@ -192,22 +191,30 @@ namespace ColetorA41.ViewModel
 
         //Extrakit
         [RelayCommand]
-        private void SelecionarTodosExtrakit()
+        void SelecionarTodosExtrakit()
         {
-            //this.listaExtrakitSelecionados.Clear();
             foreach (var item in this.listaExtrakit)
             {
                 this.listaExtrakitSelecionados.Add(item);
             }
         }
 
+        
+
+        [RelayCommand]
+        public void ListaETSelecionada(object obj)
+        {
+            QtdeETSelecionadas = listaExtrakitSelecionados.OfType<Extrakit>().Sum(s => s.qtSaldo);
+            QtdeETNaoSelecionadas = 0;
+        }
+
         public ObservableCollection<Extrakit> listaExtrakit { get; private set; } = new();
-        public ObservableCollection<Extrakit> listaExtrakitSelecionados { get;  set; } = new ();
+        public ObservableCollection<object> listaExtrakitSelecionados { get;  set; } = new ();
         public async void ObterExtrakit()
         {
             this.IsBusy = true;
             this.listaExtrakit.Clear();
-            var lista = await _service.ObterExtrakit(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, this.entregaSelecionada.nrProcesso);
+            var lista = await _service.ObterExtrakit(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, this.NrProcessSelecionado);
             foreach (var item in lista)
             {
                 this.listaExtrakit.Add(item);
@@ -360,9 +367,11 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task EliminarEnc(Enc objEnc)
         {
+            IsBusy = true;
             await _service46.Desmarcar(objEnc.cRowId, objEnc.cItemRowId);
-            var item = this.listaEnc.Where(x=>x.numEnc == objEnc.numEnc).FirstOrDefault();
+            var item = this.listaEnc.Where(x => x.numEnc == objEnc.numEnc).First();
             this.listaEnc.Remove(item);
+            IsBusy = false;
 
         }
 
@@ -373,16 +382,18 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
             await this.PrepararCalculo();
             
-            //Montar Resumo
-            //await this.AtualizarLabelsContadores(1);
-            
-
         }
 
         [RelayCommand]
-        async Task RadioTipoCalculo(object obj)
+        async Task RadioTipoCalculo(string tipoCalculo)
         {
-            var tipo = (obj as CalculoViewModel).tipoCalculo;
+            var tipo = Convert.ToInt32(tipoCalculo);
+            await this.AtualizaLblBotoes(tipo);
+            await this.AtualizarLabelsContadores(tipo);
+        }
+
+        async Task AtualizaLblBotoes(int tipo)
+        {
             switch (tipo)
             {
                 case 1:
@@ -405,7 +416,6 @@ namespace ColetorA41.ViewModel
                     }
                     break;
             }
-            await this.AtualizarLabelsContadores(tipo);
         }
 
         //Login Almoxarifado
@@ -420,7 +430,7 @@ namespace ColetorA41.ViewModel
             var calculo = await _service.PrepararCalculoMobile(this.EstabSelecionado.codEstab,
                                                          this.TecnicoSelecionado.codTec,
                                                          this.NrProcessSelecionado,
-                                                         this.listaExtrakitSelecionados.ToList());
+                                                         this.listaExtrakit.ToList());
 
             //Montar 
             this.listaCalculo.Clear();
@@ -431,6 +441,7 @@ namespace ColetorA41.ViewModel
 
             //Chamar Tela
             await Task.Delay(100);
+            await this.AtualizaLblBotoes(2);
             await this.AtualizarLabelsContadores(2);
 
         }
@@ -438,7 +449,7 @@ namespace ColetorA41.ViewModel
         public async Task AtualizarLabelsContadores(int tipoCalculo)
         {
 
-            this.tipoCalculo = tipoCalculo;
+            TipoCalculo = tipoCalculo;
 
             var item = this.listaCalculo.Where(x => x.tipo == tipoCalculo).FirstOrDefault();
             if (item == null) return;
