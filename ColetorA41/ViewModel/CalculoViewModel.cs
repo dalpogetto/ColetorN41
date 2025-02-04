@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ColetorA41.Views.Calculo;
 using Microsoft.Extensions.Configuration;
+using ColetorA41.Views;
 
 namespace ColetorA41.ViewModel
 {
@@ -254,14 +255,24 @@ namespace ColetorA41.ViewModel
         public ObservableCollection<Semsaldo> listaSemSaldo { get; private set; } = new();
         public ObservableCollection<Models.Resumo> listaResumo { get; private set; } = new();
 
-        public async Task<bool> LoginAlmoxa()
+        [RelayCommand]
+        public async Task LoginAlmoxa()
         {
             this.IsBusy = true;
             var ok = await _service.LoginAlmoxa(this.EstabSelecionado.codEstab,
                                                 this.UsuarioAlmoxa,
                                                 this.SenhaAlmoxa);
-            this.IsBusy = false;
-            return ok;
+            if (ok.senhaValida)
+            {
+                await ChamarResumo();
+            }
+            else
+            {
+                this.IsBusy = false;
+                await Shell.Current.DisplayAlert("Erro Login", ok.mensagem, "ok");
+                
+            }
+            
         }
 
         public Command SelectedChangedCommand
@@ -327,13 +338,24 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(ExtrakitView)}");
         }
 
-        
+        [RelayCommand]
+        async Task ChamarMainPage()
+        {
+            await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
+            
+        }
 
         [RelayCommand]
         async Task ChamarLeituraENC()
         {
             await Shell.Current.GoToAsync($"{nameof(LeituraENC)}");
             await this.ObterEncs();
+        }
+
+        [RelayCommand]
+        async Task ChamarLoginAlmoxa()
+        {
+            await Shell.Current.GoToAsync($"{nameof(LoginAlmoxa)}");
         }
 
         public async Task ObterEncs()
@@ -397,6 +419,8 @@ namespace ColetorA41.ViewModel
         async Task ChamarResumo()
         {
             this.IsBusy = true;
+            //Apagar os calculos anteriores
+            this.Fichas = new();
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
             await this.PrepararCalculo();
             
@@ -446,9 +470,9 @@ namespace ColetorA41.ViewModel
             this.IsBusy = true;
             //Gerar Numero de Processo se for preciso
             var calculo = await _service.PrepararCalculoMobile(this.EstabSelecionado.codEstab,
-                                                         this.TecnicoSelecionado.codTec,
-                                                         this.NrProcessSelecionado,
-                                                         this.listaExtrakit.ToList());
+                                                               this.TecnicoSelecionado.codTec,
+                                                               this.NrProcessSelecionado,
+                                                               this.listaExtrakitSelecionados.OfType<Extrakit>().ToList());
 
             //Montar 
             this.listaCalculo.Clear();
@@ -474,7 +498,7 @@ namespace ColetorA41.ViewModel
 
             //Extrakits nao selecionados
             var totalET = 0;
-            foreach (var x in listaExtrakit)
+            foreach (var x in listaExtrakitNaoSelecionados)
             {
                 totalET += x.qtDisp;
             }
@@ -501,9 +525,6 @@ namespace ColetorA41.ViewModel
             Fichas.SemSaldo = item.qtSemSaldo;
 
             this.IsBusy = false;
-
-            //Atualizar tela
-            
 
         }
     }

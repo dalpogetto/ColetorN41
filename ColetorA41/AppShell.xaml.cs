@@ -18,13 +18,14 @@ namespace ColetorA41
             Routing.RegisterRoute(nameof(MainPage)      , typeof(MainPage));
             Routing.RegisterRoute(nameof(ParamEstabList), typeof(ParamEstabList));
             Routing.RegisterRoute(nameof(ParamEstabEdit), typeof(ParamEstabEdit));
-            Routing.RegisterRoute("Calculo",              typeof(EstabTec));
+            //Routing.RegisterRoute("Calculo",              typeof(EstabTec));
             Routing.RegisterRoute(nameof(EstabTec)      , typeof(EstabTec));
             Routing.RegisterRoute(nameof(DadosNF)       , typeof(DadosNF));
             Routing.RegisterRoute(nameof(ExtrakitView)  , typeof(ExtrakitView));
             Routing.RegisterRoute(nameof(Resumo)        , typeof(Resumo));
             Routing.RegisterRoute(nameof(ResumoDetalhe) , typeof(ResumoDetalhe));
             Routing.RegisterRoute(nameof(LeituraENC)    , typeof(LeituraENC));
+            Routing.RegisterRoute(nameof(LoginAlmoxa)   , typeof(LoginAlmoxa));
 
 
 

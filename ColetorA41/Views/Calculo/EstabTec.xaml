@@ -56,7 +56,7 @@
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />
+                        <TapGestureRecognizer Command="{Binding ChamarMainPageCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
 

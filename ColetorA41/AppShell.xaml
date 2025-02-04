@@ -9,6 +9,7 @@
     Shell.FlyoutBehavior="Flyout"
     Title="ColetorA41">
 
+   
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid>
@@ -55,14 +56,14 @@
     <ShellContent
         Title="Loading"
         ContentTemplate="{DataTemplate views:Loading}"
-        Route="LoadingPage"
+       
         Shell.FlyoutBehavior="Disabled"
         Shell.FlyoutItemIsVisible="False" />
 
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate views:Login}"
-        Route="Login"
+        
         Shell.FlyoutBehavior="Disabled"
         Shell.FlyoutItemIsVisible="False"/>
 
@@ -70,20 +71,27 @@
         Icon="home"
         Title="Home Page"
         ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage" />
+         />
 
     <ShellContent
         Icon="informe2"
         Title="Parâmetros Estabel"
         ContentTemplate="{DataTemplate views:ParamEstab.ParamEstabList}"
-        Route="ParamEstabList"
+        
         />
 
     <ShellContent
      Icon="calculo"
-     Title="Cálculo"
+     Title="Cálculo de Necessidades"
      ContentTemplate="{DataTemplate viewsCalc:EstabTec}"
-     Route="ParamEstabList"
+     
+     />
+
+    <ShellContent
+     Icon="monitor"
+     Title="Monitor"
+     ContentTemplate="{DataTemplate viewsCalc:EstabTec}"
+     
      />
 
     <!--<FlyoutItem Title="Cálculo" Icon="calculo" Route="Calculo">

@@ -13,7 +13,7 @@
         <local:StringToColor x:Key="StringToColor" />
 
         <Style x:Key="lblCabec" TargetType="Label">
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="12" />
             <Setter Property="FontAttributes" Value="None" />
             <Setter Property="TextColor" Value="{StaticResource Primary}" />
         </Style>
@@ -56,6 +56,7 @@
                         HorizontalOptions="Center" />
 
                 </HorizontalStackLayout>
+               
                 <Border HeightRequest="70" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke"  >
                     <Entry x:Name="entry"
                        Margin="20,10"
@@ -67,19 +68,20 @@
                        ReturnCommandParameter="{Binding NumEnc}"
                        TextColor="Black"></Entry>
                 </Border>
-                <ActivityIndicator  
-                      IsVisible="{Binding IsBusy}"
-                      HorizontalOptions="Center"
-                      IsRunning="{Binding IsBusy}"
-                      VerticalOptions="Center"/>
+
+               
+
             </VerticalStackLayout>
             
         </StackLayout>
 
-        <ScrollView Grid.Row="1" Margin="15,0">
-            
+        <ScrollView Grid.Row="1"  Margin="10,-10,10,0" HorizontalOptions="Center">
             <StackLayout>
-               
+                <ActivityIndicator  
+                        IsVisible="{Binding IsBusy}"
+                        HorizontalOptions="Center"
+                        IsRunning="{Binding IsBusy}"
+                        VerticalOptions="Center"/>
                 
                 <CollectionView x:Name="collectionParam"
                  ItemsSource="{Binding listaEnc}" 
@@ -93,16 +95,16 @@
                                         <SwipeItems>
                                             <SwipeItem 
                                                     IconImageSource="trash.png"
-                                                    BackgroundColor="LightCoral"
+                                                    BackgroundColor="WhiteSmoke"
                                                     Command="{Binding BindingContext.EliminarEncCommand, Source={x:Reference leituraEnc}}"
                                                     CommandParameter="{Binding .}" />
                                         </SwipeItems>
                                     </SwipeView.RightItems>
-                                    <Border HeightRequest="90" Margin="0,5" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                                    <Border HeightRequest="90" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" HorizontalOptions="Center">
                                         <Grid ColumnDefinitions="*,auto" >
-                                            <Frame Grid.Column="1" HeightRequest="30" WidthRequest="120" Margin="0,2" Padding="5" HasShadow="true" VerticalOptions="Start"
+                                            <Frame Grid.Column="1" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start"
                                                    BackgroundColor="{Binding flag, Converter={StaticResource  StringToColor}}" CornerRadius="10">
-                                                <Label Text="{Binding flag}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" />
+                                                <Label Text="{Binding flag}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="White"/>
                                             </Frame>
                                             <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto,auto" ColumnSpacing="20" Grid.Column="0">
                                                 <!--Chave-->
@@ -146,7 +148,7 @@
             <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarResumoCommand}" />
+                        <TapGestureRecognizer Command="{Binding ChamarLoginAlmoxaCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
 

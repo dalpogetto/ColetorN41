@@ -45,9 +45,8 @@
                         CornerRadius="20"/>
 
                 <HorizontalStackLayout Spacing="50" HorizontalOptions="Center">
-                    <Label Text="{Binding QtdeETSelecionadas, StringFormat='Qtde Selecionadas: {0}'}"></Label>
-
-                    <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Qtde Não Selecionadas: {0}'}"></Label>
+                    <Label Text="{Binding QtdeETSelecionadas, StringFormat='Qtde Selecionadas: {0}'}" FontAttributes="Bold"></Label>
+                    <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Qtde Não Selecionadas: {0}'}" FontAttributes="Bold"></Label>
                 </HorizontalStackLayout>
                 
 
@@ -63,7 +62,7 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <ScrollView Grid.Row="1" Margin="5,-70,5,0">
+        <ScrollView Grid.Row="1" Margin="15,-30,15,0">
             <StackLayout>
                 <CollectionView x:Name="lista" 
                                   ItemsSource="{Binding listaExtrakit}" 
@@ -75,7 +74,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Extrakit">
                             
-                                <Border HeightRequest="90" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                                <Border HeightRequest="80" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
 
                                     <Grid Padding="5" >
                                         <Grid.RowDefinitions>
@@ -121,6 +120,7 @@
                                                  HeightRequest="30"
                                                  BackgroundColor="WhiteSmoke"
                                                  Padding="1" 
+                                                 x:Name="qtde"
                                                  
                                                  >
                                             <Label Text="{Binding qtSaldo}"
@@ -128,6 +128,7 @@
                                                      FontAttributes="Bold" 
                                                      VerticalOptions="Center"
                                                      HorizontalOptions="Center"
+                                                     x:Name="lblQtde"
                                                      /> 
                                         </Frame>
                                     </Grid>
@@ -135,9 +136,11 @@
                                         <VisualStateGroup>
                                             <VisualState Name="Selected">
                                                 <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="LightYellow" />
-                                                    <!--Setter TargetName="seatNumber" Property="Label.TextColor" Value="White" -->
-                                                </VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+                                                <Setter TargetName="qtde" Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                                                <Setter TargetName="lblQtde" Property="Label.TextColor" Value="White"/>
+
+                                            </VisualState.Setters>
                                             </VisualState>
                                             <VisualState Name="Normal">
                                                 <VisualState.Setters>

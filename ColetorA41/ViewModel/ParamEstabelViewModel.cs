@@ -97,7 +97,7 @@ namespace ColetorA41.ViewModel
             this.ObterParamEstabelecimentos();
 
             this.ParamEstab = null;
-            await Shell.Current.GoToAsync("..", true);
+            await Shell.Current.GoToAsync($"{nameof(ParamEstabList)}");
         }
 
         public async Task SalvarRegistro()
@@ -116,7 +116,7 @@ namespace ColetorA41.ViewModel
         public async Task Salvar()
         {
             await this.SalvarRegistro();
-            await Shell.Current.GoToAsync("/ParamEstabList", true);
+            await Shell.Current.GoToAsync($"{nameof(ParamEstabList)}");
         }
 
         [RelayCommand]

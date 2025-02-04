@@ -59,6 +59,7 @@ namespace ColetorA41
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<Login>();
+            builder.Services.AddTransient<LoginAlmoxa>();
             builder.Services.AddTransient<Loading>();
             builder.Services.AddTransient<ParamEstabList>();
             builder.Services.AddTransient<ParamEstabEdit>();

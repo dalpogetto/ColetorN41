@@ -38,7 +38,7 @@ namespace ColetorA41.Services
             try
             {
                 
-                if (!await srv.LoginAlmoxa("101"))
+                if (!await srv.Login("101"))
                 {
                     await Shell.Current.DisplayAlert("Erro!", "Usuário e senha inválidos", "OK");
                     return default;

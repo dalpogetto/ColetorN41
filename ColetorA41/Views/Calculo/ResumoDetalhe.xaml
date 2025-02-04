@@ -56,10 +56,10 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Label Grid.Row="0"
-                           Grid.Column="0"
-                           Text="{Binding itCodigo}"
-                           FontSize="16"
-                           FontAttributes="Bold" />
+                                               Grid.Column="0"
+                                               Text="{Binding itCodigo}"
+                                               FontSize="16"
+                                               FontAttributes="Bold" />
 
                                         <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End"  >
                                             <Label Text="{Binding serieDocto}" FontAttributes="Bold"/>
@@ -68,31 +68,29 @@
                                         </HorizontalStackLayout>
 
                                         <Label Grid.Row="1"
-                           Grid.Column="0"
-                           Grid.ColumnSpan="2"
-                           Grid.RowSpan="2"
-                           Text="{Binding descItem}"
-                           FontAttributes="Italic"
-                           VerticalOptions="Start" />
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="2"
+                                               Grid.RowSpan="2"
+                                               Text="{Binding descItem}"
+                                               FontAttributes="Italic"
+                                               VerticalOptions="Start" />
 
                                         <Frame CornerRadius="10" 
-                                   HasShadow="True" 
-                                   Grid.Row="2" 
-                                   Grid.Column="1" 
-                                   HorizontalOptions="End" 
-                                   Margin="10,0"
-                                   WidthRequest="40"
-                                   HeightRequest="30"
+                                               HasShadow="True" 
+                                               Grid.Row="2" 
+                                               Grid.Column="1" 
+                                               HorizontalOptions="End" 
+                                               Margin="10,0"
+                                               WidthRequest="40"
+                                               HeightRequest="30"
                                    
-                                   BackgroundColor="WhiteSmoke"
-                                   Padding="1" 
-                                   >
+                                               BackgroundColor="WhiteSmoke"
+                                               Padding="1">
                                             <Label Text="{Binding qtSaldo}"
-                                   FontSize="16"
-                                   FontAttributes="Bold" 
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Center"
-                                   />
+                                                   FontSize="16"
+                                                   FontAttributes="Bold" 
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Center"/>
                                         </Frame>
 
 

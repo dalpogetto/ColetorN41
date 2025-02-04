@@ -14,10 +14,10 @@
     
     <ContentPage.Resources>
         <Style x:Key="lblCabec" TargetType="Label">
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="FontAttributes" Value="Italic" />
+            <Setter Property="FontSize" Value="12" />
+            <!--Setter Property="FontAttributes" Value="Italic" -->
             <Setter Property="WidthRequest" Value="80" />
-            <Setter Property="TextColor" Value="black" />
+            <Setter Property="TextColor" Value="{StaticResource Primary}" />
         </Style>
 
         <Style x:Key="lblDet" TargetType="Label">

@@ -32,7 +32,15 @@
         <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
+
+                <ActivityIndicator
+                             Grid.Column="0"
+                             IsVisible="{Binding IsBusy}"
+                             HorizontalOptions="Center"
+                             IsRunning="True"
+                             VerticalOptions="Center"
+                            />
+                <!--Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
                     </Frame.GestureRecognizers>
@@ -40,14 +48,14 @@
                         <Image Source="folder2.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
                         <Label  Text="Informe" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
-                </Frame>
-                <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
+                <Frame-->
+                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
                     </Frame.GestureRecognizers>
                     <VerticalStackLayout HorizontalOptions="Center" >
                         <Image Source="calculo.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
-                        <Label  Text="Cálculo" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label  Text="Cálculo de Necessidades" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
             </HorizontalStackLayout>
@@ -55,7 +63,7 @@
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
                 <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarMOnitorCommand}" />
+                        <TapGestureRecognizer Command="{Binding ChamarMonitorCommand}" />
                     </Frame.GestureRecognizers>
                     <VerticalStackLayout HorizontalOptions="Center" >
                         <Image Source="monitor.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>

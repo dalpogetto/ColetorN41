@@ -11,8 +11,10 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarCalculo()
         {
-            await Shell.Current.GoToAsync($"/EstabTec");
-        
+            this.IsBusy = true;
+            await Shell.Current.GoToAsync($"{nameof(EstabTec)}");
+            this.IsBusy = false;
+
         }
 
         [RelayCommand]
@@ -30,7 +32,9 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarCadEstabel()
         {
-            await Shell.Current.GoToAsync($"/{nameof(ParamEstabList)}");
+            this.IsBusy = true;
+            await Shell.Current.GoToAsync($"{nameof(ParamEstabList)}");
+            this.IsBusy = false;
         }
 
         [RelayCommand]

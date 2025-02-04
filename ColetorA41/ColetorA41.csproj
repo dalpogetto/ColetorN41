@@ -110,6 +110,9 @@
 	  <MauiXaml Update="Views\Calculo\LeituraENC.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Calculo\LoginAlmoxa.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Calculo\Resumo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

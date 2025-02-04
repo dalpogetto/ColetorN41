@@ -6,6 +6,7 @@
              xmlns:viewmodels="clr-namespace:ColetorA41.ViewModel"
              x:DataType="viewmodels:ParamEstabelViewModel"
              Title="ParamEstabEdit">
+    
     <Grid RowDefinitions="70, *, auto" >
         <Grid RowDefinitions="10">
             <Rectangle Fill="#D7F0FE" />
