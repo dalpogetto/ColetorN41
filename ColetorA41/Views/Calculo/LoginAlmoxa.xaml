@@ -42,7 +42,7 @@
         </StackLayout>
         <VerticalStackLayout Padding="25" Spacing="25" Grid.Row="1">
             
-            <Entry Text="{Binding UsuarioAlmoxa}" Placeholder="Digite seu usuario"  FontAttributes="Bold" FontSize="18"/>
+            <Entry Text="{Binding UsuarioAlmoxa_}" Placeholder="Digite seu usuario"  FontAttributes="Bold" FontSize="18"/>
             <Entry Text="{Binding SenhaAlmoxa}" Placeholder="Senha" IsPassword="true" FontAttributes="Bold" FontSize="18"/>
             <Button Text="Login" Command="{Binding LoginAlmoxaCommand}"/>
         </VerticalStackLayout>

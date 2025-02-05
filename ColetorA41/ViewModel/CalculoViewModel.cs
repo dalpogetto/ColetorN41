@@ -129,7 +129,7 @@ namespace ColetorA41.ViewModel
         Entrega entregaSelecionada;
 
         [ObservableProperty]
-        int usuarioAlmoxa;
+        int usuarioAlmoxa_;
 
         [ObservableProperty]
         string senhaAlmoxa;
@@ -260,11 +260,12 @@ namespace ColetorA41.ViewModel
         {
             this.IsBusy = true;
             var ok = await _service.LoginAlmoxa(this.EstabSelecionado.codEstab,
-                                                this.UsuarioAlmoxa,
+                                                this.UsuarioAlmoxa_,
                                                 this.SenhaAlmoxa);
             if (ok.senhaValida)
             {
-                await ChamarResumo();
+                //await ChamarResumo();
+                await ChamarLoadingCalculo();
             }
             else
             {
@@ -341,7 +342,7 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarMainPage()
         {
-            await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
+            await Shell.Current.GoToAsync($"{nameof(MainPage)}");
             
         }
 
@@ -416,13 +417,27 @@ namespace ColetorA41.ViewModel
         }
 
         [RelayCommand]
-        async Task ChamarResumo()
+        async Task ChamarLoadingCalculo()
         {
             this.IsBusy = true;
             //Apagar os calculos anteriores
             this.Fichas = new();
-            await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+            await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
             await this.PrepararCalculo();
+
+            this.IsBusy = false;
+            await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+
+        }
+
+        [RelayCommand]
+        async Task ChamarResumo()
+        {
+            this.IsBusy = true;
+            //Apagar os calculos anteriores
+            //this.Fichas = new();
+            await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+           // await this.PrepararCalculo();
             
         }
 
@@ -485,6 +500,9 @@ namespace ColetorA41.ViewModel
             await Task.Delay(100);
             await this.AtualizaLblBotoes(2);
             await this.AtualizarLabelsContadores(2);
+
+            this.IsBusy = false;
+            //await this.ChamarResumo();
 
         }
 

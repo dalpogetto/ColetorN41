@@ -176,8 +176,8 @@
                 </HorizontalStackLayout>
 
                 <StackLayout Padding="20" Spacing="10">
-                <Button Text="{Binding LblAprovar, StringFormat='Aprovar - {0}'} " CornerRadius="20"></Button>
-                <Button Text="{Binding LblAprovarSemEntrada, StringFormat='Aprovar Sem Saída - {0}'} " CornerRadius="20"></Button>
+                    <Button Text="{Binding LblAprovar, StringFormat='Aprovar - {0}'} " CornerRadius="20"></Button>
+                    <Button Text="{Binding LblAprovarSemEntrada, StringFormat='Aprovar Sem Saída - {0}'} " CornerRadius="20"></Button>
                 </StackLayout>
             </VerticalStackLayout>
 

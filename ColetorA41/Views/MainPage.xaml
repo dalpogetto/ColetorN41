@@ -30,16 +30,17 @@
                 HorizontalOptions="Center" />
         </VerticalStackLayout>
         <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+            <ActivityIndicator
+             Grid.Column="0"
+             IsVisible="{Binding IsBusy}"
+             HorizontalOptions="Center"
+             IsRunning="True"
+             VerticalOptions="Center"
+            />
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
 
-                <ActivityIndicator
-                             Grid.Column="0"
-                             IsVisible="{Binding IsBusy}"
-                             HorizontalOptions="Center"
-                             IsRunning="True"
-                             VerticalOptions="Center"
-                            />
+                
                 <!--Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />

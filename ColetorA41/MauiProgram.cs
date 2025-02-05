@@ -61,6 +61,7 @@ namespace ColetorA41
             builder.Services.AddTransient<Login>();
             builder.Services.AddTransient<LoginAlmoxa>();
             builder.Services.AddTransient<Loading>();
+            builder.Services.AddTransient<LoadingCalculo>();
             builder.Services.AddTransient<ParamEstabList>();
             builder.Services.AddTransient<ParamEstabEdit>();
             builder.Services.AddTransient<EstabTec>();
