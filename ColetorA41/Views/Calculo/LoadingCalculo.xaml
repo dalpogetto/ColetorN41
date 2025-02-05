@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ColetorA41.Views.Calculo.LoadingCalculo"
+             Shell.TabBarIsVisible="False"
+             Shell.NavBarIsVisible="False"
              Title="LoadingCalculo">
-    <Grid RowDefinitions="200,*,60">
+    <Grid RowDefinitions="200,*,auto">
         <StackLayout>
             <Grid RowDefinitions="100, 200">
                 <Rectangle 
@@ -17,8 +19,16 @@
                        Fill="#D7F0FE"
                        TranslationY="-110"
                        HeightRequest="200"
-                       VerticalOptions="Start"
-/>
+                       VerticalOptions="Start">
+                    <Ellipse.Shadow>
+                        <Shadow Brush="LightGray"
+ Offset="1,1"
+ Radius="5"
+ Opacity="0.8" />
+                    </Ellipse.Shadow>
+                </Ellipse>
+               
+
             </Grid>
 
             <VerticalStackLayout VerticalOptions="Center" Margin="0,-290,0,0">
@@ -43,22 +53,29 @@
         <VerticalStackLayout Grid.Row="1" Padding="20" HorizontalOptions="Center" VerticalOptions="Center">
 
             <ActivityIndicator
-                         Grid.Column="0"
+                         
                          IsVisible="{Binding IsBusy}"
                          HorizontalOptions="Center"
                          IsRunning="{Binding IsBusy}"
                          VerticalOptions="Center"
                         />
-            <Label Text="Aguarde...."></Label>
+            <Label Text="Gerando Resumo Aguarde ...." FontAttributes="Bold"></Label>
 
         </VerticalStackLayout>
 
-        <Grid Grid.Row="2">
-            <Rectangle 
-                    VerticalOptions="Start"
-                    HeightRequest="100"
-                    Fill="#D7F0FE"
-                    />
+        
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" HorizontalOptions="Center" BackgroundColor="#D7F0FE" Padding="20">
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label Text="Estabelecimento: " HorizontalTextAlignment="End"  FontSize="16"></Label>
+                <Label Text="Técnico: " HorizontalTextAlignment="End"  FontSize="16"></Label>
+                <Label Text="Processo: " HorizontalTextAlignment="End"  FontSize="16"></Label>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label Text="{Binding EstabSelecionado.identific}" FontSize="16" FontAttributes="Bold" ></Label>
+                <Label Text="{Binding TecnicoSelecionado.identific}" FontSize="16" FontAttributes="Bold"></Label>
+                <Label Text="{Binding NrProcessSelecionado}" FontSize="16" FontAttributes="Bold"></Label>
+            </VerticalStackLayout>
         </Grid>
     </Grid>
 </ContentPage>

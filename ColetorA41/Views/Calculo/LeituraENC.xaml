@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:ColetorA41.Converters"
              x:Name="leituraEnc"
              HideSoftInputOnTapped="True"
+             Shell.NavBarIsVisible="False"
              Title="Etiqueta ENC">
 
     <ContentPage.Resources>
@@ -39,8 +40,15 @@
                        Fill="#D7F0FE"
                        TranslationY="-110"
                        HeightRequest="200"
-                       VerticalOptions="Start"
-/>
+                       VerticalOptions="Start">
+                    <Ellipse.Shadow>
+                        <Shadow Brush="LightGray"
+ Offset="1,1"
+ Radius="5"
+ Opacity="0.8" />
+                    </Ellipse.Shadow>
+                </Ellipse>
+               
             </Grid>
 
             <VerticalStackLayout Padding="20,10" Margin="0,-300,0,0">
@@ -48,7 +56,14 @@
                     <Image
                         Source="scanner.png"
                         HeightRequest="60"
-                        HorizontalOptions="Center" />
+                        HorizontalOptions="Center">
+                        <Image.Shadow>
+                            <Shadow Brush="Black"
+    Offset="10,10"
+    Radius="40"
+    Opacity="0.8" />
+                        </Image.Shadow>
+                    </Image>
                     <Label  Text="Leitura ENC"
                         FontAttributes="Bold"
                         FontSize="22"
@@ -100,7 +115,7 @@
                                                     CommandParameter="{Binding .}" />
                                         </SwipeItems>
                                     </SwipeView.RightItems>
-                                    <Border HeightRequest="90" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" HorizontalOptions="Center">
+                                    <Border HeightRequest="90" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" Margin="0,0,0,10">
                                         <Grid ColumnDefinitions="*,auto" >
                                             <Frame Grid.Column="1" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start"
                                                    BackgroundColor="{Binding flag, Converter={StaticResource  StringToColor}}" CornerRadius="10">

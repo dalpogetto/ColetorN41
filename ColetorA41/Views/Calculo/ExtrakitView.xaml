@@ -5,7 +5,8 @@
              xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
              xmlns:models="clr-namespace:ColetorA41.Models"
              x:DataType="viewmodel:CalculoViewModel"
-             Title="Lista Extrakit">
+              Shell.NavBarIsVisible="False"
+             Title="Extrakit">
     <Grid RowDefinitions="200,*,60">
         <StackLayout>
             <Grid RowDefinitions="100,200">
@@ -21,7 +22,14 @@
                        TranslationY="-110"
                        HeightRequest="200"
                        VerticalOptions="Start"
-/>
+                   >
+                    <Ellipse.Shadow>
+                        <Shadow Brush="LightGray"
+ Offset="1,1"
+ Radius="5"
+ Opacity="0.8" />
+                    </Ellipse.Shadow>
+                </Ellipse>
             </Grid>
 
             <VerticalStackLayout Padding="20,10" Margin="0,-300,0,0">
@@ -30,7 +38,14 @@
                         Source="folder2.png"
                         SemanticProperties.Description="Cute dot net bot waving hi to you!"
                         HeightRequest="40"
-                        HorizontalOptions="Center" />
+                        HorizontalOptions="Center">
+                        <Image.Shadow>
+                            <Shadow Brush="Black"
+    Offset="10,10"
+    Radius="40"
+    Opacity="0.8" />
+                        </Image.Shadow>
+                    </Image>
                     <Label  Text="Lista de Extrakit"
                         FontAttributes="Bold"
                         FontSize="22"
@@ -48,7 +63,7 @@
                     <Label Text="{Binding QtdeETSelecionadas, StringFormat='Qtde Selecionadas: {0}'}" FontAttributes="Bold"></Label>
                     <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Qtde Não Selecionadas: {0}'}" FontAttributes="Bold"></Label>
                 </HorizontalStackLayout>
-                
+
 
                 <ActivityIndicator  Grid.Column="0"
                                  IsVisible="{Binding IsBusy}"
@@ -73,34 +88,34 @@
                                 >
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Extrakit">
-                            
-                                <Border HeightRequest="80" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
 
-                                    <Grid Padding="5" >
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
+                            <Border HeightRequest="80" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
 
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                <Grid Padding="5" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
 
-                                        <Label Grid.Row="0"
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0"
                                                Grid.Column="0"
                                                Text="{Binding itCodigo}"
                                                FontSize="16"
                                                FontAttributes="Bold" />
 
-                                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End"  >
-                                            <Label Text="{Binding serieDocto}" FontAttributes="Bold"/>
-                                            <Label Text=" - " FontAttributes="Bold"/>
-                                            <Label Text="{Binding nroDocto}" FontAttributes="Bold"/>
-                                        </HorizontalStackLayout>
+                                    <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End"  >
+                                        <Label Text="{Binding serieDocto}" FontAttributes="Bold"/>
+                                        <Label Text=" - " FontAttributes="Bold"/>
+                                        <Label Text="{Binding nroDocto}" FontAttributes="Bold"/>
+                                    </HorizontalStackLayout>
 
-                                        <Label Grid.Row="1"
+                                    <Label Grid.Row="1"
                                                  Grid.Column="0"
                                                  Grid.ColumnSpan="2"
                                                  Grid.RowSpan="2"
@@ -110,7 +125,7 @@
                                                  VerticalOptions="Start"
                                                WidthRequest="300"/>
 
-                                        <Frame CornerRadius="10" 
+                                    <Frame CornerRadius="10" 
                                                  HasShadow="True" 
                                                  Grid.Row="1" 
                                                  Grid.Column="1" 
@@ -123,34 +138,34 @@
                                                  x:Name="qtde"
                                                  
                                                  >
-                                            <Label Text="{Binding qtSaldo}"
+                                        <Label Text="{Binding qtSaldo}"
                                                      FontSize="16"
                                                      FontAttributes="Bold" 
                                                      VerticalOptions="Center"
                                                      HorizontalOptions="Center"
                                                      x:Name="lblQtde"
-                                                     /> 
-                                        </Frame>
-                                    </Grid>
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroup>
-                                            <VisualState Name="Selected">
-                                                <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+                                                     />
+                                    </Frame>
+                                </Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="LightGray" />
                                                 <Setter TargetName="qtde" Property="BackgroundColor" Value="{StaticResource Primary}"/>
                                                 <Setter TargetName="lblQtde" Property="Label.TextColor" Value="White"/>
 
                                             </VisualState.Setters>
-                                            </VisualState>
-                                            <VisualState Name="Normal">
-                                                <VisualState.Setters>
-                                                    <Setter Property="BackgroundColor" Value="White" />
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                        </VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Border>
-                            
+                                        </VisualState>
+                                        <VisualState Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Border>
+
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

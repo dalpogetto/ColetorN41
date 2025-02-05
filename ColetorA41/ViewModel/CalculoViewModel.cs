@@ -8,6 +8,7 @@ using System.Windows.Input;
 using ColetorA41.Views.Calculo;
 using Microsoft.Extensions.Configuration;
 using ColetorA41.Views;
+using CommunityToolkit.Maui.Core.Platform;
 
 namespace ColetorA41.ViewModel
 {
@@ -273,7 +274,10 @@ namespace ColetorA41.ViewModel
                 await Shell.Current.DisplayAlert("Erro Login", ok.mensagem, "ok");
                 
             }
+
+            //Esconder o teclado
             
+
         }
 
         public Command SelectedChangedCommand
@@ -382,7 +386,7 @@ namespace ColetorA41.ViewModel
                 return;
             }
 
-            var item = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.entregaSelecionada.nrProcesso.ToString());
+            var item = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.EntregaSelecionada.nrProcesso.ToString());
             item.numEnc = numEnc;
             if (item.flag.ToUpper() == "ERRO")
             {
@@ -390,9 +394,12 @@ namespace ColetorA41.ViewModel
                 await Shell.Current.DisplayAlert("Erro ENC", item.mensagem, "OK");
                 return;
             }
-            this.listaEnc.Add(item);
+
+            //this.listaEnc.Add(item);
+            this.listaEnc.Clear();
+            await this.ObterEncs();
             this.NumEnc = string.Empty;
-            this.IsBusy = false;
+           
            
             
         }

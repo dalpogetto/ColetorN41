@@ -5,7 +5,10 @@
              xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
              xmlns:models="clr-namespace:ColetorA41.Models"
              x:DataType="viewmodel:CalculoViewModel"
+              Shell.NavBarIsVisible="False"
              Title="Resumo Detalhe">
+    
+    
     <ScrollView>
         <StackLayout>
             <Grid RowDefinitions="Auto, *">

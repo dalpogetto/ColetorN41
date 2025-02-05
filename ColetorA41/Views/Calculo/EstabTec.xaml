@@ -2,22 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ColetorA41.Views.Calculo.EstabTec"
-             Shell.NavBarIsVisible="true"
+              Shell.NavBarIsVisible="False"
              Title="EstabTec">
     <Grid RowDefinitions="200,*,60">
         <StackLayout>
         <Grid RowDefinitions="100, 200">
             <Rectangle Fill="#D7F0FE" />
-            <Ellipse Grid.Row="1" Fill="#D7F0FE" TranslationY="-110"/>
-        </Grid>
+                <Ellipse Grid.Row="1" Fill="#D7F0FE" TranslationY="-110">
+                    <Ellipse.Shadow>
+                    <Shadow Brush="LightGray"
+ Offset="1,1"
+ Radius="5"
+ Opacity="0.8" />
+                    </Ellipse.Shadow>
+                </Ellipse>
+            </Grid>
 
         <VerticalStackLayout VerticalOptions="Center" Margin="0,-300,0,0">
-            <Image
+                <Image
                 Source="usuario.png"
                 HeightRequest="80"
-                HorizontalOptions="Center" Margin="0,0,0,10"/>
+                HorizontalOptions="Center" Margin="0,0,0,10">
+                    <Image.Shadow>
+                        <Shadow Brush="Black"
+    Offset="10,10"
+    Radius="40"
+    Opacity="0.8" />
+                    </Image.Shadow>
+                </Image>
 
-            <Label 
+                <Label 
                 Text="Estabelecimento e Técnico"
                 FontAttributes="Bold"
                 FontSize="22"

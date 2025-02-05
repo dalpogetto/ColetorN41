@@ -61,6 +61,8 @@
 
 	<ItemGroup>
 	  <Compile Remove="Models\Resumo.cs" />
+	  <Compile Remove="ViewModel\CalculoDadosNF.cs" />
+	  <Compile Remove="ViewModel\CalculoDadosNFBase.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
