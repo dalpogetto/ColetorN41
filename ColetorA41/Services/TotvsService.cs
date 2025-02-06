@@ -15,6 +15,19 @@ namespace ColetorA41.Services
         {
         }
 
+        public async Task<ItemFichaResponse> ObterItensCalculoMobile(int tipoCalculo, string tipoFicha, int nrProcess, int skip, int pageSize)
+        {
+            var param = new NameValueCollection { { "TipoCalculo", tipoCalculo.ToString() }, 
+                                                  { "TipoFicha", tipoFicha },
+                                                  { "NrProcess", nrProcess.ToString() },
+                                                  { "Skip", skip.ToString() },
+                                                  { "PageSize", pageSize.ToString() },
+
+                                                };
+            var response = await GetAsync<ItemFichaResponse>("apiesaa041/ObterItensCalculoMobile", param);
+            return response;
+        }
+
         public async Task<List<ParamEstabel>> ObterParamEstabelecimentos()
         {
             var response = await GetAsync<ParamEstabelecimentoResponse>("apiesaa041/ObterCalcEstab");

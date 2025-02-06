@@ -11,10 +11,5 @@ public partial class ResumoDetalhe : ContentPage
         this.BindingContext = viewModel;
         this.vm = viewModel;
     }
-    protected override void OnAppearing()
-    {
-
-        base.OnAppearing();
-        this.vm.ObterExtrakit();
-    }
+    
 }

@@ -5,13 +5,33 @@
              xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
              xmlns:models="clr-namespace:ColetorA41.Models"
              x:DataType="viewmodel:CalculoViewModel"
+             xmlns:local="clr-namespace:ColetorA41.Converters"
               Shell.NavBarIsVisible="False"
+               x:Name="detalhe"
              Title="Resumo Detalhe">
-    
-    
-    <ScrollView>
+
+    <ContentPage.Resources>
+        <local:StringToColor x:Key="StringToColor" />
+
+        <Style x:Key="lblCabec" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+        </Style>
+
+        <Style x:Key="lblDet" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontAttributes" Value="Bold" />
+
+        </Style>
+    </ContentPage.Resources>
+
+
+    <Grid RowDefinitions="120,*,60">
         <StackLayout>
-            <Grid RowDefinitions="Auto, *">
+            <Grid RowDefinitions="100,200">
                 <Rectangle 
                         VerticalOptions="Start"
                         HeightRequest="100"
@@ -24,87 +44,117 @@
                        TranslationY="-110"
                        HeightRequest="200"
                        VerticalOptions="Start"
-/>
+                   >
+                    <Ellipse.Shadow>
+                        <Shadow Brush="LightGray"
+ Offset="1,1"
+ Radius="5"
+ Opacity="0.8" />
+                    </Ellipse.Shadow>
+                </Ellipse>
             </Grid>
-            <VerticalStackLayout Padding="20,10" Margin="0,-300,0,0">
+
+            <VerticalStackLayout Padding="20,10" Margin="0,-290,0,0">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
+                    <Image
+                        Source="folder2.png"
+                        SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                        HeightRequest="40"
+                        HorizontalOptions="Center">
+                        <Image.Shadow>
+                            <Shadow Brush="Black"
+    Offset="10,10"
+    Radius="40"
+    Opacity="0.8" />
+                        </Image.Shadow>
+                    </Image>
+                    <Label  Text="{Binding TipoFichaSelecionado, StringFormat='Lista {0}'}"
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center" />
+
+                </HorizontalStackLayout>
+
                 <ActivityIndicator  Grid.Column="0"
-                         IsVisible="{Binding IsBusy}"
-                         HorizontalOptions="Center"
-                         IsRunning="{Binding IsBusy}"
-                         VerticalOptions="Center"
-                        />
-
-                <CollectionView x:Name="teste"
-                    ItemsSource="{Binding listaExtrakit}" 
-                    SelectionMode="Multiple" 
-                    SelectedItems="{Binding listaExtrakitSelecionados}"
-                    SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                    >
-
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Extrakit">
-                            <StackLayout>
-                                <Border HeightRequest="100" Margin="0,2" Padding="5" StrokeShape="RoundRectangle 10">
-
-                                    <Grid Padding="5" HeightRequest="90">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Label Grid.Row="0"
-                                               Grid.Column="0"
-                                               Text="{Binding itCodigo}"
-                                               FontSize="16"
-                                               FontAttributes="Bold" />
-
-                                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End"  >
-                                            <Label Text="{Binding serieDocto}" FontAttributes="Bold"/>
-                                            <Label Text=" - " FontAttributes="Bold"/>
-                                            <Label Text="{Binding nroDocto}" FontAttributes="Bold"/>
-                                        </HorizontalStackLayout>
-
-                                        <Label Grid.Row="1"
-                                               Grid.Column="0"
-                                               Grid.ColumnSpan="2"
-                                               Grid.RowSpan="2"
-                                               Text="{Binding descItem}"
-                                               FontAttributes="Italic"
-                                               VerticalOptions="Start" />
-
-                                        <Frame CornerRadius="10" 
-                                               HasShadow="True" 
-                                               Grid.Row="2" 
-                                               Grid.Column="1" 
-                                               HorizontalOptions="End" 
-                                               Margin="10,0"
-                                               WidthRequest="40"
-                                               HeightRequest="30"
-                                   
-                                               BackgroundColor="WhiteSmoke"
-                                               Padding="1">
-                                            <Label Text="{Binding qtSaldo}"
-                                                   FontSize="16"
-                                                   FontAttributes="Bold" 
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="Center"/>
-                                        </Frame>
+                                 IsVisible="{Binding IsBusy}"
+                                 HorizontalOptions="Center"
+                                 IsRunning="{Binding IsBusy}"
+                                 VerticalOptions="Center"/>
 
 
-
-                                    </Grid>
-                                </Border>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
             </VerticalStackLayout>
         </StackLayout>
-    </ScrollView>
+
+                <CollectionView x:Name="lista" Grid.Row="1"
+                                  ItemsSource="{Binding listaItensFicha}" 
+                                  RemainingItemsThreshold="4"
+                                  ItemsUpdatingScrollMode="KeepItemsInView"
+                                  RemainingItemsThresholdReachedCommand="{Binding CarregarFichasCommand}"
+                                  VerticalScrollBarVisibility="Always">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ItemFicha">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem 
+                                         Text="Detalhes"
+                                         IconImageSource="vermais.png"
+                                         BackgroundColor="WhiteSmoke"
+                                         Command="{Binding BindingContext.DetalheItemFichaCommand, Source={x:Reference detalhe}}"
+                                         CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Border HeightRequest="90" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+
+                            <VerticalStackLayout>
+
+                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
+                                    <!--Chave-->
+                                    <Label Text="{Binding itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
+                                    <Label Text="{Binding itPrincipal}" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16" HorizontalTextAlignment="End"/>
+                                    <Label Text="{Binding descItem}" Grid.Row="1" Grid.ColumnSpan="4" FontSize="12"  FontAttributes="Bold"/>
+                                    <Rectangle HeightRequest="1" Fill="LightGray" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.ColumnSpan="5"/>
+                                    <!--Cabecalho-->
+                                    <Label Text="QtPagar"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0"></Label>
+                                    <Label Text="QtRenovar"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
+                                    <Label Text="QtExtrakit"  Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="2"></Label>
+                                    <Label Text="QtRuim"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="3"></Label>
+                                   
+
+                                    <!--Detalhe-->
+                                    <Label Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0"></Label>
+                                    <Label Text="{Binding qtRenovar}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1"></Label>
+                                    <Label Text="{Binding qtExtrakit}"        Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2"></Label>
+                                    <Label Text="{Binding qtRuim}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="3"></Label>
+                                    
+                                </Grid>
+
+                                
+                            </VerticalStackLayout>
+                        </Border>
+                    </SwipeView>
+                </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            
+
+        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
+                <Image Source="seta_esquerda" WidthRequest="50">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarResumoCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </VerticalStackLayout>
+
+
+
+           
+        </Grid>
+
+    </Grid>
+
 </ContentPage>

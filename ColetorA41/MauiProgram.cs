@@ -70,6 +70,7 @@ namespace ColetorA41
             builder.Services.AddTransient<LeituraENC>();
             builder.Services.AddTransient<ColetorA41.Views.Calculo.Resumo>();
             builder.Services.AddTransient<ResumoDetalhe>();
+            builder.Services.AddTransient<ResumoDetalheItem>();
 
             //ViewModels
             builder.Services.AddTransient<AppShellViewModel>();

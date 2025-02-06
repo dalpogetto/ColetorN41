@@ -27,7 +27,7 @@ namespace ColetorA41.ViewModel
             await Task.Delay(2000);
             if (await _authService.Login(Usuario, Senha))
             {
-                await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
+                await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
             }
             this.IsBusy = false;
 

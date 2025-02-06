@@ -111,14 +111,6 @@
                   IsRunning="True"
                   VerticalOptions="Center"/>
 
-                <Label Text="Preparando o calculo ..."
-                        FontAttributes="Bold"
-                        IsVisible="{Binding IsBusy}"
-                        FontSize="16"
-                        Margin="0,0,0,0"
-                        VerticalOptions="Center" 
-                        HorizontalOptions="Center" />
-
             </HorizontalStackLayout>
            
 
@@ -126,7 +118,7 @@
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="1" />
+                            <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Geral" />
                         </Frame.GestureRecognizers>
                         <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Black" Padding="1" >
@@ -138,8 +130,12 @@
                     </Frame>
 
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
-                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Renovar" />
+                    </Frame.GestureRecognizers>
+                    <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Green" Padding="1" >
+                            
                             <Label Text="{Binding Fichas.Renovacao}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
                             <Label Text="Entradas e Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -150,7 +146,10 @@
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
-                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Pagto" />
+                    </Frame.GestureRecognizers>
+                    <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#045B8F" Padding="1" >
                             <Label Text="{Binding Fichas.Pagto}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
@@ -160,7 +159,10 @@
                     </Frame>
 
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke" >
-                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="ET" />
+                    </Frame.GestureRecognizers>
+                    <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="Orange" Padding="1" >
                             <Label Text="{Binding Fichas.Extrakit}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
@@ -172,7 +174,10 @@
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
                     <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
-                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="SoEntrada" />
+                    </Frame.GestureRecognizers>
+                    <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#AAC248" Padding="1" >
                             <Label Text="{Binding Fichas.SomenteEntrada}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
@@ -182,7 +187,10 @@
                     </Frame>
 
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
-                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="SemSaldo" />
+                    </Frame.GestureRecognizers>
+                    <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#9e3933" Padding="1" >
                             <Label Text="{Binding Fichas.SemSaldo}" TextColor="White" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>

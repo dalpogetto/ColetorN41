@@ -70,6 +70,7 @@
     <ShellContent
         Icon="home"
         Title="Home Page"
+        Route="MainPage"
         ContentTemplate="{DataTemplate views:MainPage}"
          />
 

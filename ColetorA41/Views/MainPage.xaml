@@ -97,8 +97,9 @@ Opacity="0.8" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
-        <Grid RowDefinitions="10" Grid.Row="3" VerticalOptions="End">
-            <Rectangle Fill="#D7F0FE" />
+        <Grid RowDefinitions="60" Grid.Row="3" VerticalOptions="End" Margin="0,5">
+            
+           
         </Grid>
 
 

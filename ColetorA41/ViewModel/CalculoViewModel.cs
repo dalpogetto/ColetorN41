@@ -9,6 +9,7 @@ using ColetorA41.Views.Calculo;
 using Microsoft.Extensions.Configuration;
 using ColetorA41.Views;
 using CommunityToolkit.Maui.Core.Platform;
+using ColetorA41.Extensions;
 
 namespace ColetorA41.ViewModel
 {
@@ -128,6 +129,9 @@ namespace ColetorA41.ViewModel
 
         [ObservableProperty]
         Entrega entregaSelecionada;
+
+        [ObservableProperty]
+        ItemFicha itemFichaSelecionada;
 
         [ObservableProperty]
         int usuarioAlmoxa_;
@@ -255,6 +259,7 @@ namespace ColetorA41.ViewModel
         public ObservableCollection<Ficha> listaCalculo { get; private set; } = new();
         public ObservableCollection<Semsaldo> listaSemSaldo { get; private set; } = new();
         public ObservableCollection<Models.Resumo> listaResumo { get; private set; } = new();
+        public ObservableRangeCollection<ItemFicha> listaItensFicha { get; private set; } = new();
 
         [RelayCommand]
         public async Task LoginAlmoxa()
@@ -314,10 +319,32 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(EstabTec)}");
         }
 
+        [ObservableProperty]
+        string tipoFichaSelecionado;
+
         [RelayCommand]
-        async Task ChamarResumoDetalhe()
+        async Task ChamarResumoDetalhe(string tipoFicha)
         {
+            if (tipoFichaSelecionado != tipoFicha)
+            {
+                listaItensFicha.Clear();
+                tipoFichaSelecionado = tipoFicha;
+
+            }
+            await this.CarregarFichas();
             await Shell.Current.GoToAsync($"{nameof(ResumoDetalhe)}");
+        }
+
+        [RelayCommand]
+        async Task CarregarFichas()
+        {
+            if (IsBusy) return;
+            IsBusy = true;
+
+            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 10);
+            listaItensFicha.AddRange(lista.items);
+            IsBusy = false;
+
         }
 
         [RelayCommand]
@@ -346,7 +373,7 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarMainPage()
         {
-            await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             
         }
 
@@ -423,6 +450,17 @@ namespace ColetorA41.ViewModel
 
         }
 
+        
+        [RelayCommand]
+        async Task DetalheItemFicha(ItemFicha obj)
+        {
+            IsBusy = true;
+            ItemFichaSelecionada = obj;
+            await Shell.Current.GoToAsync($"{nameof(ResumoDetalheItem)}");
+            IsBusy = false;
+
+        }
+
         [RelayCommand]
         async Task ChamarLoadingCalculo()
         {
@@ -440,12 +478,18 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarResumo()
         {
-            this.IsBusy = true;
+            //this.IsBusy = true;
             //Apagar os calculos anteriores
             //this.Fichas = new();
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
            // await this.PrepararCalculo();
             
+        }
+
+        [RelayCommand]
+        async Task ChamarDetalheResumo()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ResumoDetalhe)}");
         }
 
         [RelayCommand]
@@ -455,6 +499,8 @@ namespace ColetorA41.ViewModel
             await this.AtualizaLblBotoes(tipo);
             await this.AtualizarLabelsContadores(tipo);
         }
+
+       
 
         async Task AtualizaLblBotoes(int tipo)
         {
@@ -552,5 +598,7 @@ namespace ColetorA41.ViewModel
             this.IsBusy = false;
 
         }
+
+       
     }
 }
