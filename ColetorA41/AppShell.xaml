@@ -133,20 +133,15 @@
                 </Border>
 
                 <!--<Button Text="Logout SUPER" Margin="20" Command="{Binding LogoutCommand}"></Button>-->
-                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="10">
-                    <Label Text="Versão: 1.0"
+                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Margin="0,10">
+                    <Label Text="{Binding ObterVersao, StringFormat='Versão: {0}'}"
+                           FontSize="22"
                             FontAttributes="Bold"
                             HorizontalOptions="Center" />
-                    <Image 
-                           HeightRequest="20"
-                           WidthRequest="20"
-                           
-                           Source="versionok"
-                            />
+                    
                 </HorizontalStackLayout>
 
-                <Label Text="Validade: 31/12/9999"
-                    HorizontalOptions="Center" />
+               
             </StackLayout>
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>

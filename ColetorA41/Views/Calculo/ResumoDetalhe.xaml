@@ -31,22 +31,11 @@
 
     <Grid RowDefinitions="120,*,60">
         <StackLayout>
-            <Grid RowDefinitions="100,200">
-                <Rectangle 
-                        VerticalOptions="Start"
-                        HeightRequest="100"
-                        Fill="#D7F0FE"
-                        />
-                <Ellipse 
-                    Grid.Row="1"
-                    x:Name="HeaderShape02"
-                       Fill="#D7F0FE"
-                       TranslationY="-110"
-                       HeightRequest="200"
-                       VerticalOptions="Start"
-                   >
+            <Grid RowDefinitions="50,200">
+                <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                     <Ellipse.Shadow>
-                        <Shadow Brush="LightGray"
+                        <Shadow Brush="Black"
  Offset="1,1"
  Radius="5"
  Opacity="0.8" />
@@ -54,7 +43,7 @@
                 </Ellipse>
             </Grid>
 
-            <VerticalStackLayout Padding="20,10" Margin="0,-290,0,0">
+            <VerticalStackLayout Padding="20,10" Margin="0,-220,0,0">
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
                         Source="folder2.png"
@@ -70,6 +59,7 @@
                     </Image>
                     <Label  Text="{Binding TipoFichaSelecionado, StringFormat='Lista {0}'}"
                         FontAttributes="Bold"
+                            TextColor="White"
                         FontSize="22"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center" />
@@ -86,7 +76,7 @@
             </VerticalStackLayout>
         </StackLayout>
 
-                <CollectionView x:Name="lista" Grid.Row="1"
+                <CollectionView x:Name="lista" Grid.Row="1" Margin="0,20"
                                   ItemsSource="{Binding listaItensFicha}" 
                                   RemainingItemsThreshold="4"
                                   ItemsUpdatingScrollMode="KeepItemsInView"

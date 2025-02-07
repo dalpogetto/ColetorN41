@@ -12,11 +12,11 @@
   
         <Grid RowDefinitions="50,*,60">
 
-            <Grid RowDefinitions="100, 200">
-                <Rectangle Fill="#D7F0FE" />
-            <Ellipse Grid.Row="1" Fill="#D7F0FE" TranslationY="-110">
+            <Grid RowDefinitions="70, 200">
+            <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
+            <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                 <Ellipse.Shadow>
-                    <Shadow Brush="LightGray"
+                    <Shadow Brush="Black"
  Offset="1,1"
  Radius="5"
  Opacity="0.8" />
@@ -36,6 +36,7 @@
                 </Image.Shadow>
             </Image>
             <Label Text="Resumo do Cálculo"
+                   TextColor="White"
                     FontAttributes="Bold"
                     FontSize="22"
                     VerticalOptions="Center" 
@@ -44,8 +45,19 @@
             </HorizontalStackLayout>
         
             <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,0,0,0" Grid.Row="1" HorizontalOptions="Center">
-            <Button Text="Impressão Informe" WidthRequest="150"></Button>
-            <HorizontalStackLayout Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
+            <Button Text="Impressão Informe" WidthRequest="250" BackgroundColor="{StaticResource Gray900}"></Button>
+
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <ActivityIndicator
+                                  Grid.Column="0"
+                                  IsVisible="{Binding IsBusy}"
+                                  HorizontalOptions="Center"
+                                  HeightRequest="28"
+                                  IsRunning="True"
+                                  VerticalOptions="Center"/>
+
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Margin="0,10,10,10" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
                 <RadioButton Content="Renov.Total" Value="1">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
@@ -102,17 +114,9 @@
                 </RadioButton>
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <ActivityIndicator
-                  Grid.Column="0"
-                  IsVisible="{Binding IsBusy}"
-                  HorizontalOptions="Center"
-                  HeightRequest="28"
-                  IsRunning="True"
-                  VerticalOptions="Center"/>
-
-            </HorizontalStackLayout>
+            
            
+                
 
 
             <HorizontalStackLayout HorizontalOptions="Center">

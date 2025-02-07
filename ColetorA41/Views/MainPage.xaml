@@ -6,11 +6,11 @@
              BackgroundColor="WhiteSmoke"
              >
     <Grid RowDefinitions="*,400,40" >
-        <Grid RowDefinitions="100, 200">
-            <Rectangle Fill="#D7F0FE" />
-            <Ellipse Grid.Row="1" Fill="#D7F0FE" TranslationY="-110">
+        <Grid RowDefinitions="80, 200">
+            <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
+            <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                 <Ellipse.Shadow>
-                    <Shadow Brush="LightGray"
+                    <Shadow Brush="Black"
              Offset="1,1"
              Radius="5"
              Opacity="0.8" />
@@ -28,7 +28,7 @@ Radius="40"
 Opacity="0.8" />
                     </Image.Shadow>
                 </Image>
-                <Label  Text="Home Page" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20"/>
+                <Label  Text="Home Page" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20" TextColor="White"/>
             </VerticalStackLayout>
             <Label
                 Text="Auto Atendimento"

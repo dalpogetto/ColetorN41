@@ -14,12 +14,12 @@
         <Style x:Key="lblCabec" TargetType="Label">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontAttributes" Value="None" />
-            <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
             <Setter Property="TextColor" Value="{StaticResource Primary}" />
         </Style>
 
         <Style x:Key="lblDet" TargetType="Label">
-            <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontAttributes" Value="Bold" />
 
@@ -29,21 +29,11 @@
 
     <Grid RowDefinitions="100,*,60">
         <StackLayout>
-            <Grid RowDefinitions="100,200">
-                <Rectangle 
-                        VerticalOptions="Start"
-                        HeightRequest="100"
-                        Fill="#D7F0FE"
-                        />
-                <Ellipse 
-                    Grid.Row="1"
-                    x:Name="HeaderShape02"
-                       Fill="#D7F0FE"
-                       TranslationY="-110"
-                       HeightRequest="200"
-                       VerticalOptions="Start">
+            <Grid RowDefinitions="60,200">
+                <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                     <Ellipse.Shadow>
-                        <Shadow Brush="LightGray"
+                        <Shadow Brush="Black"
              Offset="1,1"
              Radius="5"
              Opacity="0.8" />
@@ -51,7 +41,7 @@
                 </Ellipse>
             </Grid>
 
-            <VerticalStackLayout Padding="20,10" Margin="0,-290,0,0">
+            <VerticalStackLayout Padding="20,10" Margin="0,-230,0,0">
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
                         Source="folder2.png"
@@ -66,6 +56,7 @@
                         </Image.Shadow>
                     </Image>
                     <Label  Text="Detalhe Item da Ficha"
+                            TextColor="White"
                         FontAttributes="Bold"
                         FontSize="22"
                         VerticalOptions="Center" 
@@ -83,7 +74,7 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <Border HeightRequest="380" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1">
+        <Border Margin="10,55" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1">
 
             <VerticalStackLayout>
 
@@ -96,14 +87,14 @@
                     <!--Cabecalho-->
                     <Label Text="Mascara"      Style="{StaticResource lblCabec}" Grid.Row="3" Grid.Column="0"></Label>
                     <Label Text="Saldo"       Style="{StaticResource lblCabec}" Grid.Row="3" Grid.Column="1"></Label>
-                    <Label Text="Localiza"  Style="{StaticResource lblCabec}" Grid.Row="3" Grid.Column="2"></Label>
-                    <Label Text="NotaAnt"       Style="{StaticResource lblCabec}" Grid.Row="3" Grid.Column="3"></Label>
+                    <Label Text="Localiza"  Style="{StaticResource lblCabec}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"></Label>
+                   
                    
                     <!--Detalhe-->
                     <Label Text="{Binding ItemFichaSelecionada.qtMascara}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0"></Label>
                     <Label Text="{Binding ItemFichaSelecionada.qtSaldo}"   Style="{StaticResource lblDet}" Grid.Row="5" Grid.Column="1"></Label>
-                    <Label Text="{Binding ItemFichaSelecionada.codLocaliza}"        Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2"></Label>
-                    <Label Text="{Binding ItemFichaSelecionada.notaAnt}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="3"></Label>
+                    <Label Text="{Binding ItemFichaSelecionada.codLocaliza}"        Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"></Label>
+                    
                    
 
                 </Grid>
@@ -126,24 +117,24 @@
                 <Grid Padding="10" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
                     <!--Cabecalho-->
                     <Label Text="NumOS"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0"></Label>
-                    <Label Text="Kit"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
-                    <Label Text="TemPagto?"  Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="2"></Label>
+                    <Label Text="Kit"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"></Label>
                     <Label Text="Tipo"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="3"></Label>
                     <!--Detalhe-->
                     <Label Text="{Binding ItemFichaSelecionada.numOS}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0"></Label>
-                    <Label Text="{Binding ItemFichaSelecionada.kit}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1"></Label>
-                    <Label Text="{Binding ItemFichaSelecionada.temPagto}"        Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2"></Label>
+                    <Label Text="{Binding ItemFichaSelecionada.kit}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"></Label>
                     <Label Text="{Binding ItemFichaSelecionada.tipo}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="3"></Label>
 
                 </Grid>
 
-                <Grid Padding="10" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
+                <Grid Padding="10" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*" ColumnSpacing="20" Margin="0,0">
                     <!--Cabecalho-->
                     <Label Text="Qt Terc"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0"></Label>
                     <Label Text="Qt DAT"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
+                    <Label Text="NotaAnt"       Style="{StaticResource lblCabec}" Grid.Row="3" Grid.Column="2"></Label>
                     <!--Detalhe-->
                     <Label Text="{Binding ItemFichaSelecionada.qtTerc}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0"></Label>
                     <Label Text="{Binding ItemFichaSelecionada.qtDAT}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1"></Label>
+                    <Label Text="{Binding ItemFichaSelecionada.notaAnt}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2"></Label>
 
                 </Grid>
 

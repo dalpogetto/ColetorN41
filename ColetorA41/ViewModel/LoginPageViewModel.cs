@@ -20,6 +20,9 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         string senha;
 
+        [ObservableProperty]
+        string versao = AppInfo.Current.VersionString;
+
         [RelayCommand]
         public async void Login()
         {
@@ -27,13 +30,10 @@ namespace ColetorA41.ViewModel
             await Task.Delay(2000);
             if (await _authService.Login(Usuario, Senha))
             {
-                await Shell.Current.GoToAsync($"/{nameof(MainPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             }
             this.IsBusy = false;
-
-
         }
-
 
     }
 }

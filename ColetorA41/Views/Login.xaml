@@ -6,19 +6,15 @@
              Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="*,450" >
         <Grid RowDefinitions="*, *">
-            <Rectangle  Stroke="Transparent"
-                        VerticalOptions="Start"
-                        HeightRequest="120"
-                        Fill="{StaticResource Secondary}"
-                     
-                        />
-            <Ellipse 
-                    Grid.Row="1"
-                    x:Name="HeaderShape02"
-                       Fill="{StaticResource Secondary}"
-                       TranslationY="-110"
-                       HeightRequest="200"
-                       VerticalOptions="Start" />
+            <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
+            <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
+                <Ellipse.Shadow>
+                    <Shadow Brush="Black"
+Offset="1,1"
+Radius="5"
+Opacity="0.8" />
+                </Ellipse.Shadow>
+            </Ellipse>
 
 
         </Grid>

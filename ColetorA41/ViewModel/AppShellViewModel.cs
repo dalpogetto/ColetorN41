@@ -16,11 +16,13 @@ namespace ColetorA41.ViewModel
             _authService = authService;
         }
 
+        public AppShellViewModel() { }
+
         [RelayCommand]
         public void Logout()
         {
-            _authService.Logout();
-            Shell.Current.GoToAsync($"//{nameof(Login)}");
+            Preferences.Default.Clear();
+            Shell.Current.GoToAsync($"{nameof(Login)}");
         }
 
         [ObservableProperty]
@@ -31,6 +33,8 @@ namespace ColetorA41.ViewModel
 
         [ObservableProperty]
         Processo processoSelecionado;
+
+        public string ObterVersao { get; set; } = AppInfo.Current.VersionString;
 
 
     }

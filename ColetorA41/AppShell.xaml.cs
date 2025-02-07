@@ -3,6 +3,7 @@ using ColetorA41.ViewModel;
 using ColetorA41.Views;
 using ColetorA41.Views.ParamEstab;
 using ColetorA41.Views.Calculo;
+using ColetorA41.Services;
 
 
 namespace ColetorA41
@@ -12,13 +13,14 @@ namespace ColetorA41
         public AppShell()
         {
             InitializeComponent();
+            BindingContext = new AppShellViewModel();
+            
 
             Routing.RegisterRoute(nameof(Loading)       , typeof(Loading));
             Routing.RegisterRoute(nameof(Login)         , typeof(Login));
            // Routing.RegisterRoute(nameof(MainPage)      , typeof(MainPage));
             Routing.RegisterRoute(nameof(ParamEstabList), typeof(ParamEstabList));
             Routing.RegisterRoute(nameof(ParamEstabEdit), typeof(ParamEstabEdit));
-            //Routing.RegisterRoute("Calculo",              typeof(EstabTec));
             Routing.RegisterRoute(nameof(EstabTec)      , typeof(EstabTec));
             Routing.RegisterRoute(nameof(DadosNF)       , typeof(DadosNF));
             Routing.RegisterRoute(nameof(ExtrakitView)  , typeof(ExtrakitView));
@@ -29,8 +31,7 @@ namespace ColetorA41
             Routing.RegisterRoute(nameof(LoginAlmoxa)   , typeof(LoginAlmoxa));
             Routing.RegisterRoute(nameof(LoadingCalculo), typeof(LoadingCalculo));
 
-
-
+            //
 
         }
     }
