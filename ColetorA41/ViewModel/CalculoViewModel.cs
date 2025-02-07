@@ -258,7 +258,7 @@ namespace ColetorA41.ViewModel
         {
             this.IsBusy = true;
             //Gerar Numero de Processo se for preciso
-            var RowIdOS = await _service46.ObterDados(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
+            RowIdOS = await _service46.ObterDados(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
             //Obter Numero Gerado
             this.NrProcessSelecionado = await _service.ObterNrProcesso(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
             this.IsBusy = false;
@@ -503,7 +503,7 @@ namespace ColetorA41.ViewModel
                 var informe = await _service46.ImprimirOS(RowIdOS);
                 if (informe != null)
                 {
-                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec}/nArquivo: {informe.Arquivo}", "OK");
+                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} Arquivo: {informe.Arquivo}", "OK");
                 }
 
             }
