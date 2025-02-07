@@ -13,6 +13,12 @@ namespace ColetorA41.ViewModel
         bool isBusy = false;
 
         [ObservableProperty]
+        bool isError = false;
+
+        [ObservableProperty]
+        bool isCalculated = false;
+
+        [ObservableProperty]
         bool title = false;
 
     }

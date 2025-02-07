@@ -10,10 +10,10 @@ namespace ColetorA41.ViewModel
 
     public partial class AppShellViewModel: BaseViewModel
     {
-        private readonly AuthService _authService;
-        public AppShellViewModel(AuthService authService)
+        private readonly TotvsService _service;
+        public AppShellViewModel(TotvsService srv)
         {
-            _authService = authService;
+            _service = srv;
         }
 
         public AppShellViewModel() { }

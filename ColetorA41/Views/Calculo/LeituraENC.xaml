@@ -83,11 +83,6 @@
 
         <ScrollView Grid.Row="1"  Margin="10,-10,10,0" HorizontalOptions="Center">
             <StackLayout>
-                <ActivityIndicator  
-                        IsVisible="{Binding IsBusy}"
-                        HorizontalOptions="Center"
-                        IsRunning="{Binding IsBusy}"
-                        VerticalOptions="Center"/>
                 
                 <CollectionView x:Name="collectionParam"
                  ItemsSource="{Binding listaEnc}" 
@@ -139,7 +134,7 @@
 
         </ScrollView>
 
-        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
@@ -149,9 +144,19 @@
 
             </VerticalStackLayout>
 
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <ActivityIndicator
+                 Grid.Column="0"
+                 IsVisible="{Binding IsBusy}"
+                 HorizontalOptions="Center"
+                 IsRunning="{Binding IsBusy}"
+                 VerticalOptions="Center"
+                />
+            </VerticalStackLayout>
 
 
-            <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
+
+            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarLoginAlmoxaCommand}" />

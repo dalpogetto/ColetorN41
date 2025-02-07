@@ -66,11 +66,7 @@
 
                 </HorizontalStackLayout>
 
-                <ActivityIndicator  Grid.Column="0"
-                                 IsVisible="{Binding IsBusy}"
-                                 HorizontalOptions="Center"
-                                 IsRunning="{Binding IsBusy}"
-                                 VerticalOptions="Center"/>
+              
 
 
             </VerticalStackLayout>
@@ -130,7 +126,7 @@
                 </CollectionView>
             
 
-        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
@@ -140,9 +136,19 @@
 
             </VerticalStackLayout>
 
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <ActivityIndicator
+                 Grid.Column="0"
+                 IsVisible="{Binding IsBusy}"
+                 HorizontalOptions="Center"
+                 IsRunning="{Binding IsBusy}"
+                 VerticalOptions="Center"
+                />
+            </VerticalStackLayout>
 
 
-           
+
+
         </Grid>
 
     </Grid>

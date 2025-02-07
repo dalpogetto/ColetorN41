@@ -9,8 +9,10 @@ namespace ColetorA41.Models
    
 public class OrdemServicoResponse
     {
-        public List<Tela> tela { get; set; }
-        public List<OrdemServico> ordens { get; set; }
+       // public List<Tela> tela { get; set; }
+       // public List<OrdemServico> ordens { get; set; }
+
+        public string cRowId { get; set; }
     }
 
     public class Tela

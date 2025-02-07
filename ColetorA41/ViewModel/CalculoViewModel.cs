@@ -73,6 +73,13 @@ namespace ColetorA41.ViewModel
             this.IsBusy = false;
         }
 
+        public async Task VerificarVersao()
+        {
+            this.IsBusy = true;
+            IsError = await _service.VerificarVersaoMobile(AppInfo.Current.VersionString);
+            this.IsBusy = false;
+        }
+
         
         [ObservableProperty]
         int nrProcessSelecionado;
@@ -244,12 +251,14 @@ namespace ColetorA41.ViewModel
             }
             this.IsBusy = false;
         }
+        [ObservableProperty]
+        string rowIdOS = "";
 
         public async Task ObterDados()
         {
             this.IsBusy = true;
             //Gerar Numero de Processo se for preciso
-            var lista = await _service46.ObterDados(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
+            var RowIdOS = await _service46.ObterDados(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
             //Obter Numero Gerado
             this.NrProcessSelecionado = await _service.ObterNrProcesso(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
             this.IsBusy = false;
@@ -364,10 +373,13 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarExtrakit()
         {
-            //await Shell.Current.DisplayAlert("Aqui", "Entrou", "OK");
+            IsBusy = true;
+            QtdeETNaoSelecionadas = 0;
+            qtdeETNaoSelecionadas = 0;
             await this.ObterExtrakit();
             this.ListaETSelecionada();
             await Shell.Current.GoToAsync($"{nameof(ExtrakitView)}");
+            IsBusy = false;
         }
 
         [RelayCommand]
@@ -478,13 +490,25 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarResumo()
         {
-            //this.IsBusy = true;
-            //Apagar os calculos anteriores
-            //this.Fichas = new();
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
-           // await this.PrepararCalculo();
             
         }
+        [RelayCommand]
+        async Task GerarInforme()
+        {
+            bool ok = await Shell.Current.DisplayAlert("GERAR INFORME ?", "DESEJA GERAR O INFORME DE OS", "Sim", "Não");
+            if (ok)
+            {
+                IsBusy = true;
+                var informe = await _service46.ImprimirOS(RowIdOS);
+                if (informe != null)
+                {
+                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec}/nArquivo: {informe.Arquivo}", "OK");
+                }
+
+            }
+        }
+
 
         [RelayCommand]
         async Task ChamarDetalheResumo()
@@ -536,6 +560,7 @@ namespace ColetorA41.ViewModel
         public async Task PrepararCalculo()
         {
             this.IsBusy = true;
+            this.IsCalculated = true;
             //Gerar Numero de Processo se for preciso
             var calculo = await _service.PrepararCalculoMobile(this.EstabSelecionado.codEstab,
                                                                this.TecnicoSelecionado.codTec,

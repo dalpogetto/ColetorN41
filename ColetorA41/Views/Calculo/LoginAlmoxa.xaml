@@ -42,11 +42,7 @@
              <Label Margin="10,20" Text="Login para prosseguir com o Resumo do Cálculo" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="200" TextColor="White"></Label>
 
 
-                <ActivityIndicator  
-                      IsVisible="{Binding IsBusy}"
-                      HorizontalOptions="Center"
-                      IsRunning="{Binding IsBusy}"
-                      VerticalOptions="Center"/>
+                
         </VerticalStackLayout>
         </StackLayout>
         <VerticalStackLayout Padding="25" Spacing="25" Grid.Row="1">
@@ -58,7 +54,7 @@
 
        
 
-        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
@@ -66,6 +62,16 @@
                     </Image.GestureRecognizers>
                 </Image>
 
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <ActivityIndicator
+                 Grid.Column="0"
+                 IsVisible="{Binding IsBusy}"
+                 HorizontalOptions="Center"
+                 IsRunning="{Binding IsBusy}"
+                 VerticalOptions="Center"
+                />
             </VerticalStackLayout>
         </Grid>
     </Grid>

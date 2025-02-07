@@ -51,18 +51,9 @@
                         CornerRadius="20"/>
 
                 <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Padding="-5">
-                    <Label Text="{Binding QtdeETSelecionadas, StringFormat='Qtde Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White"></Label>
-                    <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Qtde Não Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White"></Label>
+                    <Label Text="{Binding QtdeETSelecionadas, StringFormat='Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White"></Label>
+                    <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Não Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White"></Label>
                 </HorizontalStackLayout>
-
-
-                <ActivityIndicator  Grid.Column="0"
-                                 IsVisible="{Binding IsBusy}"
-                                 HorizontalOptions="Center"
-                                 IsRunning="{Binding IsBusy}"
-                                 VerticalOptions="Center"
-                                 
-                                />
 
 
             </VerticalStackLayout>
@@ -164,7 +155,7 @@
 
         </ScrollView>
 
-        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
@@ -174,9 +165,19 @@
 
             </VerticalStackLayout>
 
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <ActivityIndicator
+                 Grid.Column="0"
+                 IsVisible="{Binding IsBusy}"
+                 HorizontalOptions="Center"
+                 IsRunning="{Binding IsBusy}"
+                 VerticalOptions="Center"
+                />
+            </VerticalStackLayout>
 
 
-            <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
+
+            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />

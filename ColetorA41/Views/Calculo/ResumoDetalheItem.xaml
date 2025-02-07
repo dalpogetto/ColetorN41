@@ -64,21 +64,15 @@
 
                 </HorizontalStackLayout>
 
-                <ActivityIndicator  Grid.Column="0"
-                                 IsVisible="{Binding IsBusy}"
-                                 HorizontalOptions="Center"
-                                 IsRunning="{Binding IsBusy}"
-                                 VerticalOptions="Center"/>
-
-
+                
             </VerticalStackLayout>
         </StackLayout>
-
-        <Border Margin="10,55" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1">
+        <StackLayout Grid.Row="1" Padding="20">
+        <Border Margin="10,55" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
 
             <VerticalStackLayout>
 
-                <Grid Padding="10" RowDefinitions="*,40,*,*,*" ColumnDefinitions="*,*,90,*" ColumnSpacing="5">
+                <Grid Padding="1" RowDefinitions="*,40,*,*,*" ColumnDefinitions="*,*,90,*" ColumnSpacing="5">
                     <!--Chave-->
                     <Label Text="{Binding ItemFichaSelecionada.itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
                     <Label Text="{Binding ItemFichaSelecionada.itPrincipal}" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16" HorizontalTextAlignment="End"/>
@@ -99,7 +93,7 @@
 
                 </Grid>
 
-                <Grid Padding="10" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
+                <Grid Padding="1" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
                     <!--Cabecalho-->
                     <Label Text="QtPagar"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0"></Label>
                     <Label Text="QtRenovar"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
@@ -114,7 +108,7 @@
                 </Grid>
 
 
-                <Grid Padding="10" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
+                <Grid Padding="1" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
                     <!--Cabecalho-->
                     <Label Text="NumOS"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0"></Label>
                     <Label Text="Kit"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"></Label>
@@ -126,7 +120,7 @@
 
                 </Grid>
 
-                <Grid Padding="10" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*" ColumnSpacing="20" Margin="0,0">
+                <Grid Padding="1" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*" ColumnSpacing="20" Margin="0,0">
                     <!--Cabecalho-->
                     <Label Text="Qt Terc"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0"></Label>
                     <Label Text="Qt DAT"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
@@ -141,9 +135,10 @@
 
             </VerticalStackLayout>
         </Border>
+        </StackLayout>
 
 
-        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
@@ -151,6 +146,16 @@
                     </Image.GestureRecognizers>
                 </Image>
 
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <ActivityIndicator
+                 Grid.Column="0"
+                 IsVisible="{Binding IsBusy}"
+                 HorizontalOptions="Center"
+                 IsRunning="{Binding IsBusy}"
+                 VerticalOptions="Center"
+                />
             </VerticalStackLayout>
         </Grid>
     </Grid>

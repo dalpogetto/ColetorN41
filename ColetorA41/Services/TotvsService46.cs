@@ -15,7 +15,7 @@ namespace ColetorA41.Services
         {
         }
 
-        public async Task<List<OrdemServico>> ObterDados(string codEstabel, int codTecnico, string senha = "moto", string origem = "calculo")
+        public async Task<string> ObterDados(string codEstabel, int codTecnico, string senha = "moto", string origem = "calculo")
         {
             var param = new NameValueCollection {
                 {"codEstabel", codEstabel },
@@ -23,8 +23,8 @@ namespace ColetorA41.Services
                 {"senha", senha },
                 {"origem", origem }
             };
-            var response = await GetAsync<OrdemServicoResponse>("apiesaa046/ObterDados", param);
-            return response.ordens;
+            var response = await GetAsync<OrdemServicoResponse>("apiesaa046/ObterDadosMobile", param);
+            return response.cRowId;
         }
 
         public async Task<Enc> LeituraEnc(string codEstabel, int codTecnico, string numEnc, string nrProcesso)
@@ -57,6 +57,16 @@ namespace ColetorA41.Services
             };
             var response = await GetAsync<EncResponse>("apiesaa046/Desmarcar", param);
             return true;
+        }
+
+        public async Task<InformeResponse> ImprimirOS(string cRowId)
+        {
+            var param = new NameValueCollection {
+                {"iExecucao", "2" },
+                {"cItemRowId", cRowId }
+            };
+            var response = await GetAsync<InformeResponse>("apiesaa046/ImprimirOS", param);
+            return response;
         }
 
     }

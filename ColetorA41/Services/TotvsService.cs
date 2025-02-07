@@ -11,8 +11,57 @@ namespace ColetorA41.Services
 {
     public partial class TotvsService:BaseService
     {
+
+        private const string AuthStateKey = "AuthState";
+        private const string InfoLogin = "UsuarioSenhaBase64";
+
         public TotvsService(IHttpClientFactory httpClientFactory, IConfiguration config) : base(httpClientFactory, config)
         {
+        }
+
+        public async Task<bool> IsAuthenticatedAsync()
+        {
+            await Task.Delay(2000);
+
+            var authState = Preferences.Default.Get<bool>(AuthStateKey, false);
+            var dadosLogin = Preferences.Default.Get(InfoLogin, String.Empty);
+            //Setar Informacoes Usuario e Senha para Chamar APIs TOTVS
+            Ambiente.UsuarioSenhaBase64 = dadosLogin;
+
+            return authState;
+        }
+        public async Task<bool> Login(string usuario, string senha)
+        {
+            var byteArray = new UTF8Encoding().GetBytes($"{usuario}:{senha}");
+            Ambiente.UsuarioSenhaBase64 = Convert.ToBase64String(byteArray);
+
+            try
+            {
+
+                if (!await Login("101"))
+                {
+                    await Shell.Current.DisplayAlert("Erro!", "Usuário e senha inválidos", "OK");
+                    return default;
+                }
+
+
+                Preferences.Default.Set<bool>(AuthStateKey, true);
+                // var byteArray = new UTF8Encoding().GetBytes($"{usuario}:{senha}");
+                // Ambiente.UsuarioSenhaBase64 = Convert.ToBase64String(byteArray);
+                Preferences.Default.Set(InfoLogin, Ambiente.UsuarioSenhaBase64);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                await Shell.Current.DisplayAlert("Erro!", "Usuário e senha inválidos", "OK");
+                return false;
+            }
+
+        }
+        public void Logout()
+        {
+            Preferences.Default.Clear();
         }
 
         public async Task<ItemFichaResponse> ObterItensCalculoMobile(int tipoCalculo, string tipoFicha, int nrProcess, int skip, int pageSize)
@@ -32,6 +81,13 @@ namespace ColetorA41.Services
         {
             var response = await GetAsync<ParamEstabelecimentoResponse>("apiesaa041/ObterCalcEstab");
             return response.items;
+        }
+
+        public async Task<bool> VerificarVersaoMobile(string versaoAtual)
+        {
+            var param = new NameValueCollection { { "versao", versaoAtual } };
+            var response = await GetAsync<Mobile>("apiesaa041/ObterVersaoMobile", param);
+            return response.versaoValida;
         }
 
         public async Task<List<Estabelecimento>> ObterEstabelecimentos()

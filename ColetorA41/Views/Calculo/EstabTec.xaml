@@ -41,20 +41,18 @@
                  HorizontalOptions="Center" Margin="0,0,0,0"/>
 
 
-            <ActivityIndicator
-                Grid.Column="0"
-                IsVisible="{Binding IsBusy}"
-                HorizontalOptions="Center"
-                IsRunning="{Binding IsBusy}"
-                VerticalOptions="Center"/>
+            
 
         </VerticalStackLayout>
         </StackLayout>
+
+        
         <VerticalStackLayout Grid.Row="1" Padding="20">
 
+           
             <Label Text="Estabelecimento"/>
             <Picker Title="Selecione um Estabelecimento"
-                    TitleColor="LightCoral" FontAttributes="Bold" FontSize="16"
+                     FontAttributes="Bold" FontSize="16"
                      ItemsSource="{Binding listaEstab}"  
                      ItemDisplayBinding="{Binding identific}"
                      SelectedItem="{Binding EstabSelecionado}"
@@ -62,13 +60,13 @@
 
             <Label Text="Técnico"/>
             <Picker Title="Selecione um Técnico"
-                     TitleColor="LightCoral" FontAttributes="Bold" FontSize="16"
+                     FontAttributes="Bold" FontSize="16"
                      ItemsSource="{Binding listaTecnico}"  
                      ItemDisplayBinding="{Binding identific}"
                      SelectedItem="{Binding TecnicoSelecionado}"/>  
         </VerticalStackLayout>
 
-        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
@@ -77,7 +75,17 @@
                 </Image>
 
             </VerticalStackLayout>
-            <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
+
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <ActivityIndicator
+                 Grid.Column="0"
+                 IsVisible="{Binding IsBusy}"
+                 HorizontalOptions="Center"
+                 IsRunning="{Binding IsBusy}"
+                 VerticalOptions="Center"
+                />
+            </VerticalStackLayout>
+            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />

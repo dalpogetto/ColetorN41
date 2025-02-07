@@ -5,7 +5,7 @@
              Title="Login"
              Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="*,450" >
-        <Grid RowDefinitions="*, *">
+        <Grid RowDefinitions="100,200">
             <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                 <Ellipse.Shadow>
@@ -20,7 +20,7 @@ Opacity="0.8" />
         </Grid>
         <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,20,0,0">
             <Image Source="login.png" HeightRequest="80" HorizontalOptions="Center" Margin="0,0,0,10"/>
-            <Label  Text="Login Totvs" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20"/>
+            <Label  Text="Login Totvs" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20" TextColor="White"/>
         </VerticalStackLayout>
         <VerticalStackLayout Padding="25" Spacing="25" Grid.Row="1">
 

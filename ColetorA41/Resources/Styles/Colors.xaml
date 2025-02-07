@@ -19,6 +19,7 @@
     <Color x:Key="Magenta">#D600AA</Color>
     <Color x:Key="MidnightBlue">#190649</Color>
     <Color x:Key="OffBlack">#1f1f1f</Color>
+    <Color x:Key="Vermelho">#ff4c4c</Color>
 
     <Color x:Key="MenuCabec">#5165BF</Color>
     <Color x:Key="MenuCabec2">#D7F0FE</Color>

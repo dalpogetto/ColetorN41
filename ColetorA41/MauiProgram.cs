@@ -44,7 +44,6 @@ namespace ColetorA41
             //Services
             builder.Services.AddTransient<TotvsService>();
             builder.Services.AddTransient<TotvsService46>();
-            builder.Services.AddTransient<AuthService>();
             
             //HttpClient
             builder.Services.AddHttpClient("coletor", httpClient =>

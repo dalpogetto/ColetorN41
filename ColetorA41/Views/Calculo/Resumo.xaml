@@ -45,16 +45,10 @@
             </HorizontalStackLayout>
         
             <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,0,0,0" Grid.Row="1" HorizontalOptions="Center">
-            <Button Text="Impressão Informe" WidthRequest="250" BackgroundColor="{StaticResource Gray900}"></Button>
+            <Button Text="Impressão Informe" WidthRequest="250" BackgroundColor="{StaticResource Gray900}" Command="{Binding GerarInformeCommand}"></Button>
 
             <HorizontalStackLayout HorizontalOptions="Center">
-                <ActivityIndicator
-                                  Grid.Column="0"
-                                  IsVisible="{Binding IsBusy}"
-                                  HorizontalOptions="Center"
-                                  HeightRequest="28"
-                                  IsRunning="True"
-                                  VerticalOptions="Center"/>
+               
 
             </HorizontalStackLayout>
             <HorizontalStackLayout Margin="0,10,10,10" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
@@ -210,7 +204,7 @@
                 </StackLayout>
             </VerticalStackLayout>
 
-            <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+            <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
                 
                     <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                         <Image Source="seta_esquerda" WidthRequest="50">
@@ -219,8 +213,17 @@
                             </Image.GestureRecognizers>
                         </Image>
                     </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                        <ActivityIndicator
+                         Grid.Column="0"
+                         IsVisible="{Binding IsBusy}"
+                         HorizontalOptions="Center"
+                         IsRunning="{Binding IsBusy}"
+                         VerticalOptions="Center"
+                        />
+                    </VerticalStackLayout>
 
-                    <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
                
                         <Image Source="seta_dupla_esquerda" WidthRequest="80" Margin="0,-18,0,0">
                               <Image.GestureRecognizers>

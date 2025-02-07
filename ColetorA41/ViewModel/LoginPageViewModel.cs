@@ -7,11 +7,11 @@ namespace ColetorA41.ViewModel
 {
     public partial class LoginPageViewModel: BaseViewModel
     {
-        private readonly AuthService _authService;
+        private readonly TotvsService _srv;
 
-        public LoginPageViewModel(AuthService authService)
+        public LoginPageViewModel(TotvsService srv)
         {
-            _authService = authService;
+            _srv = srv;
         }
 
         [ObservableProperty]
@@ -28,7 +28,7 @@ namespace ColetorA41.ViewModel
         {
             this.IsBusy = true;
             await Task.Delay(2000);
-            if (await _authService.Login(Usuario, Senha))
+            if (await _srv.Login(Usuario, Senha))
             {
                 await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             }

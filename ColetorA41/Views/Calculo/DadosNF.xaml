@@ -6,7 +6,7 @@
              Title="Nota Fiscal">
     <Grid RowDefinitions="200,*,60">
         <StackLayout>
-        <Grid RowDefinitions="80, 200">
+            <Grid RowDefinitions="80, 200">
                 <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
                 <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                     <Ellipse.Shadow>
@@ -16,10 +16,10 @@
  Opacity="0.8" />
                     </Ellipse.Shadow>
                 </Ellipse>
-                
-        </Grid>
-        
-        <VerticalStackLayout VerticalOptions="Center" Margin="0,-260,0,0">
+
+            </Grid>
+
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-260,0,0">
                 <Image
             Source="informe2.png"
             SemanticProperties.Description="Cute dot net bot waving hi to you!"
@@ -43,17 +43,14 @@
             HorizontalOptions="Center" Margin="0,0,0,0"
             />
 
-            <ActivityIndicator
-             Grid.Column="0"
-             IsVisible="{Binding IsBusy}"
-             HorizontalOptions="Center"
-             IsRunning="{Binding IsBusy}"
-             VerticalOptions="Center"
-            />
-        </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+            
         </StackLayout>
 
         <VerticalStackLayout Grid.Row="1" Padding="20">
+
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
                 <VerticalStackLayout>
                     <Label Text="Serie Entrada"/>
@@ -65,7 +62,7 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
-                
+
                 <VerticalStackLayout>
                     <Label Text="RPW"/>
                     <Entry Text="{Binding Rpw}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
@@ -79,7 +76,7 @@
                      ItemsSource="{Binding listaTransporte}"  
                      ItemDisplayBinding="{Binding identific}"
                      SelectedItem="{Binding TranspEntraSelecionado, Mode=TwoWay}"
-                     Margin="0,0,0,20"/>        
+                     Margin="0,0,0,20"/>
 
             <Label Text="Transportadora Saída"/>
             <Picker Title="Selecione a transportadora" FontAttributes="Bold" FontSize="16"
@@ -99,23 +96,32 @@
 
         </VerticalStackLayout>
 
-        <Grid ColumnDefinitions="*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
             <VerticalStackLayout  HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarEstabTecCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-                
+
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <ActivityIndicator
+                             Grid.Column="0"
+                             IsVisible="{Binding IsBusy}"
+                             HorizontalOptions="Center"
+                             IsRunning="{Binding IsBusy}"
+                             VerticalOptions="Center"
+                            />  
             </VerticalStackLayout>
 
-            <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
+            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarExtrakitCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-                
+
             </VerticalStackLayout>
         </Grid>
     </Grid>
