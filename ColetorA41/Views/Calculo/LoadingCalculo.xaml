@@ -50,13 +50,13 @@
                          IsRunning="{Binding IsBusy}"
                          VerticalOptions="Center"
                         />
-            <Label Text="Gerando Resumo Aguarde ...." FontAttributes="Bold"></Label>
+            <Label Text="{Binding LabelLoading}" FontAttributes="Bold" FontSize="18"></Label>
 
         </VerticalStackLayout>
 
         
 
-        <Grid Grid.Row="2" ColumnDefinitions="*,*" HorizontalOptions="Center" BackgroundColor="{StaticResource Primary}" Padding="20">
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" HorizontalOptions="Center" BackgroundColor="{StaticResource Primary}" Padding="20" Margin="10,0">
             <VerticalStackLayout VerticalOptions="Center">
                 <Label Text="Estabelecimento: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
                 <Label Text="Técnico: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>

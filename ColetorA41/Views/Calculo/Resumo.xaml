@@ -44,8 +44,8 @@
 
             </HorizontalStackLayout>
         
-            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,0,0,0" Grid.Row="1" HorizontalOptions="Center">
-            <Button Text="Impressão Informe" WidthRequest="250" BackgroundColor="{StaticResource Gray900}" Command="{Binding GerarInformeCommand}"></Button>
+            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,20,0,0" Grid.Row="1" HorizontalOptions="Center">
+            <Button Text="Impressão Informe" WidthRequest="150" BackgroundColor="{StaticResource Gray900}" Command="{Binding GerarInformeCommand}" CornerRadius="20"></Button>
 
             <HorizontalStackLayout HorizontalOptions="Center">
                

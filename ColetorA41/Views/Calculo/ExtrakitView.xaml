@@ -47,7 +47,7 @@
                 <Button Text="Selecionar Todos" Command="{Binding SelecionarTodosExtrakitCommand}" 
                         Background="{StaticResource Gray900}"
                         Margin="0,0,0,10" 
-                        WidthRequest="250" 
+                        WidthRequest="230" 
                         CornerRadius="20"/>
 
                 <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Padding="-5">

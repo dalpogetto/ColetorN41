@@ -89,6 +89,30 @@ namespace ColetorA41.Models
         public int NrProcess { get; set; }
     }
 
+    public class ExecutarCalculoRequest
+    {
+        public ParamsTela paramTela { get; set; }
+    }
+
+    public class ParamsTela
+    {
+        public int opcao { get; set; }
+        public int tipoAprovacao { get; set; }
+        public string codEstab { get; set; }
+        public int codEmitente { get; set; }
+        public int nrProcess { get; set; }
+        public string serieEntra { get; set; }
+        public string serieSai { get; set; }
+        public string codTranspEntra { get; set; }
+        public string codTranspSai { get; set; }
+        public string codEntrega { get; set; }
+    }
+
+    public class ExecutarCalculoResponse
+    {
+
+    }
+
 
 
 }

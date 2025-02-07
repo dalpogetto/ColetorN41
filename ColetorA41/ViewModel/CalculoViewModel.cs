@@ -479,6 +479,7 @@ namespace ColetorA41.ViewModel
             this.IsBusy = true;
             //Apagar os calculos anteriores
             this.Fichas = new();
+            LabelLoading = "Gerando Resumo Cálculo";
             await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
             await this.PrepararCalculo();
 
@@ -491,8 +492,10 @@ namespace ColetorA41.ViewModel
         async Task ChamarResumo()
         {
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
-            
         }
+        [ObservableProperty]
+        string labelLoading;
+
         [RelayCommand]
         async Task GerarInforme()
         {
@@ -500,13 +503,19 @@ namespace ColetorA41.ViewModel
             if (ok)
             {
                 IsBusy = true;
+                LabelLoading = "Gerando Arquivo de Informe";
+                await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
+
                 var informe = await _service46.ImprimirOS(RowIdOS);
                 if (informe != null)
                 {
-                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} Arquivo: {informe.Arquivo}", "OK");
+                    
+                    IsBusy = false;
+                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
+                    await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
                 }
-
             }
+            IsBusy = false;
         }
 
 
@@ -561,6 +570,7 @@ namespace ColetorA41.ViewModel
         {
             this.IsBusy = true;
             this.IsCalculated = true;
+
             //Gerar Numero de Processo se for preciso
             var calculo = await _service.PrepararCalculoMobile(this.EstabSelecionado.codEstab,
                                                                this.TecnicoSelecionado.codTec,
@@ -624,6 +634,30 @@ namespace ColetorA41.ViewModel
 
         }
 
-       
+        [RelayCommand]
+        async Task AprovarCalculo()
+        {
+            bool ok = await Shell.Current.DisplayAlert("EXECUÇÃO CÁLCULO ?", "CONFIRMA EXECUÇÃO DO CÁLCULO", "Sim", "Não");
+            if (ok)
+            {
+                /*
+                IsBusy = true;
+                LabelLoading = "Gerando Arquivo de Informe";
+                await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
+
+                var informe = await _service46.ImprimirOS(RowIdOS);
+                if (informe != null)
+                {
+
+                    IsBusy = false;
+                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
+                    await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                }
+                */
+            }
+            IsBusy = false;
+        }
+
+
     }
 }

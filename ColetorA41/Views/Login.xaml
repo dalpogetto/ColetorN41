@@ -4,7 +4,7 @@
              x:Class="ColetorA41.Views.Login"
              Title="Login"
              Shell.NavBarIsVisible="False">
-    <Grid RowDefinitions="*,450" >
+    <Grid RowDefinitions="*,500" >
         <Grid RowDefinitions="100,200">
             <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
@@ -37,7 +37,7 @@ Opacity="0.8" />
             <Label Text="Domínio: DIEBOLD_MASTER"/>
 
             <Button Text="Login"
-                Command="{Binding LoginCommand}"/>
+                Command="{Binding LoginCommand}" CornerRadius="20"/>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

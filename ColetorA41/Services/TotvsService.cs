@@ -171,5 +171,13 @@ namespace ColetorA41.Services
             var response = await PostAsync<ParamEstabelecimentoRequest, Object>("apiesaa041/SalvarCalcEstab", request);
             return true;
         }
+
+        public async Task<ExecutarCalculoResponse> AprovarCalculo(ParamsTela req)
+        {
+            var request = new ExecutarCalculoRequest { paramTela = req};
+
+            var response = await PostAsync<ExecutarCalculoRequest, ExecutarCalculoResponse>("apiesaa041/ObterExtrakit", request);
+            return response;
+        }
     }
 }

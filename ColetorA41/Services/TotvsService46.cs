@@ -63,7 +63,7 @@ namespace ColetorA41.Services
         {
             var param = new NameValueCollection {
                 {"iExecucao", "2" },
-                {"cItemRowId", "cRowId" }
+                {"cRowId", cRowId }
             };
             var response = await GetAsync<InformeResponse>("apiesaa046/ImprimirOS", param);
             return response;
