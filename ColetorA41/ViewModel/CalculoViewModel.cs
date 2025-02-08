@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using ColetorA41.Views;
 using CommunityToolkit.Maui.Core.Platform;
 using ColetorA41.Extensions;
+using CommunityToolkit.Maui.Alerts;
 
 namespace ColetorA41.ViewModel
 {
@@ -27,7 +28,8 @@ namespace ColetorA41.ViewModel
             _service = totvsService;
             _service46 = totvsService46;
             _config = config;
-            this.ObterEstabelecimentos();
+            Task.Run(async () => await this.ObterEstabelecimentos());
+            
         }
 
         private Estabelecimento _estabSelecionado;
@@ -39,9 +41,15 @@ namespace ColetorA41.ViewModel
                 if (_estabSelecionado != value)
                 {
                     _estabSelecionado = value;
-                    
-                     this.ObterTecnicosEstab();
-                     this.ObterTransporte();
+
+                    Task.Run(async () => {
+                        IsBusy = false;
+                        await this.CarregarTecnicosEstabelecimento();
+                        await this.ObterTransporte();
+                        });
+
+                    //this.ObterTecnicosEstab();
+                    // this.ObterTransporte();
                 }
             }
         }
@@ -92,7 +100,7 @@ namespace ColetorA41.ViewModel
             this.IsBusy = true;
             try
             {
-                var lista = await _service.ObterTecEstabMobile(this._estabSelecionado.codEstab, 0, 20);
+                var lista = await _service.ObterTecEstabMobile(this._estabSelecionado.codEstab, CriterioBuscaTecnico,0, 20);
                 if (lista != null)
                 {
                     this.listaTecnico.Clear();
@@ -182,7 +190,7 @@ namespace ColetorA41.ViewModel
 
         public ObservableCollection<Transporte> listaTransporte { get; private set; } = new();
 
-        public async void ObterTransporte()
+        public async Task ObterTransporte()
         {
             this.IsBusy = true;
             var lista = await _service.ObterTransportes();
@@ -237,6 +245,52 @@ namespace ColetorA41.ViewModel
             {
                 this.listaExtrakitSelecionados.Add(item);
             }
+        }
+
+        private string searchText;
+        public string SearchText
+        {
+            get
+            {
+                return searchText;
+            }
+            set
+            {
+                searchText = value;
+                if (searchText.Length > 2)
+                {
+                   // Task.Run(async () => { await BuscarTecnico(searchText); }).Wait();
+                }
+                if (searchText == "")
+                {
+                    Task.Run(async () => { await BuscarTecnico(""); }).Wait();
+                }
+            }
+        }
+
+        [ObservableProperty]
+        string criterioBuscaTecnico = "";
+
+        [RelayCommand]
+        private async Task TextChanged(string newText)
+        {
+            if (string.IsNullOrEmpty(newText))
+            {
+                await Toast.Make("Searchbar is empty!").Show();
+            }
+            return;
+        }
+
+        [RelayCommand]
+        async Task BuscarTecnico(string criterio)
+        {
+            Task.Run(async ()=> {
+                IsBusy = true;
+                criterioBuscaTecnico = criterio;
+                await ObterTecnicosEstab();
+                IsBusy = false;
+                });
+
         }
 
         
@@ -390,7 +444,7 @@ namespace ColetorA41.ViewModel
             // var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20);
             try
             {
-                var lista = await _service.ObterTecEstabMobile(this._estabSelecionado.codEstab, listaTecnico.Count(), 20);
+                var lista = await _service.ObterTecEstabMobile(this._estabSelecionado.codEstab, CriterioBuscaTecnico ,listaTecnico.Count(), 20);
                 if (lista != null)
                     listaTecnico.AddRange(lista);
                 IsBusy = false;

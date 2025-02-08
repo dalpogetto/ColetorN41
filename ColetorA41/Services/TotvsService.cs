@@ -107,9 +107,13 @@ namespace ColetorA41.Services
             return response.items;
         }
 
-        public async Task<List<Tecnico>> ObterTecEstabMobile(string codEstabel, int skip, int pageSize)
+        public async Task<List<Tecnico>> ObterTecEstabMobile(string codEstabel, string criterioBusca, int skip, int pageSize)
         {
-            var param = new NameValueCollection { { "codEstabel", codEstabel }, { "Skip", skip.ToString()}, { "PageSize", pageSize.ToString() } };
+            var param = new NameValueCollection { { "codEstabel", codEstabel }, 
+                                                  { "criterioBusca", criterioBusca }, 
+                                                  { "Skip", skip.ToString()}, 
+                                                  { "PageSize", pageSize.ToString() } 
+                                                };
             var response = await GetAsync<TecnicoResponse>("apiesaa041/ObterTecEstabMobile", param);
             if (response.type == "error")
             {
