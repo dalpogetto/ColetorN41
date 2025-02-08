@@ -30,6 +30,7 @@ namespace ColetorA41
             Routing.RegisterRoute(nameof(LeituraENC)    , typeof(LeituraENC));
             Routing.RegisterRoute(nameof(LoginAlmoxa)   , typeof(LoginAlmoxa));
             Routing.RegisterRoute(nameof(LoadingCalculo), typeof(LoadingCalculo));
+            Routing.RegisterRoute(nameof(Erro), typeof(Erro));
 
             //
 

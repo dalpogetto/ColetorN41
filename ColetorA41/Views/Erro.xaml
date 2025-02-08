@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColetorA41.Views.Erro"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="False"
+             Title="Erro">
+    <Grid RowDefinitions="80,*,100">
+        <StackLayout>
+            <Grid RowDefinitions="80, 200">
+                <Rectangle Fill="{StaticResource Vermelho}"  Stroke="{StaticResource Vermelho}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource Vermelho}" TranslationY="-110">
+                    <Ellipse.Shadow>
+                        <Shadow Brush="Black"
+                             Offset="1,1"
+                             Radius="5"
+                             Opacity="0.8" />
+                    </Ellipse.Shadow>
+                </Ellipse>
+            </Grid>
+            <VerticalStackLayout Margin="0,-270,0,0">
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,80">
+                    <Image Source="stop.png" HeightRequest="80" HorizontalOptions="Center" Margin="0,0,0,10">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="White" />
+                        </Image.Behaviors>
+                        <Image.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="10,10"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Image.Shadow>
+                    </Image>
+                    <Label  Text="ERRO" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20" TextColor="White"/>
+                </VerticalStackLayout>
+
+
+            </VerticalStackLayout>
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="Erro Crítico" FontSize="Subtitle" HorizontalTextAlignment="Center"></Label>
+                <Label Text="{Binding LabelErro}" FontSize="Title" HorizontalTextAlignment="Center"></Label>
+            </VerticalStackLayout>
+        </StackLayout>
+
+        <Label Grid.Row="2" Text="Contate o administrador" HorizontalTextAlignment="Center"></Label>
+
+
+    </Grid>
+
+</ContentPage>

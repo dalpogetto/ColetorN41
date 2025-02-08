@@ -18,29 +18,45 @@ public partial class Loading : ContentPage
     {
         base.OnNavigatedTo(args);
 
-        _vm.IsBusy = true;
-
-        if (await _srv.VerificarVersaoMobile(AppInfo.Current.VersionString))
+        try
         {
-            
-            if (await _srv.IsAuthenticatedAsync())
+            if (await _srv.VerificarVersaoMobile(AppInfo.Current.VersionString))
             {
-                // User is logged in
-                // redirect to main page
-                await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+
+                if (await _srv.IsAuthenticatedAsync())
+                {
+                    // User is logged in
+                    // redirect to main page
+                    await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                }
+                else
+                {
+                    // User is not logged in 
+                    // Redirect to LoginPage
+                    await Shell.Current.GoToAsync($"{nameof(Login)}");
+                }
             }
             else
             {
-                // User is not logged in 
-                // Redirect to LoginPage
-                await Shell.Current.GoToAsync($"{nameof(Login)}");
+                _vm.IsError = true;
+                _vm.IsBusy = false;
             }
         }
-        else
+        catch (Exception ex)
         {
-            _vm.IsError = true;
-            _vm.IsBusy = false;
+
+            //await Shell.Current.DisplayAlert("Atenção", ex.Message, "OK");
+            _vm.LabelErro = ex.Message;
+            await Shell.Current.GoToAsync($"{nameof(Erro)}");
         }
+        finally
+        {
+            IsBusy = false;
+        }
+
+        _vm.IsBusy = true;
+
+        
         
         
     }

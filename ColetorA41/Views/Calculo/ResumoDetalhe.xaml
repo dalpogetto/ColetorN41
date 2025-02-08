@@ -75,8 +75,18 @@
 
             </VerticalStackLayout>
         </StackLayout>
+        <Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke">
+            <SearchBar x:Name="searchBar"
+                       Placeholder="Buscar técnico..."
+                       Text="{Binding BuscaItemFicha}"
+                       SearchCommand="{Binding BuscarItemFichaCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                       >
 
-                <CollectionView x:Name="lista" Grid.Row="1" Margin="0,20"
+            </SearchBar>
+        </Border>
+
+        <CollectionView x:Name="lista" Grid.Row="1" Margin="0,20"
                                   ItemsSource="{Binding listaItensFicha}" 
                                   RemainingItemsThreshold="4"
                                   ItemsUpdatingScrollMode="KeepItemsInView"

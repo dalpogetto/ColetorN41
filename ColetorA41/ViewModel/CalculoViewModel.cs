@@ -54,6 +54,9 @@ namespace ColetorA41.ViewModel
             }
         }
 
+        [ObservableProperty]
+        string labelErro = "";
+
         private Tecnico _tecnicoSelecionado;
         public Tecnico TecnicoSelecionado
         {
@@ -247,21 +250,21 @@ namespace ColetorA41.ViewModel
             }
         }
 
-        private string searchText;
-        public string SearchText
+        private string buscaTecnico;
+        public string BuscaTecnico
         {
             get
             {
-                return searchText;
+                return buscaTecnico;
             }
             set
             {
-                searchText = value;
-                if (searchText.Length > 2)
+                buscaTecnico = value;
+                if (buscaTecnico.Length > 2)
                 {
                    // Task.Run(async () => { await BuscarTecnico(searchText); }).Wait();
                 }
-                if (searchText == "")
+                if (buscaTecnico == "")
                 {
                     Task.Run(async () => { await BuscarTecnico(""); }).Wait();
                 }
@@ -272,28 +275,53 @@ namespace ColetorA41.ViewModel
         string criterioBuscaTecnico = "";
 
         [RelayCommand]
-        private async Task TextChanged(string newText)
-        {
-            if (string.IsNullOrEmpty(newText))
-            {
-                await Toast.Make("Searchbar is empty!").Show();
-            }
-            return;
-        }
-
-        [RelayCommand]
         async Task BuscarTecnico(string criterio)
         {
-            Task.Run(async ()=> {
+            await Task.Run(async ()=> {
                 IsBusy = true;
-                criterioBuscaTecnico = criterio;
+                CriterioBuscaTecnico = criterio;
                 await ObterTecnicosEstab();
                 IsBusy = false;
                 });
 
         }
 
-        
+        private string buscaItemFicha;
+        public string BuscaItemFicha
+        {
+            get
+            {
+                return buscaItemFicha;
+            }
+            set
+            {
+                buscaItemFicha = value;
+                if (buscaItemFicha.Length > 2)
+                {
+                    // Task.Run(async () => { await BuscarTecnico(searchText); }).Wait();
+                }
+                if (buscaItemFicha == "")
+                {
+                    Task.Run(async () => { await BuscarTecnico(""); }).Wait();
+                }
+            }
+        }
+
+        [ObservableProperty]
+        string criterioBuscaItemFicha = "";
+
+        [RelayCommand]
+        async Task BuscarItemFicha(string criterio)
+        {
+            await Task.Run(async () => {
+                IsBusy = true;
+                CriterioBuscaItemFicha = criterio;
+                await CarregarFichas();
+                IsBusy = false;
+            });
+
+        }
+
 
         [RelayCommand]
         public void ListaETSelecionada()
@@ -423,7 +451,7 @@ namespace ColetorA41.ViewModel
             if (IsBusy) return;
             IsBusy = true;
 
-            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20);
+            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20, BuscaItemFicha);
             listaItensFicha.AddRange(lista.items);
             IsBusy = false;
 

@@ -64,13 +64,14 @@ namespace ColetorA41.Services
             Preferences.Default.Clear();
         }
 
-        public async Task<ItemFichaResponse> ObterItensCalculoMobile(int tipoCalculo, string tipoFicha, int nrProcess, int skip, int pageSize)
+        public async Task<ItemFichaResponse> ObterItensCalculoMobile(int tipoCalculo, string tipoFicha, int nrProcess, int skip, int pageSize, string criterioBuscaItemFicha)
         {
             var param = new NameValueCollection { { "TipoCalculo", tipoCalculo.ToString() }, 
                                                   { "TipoFicha", tipoFicha },
                                                   { "NrProcess", nrProcess.ToString() },
                                                   { "Skip", skip.ToString() },
                                                   { "PageSize", pageSize.ToString() },
+                                                  { "criterioBusca", criterioBuscaItemFicha },
 
                                                 };
             var response = await GetAsync<ItemFichaResponse>("apiesaa041/ObterItensCalculoMobile", param);

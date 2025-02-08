@@ -127,6 +127,9 @@
 	  <MauiXaml Update="Views\Calculo\ResumoDetalheItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Erro.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Loading.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

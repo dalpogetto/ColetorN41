@@ -75,7 +75,7 @@
                 <Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke">
                     <SearchBar x:Name="searchBar"
                            Placeholder="Buscar técnico..."
-                           Text="{Binding SearchText}"
+                           Text="{Binding BuscaTecnico}"
                            SearchCommand="{Binding BuscarTecnicoCommand}"
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                            >
