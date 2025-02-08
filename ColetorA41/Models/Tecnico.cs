@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ColetorA41.Models
 {
     
-    public class TecnicoResponse
+    public class TecnicoResponse:BaseModel
     {
         public int total { get; set; }
         public bool hasNext { get; set; }

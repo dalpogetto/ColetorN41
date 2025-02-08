@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ColetorA41.Models
 {
    
-public class OrdemServicoResponse
+public class OrdemServicoResponse: BaseModel
     {
        // public List<Tela> tela { get; set; }
        // public List<OrdemServico> ordens { get; set; }

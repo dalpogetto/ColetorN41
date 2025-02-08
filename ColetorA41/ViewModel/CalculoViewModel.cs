@@ -39,6 +39,7 @@ namespace ColetorA41.ViewModel
                 if (_estabSelecionado != value)
                 {
                     _estabSelecionado = value;
+                    
                      this.ObterTecnicosEstab();
                      this.ObterTransporte();
                 }
@@ -89,17 +90,35 @@ namespace ColetorA41.ViewModel
         public async Task ObterTecnicosEstab()
         {
             this.IsBusy = true;
-            var lista = await _service.ObterTecEstab(this._estabSelecionado.codEstab);
+            try
+            {
+                var lista = await _service.ObterTecEstabMobile(this._estabSelecionado.codEstab, 0, 20);
+                if (lista != null)
+                {
+                    this.listaTecnico.Clear();
+                    this.listaTecnico.AddRange(lista);
+                    
+                }
+                this.IsBusy = false;
+            }
+            catch (Exception ex)
+            {
 
-            this.listaTecnico.Clear();
+                IsBusy = false;
+                await Shell.Current.DisplayAlert("Atenção", ex.Message, "OK");
+            }
+            
+
+            /*
             foreach (var item in lista.OrderBy(x => x.identific))
             {
                 this.listaTecnico.Add(item);
             }
+            */
             this.IsBusy = false;
         }
 
-        public ObservableCollection<Tecnico> listaTecnico { get; private set; } = new();
+        public ObservableRangeCollection<Tecnico> listaTecnico { get; private set; } = new();
 
         public ObservableCollection<Enc> listaEnc { get; private set; } = new();
 
@@ -350,9 +369,40 @@ namespace ColetorA41.ViewModel
             if (IsBusy) return;
             IsBusy = true;
 
-            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 10);
+            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20);
             listaItensFicha.AddRange(lista.items);
             IsBusy = false;
+
+        }
+
+        [RelayCommand]
+        async Task CarregarTecnicosEstabelecimento()
+        {
+            if (IsBusy) return;
+            IsBusy = true;
+
+            if (_estabSelecionado == null)
+            {
+                IsBusy = false;
+                return;
+            }
+
+            // var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20);
+            try
+            {
+                var lista = await _service.ObterTecEstabMobile(this._estabSelecionado.codEstab, listaTecnico.Count(), 20);
+                if (lista != null)
+                    listaTecnico.AddRange(lista);
+                IsBusy = false;
+
+            }
+            catch (Exception ex)
+            {
+
+                IsBusy = false;
+                await Shell.Current.DisplayAlert("Atenção", ex.Message, "OK");
+            }
+            
 
         }
 
@@ -366,8 +416,19 @@ namespace ColetorA41.ViewModel
                 return;
             }
             await this.ObterParametrosEstab();
-            await this.ObterDados();
-            await Shell.Current.GoToAsync($"{nameof(DadosNF)}");
+            try
+            {
+                await this.ObterDados();
+                await Shell.Current.GoToAsync($"{nameof(DadosNF)}");
+
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+                await Shell.Current.DisplayAlert("Erro", ex.Message, "OK");
+            }
+           
+            
         }
 
         [RelayCommand]

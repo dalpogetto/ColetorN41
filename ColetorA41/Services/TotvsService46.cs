@@ -24,7 +24,12 @@ namespace ColetorA41.Services
                 {"origem", origem }
             };
             var response = await GetAsync<OrdemServicoResponse>("apiesaa046/ObterDadosMobile", param);
+            if (response.type == "error")
+            {
+                throw new Exception($"Code: {response.code}\nDetail: {response.detailedMessage}\nMessage: {response.message}");
+            }
             return response.cRowId;
+            
         }
 
         public async Task<Enc> LeituraEnc(string codEstabel, int codTecnico, string numEnc, string nrProcesso)

@@ -66,7 +66,7 @@ namespace ColetorA41.Services
             try
             {
                 var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
-                response.EnsureSuccessStatusCode();
+                //response.EnsureSuccessStatusCode();
 
                 
                 using var responseStream = await response.Content.ReadAsStreamAsync();
