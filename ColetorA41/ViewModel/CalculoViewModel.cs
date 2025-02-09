@@ -28,8 +28,8 @@ namespace ColetorA41.ViewModel
             _service = totvsService;
             _service46 = totvsService46;
             _config = config;
-            Task.Run(async () => await this.ObterEstabelecimentos());
-            
+          //  Task.Run(async () => await this.ObterEstabelecimentos());
+
         }
 
         private Estabelecimento _estabSelecionado;
@@ -44,6 +44,7 @@ namespace ColetorA41.ViewModel
 
                     Task.Run(async () => {
                         IsBusy = false;
+                        this.listaTecnico.Clear();
                         await this.CarregarTecnicosEstabelecimento();
                         await this.ObterTransporte();
                         });
@@ -66,7 +67,7 @@ namespace ColetorA41.ViewModel
                 if (_tecnicoSelecionado != value)
                 {
                     _tecnicoSelecionado = value;
-                    this.ObterEntrega();
+                    Task.Run(async () => await this.ObterEntrega());
                     
                 }
             }
@@ -208,7 +209,7 @@ namespace ColetorA41.ViewModel
 
         public ObservableCollection<Entrega> listaEntrega { get; private set; } = new();
 
-        public async void ObterEntrega()
+        public async Task ObterEntrega()
         {
             this.IsBusy = true;
             var lista = await _service.ObterEntrega(this.TecnicoSelecionado.codTec, this.EstabSelecionado.codEstab);
@@ -448,9 +449,10 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task CarregarFichas()
         {
-            if (IsBusy) return;
+           // if (IsBusy) return;
             IsBusy = true;
 
+            listaItensFicha.Clear();
             var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20, BuscaItemFicha);
             listaItensFicha.AddRange(lista.items);
             IsBusy = false;
@@ -708,6 +710,8 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         LabelResumo fichas = new ();
 
+        ObservableCollection<Calculo> listaPagtos = new();
+
 
         public async Task PrepararCalculo()
         {
@@ -720,11 +724,25 @@ namespace ColetorA41.ViewModel
                                                                this.NrProcessSelecionado,
                                                                this.listaExtrakitSelecionados.OfType<Extrakit>().ToList());
 
-            //Montar 
+            //Montar Fichar
             this.listaCalculo.Clear();
             foreach (var item in calculo.items)
             {
                 this.listaCalculo.Add(item);
+            }
+
+            //Montar SemSaldo
+            this.listaSemSaldo.Clear();
+            foreach (var item in calculo.semsaldo)
+            {
+                this.listaSemSaldo.Add(item);
+            }
+
+            //Montar Pagamentos
+            this.listaPagtos.Clear();
+            foreach (var item in calculo.pagto)
+            {
+                this.listaPagtos.Add(item);
             }
 
             //Chamar Tela

@@ -56,17 +56,22 @@
 
         
 
-        <Grid Grid.Row="2" ColumnDefinitions="*,*" HorizontalOptions="Center" BackgroundColor="{StaticResource Primary}" Padding="20" Margin="10,0">
-            <VerticalStackLayout VerticalOptions="Center">
-                <Label Text="Estabelecimento: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
-                <Label Text="Técnico: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
-                <Label Text="Processo: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
-            </VerticalStackLayout>
-            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                <Label Text="{Binding EstabSelecionado.identific}" FontSize="16" FontAttributes="Bold" TextColor="White"></Label>
-                <Label Text="{Binding TecnicoSelecionado.identific}" FontSize="16" FontAttributes="Bold" TextColor="White"></Label>
-                <Label Text="{Binding NrProcessSelecionado}" FontSize="16" FontAttributes="Bold" TextColor="White"></Label>
-            </VerticalStackLayout>
-        </Grid>
+        
+            <Border Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource Primary}" Grid.Row="2" Margin="5,5">
+                <Grid ColumnDefinitions="*,*" HorizontalOptions="Center"  Padding="10" Margin="10,0">
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label Text="Estabelecimento: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
+                        <Label Text="Técnico: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
+                        <Label Text="Processo: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="{Binding EstabSelecionado.identific}" FontSize="16" FontAttributes="Bold" TextColor="White"></Label>
+                        <Label Text="{Binding TecnicoSelecionado.identific}" FontSize="16" FontAttributes="Bold" TextColor="White"></Label>
+                        <Label Text="{Binding NrProcessSelecionado}" FontSize="16" FontAttributes="Bold" TextColor="White"></Label>
+                    </VerticalStackLayout>
+                </Grid>
+
+        </Border>
+        
     </Grid>
 </ContentPage>

@@ -52,14 +52,19 @@
         
         <VerticalStackLayout Grid.Row="1" Padding="20">
 
-           
-            <Label Text="Estabelecimento"/>
-            <Picker Title="Selecione um Estabelecimento"
+            <Border Margin="0,0" Padding="20" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource Primary}">
+                <StackLayout>
+                <Label Text="Estabelecimento" TextColor="White"/>
+                <Picker Title="Selecione um Estabelecimento"
+                        TextColor="White"
+                        TitleColor="White"
                      FontAttributes="Bold" FontSize="16"
                      ItemsSource="{Binding listaEstab}"  
                      ItemDisplayBinding="{Binding identific}"
                      SelectedItem="{Binding EstabSelecionado}"
-                     Margin="0,0,0,40"/>
+                     Margin="0,0,0,0"/>
+                </StackLayout>
+            </Border>
 
             <!--
             <Label Text="Técnico"/>
@@ -69,8 +74,8 @@
                      ItemDisplayBinding="{Binding identific}"
                      SelectedItem="{Binding TecnicoSelecionado}"/>
 --></VerticalStackLayout>
-        <Grid Grid.Row="1" Margin="0,90" Padding="20" RowDefinitions="auto,350">
-            <VerticalStackLayout Margin="0,0,0,20">
+        <Grid Grid.Row="1" Margin="0,90" Padding="40" RowDefinitions="auto,350">
+            <VerticalStackLayout Margin="0,20,0,20">
                
                 <Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke">
                     <SearchBar x:Name="searchBar"
@@ -100,7 +105,7 @@
                    VerticalScrollBarVisibility="Always">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Tecnico">
-                            <Border Margin="5,1" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                            <Border Margin="5,1" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
                                     <Grid Padding="5" Margin="0,0">
                                         <!--Chave-->
                                         <Label Text="{Binding identific}" x:Name="nomeAbrev" />
@@ -110,14 +115,15 @@
                                     <VisualStateGroup Name="TecnicoEstab">
                                         <VisualState Name="Selected">
                                             <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="LightGray" />
-                                                <Setter TargetName="nomeAbrev" Property="Label.FontAttributes" Value="Bold"/>
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                            <Setter TargetName="nomeAbrev" Property="Label.TextColor" Value="White"/>
+                                            <Setter TargetName="nomeAbrev" Property="Label.FontAttributes" Value="Bold"/>
                                                 <Setter TargetName="nomeAbrev" Property="Label.FontSize" Value="18"/>
                                         </VisualState.Setters>
                                         </VisualState>
                                         <VisualState Name="Normal">
                                             <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+                                                <Setter Property="BackgroundColor" Value="White" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>

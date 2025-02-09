@@ -11,9 +11,8 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarCalculo()
         {
-            this.IsBusy = true;
+            IsBusy = false;
             await Shell.Current.GoToAsync($"{nameof(EstabTec)}");
-            this.IsBusy = false;
 
         }
 

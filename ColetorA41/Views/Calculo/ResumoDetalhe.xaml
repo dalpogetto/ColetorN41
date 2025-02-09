@@ -29,7 +29,7 @@
     </ContentPage.Resources>
 
 
-    <Grid RowDefinitions="120,*,60">
+    <Grid RowDefinitions="120,auto,*,60">
         <StackLayout>
             <Grid RowDefinitions="50,200">
                 <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
@@ -75,9 +75,9 @@
 
             </VerticalStackLayout>
         </StackLayout>
-        <Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke">
+        <Border Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" Grid.Row="1" Margin="20,10" >
             <SearchBar x:Name="searchBar"
-                       Placeholder="Buscar técnico..."
+                       Placeholder="Buscar item..."
                        Text="{Binding BuscaItemFicha}"
                        SearchCommand="{Binding BuscarItemFichaCommand}"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
@@ -86,7 +86,7 @@
             </SearchBar>
         </Border>
 
-        <CollectionView x:Name="lista" Grid.Row="1" Margin="0,20"
+        <CollectionView x:Name="lista" Grid.Row="2" Margin="0,0"
                                   ItemsSource="{Binding listaItensFicha}" 
                                   RemainingItemsThreshold="4"
                                   ItemsUpdatingScrollMode="KeepItemsInView"
@@ -140,7 +140,7 @@
                 </CollectionView>
             
 
-        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="3" BackgroundColor="White">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.GestureRecognizers>

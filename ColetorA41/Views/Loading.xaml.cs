@@ -20,9 +20,10 @@ public partial class Loading : ContentPage
 
         try
         {
+            _vm.IsBusy = true;
             if (await _srv.VerificarVersaoMobile(AppInfo.Current.VersionString))
             {
-
+                
                 if (await _srv.IsAuthenticatedAsync())
                 {
                     // User is logged in

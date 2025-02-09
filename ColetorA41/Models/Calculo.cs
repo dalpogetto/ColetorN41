@@ -39,9 +39,12 @@ namespace ColetorA41.Models
         public List<Extrakit> Extrakit { get; set; }
     }
 
-    public class PrepararCalculoResponse
+    public class PrepararCalculoResponse:BaseModel
     {
         public List<Ficha> items { get; set; }
+        public List<Semsaldo> semsaldo { get; set; }
+
+        public List<Calculo> pagto { get; set; }
     }
 
     public class Semsaldo
