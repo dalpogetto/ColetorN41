@@ -26,11 +26,12 @@
                 Source="usuario.png"
                 HeightRequest="80"
                 HorizontalOptions="Center" Margin="0,0,0,10">
+                    
                     <Image.Shadow>
                         <Shadow Brush="Black"
-    Offset="10,10"
-    Radius="40"
-    Opacity="0.8" />
+                                Offset="10,10"
+                                Radius="40"
+                                Opacity="0.8" />
                     </Image.Shadow>
                 </Image>
 
@@ -52,17 +53,17 @@
         
         <VerticalStackLayout Grid.Row="1" Padding="20">
 
-            <Border Margin="0,0" Padding="20" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource Primary}">
+            <Border Margin="0,0" Padding="10" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource Primary}">
                 <StackLayout>
-                <Label Text="Estabelecimento" TextColor="White"/>
+                <Label Text="Estabelecimento" TextColor="WhiteSmoke"/>
                 <Picker Title="Selecione um Estabelecimento"
-                        TextColor="White"
-                        TitleColor="White"
+                     TextColor="White"   
+                     TitleColor="White"
                      FontAttributes="Bold" FontSize="16"
                      ItemsSource="{Binding listaEstab}"  
                      ItemDisplayBinding="{Binding identific}"
                      SelectedItem="{Binding EstabSelecionado}"
-                     Margin="0,0,0,0"/>
+                     />
                 </StackLayout>
             </Border>
 
@@ -75,25 +76,31 @@
                      SelectedItem="{Binding TecnicoSelecionado}"/>
 --></VerticalStackLayout>
         <Grid Grid.Row="1" Margin="0,90" Padding="40" RowDefinitions="auto,350">
-            <VerticalStackLayout Margin="0,20,0,20">
+            <VerticalStackLayout Margin="0,20,0,20" HorizontalOptions="Start" WidthRequest="300">
                
-                <Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke">
+                <!--Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" -->
                     <SearchBar x:Name="searchBar"
                            Placeholder="Buscar técnico..."
                            Text="{Binding BuscaTecnico}"
                            SearchCommand="{Binding BuscarTecnicoCommand}"
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                            >
+                    <SearchBar.Shadow>
+                        <Shadow Brush="Black"
+                             Offset="10,10"
+                             Radius="40"
+                             Opacity="0.8" />
+                    </SearchBar.Shadow>
 
                     </SearchBar>
-                </Border>
-                
+                <!-- /Border-->
 
 
             </VerticalStackLayout>
-           
 
-            <CollectionView x:Name="lista"  Grid.Row="1"
+            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="300">
+                
+                <CollectionView x:Name="lista"  
                    ItemsSource="{Binding listaTecnico}" 
                    SelectedItem="{Binding TecnicoSelecionado}"
                    SelectionMode="Single"
@@ -103,23 +110,23 @@
                    EmptyView="Técnicos do Estabelecimento"
                    
                    VerticalScrollBarVisibility="Always">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Tecnico">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Tecnico">
                             <Border Margin="5,1" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
-                                    <Grid Padding="5" Margin="0,0">
-                                        <!--Chave-->
-                                        <Label Text="{Binding identific}" x:Name="nomeAbrev" />
-                                    </Grid>
+                                <Grid Padding="5" Margin="0,0">
+                                    <!--Chave-->
+                                    <Label Text="{Binding identific}" x:Name="nomeAbrev" />
+                                </Grid>
 
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup Name="TecnicoEstab">
                                         <VisualState Name="Selected">
                                             <VisualState.Setters>
                                                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-                                            <Setter TargetName="nomeAbrev" Property="Label.TextColor" Value="White"/>
-                                            <Setter TargetName="nomeAbrev" Property="Label.FontAttributes" Value="Bold"/>
+                                                <Setter TargetName="nomeAbrev" Property="Label.TextColor" Value="White"/>
+                                                <Setter TargetName="nomeAbrev" Property="Label.FontAttributes" Value="Bold"/>
                                                 <Setter TargetName="nomeAbrev" Property="Label.FontSize" Value="18"/>
-                                        </VisualState.Setters>
+                                            </VisualState.Setters>
                                         </VisualState>
                                         <VisualState Name="Normal">
                                             <VisualState.Setters>
@@ -129,18 +136,24 @@
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                             </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
         </Grid>
 
 
         <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                    </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarMainPageCommand}" />
                     </Image.GestureRecognizers>
+
+                    
                 </Image>
 
             </VerticalStackLayout>
@@ -156,9 +169,15 @@
             </VerticalStackLayout>
             <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
+                    
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                    </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />
                     </Image.GestureRecognizers>
+
+                    
                 </Image>
                 
             </VerticalStackLayout>

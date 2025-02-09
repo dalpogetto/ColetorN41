@@ -28,10 +28,10 @@ namespace ColetorA41.ViewModel
             _service = totvsService;
             _service46 = totvsService46;
             _config = config;
-          //  Task.Run(async () => await this.ObterEstabelecimentos());
-
         }
 
+
+        #region Getter-Setter
         private Estabelecimento _estabSelecionado;
         public Estabelecimento EstabSelecionado
         {
@@ -48,15 +48,9 @@ namespace ColetorA41.ViewModel
                         await this.CarregarTecnicosEstabelecimento();
                         await this.ObterTransporte();
                         });
-
-                    //this.ObterTecnicosEstab();
-                    // this.ObterTransporte();
                 }
             }
         }
-
-        [ObservableProperty]
-        string labelErro = "";
 
         private Tecnico _tecnicoSelecionado;
         public Tecnico TecnicoSelecionado
@@ -68,71 +62,40 @@ namespace ColetorA41.ViewModel
                 {
                     _tecnicoSelecionado = value;
                     Task.Run(async () => await this.ObterEntrega());
-                    
+
                 }
             }
         }
 
-        public async Task ObterEstabelecimentos()
-        {
-            this.IsBusy = true;
-            var lista = await _service.ObterEstabelecimentos();
+        #endregion
 
-            this.listaEstab.Clear();
-            foreach (var item in lista.OrderBy(x => x.identific)) 
-            {
-                this.listaEstab.Add(item);
-            }
-            this.IsBusy = false;
-        }
+        #region Lista Compartilhadas
+        public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
+        public ObservableRangeCollection<Tecnico> listaTecnico { get; private set; } = new();
+        public ObservableCollection<Enc> listaEnc { get; private set; } = new();
+        public ObservableCollection<Transporte> listaTransporte { get; private set; } = new();
+        public ObservableCollection<Entrega> listaEntrega { get; private set; } = new();
+        public ObservableCollection<Extrakit> listaExtrakit { get; private set; } = new();
+        public ObservableCollection<object> listaExtrakitSelecionados { get; set; } = new();
+        public ObservableCollection<Extrakit> listaExtrakitNaoSelecionados { get; set; } = new();
+        public ObservableCollection<Ficha> listaCalculo { get; private set; } = new();
+        public ObservableCollection<Semsaldo> listaSemSaldo { get; private set; } = new();
+        public ObservableCollection<Models.Resumo> listaResumo { get; private set; } = new();
+        public ObservableRangeCollection<ItemFicha> listaItensFicha { get; private set; } = new();
 
-        public async Task VerificarVersao()
-        {
-            this.IsBusy = true;
-            IsError = await _service.VerificarVersaoMobile(AppInfo.Current.VersionString);
-            this.IsBusy = false;
-        }
+        public ObservableCollection<ItemFicha> listaPagtos { get; private set; }  = new();
+        #endregion
 
-        
+        #region Listas Locais
+        #endregion
+
+        #region Variaveis Compartilhadas
+
+        [ObservableProperty]
+        string labelErro = "";
+
         [ObservableProperty]
         int nrProcessSelecionado;
-
-        public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
-
-        public async Task ObterTecnicosEstab()
-        {
-            this.IsBusy = true;
-            try
-            {
-                var lista = await _service.ObterTecEstabMobile(this._estabSelecionado.codEstab, CriterioBuscaTecnico,0, 20);
-                if (lista != null)
-                {
-                    this.listaTecnico.Clear();
-                    this.listaTecnico.AddRange(lista);
-                    
-                }
-                this.IsBusy = false;
-            }
-            catch (Exception ex)
-            {
-
-                IsBusy = false;
-                await Shell.Current.DisplayAlert("Atenção", ex.Message, "OK");
-            }
-            
-
-            /*
-            foreach (var item in lista.OrderBy(x => x.identific))
-            {
-                this.listaTecnico.Add(item);
-            }
-            */
-            this.IsBusy = false;
-        }
-
-        public ObservableRangeCollection<Tecnico> listaTecnico { get; private set; } = new();
-
-        public ObservableCollection<Enc> listaEnc { get; private set; } = new();
 
         [ObservableProperty]
         string etiquetaEnc;
@@ -172,6 +135,9 @@ namespace ColetorA41.ViewModel
         ItemFicha itemFichaSelecionada;
 
         [ObservableProperty]
+        string tipoFichaSelecionado;
+
+        [ObservableProperty]
         int usuarioAlmoxa_;
 
         [ObservableProperty]
@@ -183,61 +149,35 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         string numEnc;
 
-        
         [ObservableProperty]
         string lblAprovar;
 
         [ObservableProperty]
         string lblAprovarSemEntrada;
 
+        [ObservableProperty]
+        string rowIdOS = "";
+
+        [ObservableProperty]
+        string labelLoading;
+
+        //Login Almoxarifado
+        [ObservableProperty]
+        LabelResumo fichas = new();
+
+        [ObservableProperty]
+        string criterioBuscaTecnico = "";
+
+        [ObservableProperty]
+        string criterioBuscaItemFicha = "";
+        #endregion
+
+        #region Variaveis Locais
 
 
-        public ObservableCollection<Transporte> listaTransporte { get; private set; } = new();
+        #endregion
 
-        public async Task ObterTransporte()
-        {
-            this.IsBusy = true;
-            var lista = await _service.ObterTransportes();
-
-            this.listaTransporte.Clear();
-            foreach (var item in lista.OrderBy(x => x.identific))
-            {
-                this.listaTransporte.Add(item);
-            }
-            this.IsBusy = false;
-        }
-
-        public ObservableCollection<Entrega> listaEntrega { get; private set; } = new();
-
-        public async Task ObterEntrega()
-        {
-            this.IsBusy = true;
-            var lista = await _service.ObterEntrega(this.TecnicoSelecionado.codTec, this.EstabSelecionado.codEstab);
-
-            this.listaEntrega.Clear();
-            foreach (var item in lista.OrderBy(x=>x.identific))
-            {
-                this.listaEntrega.Add(item);
-            }
-            this.IsBusy = false;
-        }
-
-        public async Task ObterParametrosEstab()
-        {
-            this.IsBusy = true;
-            var parametro = await _service.ObterParametrosEstab(this._estabSelecionado.codEstab);
-            if (parametro != null)
-            {
-                this.TranspEntraSelecionado = this.listaTransporte.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
-                this.TranspSaidaSelecionado = this.listaTransporte.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
-                this.EntregaSelecionada = this.listaEntrega.Where(item => item.codEntrega == parametro.codEntrega).FirstOrDefault();
-                this.SerieEntra = parametro.serieEntra;
-                this.SerieSaida = parametro.serieSai;
-                this.Entrega = parametro.codEntrega;
-                this.Rpw = parametro.rpw;
-            }
-            this.IsBusy = false;
-        }
+        #region Funcoes Compartilhadas
 
         //Extrakit
         [RelayCommand]
@@ -251,30 +191,6 @@ namespace ColetorA41.ViewModel
             }
         }
 
-        private string buscaTecnico;
-        public string BuscaTecnico
-        {
-            get
-            {
-                return buscaTecnico;
-            }
-            set
-            {
-                buscaTecnico = value;
-                if (buscaTecnico.Length > 2)
-                {
-                   // Task.Run(async () => { await BuscarTecnico(searchText); }).Wait();
-                }
-                if (buscaTecnico == "")
-                {
-                    Task.Run(async () => { await BuscarTecnico(""); }).Wait();
-                }
-            }
-        }
-
-        [ObservableProperty]
-        string criterioBuscaTecnico = "";
-
         [RelayCommand]
         async Task BuscarTecnico(string criterio)
         {
@@ -287,30 +203,6 @@ namespace ColetorA41.ViewModel
 
         }
 
-        private string buscaItemFicha;
-        public string BuscaItemFicha
-        {
-            get
-            {
-                return buscaItemFicha;
-            }
-            set
-            {
-                buscaItemFicha = value;
-                if (buscaItemFicha.Length > 2)
-                {
-                    // Task.Run(async () => { await BuscarTecnico(searchText); }).Wait();
-                }
-                if (buscaItemFicha == "")
-                {
-                    Task.Run(async () => { await BuscarTecnico(""); }).Wait();
-                }
-            }
-        }
-
-        [ObservableProperty]
-        string criterioBuscaItemFicha = "";
-
         [RelayCommand]
         async Task BuscarItemFicha(string criterio)
         {
@@ -322,7 +214,6 @@ namespace ColetorA41.ViewModel
             });
 
         }
-
 
         [RelayCommand]
         public void ListaETSelecionada()
@@ -338,39 +229,6 @@ namespace ColetorA41.ViewModel
             QtdeETSelecionadas = listaExtrakitSelecionados.OfType<Extrakit>().Sum(s => s.qtSaldo);
             QtdeETNaoSelecionadas = listaExtrakitNaoSelecionados.Sum(s => s.qtSaldo);
         }
-
-        public ObservableCollection<Extrakit> listaExtrakit { get; private set; } = new();
-        public ObservableCollection<object> listaExtrakitSelecionados { get;  set; } = new ();
-        public ObservableCollection<Extrakit> listaExtrakitNaoSelecionados { get; set; } = new();
-        public async Task ObterExtrakit()
-        {
-            this.IsBusy = true;
-            this.listaExtrakit.Clear();
-            var lista = await _service.ObterExtrakit(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, this.NrProcessSelecionado);
-            foreach (var item in lista)
-            {
-                this.listaExtrakit.Add(item);
-            }
-            this.IsBusy = false;
-        }
-        [ObservableProperty]
-        string rowIdOS = "";
-
-        public async Task ObterDados()
-        {
-            this.IsBusy = true;
-            //Gerar Numero de Processo se for preciso
-            RowIdOS = await _service46.ObterDados(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
-            //Obter Numero Gerado
-            this.NrProcessSelecionado = await _service.ObterNrProcesso(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
-            this.IsBusy = false;
-        }
-
-        //Calculo
-        public ObservableCollection<Ficha> listaCalculo { get; private set; } = new();
-        public ObservableCollection<Semsaldo> listaSemSaldo { get; private set; } = new();
-        public ObservableCollection<Models.Resumo> listaResumo { get; private set; } = new();
-        public ObservableRangeCollection<ItemFicha> listaItensFicha { get; private set; } = new();
 
         [RelayCommand]
         public async Task LoginAlmoxa()
@@ -396,21 +254,6 @@ namespace ColetorA41.ViewModel
 
         }
 
-        public Command SelectedChangedCommand
-        {
-            get
-            {
-                return new Command((sender) =>
-                {
-                   // Extrakit et = sender as Extrakit;
-
-                    //Console.WriteLine("Select item in Colletionview" + et.itCodigo);
-                });
-            }
-        }
-
-        public IConfiguration Config { get; }
-
         [RelayCommand]
         private void SelectionChanged()
         {
@@ -430,9 +273,6 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(EstabTec)}");
         }
 
-        [ObservableProperty]
-        string tipoFichaSelecionado;
-
         [RelayCommand]
         async Task ChamarResumoDetalhe(string tipoFicha)
         {
@@ -443,7 +283,20 @@ namespace ColetorA41.ViewModel
 
             }
             await this.CarregarFichas();
-            await Shell.Current.GoToAsync($"{nameof(ResumoDetalhe)}");
+            await Shell.Current.GoToAsync($"{nameof(ResumoDetalheItem)}");
+        }
+
+        [RelayCommand]
+        async Task ChamarResumoDetalhePagto(string tipoFicha)
+        {
+            if (tipoFichaSelecionado != tipoFicha)
+            {
+                listaItensFicha.Clear();
+                tipoFichaSelecionado = tipoFicha;
+
+            }
+            await this.CarregarFichasPagto();
+            await Shell.Current.GoToAsync($"{nameof(ResumoDetalhePago)}");
         }
 
         [RelayCommand]
@@ -456,8 +309,13 @@ namespace ColetorA41.ViewModel
             var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20, BuscaItemFicha);
             listaItensFicha.AddRange(lista.items);
             IsBusy = false;
-
         }
+
+        async Task CarregarFichasPagto()
+        {
+           
+        }
+
 
         [RelayCommand]
         async Task CarregarTecnicosEstabelecimento()
@@ -547,19 +405,6 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(LoginAlmoxa)}");
         }
 
-        public async Task ObterEncs()
-        {
-            this.IsBusy = true;
-            var lista = await _service46.ObterEncs(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
-            this.listaEnc.Clear();
-            foreach (var item in lista)
-            {
-                this.listaEnc.Add(item);
-            }
-            this.IsBusy = false;
-
-        }
-
         [RelayCommand]
         async Task LeituraENC(string numEnc)
         {
@@ -588,14 +433,6 @@ namespace ColetorA41.ViewModel
             
         }
 
-        public async void Mock()
-        {
-            this.IsBusy = true;
-            this.listaEnc.Add(new Enc {numEnc="12345", chamado = "11111", flag = "OK", itCodigo = "85.111.00024-2b", numOS=8540, mensagem="Mensagem: OK" });
-            this.listaEnc.Add(new Enc {numEnc = "6789", chamado = "", flag = "NOK", itCodigo = "86.555.00024-2b", itDescricao = "", numOS = 0, mensagem = "" });
-            this.IsBusy = false;
-        }
-
         [RelayCommand]
         async Task EliminarEnc(Enc objEnc)
         {
@@ -604,10 +441,20 @@ namespace ColetorA41.ViewModel
             var item = this.listaEnc.Where(x => x.numEnc == objEnc.numEnc).First();
             this.listaEnc.Remove(item);
             IsBusy = false;
+        }
+
+        [RelayCommand]
+        async Task EliminarPagto(ItemFicha obj)
+        {
+            IsBusy = true;
+            var item = this.listaPagtos.Where(o=>o.cRowId==obj.cRowId).First();
+            this.listaPagtos.Remove(item);
+
+            await AtualizarLabelsContadores(TipoCalculo);
+            IsBusy = false;
 
         }
 
-        
         [RelayCommand]
         async Task DetalheItemFicha(ItemFicha obj)
         {
@@ -638,9 +485,7 @@ namespace ColetorA41.ViewModel
         {
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
         }
-        [ObservableProperty]
-        string labelLoading;
-
+       
         [RelayCommand]
         async Task GerarInforme()
         {
@@ -663,7 +508,6 @@ namespace ColetorA41.ViewModel
             IsBusy = false;
         }
 
-
         [RelayCommand]
         async Task ChamarDetalheResumo()
         {
@@ -674,11 +518,194 @@ namespace ColetorA41.ViewModel
         async Task RadioTipoCalculo(string tipoCalculo)
         {
             var tipo = Convert.ToInt32(tipoCalculo);
+            TipoCalculo = tipo;
             await this.AtualizaLblBotoes(tipo);
             await this.AtualizarLabelsContadores(tipo);
         }
 
-       
+        [RelayCommand]
+        async Task AprovarCalculo()
+        {
+            bool ok = await Shell.Current.DisplayAlert("EXECUÇÃO CÁLCULO ?", "CONFIRMA EXECUÇÃO DO CÁLCULO", "Sim", "Não");
+            if (ok)
+            {
+                /*
+                IsBusy = true;
+                LabelLoading = "Gerando Arquivo de Informe";
+                await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
+
+                var informe = await _service46.ImprimirOS(RowIdOS);
+                if (informe != null)
+                {
+
+                    IsBusy = false;
+                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
+                    await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                }
+                */
+            }
+            IsBusy = false;
+        }
+        #endregion
+
+        #region Funcoes Locais
+
+        private string buscaItemFicha;
+        public string BuscaItemFicha
+        {
+            get
+            {
+                return buscaItemFicha;
+            }
+            set
+            {
+                buscaItemFicha = value;
+                if (buscaItemFicha.Length > 2)
+                {
+                    // Task.Run(async () => { await BuscarTecnico(searchText); }).Wait();
+                }
+                if (buscaItemFicha == "")
+                {
+                    Task.Run(async () => { await BuscarTecnico(""); }).Wait();
+                }
+            }
+        }
+
+        private string buscaTecnico;
+        public string BuscaTecnico
+        {
+            get
+            {
+                return buscaTecnico;
+            }
+            set
+            {
+                buscaTecnico = value;
+                if (buscaTecnico.Length > 2)
+                {
+                    // Task.Run(async () => { await BuscarTecnico(searchText); }).Wait();
+                }
+                if (buscaTecnico == "")
+                {
+                    Task.Run(async () => { await BuscarTecnico(""); }).Wait();
+                }
+            }
+        }
+
+        public async Task ObterEstabelecimentos()
+        {
+            this.IsBusy = true;
+            var lista = await _service.ObterEstabelecimentos();
+
+            this.listaEstab.Clear();
+            foreach (var item in lista.OrderBy(x => x.identific))
+            {
+                this.listaEstab.Add(item);
+            }
+            this.IsBusy = false;
+        }
+
+        public async Task VerificarVersao()
+        {
+            this.IsBusy = true;
+            IsError = await _service.VerificarVersaoMobile(AppInfo.Current.VersionString);
+            this.IsBusy = false;
+        }
+
+        public async Task ObterTecnicosEstab()
+        {
+            this.IsBusy = true;
+            try
+            {
+                var lista = await _service.ObterTecEstabMobile(this._estabSelecionado.codEstab, CriterioBuscaTecnico, 0, 20);
+                if (lista != null)
+                {
+                    this.listaTecnico.Clear();
+                    this.listaTecnico.AddRange(lista);
+
+                }
+                this.IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+
+                IsBusy = false;
+                await Shell.Current.DisplayAlert("Atenção", ex.Message, "OK");
+            }
+
+
+            /*
+            foreach (var item in lista.OrderBy(x => x.identific))
+            {
+                this.listaTecnico.Add(item);
+            }
+            */
+            this.IsBusy = false;
+        }
+
+        public async Task ObterTransporte()
+        {
+            this.IsBusy = true;
+            var lista = await _service.ObterTransportes();
+
+            this.listaTransporte.Clear();
+            foreach (var item in lista.OrderBy(x => x.identific))
+            {
+                this.listaTransporte.Add(item);
+            }
+            this.IsBusy = false;
+        }
+
+        public async Task ObterEntrega()
+        {
+            this.IsBusy = true;
+            var lista = await _service.ObterEntrega(this.TecnicoSelecionado.codTec, this.EstabSelecionado.codEstab);
+
+            this.listaEntrega.Clear();
+            foreach (var item in lista.OrderBy(x => x.identific))
+            {
+                this.listaEntrega.Add(item);
+            }
+            this.IsBusy = false;
+        }
+
+        public async Task ObterParametrosEstab()
+        {
+            this.IsBusy = true;
+            var parametro = await _service.ObterParametrosEstab(this._estabSelecionado.codEstab);
+            if (parametro != null)
+            {
+                this.TranspEntraSelecionado = this.listaTransporte.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
+                this.TranspSaidaSelecionado = this.listaTransporte.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
+                this.EntregaSelecionada = this.listaEntrega.Where(item => item.codEntrega == parametro.codEntrega).FirstOrDefault();
+                this.SerieEntra = parametro.serieEntra;
+                this.SerieSaida = parametro.serieSai;
+                this.Entrega = parametro.codEntrega;
+                this.Rpw = parametro.rpw;
+            }
+            this.IsBusy = false;
+        }
+        public async Task ObterExtrakit()
+        {
+            this.IsBusy = true;
+            this.listaExtrakit.Clear();
+            var lista = await _service.ObterExtrakit(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, this.NrProcessSelecionado);
+            foreach (var item in lista)
+            {
+                this.listaExtrakit.Add(item);
+            }
+            this.IsBusy = false;
+        }
+
+        public async Task ObterDados()
+        {
+            this.IsBusy = true;
+            //Gerar Numero de Processo se for preciso
+            RowIdOS = await _service46.ObterDados(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
+            //Obter Numero Gerado
+            this.NrProcessSelecionado = await _service.ObterNrProcesso(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
+            this.IsBusy = false;
+        }
 
         async Task AtualizaLblBotoes(int tipo)
         {
@@ -705,13 +732,6 @@ namespace ColetorA41.ViewModel
                     break;
             }
         }
-
-        //Login Almoxarifado
-        [ObservableProperty]
-        LabelResumo fichas = new ();
-
-        ObservableCollection<Calculo> listaPagtos = new();
-
 
         public async Task PrepararCalculo()
         {
@@ -777,7 +797,7 @@ namespace ColetorA41.ViewModel
             Fichas.GeralExtrakit = totalET;
 
             //Pagamento
-            Fichas.Pagto = item.qtPagto;
+            Fichas.Pagto = listaPagtos.Sum(o=>o.qtPagar);
 
             //Renovacoes
             Fichas.Renovacao = item.qtReno;
@@ -795,30 +815,21 @@ namespace ColetorA41.ViewModel
 
         }
 
-        [RelayCommand]
-        async Task AprovarCalculo()
+        public async Task ObterEncs()
         {
-            bool ok = await Shell.Current.DisplayAlert("EXECUÇÃO CÁLCULO ?", "CONFIRMA EXECUÇÃO DO CÁLCULO", "Sim", "Não");
-            if (ok)
+            this.IsBusy = true;
+            var lista = await _service46.ObterEncs(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
+            this.listaEnc.Clear();
+            foreach (var item in lista)
             {
-                /*
-                IsBusy = true;
-                LabelLoading = "Gerando Arquivo de Informe";
-                await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
-
-                var informe = await _service46.ImprimirOS(RowIdOS);
-                if (informe != null)
-                {
-
-                    IsBusy = false;
-                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
-                    await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
-                }
-                */
+                this.listaEnc.Add(item);
             }
-            IsBusy = false;
+            this.IsBusy = false;
+
         }
 
 
+
+        #endregion
     }
 }

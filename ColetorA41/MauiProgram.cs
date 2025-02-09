@@ -18,7 +18,7 @@ namespace ColetorA41
     {
         public static MauiApp CreateMauiApp()
         {
-            NullabilityInfoContext kk = new();
+            //NullabilityInfoContext kk = new();
            
             var builder = MauiApp.CreateBuilder();
             builder
@@ -41,11 +41,12 @@ namespace ColetorA41
             builder.Logging.AddDebug();
 #endif
 
-            //Services
+            #region Services
             builder.Services.AddTransient<TotvsService>();
             builder.Services.AddTransient<TotvsService46>();
-            
-            //HttpClient
+            #endregion
+
+            #region HttpClient
             builder.Services.AddHttpClient("coletor", httpClient =>
             {
 
@@ -53,8 +54,9 @@ namespace ColetorA41
             {
                 ServerCertificateCustomValidationCallback = (m, c, ch, e) => true
             });
+            #endregion
 
-            //Views
+            #region Views
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<Login>();
@@ -69,15 +71,18 @@ namespace ColetorA41
             builder.Services.AddTransient<LeituraENC>();
             builder.Services.AddTransient<ColetorA41.Views.Calculo.Resumo>();
             builder.Services.AddTransient<ResumoDetalhe>();
+            builder.Services.AddTransient<ResumoDetalhePago>();
             builder.Services.AddTransient<ResumoDetalheItem>();
             builder.Services.AddTransient<Erro>();
+            #endregion
 
-            //ViewModels
+            #region ViewModel
             builder.Services.AddTransient<AppShellViewModel>();
             builder.Services.AddSingleton<CalculoViewModel>();
             builder.Services.AddTransient<LoginPageViewModel>();
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddSingleton<ParamEstabelViewModel>();
+            #endregion
 
             return builder.Build();
         }

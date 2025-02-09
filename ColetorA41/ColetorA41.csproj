@@ -96,6 +96,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Calculo\ResumoDetalhePagto.xaml.cs">
+	    <DependentUpon>ResumoDetalhePagto.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.92" />
 	</ItemGroup>
 
@@ -119,6 +125,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Calculo\Resumo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Calculo\ResumoDetalhePagto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Calculo\ResumoDetalhe.xaml">

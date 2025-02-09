@@ -18,6 +18,9 @@ public partial class Loading : ContentPage
     {
         base.OnNavigatedTo(args);
 
+        //Na inicializacao a rotina verifica a versao utilizada para direcionar para 
+        //MainPage ou Login e caso aconteca qualquer erro interrompe a navegacao e 
+        //mostra a tela de Erro
         try
         {
             _vm.IsBusy = true;
@@ -45,8 +48,6 @@ public partial class Loading : ContentPage
         }
         catch (Exception ex)
         {
-
-            //await Shell.Current.DisplayAlert("Atenção", ex.Message, "OK");
             _vm.LabelErro = ex.Message;
             await Shell.Current.GoToAsync($"{nameof(Erro)}");
         }

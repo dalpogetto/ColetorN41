@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ColetorA41.Views.Calculo.ResumoDetalhe"
+             x:Class="ColetorA41.Views.Calculo.ResumoDetalhePago"
              xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
              xmlns:models="clr-namespace:ColetorA41.Models"
              x:DataType="viewmodel:CalculoViewModel"
              xmlns:local="clr-namespace:ColetorA41.Converters"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
               Shell.NavBarIsVisible="False"
-               x:Name="detalhe"
+               x:Name="detalhe2"
              Title="Resumo Detalhe">
 
     <ContentPage.Resources>
@@ -37,28 +37,27 @@
                 <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                     <Ellipse.Shadow>
                         <Shadow Brush="Black"
- Offset="1,1"
- Radius="5"
- Opacity="0.8" />
+                                 Offset="1,1"
+                                 Radius="5"
+                                 Opacity="0.8" />   
                     </Ellipse.Shadow>
                 </Ellipse>
             </Grid>
 
-            <VerticalStackLayout Padding="20,10" Margin="0,-220,0,0">
+            <VerticalStackLayout Padding="20,10" Margin="0,-250,0,0">
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
-                        Source="folder2.png"
-                        SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                        Source="pagto.png"
                         HeightRequest="40"
                         HorizontalOptions="Center">
                         <Image.Shadow>
                             <Shadow Brush="Black"
-    Offset="10,10"
-    Radius="40"
-    Opacity="0.8" />
+                                    Offset="10,10"
+                                    Radius="40"
+                                    Opacity="0.8" />
                         </Image.Shadow>
                     </Image>
-                    <Label  Text="{Binding TipoFichaSelecionado, StringFormat='Lista {0}'}"
+                    <Label  Text="Pagamentos"
                         FontAttributes="Bold"
                             TextColor="White"
                         FontSize="22"
@@ -66,6 +65,9 @@
                         HorizontalOptions="Center" />
 
                 </HorizontalStackLayout>
+
+                <Label Margin="10,20" Text="Realize a manutenção para os itens de pagamento" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="200" TextColor="White"></Label>
+
 
                 <ActivityIndicator  Grid.Column="0"
                                  IsVisible="{Binding IsBusy}"
@@ -89,23 +91,30 @@
       
 
         <CollectionView x:Name="lista" Grid.Row="2" Margin="0,0"
-                                  ItemsSource="{Binding listaItensFicha}" 
-                                  RemainingItemsThreshold="4"
-                                  ItemsUpdatingScrollMode="KeepItemsInView"
-                                  RemainingItemsThresholdReachedCommand="{Binding CarregarFichasCommand}"
+                                  ItemsSource="{Binding listaPagtos}" 
                                   VerticalScrollBarVisibility="Always">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:ItemFicha">
                     <SwipeView>
                         <SwipeView.RightItems>
-                            <SwipeItems Mode="Execute">
+                            <SwipeItems>
+                                <SwipeItem 
+                                        IconImageSource="trash.png"
+                                        BackgroundColor="WhiteSmoke"
+                                        Command="{Binding BindingContext.EliminarPagtoCommand, Source={x:Reference detalhe2}}"
+                                        CommandParameter="{Binding .}" />
+                                
                                 <SwipeItem 
                                          Text="Detalhes"
                                          IconImageSource="vermais.png"
                                          BackgroundColor="WhiteSmoke"
-                                         Command="{Binding BindingContext.DetalheItemFichaCommand, Source={x:Reference detalhe}}"
+                                         Command="{Binding BindingContext.DetalheItemFichaCommand, Source={x:Reference detalhe2}}"
                                          CommandParameter="{Binding .}" />
+
+                                
+
                             </SwipeItems>
+                            
                         </SwipeView.RightItems>
 
                         <Border HeightRequest="90" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">

@@ -14,6 +14,8 @@ namespace ColetorA41.ViewModel
             _srv = srv;
         }
 
+        #region Variaveis Compartilhadas
+
         [ObservableProperty]
         string usuario;
 
@@ -22,6 +24,9 @@ namespace ColetorA41.ViewModel
 
         [ObservableProperty]
         string versao = AppInfo.Current.VersionString;
+
+        #endregion
+
 
         [RelayCommand]
         public async void Login()

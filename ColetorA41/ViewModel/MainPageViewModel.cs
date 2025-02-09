@@ -2,18 +2,22 @@
 using ColetorA41.Models;
 using ColetorA41.Views.ParamEstab;
 using ColetorA41.Views.Calculo;
+using ColetorA41.Views;
 
 
 namespace ColetorA41.ViewModel
 {
     public partial class MainPageViewModel:BaseViewModel
     {
+
+        #region Funcoes Compartilhadas
+
         [RelayCommand]
         async Task ChamarCalculo()
         {
-            IsBusy = false;
+            IsBusy = true;
             await Shell.Current.GoToAsync($"{nameof(EstabTec)}");
-
+            IsBusy = false;
         }
 
         [RelayCommand]
@@ -42,7 +46,7 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"/{nameof(LeituraENC)}");
         }
 
-
+        #endregion
 
     }
 }

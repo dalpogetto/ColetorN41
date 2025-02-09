@@ -8,5 +8,6 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
         this.BindingContext = _vm;
+		
     }
 }

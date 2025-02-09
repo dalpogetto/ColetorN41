@@ -145,7 +145,7 @@
                 <HorizontalStackLayout HorizontalOptions="Center" >
                 <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Pagto" />
+                        <TapGestureRecognizer Command="{Binding ChamarResumoDetalhePagtoCommand}" CommandParameter="Pagto" />
                     </Frame.GestureRecognizers>
                     <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*">
                             <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="80" HeightRequest="40" BackgroundColor="#045B8F" Padding="1" >
@@ -198,7 +198,7 @@
                     </Frame>
                 </HorizontalStackLayout>
 
-                <StackLayout Padding="20" Spacing="10">
+                <StackLayout Padding="20" Spacing="10" WidthRequest="320">
                     <Button Text="{Binding LblAprovar, StringFormat='Aprovar - {0}'} " CornerRadius="20"></Button>
                     <Button Text="{Binding LblAprovarSemEntrada, StringFormat='Aprovar Sem Saída - {0}'} " CornerRadius="20"></Button>
                 </StackLayout>
@@ -208,7 +208,10 @@
                 
                     <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                         <Image Source="seta_esquerda" WidthRequest="50">
-                            <Image.GestureRecognizers>
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                    </Image.Behaviors>
+                    <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />
                             </Image.GestureRecognizers>
                         </Image>
@@ -226,7 +229,10 @@
             <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
                
                         <Image Source="seta_dupla_esquerda" WidthRequest="80" Margin="0,-18,0,0">
-                              <Image.GestureRecognizers>
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                    </Image.Behaviors>
+                    <Image.GestureRecognizers>
                                  <TapGestureRecognizer Command="{Binding ChamarEstabTecCommand}" />
                             </Image.GestureRecognizers>
                         </Image>

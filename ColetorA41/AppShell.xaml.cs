@@ -15,10 +15,9 @@ namespace ColetorA41
             InitializeComponent();
             BindingContext = new AppShellViewModel();
             
-
+            //Adicionar Rotas das Views
             Routing.RegisterRoute(nameof(Loading)       , typeof(Loading));
             Routing.RegisterRoute(nameof(Login)         , typeof(Login));
-           // Routing.RegisterRoute(nameof(MainPage)      , typeof(MainPage));
             Routing.RegisterRoute(nameof(ParamEstabList), typeof(ParamEstabList));
             Routing.RegisterRoute(nameof(ParamEstabEdit), typeof(ParamEstabEdit));
             Routing.RegisterRoute(nameof(EstabTec)      , typeof(EstabTec));
@@ -26,13 +25,12 @@ namespace ColetorA41
             Routing.RegisterRoute(nameof(ExtrakitView)  , typeof(ExtrakitView));
             Routing.RegisterRoute(nameof(Resumo)        , typeof(Resumo));
             Routing.RegisterRoute(nameof(ResumoDetalhe) , typeof(ResumoDetalhe));
+            Routing.RegisterRoute(nameof(ResumoDetalhePago), typeof(ResumoDetalhePago));
             Routing.RegisterRoute(nameof(ResumoDetalheItem), typeof(ResumoDetalheItem));
             Routing.RegisterRoute(nameof(LeituraENC)    , typeof(LeituraENC));
             Routing.RegisterRoute(nameof(LoginAlmoxa)   , typeof(LoginAlmoxa));
             Routing.RegisterRoute(nameof(LoadingCalculo), typeof(LoadingCalculo));
             Routing.RegisterRoute(nameof(Erro), typeof(Erro));
-
-            //
 
         }
     }
