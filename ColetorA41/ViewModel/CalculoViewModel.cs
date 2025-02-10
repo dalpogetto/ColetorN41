@@ -170,6 +170,16 @@ namespace ColetorA41.ViewModel
 
         [ObservableProperty]
         string criterioBuscaItemFicha = "";
+
+        [ObservableProperty]
+        bool isTotal = false;
+
+        [ObservableProperty]
+        bool isParcial = true;
+
+        [ObservableProperty]
+        bool isET = false;
+
         #endregion
 
         #region Variaveis Locais
@@ -283,7 +293,7 @@ namespace ColetorA41.ViewModel
 
             }
             await this.CarregarFichas();
-            await Shell.Current.GoToAsync($"{nameof(ResumoDetalheItem)}");
+            await Shell.Current.GoToAsync($"{nameof(ResumoDetalhe)}");
         }
 
         [RelayCommand]
@@ -402,6 +412,14 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarLoginAlmoxa()
         {
+            //Verificar se existe alguma etiqueta sem leitura
+            
+            var lpendente = listaEnc.Where(o => o.flag != "OK").FirstOrDefault();
+            if (lpendente != null) {
+                await Shell.Current.DisplayAlert("FICHAS PENDENTES", "Verifique a leitura das etiquetas antes de continuar", "OK");
+                return;
+            }
+
             await Shell.Current.GoToAsync($"{nameof(LoginAlmoxa)}");
         }
 
@@ -449,6 +467,7 @@ namespace ColetorA41.ViewModel
             IsBusy = true;
             var item = this.listaPagtos.Where(o=>o.cRowId==obj.cRowId).First();
             this.listaPagtos.Remove(item);
+            Fichas.Geral = Fichas.Geral - item.qtPagar;
 
             await AtualizarLabelsContadores(TipoCalculo);
             IsBusy = false;
@@ -483,6 +502,11 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarResumo()
         {
+            IsTotal = TipoCalculo == 1;
+            IsParcial = TipoCalculo == 2 ;
+            IsET = TipoCalculo == 3;
+
+            await this.AtualizaLblBotoes(TipoCalculo);
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
         }
        

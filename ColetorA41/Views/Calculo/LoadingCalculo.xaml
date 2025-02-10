@@ -57,7 +57,7 @@
         
 
         
-            <Border Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource Primary}" Grid.Row="2" Margin="5,5">
+            <Border Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource Primary}" Grid.Row="2" Margin="15,30">
                 <Grid ColumnDefinitions="*,*" HorizontalOptions="Center"  Padding="10" Margin="10,0">
                     <VerticalStackLayout VerticalOptions="Center">
                         <Label Text="Estabelecimento: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
@@ -70,6 +70,12 @@
                         <Label Text="{Binding NrProcessSelecionado}" FontSize="16" FontAttributes="Bold" TextColor="White"></Label>
                     </VerticalStackLayout>
                 </Grid>
+            <Border.Shadow>
+                <Shadow Brush="Black"
+                        Offset="10,10"
+                        Radius="40"
+                        Opacity="0.8" />
+            </Border.Shadow>
 
         </Border>
         
