@@ -74,12 +74,7 @@
         ContentTemplate="{DataTemplate views:MainPage}"
          />
 
-    <ShellContent
-        Icon="informe2"
-        Title="Parâmetros Estabel"
-        ContentTemplate="{DataTemplate views:ParamEstab.ParamEstabList}"
-        
-        />
+   
 
     <ShellContent
      Icon="calculo"
@@ -90,7 +85,7 @@
 
     <ShellContent
      Icon="monitor"
-     Title="Monitor"
+     Title="Monitor Acompanhamento"
      ContentTemplate="{DataTemplate viewsCalc:EstabTec}"
      
      />

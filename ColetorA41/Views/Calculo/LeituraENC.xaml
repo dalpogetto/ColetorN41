@@ -17,7 +17,7 @@
         <Style x:Key="lblCabec" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontAttributes" Value="None" />
-            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+            <Setter Property="TextColor" Value="{StaticResource dnBlue}" />
         </Style>
 
         <Style x:Key="lblDet" TargetType="Label">
@@ -70,7 +70,7 @@
                        FontSize="18"
                        Text="{Binding NumEnc}"
                        Placeholder="Aguardando leitura de etiqueta...."
-                       PlaceholderColor="Red"
+                       PlaceholderColor="{StaticResource dnRed}"
                        ReturnCommand="{Binding LeituraENCCommand}"
                        ReturnCommandParameter="{Binding NumEnc}"
                        TextColor="Black"></Entry>
@@ -139,7 +139,7 @@
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarExtrakitCommand}" />
@@ -163,7 +163,7 @@
             <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarLoginAlmoxaCommand}" />

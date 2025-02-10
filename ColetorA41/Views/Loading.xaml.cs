@@ -23,7 +23,7 @@ public partial class Loading : ContentPage
         //mostra a tela de Erro
         try
         {
-            _vm.IsBusy = true;
+            _vm.IsBusyLoading = true;
             if (await _srv.VerificarVersaoMobile(AppInfo.Current.VersionString))
             {
                 
@@ -43,13 +43,15 @@ public partial class Loading : ContentPage
             else
             {
                 _vm.IsError = true;
-                _vm.IsBusy = false;
+                _vm.IsBusyLoading = false;
             }
         }
         catch (Exception ex)
         {
             _vm.LabelErro = ex.Message;
             await Shell.Current.GoToAsync($"{nameof(Erro)}");
+            _vm.IsBusyLoading = false;
+           
         }
         finally
         {

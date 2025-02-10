@@ -50,7 +50,7 @@
             
             <Entry Text="{Binding UsuarioAlmoxa_}" Placeholder="Digite seu usuario"  FontAttributes="Bold" FontSize="18"/>
             <Entry Text="{Binding SenhaAlmoxa}" Placeholder="Senha" IsPassword="true" FontAttributes="Bold" FontSize="18"/>
-            <Button Text="Login" Command="{Binding LoginAlmoxaCommand}" CornerRadius="20"/>
+            <Button Text="Login" Command="{Binding LoginAlmoxaCommand}" CornerRadius="20" Background="{StaticResource dnButton}" />
         </VerticalStackLayout>
 
        
@@ -59,7 +59,7 @@
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />

@@ -18,7 +18,7 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontAttributes" Value="None" />
             <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
-            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+            <Setter Property="TextColor" Value="{StaticResource dnBlue}" />
         </Style>
 
         <Style x:Key="lblDet" TargetType="Label">
@@ -146,7 +146,7 @@
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoCommand}" />

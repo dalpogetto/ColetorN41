@@ -27,6 +27,8 @@ namespace ColetorA41
                 
                 .ConfigureFonts(fonts =>
                 {
+
+                   // fonts.AddFont("Gotham-Medium.ttf", "Gottham");
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });

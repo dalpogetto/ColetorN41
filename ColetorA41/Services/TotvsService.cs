@@ -1,11 +1,8 @@
 ﻿using ColetorA41.Models;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ColetorA41.Services
 {
@@ -62,6 +59,14 @@ namespace ColetorA41.Services
         public void Logout()
         {
             Preferences.Default.Clear();
+        }
+
+        public async Task DownloadVersao()
+        {
+            var response = await GetAsync<Versao>("apiesaa041/DownloadVersao");
+            using var reader = new StreamReader(response.arquivo);
+
+
         }
 
         public async Task<ItemFichaResponse> ObterItensCalculoMobile(int tipoCalculo, string tipoFicha, int nrProcess, int skip, int pageSize, string criterioBuscaItemFicha)

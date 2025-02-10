@@ -4,8 +4,12 @@
              x:Class="ColetorA41.Views.MainPage"
              Title="Selecione uma opção"
              BackgroundColor="WhiteSmoke"
+             Shell.BackgroundColor="{StaticResource dnBlue}"
              >
+
+   
     <Grid RowDefinitions="*,400,40" >
+        
         <Grid RowDefinitions="80, 200">
             <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
@@ -15,6 +19,8 @@
              Radius="5"
              Opacity="0.8" />
                 </Ellipse.Shadow>
+
+               
             </Ellipse>
         </Grid>
         <VerticalStackLayout Margin="0,20,0,0">
@@ -22,10 +28,10 @@
             <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,80">
                 <Image Source="home.png" HeightRequest="80" HorizontalOptions="Center" Margin="0,0,0,10">
                     <Image.Shadow>
-                    <Shadow Brush="Black"
-Offset="10,10"
-Radius="40"
-Opacity="0.8" />
+                        <Shadow Brush="Black"
+                            Offset="10,10"
+                            Radius="40"
+                            Opacity="0.8" />
                     </Image.Shadow>
                 </Image>
                 <Label  Text="Home Page" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20" TextColor="White"/>
@@ -76,22 +82,13 @@ Opacity="0.8" />
             </HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
+                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarMonitorCommand}" />
                     </Frame.GestureRecognizers>
                     <VerticalStackLayout HorizontalOptions="Center" >
                         <Image Source="monitor.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
-                        <Label  Text="Monitor" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                </Frame>
-                <Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarCadEstabelCommand}" />
-                    </Frame.GestureRecognizers>
-                    <VerticalStackLayout HorizontalOptions="Center" >
-                        <Image Source="informe2.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
-                        <Label  Text="Parâmetros" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label  Text="Monitor Acompanhamento" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
             </HorizontalStackLayout>

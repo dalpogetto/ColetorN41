@@ -66,9 +66,6 @@ namespace ColetorA41.Services
             try
             {
                 var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
-                //response.EnsureSuccessStatusCode();
-
-                
                 using var responseStream = await response.Content.ReadAsStreamAsync();
                 var data = await JsonSerializer.DeserializeAsync<T>(responseStream);
                 return data;

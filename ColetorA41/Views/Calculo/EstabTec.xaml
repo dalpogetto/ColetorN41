@@ -50,10 +50,9 @@
         </VerticalStackLayout>
         </StackLayout>
 
-        
         <VerticalStackLayout Grid.Row="1" Padding="20">
 
-            <Border Margin="0,0" Padding="10" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource Primary}">
+            <Border Margin="0,0" Padding="10" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource dnBlue}">
                 <StackLayout>
                 <Label Text="Estabelecimento" TextColor="WhiteSmoke"/>
                 <Picker Title="Selecione um Estabelecimento"
@@ -122,7 +121,7 @@
                                     <VisualStateGroup Name="TecnicoEstab">
                                         <VisualState Name="Selected">
                                             <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                                <Setter Property="BackgroundColor" Value="{StaticResource dnBlue}" />
                                                 <Setter TargetName="nomeAbrev" Property="Label.TextColor" Value="White"/>
                                                 <Setter TargetName="nomeAbrev" Property="Label.FontAttributes" Value="Bold"/>
                                                 <Setter TargetName="nomeAbrev" Property="Label.FontSize" Value="18"/>
@@ -147,7 +146,7 @@
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarMainPageCommand}" />
@@ -171,7 +170,7 @@
                 <Image Source="seta_direita" WidthRequest="50">
                     
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />

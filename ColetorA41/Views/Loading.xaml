@@ -44,15 +44,15 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" IsVisible="{Binding IsBusy}">
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" IsVisible="{Binding IsBusyLoading}">
 
-            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" />
+            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusyLoading}" />
             <Label Text="Verificando autenticação..."/>
 
         </VerticalStackLayout>
 
         <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="End" Grid.Row="2" Margin="10" IsVisible="{Binding IsError}">
-            <Button Text="Baixar Arquivo Instalação" Background="{StaticResource Vermelho}" CornerRadius="20"></Button>
+            <Button Text="Baixar Arquivo Instalação" Background="{StaticResource Vermelho}" CornerRadius="20" Command="{Binding DownloadVersaoCommand}"></Button>
         </HorizontalStackLayout>
 
     </Grid>

@@ -6,6 +6,19 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
+
+   
+    <Color x:Key="dnBlue">#004b87</Color>
+    <Color x:Key="dnRed">#a6192e</Color>
+    <Color x:Key="dnPurple">#470a68</Color>
+    <Color x:Key="dnGreen">#007a87</Color>
+    <Color x:Key="dnLightGreen">#00b2a9</Color>
+    <Color x:Key="dnLightBlue">#0088b9</Color>
+    <Color x:Key="dntPink">#a51f66</Color>
+    <Color x:Key="dnOrange">#ff7900</Color>
+    <Color x:Key="dnYellow">#fcb61a</Color>
+    <Color x:Key="dnButton">#007a87</Color>
+
     <Color x:Key="Primary">#5165BF</Color>
     <Color x:Key="PrimaryDark">#8EDFEB</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>
@@ -13,7 +26,7 @@
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
 
-    <Color x:Key="WhiteSmoke">#FFFFFF</Color>
+    <Color x:Key="WhiteSmoke">#e6e7e8</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
@@ -21,7 +34,7 @@
     <Color x:Key="OffBlack">#1f1f1f</Color>
     <Color x:Key="Vermelho">#ff4c4c</Color>
 
-    <Color x:Key="MenuCabec">#5165BF</Color>
+    <Color x:Key="MenuCabec">#004b87</Color>
     <Color x:Key="MenuCabec2">#D7F0FE</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>

@@ -4,13 +4,10 @@ using ColetorA41.Models;
 
 using ColetorA41.Services;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using ColetorA41.Views.Calculo;
 using Microsoft.Extensions.Configuration;
 using ColetorA41.Views;
-using CommunityToolkit.Maui.Core.Platform;
 using ColetorA41.Extensions;
-using CommunityToolkit.Maui.Alerts;
 
 namespace ColetorA41.ViewModel
 {
@@ -188,6 +185,13 @@ namespace ColetorA41.ViewModel
         #endregion
 
         #region Funcoes Compartilhadas
+
+        [RelayCommand]
+        void DownloadVersao()
+        {
+            var obj = _service.DownloadVersao();
+
+        }
 
         //Extrakit
         [RelayCommand]
@@ -573,6 +577,18 @@ namespace ColetorA41.ViewModel
         #endregion
 
         #region Funcoes Locais
+
+        
+
+        public void resetGeral()
+        {
+            EstabSelecionado = null;
+            TecnicoSelecionado = null;
+            listaExtrakitSelecionados.Clear();
+            listaTecnico.Clear();
+            listaExtrakit.Clear();
+
+        }
 
         private string buscaItemFicha;
         public string BuscaItemFicha

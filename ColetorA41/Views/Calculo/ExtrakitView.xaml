@@ -46,7 +46,7 @@
                 </HorizontalStackLayout>
 
                 <Button Text="Selecionar Todos" Command="{Binding SelecionarTodosExtrakitCommand}" 
-                        Background="{StaticResource Gray900}"
+                        Background="{StaticResource dnButton}"
                         Margin="0,0,0,10" 
                         WidthRequest="230" 
                         CornerRadius="20"/>
@@ -161,7 +161,7 @@
                 
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />
@@ -185,7 +185,7 @@
             <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
                 <Image Source="seta_direita" WidthRequest="50">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />
