@@ -10,15 +10,15 @@
              >
 
    
-    <Grid RowDefinitions="*,400,10" >
+    <Grid RowDefinitions="*,400,8" >
         
         <Grid RowDefinitions="100, 200">
             <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                 <Ellipse.Shadow>
-                    <Shadow Brush="{StaticResource Gray900}"
-                             Offset="1,1"
-                             Radius="20"
+                    <Shadow Brush="{StaticResource dnPurple}"
+                             Offset="10,10"
+                             Radius="40"
                              Opacity="0.8"/>
                 </Ellipse.Shadow>
               

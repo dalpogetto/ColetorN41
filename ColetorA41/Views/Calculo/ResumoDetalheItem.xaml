@@ -28,11 +28,11 @@
     </ContentPage.Resources>
 
 
-    <Grid RowDefinitions="100,*,60">
+    <Grid RowDefinitions="100,*,60,8">
         <StackLayout>
             <Grid RowDefinitions="60,200">
-                <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
-                <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
+                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
                         <Shadow Brush="Black"
              Offset="1,1"
@@ -161,6 +161,19 @@
                  VerticalOptions="Center"
                 />
             </VerticalStackLayout>
+        </Grid>
+
+        <Grid Grid.Row="3" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="-1,-1">
+            <Rectangle>
+                <Rectangle.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="{StaticResource dnBlue}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource dnPurple}"  Offset="0.5" />
+                        <GradientStop Color="{StaticResource dnRed}"  Offset="1.0" />
+                    </LinearGradientBrush>
+                </Rectangle.Background>
+            </Rectangle>
+
         </Grid>
     </Grid>
 </ContentPage>

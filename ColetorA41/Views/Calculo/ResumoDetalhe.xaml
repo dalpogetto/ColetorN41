@@ -30,11 +30,11 @@
     </ContentPage.Resources>
 
 
-    <Grid RowDefinitions="120,auto,*,60">
+    <Grid RowDefinitions="180,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="50,200">
-                <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
-                <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
+            <Grid RowDefinitions="100,200">
+                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
                         <Shadow Brush="Black"
  Offset="1,1"
@@ -44,8 +44,8 @@
                 </Ellipse>
             </Grid>
 
-            <VerticalStackLayout Padding="20,10" Margin="0,-220,0,0">
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
+            <VerticalStackLayout Padding="20,10" Margin="0,-300,0,0">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,0" >
                     <Image
                         Source="folder2.png"
                         SemanticProperties.Description="Cute dot net bot waving hi to you!"
@@ -76,25 +76,33 @@
 
             </VerticalStackLayout>
         </StackLayout>
-       
-            <SearchBar x:Name="searchBar" Grid.Row="1" Margin="20,20,20,20"
+        <Border HeightRequest="70" Margin="40,50,40,0" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" >
+            <SearchBar x:Name="searchBar"  
                        Placeholder="Buscar item..."
-                      
+                       
                        Text="{Binding BuscaItemFicha}"
                        SearchCommand="{Binding BuscarItemFichaCommand}"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                        >
 
             </SearchBar>
-      
+        </Border>
 
-        <CollectionView x:Name="lista" Grid.Row="2" Margin="0,0"
+
+        <CollectionView x:Name="lista" Grid.Row="1" Margin="0,0" HorizontalOptions="Center" HeightRequest="580"
                                   ItemsSource="{Binding listaItensFicha}" 
                                   RemainingItemsThreshold="4"
                                   ItemsUpdatingScrollMode="KeepItemsInView"
                                   RemainingItemsThresholdReachedCommand="{Binding CarregarFichasCommand}"
                                   VerticalScrollBarVisibility="Always">
-                    <CollectionView.ItemTemplate>
+            <CollectionView.Header>
+                <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10" VerticalOptions="Center" Spacing="5">
+                    <Image  Source="attention.png" HeightRequest="25"  HorizontalOptions="Center"/>
+                    <Label Text="Arraste a ficha para esquerda para detalhes" FontAttributes="Bold" FontSize="18" TextColor="{StaticResource dnGreen}"></Label>
+                </HorizontalStackLayout>
+
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:ItemFicha">
                     <SwipeView>
                         <SwipeView.RightItems>
@@ -142,7 +150,7 @@
                 </CollectionView>
             
 
-        <Grid ColumnDefinitions="*,*,*" Grid.Row="3" >
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" >
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.Behaviors>
@@ -167,6 +175,19 @@
 
 
 
+
+        </Grid>
+
+        <Grid Grid.Row="3" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="-1,-1">
+            <Rectangle>
+                <Rectangle.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="{StaticResource dnBlue}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource dnPurple}"  Offset="0.5" />
+                        <GradientStop Color="{StaticResource dnRed}"  Offset="1.0" />
+                    </LinearGradientBrush>
+                </Rectangle.Background>
+            </Rectangle>
 
         </Grid>
 

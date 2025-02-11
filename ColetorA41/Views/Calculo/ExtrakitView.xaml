@@ -10,7 +10,7 @@
              Title="Extrakit">
     <Grid RowDefinitions="200,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="80,200">
+            <Grid RowDefinitions="100,200">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
                 <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
@@ -51,17 +51,17 @@
                         WidthRequest="230" 
                         CornerRadius="20"/>
 
-                <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Padding="-5">
-                    <Label Text="{Binding QtdeETSelecionadas, StringFormat='Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White"></Label>
-                    <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Não Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White"></Label>
-                </HorizontalStackLayout>
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center" >
+                    <Label Text="{Binding QtdeETSelecionadas, StringFormat='Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"></Label>
+                    <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Não Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"></Label>
+                </VerticalStackLayout>
 
 
             </VerticalStackLayout>
         </StackLayout>
 
-        <ScrollView Grid.Row="1" Margin="15,-20,15,0">
-            <StackLayout>
+        
+            <Grid Grid.Row="1">
                 <CollectionView x:Name="lista" 
                                   ItemsSource="{Binding listaExtrakit}" 
                                   SelectionMode="Multiple" 
@@ -72,7 +72,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Extrakit">
 
-                            <Border HeightRequest="80" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                            <Border HeightRequest="80" Margin="10,2" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
 
                                 <Grid Padding="5" >
                                     <Grid.RowDefinitions>
@@ -152,9 +152,9 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </StackLayout>
+            </Grid>
 
-        </ScrollView>
+       
 
         <Grid ColumnDefinitions="*,*,*" Grid.Row="2" >
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">

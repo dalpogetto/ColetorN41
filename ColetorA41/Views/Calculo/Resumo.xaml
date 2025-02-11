@@ -12,7 +12,7 @@
   
         <Grid RowDefinitions="50,*,60,8">
 
-            <Grid RowDefinitions="70, 200">
+            <Grid RowDefinitions="100, 200">
             <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                 <Ellipse.Shadow>
@@ -45,7 +45,7 @@
             </HorizontalStackLayout>
         
             <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,20,0,0" Grid.Row="1" HorizontalOptions="Center">
-            <Button Text="Impressão Informe" WidthRequest="150" 
+            <Button Text="Impressão Informe" WidthRequest="250" 
                     BackgroundColor="{StaticResource dnGreen}" 
                     Command="{Binding GerarInformeCommand}" 
                     CornerRadius="20"></Button>
@@ -54,7 +54,7 @@
                
 
             </HorizontalStackLayout>
-            <HorizontalStackLayout Margin="0,10,10,10" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
+            <HorizontalStackLayout Margin="0,50,0,-10" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
                 <RadioButton Content="Renov.Total" Value="1" IsChecked="{Binding IsTotal}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
@@ -224,7 +224,7 @@
                         />
                     </VerticalStackLayout>
 
-            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,0,0,0">
                
                         <Image Source="seta_dupla_esquerda" WidthRequest="80" Margin="0,-18,0,0">
                     <Image.Behaviors>

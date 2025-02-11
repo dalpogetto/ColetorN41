@@ -19,7 +19,15 @@
 
                 </Grid.RowDefinitions>
 
-                <Grid BackgroundColor="{StaticResource dnBlue}" Grid.Row="0" HeightRequest="220">
+                <Grid Grid.Row="0" HeightRequest="220">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="{StaticResource dnBlue}" Offset="0.1" />
+                            <GradientStop Color="{StaticResource dnPurple}"  Offset="0.5" />
+                            <GradientStop Color="{StaticResource dnRed}"  Offset="1.0" />
+                        </LinearGradientBrush>
+
+                    </Grid.Background>
 
 
                     <Grid HorizontalOptions="Center"

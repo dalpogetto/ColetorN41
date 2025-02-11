@@ -7,7 +7,7 @@
              Title="LoadingCalculo">
     <Grid RowDefinitions="200,*,auto,8">
         <StackLayout>
-            <Grid RowDefinitions="80, 200">
+            <Grid RowDefinitions="100, 200">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
                 <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
@@ -25,7 +25,7 @@
                 <Image
             Source="calculo.png"
             SemanticProperties.Description="Cute dot net bot waving hi to you!"
-            HeightRequest="80"
+            HeightRequest="60"
             HorizontalOptions="Center" Margin="0,0,0,10"/>
 
                 <Label 
@@ -57,7 +57,7 @@
         
 
         
-            <Border Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource dnBlue}" Grid.Row="2" Margin="15,30">
+            <Border Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource dnGreen}" Grid.Row="2" Margin="15,30">
                 <Grid ColumnDefinitions="*,*" HorizontalOptions="Center"  Padding="10" Margin="10,0">
                     <VerticalStackLayout VerticalOptions="Center">
                         <Label Text="Estabelecimento: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
@@ -70,13 +70,7 @@
                         <Label Text="{Binding NrProcessSelecionado}" FontSize="16" FontAttributes="Bold" TextColor="White"></Label>
                     </VerticalStackLayout>
                 </Grid>
-            <Border.Shadow>
-                <Shadow Brush="Black"
-                        Offset="10,10"
-                        Radius="40"
-                        Opacity="0.8" />
-            </Border.Shadow>
-
+            
         </Border>
 
 
