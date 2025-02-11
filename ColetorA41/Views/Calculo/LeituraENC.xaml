@@ -16,7 +16,7 @@
 
         <Style x:Key="lblCabec" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
-            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="{StaticResource dnBlue}" />
         </Style>
 
@@ -27,11 +27,11 @@
         </Style>
     </ContentPage.Resources>
     
-    <Grid RowDefinitions="200,*,60">
+    <Grid RowDefinitions="200,*,60,8">
         <StackLayout>
             <Grid RowDefinitions="100,200">
-                <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
-                <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
+                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
                         <Shadow Brush="Black"
  Offset="1,1"
@@ -135,7 +135,7 @@
 
         </ScrollView>
 
-        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" >
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.Behaviors>
@@ -172,6 +172,19 @@
 
 
             </VerticalStackLayout>
+        </Grid>
+
+        <Grid Grid.Row="4" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="-1,-1">
+            <Rectangle>
+                <Rectangle.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="{StaticResource dnBlue}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource dnPurple}"  Offset="0.5" />
+                        <GradientStop Color="{StaticResource dnRed}"  Offset="1.0" />
+                    </LinearGradientBrush>
+                </Rectangle.Background>
+            </Rectangle>
+
         </Grid>
 
     </Grid>

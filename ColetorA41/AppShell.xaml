@@ -19,7 +19,7 @@
 
                 </Grid.RowDefinitions>
 
-                <Grid BackgroundColor="{StaticResource Primary}" Grid.Row="0" HeightRequest="220">
+                <Grid BackgroundColor="{StaticResource dnBlue}" Grid.Row="0" HeightRequest="220">
 
 
                     <Grid HorizontalOptions="Center"
@@ -122,7 +122,7 @@
                     <VerticalStackLayout HorizontalOptions="CenterAndExpand" Spacing="10" >
 
                         <Label Text="Usuário logado: SUPER"/>
-                        <Button Text="Logout" Command="{Binding LogoutCommand}"></Button>
+                        <Button Text="Logout" Command="{Binding LogoutCommand}" Background="{StaticResource dnBlue}"></Button>
                     </VerticalStackLayout>
 
                 </Border>

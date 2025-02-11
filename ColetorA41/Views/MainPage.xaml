@@ -4,42 +4,40 @@
              x:Class="ColetorA41.Views.MainPage"
              Title="Selecione uma opção"
              BackgroundColor="WhiteSmoke"
-             Shell.BackgroundColor="{StaticResource dnBlue}"
+             Shell.BackgroundColor="{StaticResource WhiteSmoke}"
+             Shell.ForegroundColor="{StaticResource dnBlue}"
+             Shell.TitleColor="{StaticResource dnBlue}"
              >
 
    
-    <Grid RowDefinitions="*,400,40" >
+    <Grid RowDefinitions="*,400,10" >
         
-        <Grid RowDefinitions="80, 200">
+        <Grid RowDefinitions="100, 200">
             <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                 <Ellipse.Shadow>
-                    <Shadow Brush="Black"
-             Offset="1,1"
-             Radius="5"
-             Opacity="0.8" />
+                    <Shadow Brush="{StaticResource Gray900}"
+                             Offset="1,1"
+                             Radius="20"
+                             Opacity="0.8"/>
                 </Ellipse.Shadow>
-
+              
                
             </Ellipse>
         </Grid>
-        <VerticalStackLayout Margin="0,20,0,0">
+        <VerticalStackLayout Margin="0,0,0,0">
 
-            <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,80">
-                <Image Source="home.png" HeightRequest="80" HorizontalOptions="Center" Margin="0,0,0,10">
-                    <Image.Shadow>
-                        <Shadow Brush="Black"
-                            Offset="10,10"
-                            Radius="40"
-                            Opacity="0.8" />
-                    </Image.Shadow>
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,40">
+                <Image Source="dn_logo.png" HeightRequest="160" HorizontalOptions="Center" Margin="0,0,0,40">
+                   
                 </Image>
-                <Label  Text="Home Page" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,20" TextColor="White"/>
+              
             </VerticalStackLayout>
             <Label
                 Text="Auto Atendimento"
                 SemanticProperties.HeadingLevel="Level1"
-                FontSize="28"
+                FontSize="32"
+                FontFamily="Gottham"
                 HorizontalOptions="Center" />
 
             <Label
@@ -49,6 +47,7 @@
                 FontSize="18"
                 HorizontalOptions="Center" />
         </VerticalStackLayout>
+        
         <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
             <ActivityIndicator
              Grid.Column="0"
@@ -59,17 +58,6 @@
             />
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-
-                
-                <!--Frame HasShadow="True" WidthRequest="120" HeightRequest="110">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
-                    </Frame.GestureRecognizers>
-                    <VerticalStackLayout HorizontalOptions="Center" >
-                        <Image Source="folder2.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
-                        <Label  Text="Informe" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                <Frame-->
                 <Frame HasShadow="True" WidthRequest="240" HeightRequest="110">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
@@ -94,9 +82,17 @@
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
-        <Grid RowDefinitions="60" Grid.Row="3" VerticalOptions="End" Margin="0,5">
-            
-           
+        <Grid Grid.Row="3" VerticalOptions="End" Margin="-1,-1">
+            <Rectangle >
+                <Rectangle.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="{StaticResource dnBlue}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource dnPurple}"  Offset="0.5" />
+                        <GradientStop Color="{StaticResource dnRed}"  Offset="1.0" />
+                    </LinearGradientBrush>
+                </Rectangle.Background>
+            </Rectangle>
+
         </Grid>
 
 

@@ -7,56 +7,50 @@
              xmlns:converters="clr-namespace:ColetorA41.Converters"
               Shell.NavBarIsVisible="False"
              Title="EstabTec">
-    <Grid RowDefinitions="200,*,60">
+    <Grid RowDefinitions="200,*,60,8">
         <StackLayout>
-        <Grid RowDefinitions="80,200">
-                <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
-                <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
+            <Grid RowDefinitions="80,200">
+                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
-                    <Shadow Brush="Black"
- Offset="1,1"
- Radius="5"
- Opacity="0.8" />
+                        <Shadow Brush="Black"
+                                 Offset="1,1"
+                                 Radius="5"
+                                 Opacity="0.8" />
                     </Ellipse.Shadow>
                 </Ellipse>
             </Grid>
 
-        <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
-                <Image
-                Source="usuario.png"
-                HeightRequest="80"
-                HorizontalOptions="Center" Margin="0,0,0,10">
-                    
-                    <Image.Shadow>
-                        <Shadow Brush="Black"
-                                Offset="10,10"
-                                Radius="40"
-                                Opacity="0.8" />
-                    </Image.Shadow>
-                </Image>
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
+                    <Image
+                    Source="usuario.png"
+                    HeightRequest="80"
+                    HorizontalOptions="Center" Margin="0,0,0,10">
+                        <Image.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="10,10"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Image.Shadow>
+                    </Image>
 
-                <Label 
-                    
-                Text="Estabelecimento e Técnico"
-                    TextColor="White"
-                FontAttributes="Bold"
-                FontSize="22"
-                VerticalOptions="Center" 
-                 HorizontalOptions="Center" Margin="0,0,0,0"/>
-
-
-            
-
-        </VerticalStackLayout>
+                    <Label 
+                            Text="Estabelecimento e Técnico"
+                            TextColor="{StaticResource White}"
+                            FontAttributes="Bold"
+                            FontSize="22"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="Center" Margin="0,0,0,0"/>
+            </VerticalStackLayout>
         </StackLayout>
 
         <VerticalStackLayout Grid.Row="1" Padding="20">
 
-            <Border Margin="0,0" Padding="10" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource dnBlue}">
+            <Border Margin="0,0" Padding="10" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource dnWhite}">
                 <StackLayout>
-                <Label Text="Estabelecimento" TextColor="WhiteSmoke"/>
+                <Label Text="Estabelecimento" TextColor="{StaticResource dnBlue}"/>
                 <Picker Title="Selecione um Estabelecimento"
-                     TextColor="White"   
+                     TextColor="{StaticResource dnBlue}"   
                      TitleColor="White"
                      FontAttributes="Bold" FontSize="16"
                      ItemsSource="{Binding listaEstab}"  
@@ -66,14 +60,7 @@
                 </StackLayout>
             </Border>
 
-            <!--
-            <Label Text="Técnico"/>
-            <Picker Title="Selecione um Técnico"
-                     FontAttributes="Bold" FontSize="16"
-                     ItemsSource="{Binding listaTecnico}"  
-                     ItemDisplayBinding="{Binding identific}"
-                     SelectedItem="{Binding TecnicoSelecionado}"/>
---></VerticalStackLayout>
+        </VerticalStackLayout>
         <Grid Grid.Row="1" Margin="0,90" Padding="40" RowDefinitions="auto,350">
             <VerticalStackLayout Margin="0,20,0,20" HorizontalOptions="Start" WidthRequest="300">
                
@@ -142,7 +129,7 @@
         </Grid>
 
 
-        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" BackgroundColor="White">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" >
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
                 <Image Source="seta_esquerda" WidthRequest="50">
                     <Image.Behaviors>
@@ -180,6 +167,18 @@
                 </Image>
                 
             </VerticalStackLayout>
+        </Grid>
+        <Grid Grid.Row="4" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="-1,-1">
+            <Rectangle>
+                <Rectangle.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="{StaticResource dnBlue}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource dnPurple}"  Offset="0.5" />
+                        <GradientStop Color="{StaticResource dnRed}"  Offset="1.0" />
+                    </LinearGradientBrush>
+                </Rectangle.Background>
+            </Rectangle>
+
         </Grid>
     </Grid>
 </ContentPage>
