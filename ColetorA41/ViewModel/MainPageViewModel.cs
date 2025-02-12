@@ -3,6 +3,7 @@ using ColetorA41.Models;
 using ColetorA41.Views.ParamEstab;
 using ColetorA41.Views.Calculo;
 using ColetorA41.Views;
+using ColetorA41.Views.Monitor;
 
 
 namespace ColetorA41.ViewModel
@@ -27,9 +28,9 @@ namespace ColetorA41.ViewModel
         }
 
         [RelayCommand]
-        async Task ChamarMOnitor()
+        async Task ChamarMonitor()
         {
-           // await Shell.Current.GoToAsync($"{nameof(MonitorNotas)}");
+            await Shell.Current.GoToAsync($"{nameof(Processos)}");
         }
 
         [RelayCommand]

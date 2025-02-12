@@ -4,6 +4,7 @@ using ColetorA41.Views;
 using ColetorA41.Views.ParamEstab;
 using ColetorA41.Views.Calculo;
 using ColetorA41.Services;
+using ColetorA41.Views.Monitor;
 
 
 namespace ColetorA41
@@ -31,6 +32,7 @@ namespace ColetorA41
             Routing.RegisterRoute(nameof(LoginAlmoxa)   , typeof(LoginAlmoxa));
             Routing.RegisterRoute(nameof(LoadingCalculo), typeof(LoadingCalculo));
             Routing.RegisterRoute(nameof(Erro), typeof(Erro));
+            Routing.RegisterRoute(nameof(Processos), typeof(Processos));
 
         }
     }

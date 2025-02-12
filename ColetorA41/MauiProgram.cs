@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using ColetorA41.Models;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using ColetorA41.Views.Monitor;
 //using ColetorA41.Pages;
 
 namespace ColetorA41
@@ -76,6 +77,7 @@ namespace ColetorA41
             builder.Services.AddTransient<ResumoDetalhePago>();
             builder.Services.AddTransient<ResumoDetalheItem>();
             builder.Services.AddTransient<Erro>();
+            builder.Services.AddTransient<Processos>();
             #endregion
 
             #region ViewModel
@@ -84,6 +86,7 @@ namespace ColetorA41
             builder.Services.AddTransient<LoginPageViewModel>();
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddSingleton<ParamEstabelViewModel>();
+            builder.Services.AddSingleton<MonitorViewModel>();
             #endregion
 
             return builder.Build();

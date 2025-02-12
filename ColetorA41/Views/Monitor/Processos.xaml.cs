@@ -1,22 +1,23 @@
 using ColetorA41.ViewModel;
 
-namespace ColetorA41.Views.Calculo;
+namespace ColetorA41.Views.Monitor;
 
-public partial class EstabTec : ContentPage
+public partial class Processos : ContentPage
 {
-    private readonly CalculoViewModel _vm;
-    public EstabTec(CalculoViewModel vm)
+    private readonly MonitorViewModel _vm;
+    public Processos(MonitorViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = vm;
+		this.BindingContext = vm;
         _vm = vm;
-    }
+	}
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        
+
         await _vm.ObterEstabelecimentos();
 
     }
+
 }

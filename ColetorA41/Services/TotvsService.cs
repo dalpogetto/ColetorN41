@@ -204,5 +204,12 @@ namespace ColetorA41.Services
             var response = await PostAsync<ExecutarCalculoRequest, ExecutarCalculoResponse>("apiesaa041/ObterExtrakit", request);
             return response;
         }
+
+        public async Task<List<ProcessosEstab>> ObterProcessosEstab(string codEstabel)
+        {
+            var param = new NameValueCollection { { "codEstabel", codEstabel } };
+            var response = await GetAsync<ProcessosEstabResponse>("apiesaa041/ObterProcessosEstab", param);
+            return response.items;
+        }
     }
 }

@@ -148,6 +148,9 @@
 	  <MauiXaml Update="Views\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Monitor\Processos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ParamEstab\ParamEstabEdit.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
