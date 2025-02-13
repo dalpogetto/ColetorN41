@@ -84,7 +84,7 @@
 
             </VerticalStackLayout>
 
-            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="300">
+            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="360">
                 
                 <CollectionView x:Name="lista"  
                    ItemsSource="{Binding listaTecnico}" 
@@ -94,11 +94,12 @@
                    ItemsUpdatingScrollMode="KeepItemsInView"
                    RemainingItemsThresholdReachedCommand="{Binding CarregarTecnicosEstabelecimentoCommand}"
                    EmptyView="Técnicos do Estabelecimento"
+                                HorizontalOptions="CenterAndExpand"
                    
                    VerticalScrollBarVisibility="Always">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Tecnico">
-                            <Border Margin="5,1" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                            <Border Margin="0" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White" >
                                 <Grid Padding="5" Margin="0,0">
                                     <!--Chave-->
                                     <Label Text="{Binding identific}" x:Name="nomeAbrev" />

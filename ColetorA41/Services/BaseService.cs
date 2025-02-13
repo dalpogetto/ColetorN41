@@ -1,5 +1,6 @@
 ﻿using ColetorA41.Utils;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -66,8 +67,11 @@ namespace ColetorA41.Services
             try
             {
                 var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
-                using var responseStream = await response.Content.ReadAsStreamAsync();
-                var data = await JsonSerializer.DeserializeAsync<T>(responseStream);
+                var responseStream = await response.Content.ReadAsStringAsync();
+                //var data = await JsonSerializer.DeserializeAsync<T>(responseStream, options);
+                //var datastr = StreamToString(responseStream);
+                var data = JsonConvert.DeserializeObject<T>(responseStream);
+
                 return data;
             }
             catch (Exception ex)
@@ -83,6 +87,15 @@ namespace ColetorA41.Services
                 
             }
 
+        }
+
+        public static string StreamToString(Stream stream)
+        {
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+            {
+                return reader.ReadToEnd();
+            }
         }
 
         protected async Task<TResponse?> PostAsync<TRequest, TResponse>(string metodo, TRequest requestBody = default)
