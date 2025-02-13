@@ -78,6 +78,9 @@ namespace ColetorA41
             builder.Services.AddTransient<ResumoDetalheItem>();
             builder.Services.AddTransient<Erro>();
             builder.Services.AddTransient<Processos>();
+            builder.Services.AddTransient<ResumoFinal>();
+            builder.Services.AddTransient<Embalagem>();
+            builder.Services.AddTransient<Reparo>();
             #endregion
 
             #region ViewModel

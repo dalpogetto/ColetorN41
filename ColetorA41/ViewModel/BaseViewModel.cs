@@ -9,6 +9,13 @@ namespace ColetorA41.ViewModel
 {
     public partial class BaseViewModel:ObservableObject
     {
+
+        [ObservableProperty]
+        bool isBack = false;
+
+        [ObservableProperty]
+        bool isRefreshing = false;
+
         [ObservableProperty]
         bool isBusy = false;
 

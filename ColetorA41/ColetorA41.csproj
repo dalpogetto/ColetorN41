@@ -60,7 +60,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Models\Resumo.cs" />
 	  <Compile Remove="ViewModel\CalculoDadosNF.cs" />
 	  <Compile Remove="ViewModel\CalculoDadosNFBase.cs" />
 	</ItemGroup>
@@ -148,7 +147,16 @@
 	  <MauiXaml Update="Views\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Monitor\Embalagem.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Monitor\Processos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Monitor\Reparo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Monitor\ResumoFinal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ParamEstab\ParamEstabEdit.xaml">

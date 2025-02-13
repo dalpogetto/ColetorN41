@@ -211,5 +211,19 @@ namespace ColetorA41.Services
             var response = await GetAsync<ProcessosEstabResponse>("apiesaa041/ObterProcessosEstab", param);
             return response.items;
         }
+
+        public async Task<ArquivoResumo> ImprimirConfOS(string iExecucao, string nrProcess)
+        {
+            var param = new NameValueCollection { { "iExecucao", iExecucao }, { "nrProcess", nrProcess } };
+            var response = await GetAsync<ArquivoResumo>("apiesaa041/ImprimirConfOS", param);
+            return response;
+        }
+
+        public async Task EncerrarProcesso(string codEstabel, string nrProcess)
+        {
+            var param = new NameValueCollection { { "codEstabel", codEstabel }, { "nrProcess", nrProcess } };
+            var response = await GetAsync<EncerrarResponse>("apiesaa041/EncerrarProcesso", param);
+            
+        }
     }
 }

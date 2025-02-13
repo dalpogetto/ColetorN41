@@ -53,4 +53,19 @@ namespace ColetorA41.Converters
             throw new NotImplementedException();
         }
     }
+
+    public class SituacaoProcessoEmbalagemConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            var situacao = ((string)value);
+            return (situacao != "E" && situacao != "S");
+
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

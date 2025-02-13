@@ -7,10 +7,12 @@
              xmlns:converters="clr-namespace:ColetorA41.Converters"
              xmlns:local="clr-namespace:ColetorA41.Converters"
               Shell.NavBarIsVisible="False"
+             x:Name="processo"
              Title="Processos">
     <ContentPage.Resources>
         <local:SituacaoProcessoColorConverter x:Key="SituacaoProcessoColorConverter" />
         <local:SituacaoProcessoLabelConverter x:Key="SituacaoProcessoLabelConverter"/>
+        <local:SituacaoProcessoEmbalagemConverter x:Key="SituacaoProcessoEmbalagemConverter"/>
         <Style x:Key="lblCabec" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontAttributes" Value="Bold" />
@@ -81,54 +83,58 @@
 
         <Grid Grid.Row="1">
             <Border Margin="0,120,0,0" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="400">
+                <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                             Command="{Binding AtualizarListaProcessosCommand}">
 
-                <CollectionView x:Name="lista"  
+                    <CollectionView x:Name="lista"  
                                 ItemsSource="{Binding listaProcessosEstab}" 
                                 SelectedItem="{Binding ProcessoSelecionado}"
                                 SelectionMode="None"
                                 EmptyView="Processo em Aberto do Estabelecimento"
                                 VerticalScrollBarVisibility="Always">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:ProcessosEstab">
-                            <SwipeView>
-                                <SwipeView.RightItems>
-                                    <SwipeItems>
-                                        <SwipeItem 
-                                                  Text="Embalagem"
-                                                  IconImageSource="scanner2.png"
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:ProcessosEstab">
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItem 
+                                                  Text="Executar"
+                                                  IconImageSource="run.png"
                                                   BackgroundColor="WhiteSmoke"
-                                                  Command="{Binding BindingContext.DetalheItemFichaCommand, Source={x:Reference detalhe}}"
-                                                  CommandParameter="{Binding .}" /> 
-                                    </SwipeItems>
-                                </SwipeView.RightItems>
+                                                  IsVisible="{Binding situacao, Converter={StaticResource SituacaoProcessoEmbalagemConverter}}"
+                                                  Command="{Binding BindingContext.ChamarTarefaCommand, Source={x:Reference processo}}"
+                                                  CommandParameter="{Binding .}" />
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
 
-                            
-                            <Border HeightRequest="90" StrokeShape="RoundRectangle 10" BackgroundColor="White" HorizontalOptions="Center" Margin="0,0,0,10">
-                                <Grid ColumnDefinitions="*,auto" >
-                                    <Frame Grid.Column="1" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start" 
+
+                                    <Border HeightRequest="90" StrokeShape="RoundRectangle 10" BackgroundColor="White" HorizontalOptions="Center" Margin="0,0,0,10">
+                                        <Grid ColumnDefinitions="*,auto" >
+                                            <Frame Grid.Column="1" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start" 
                                            BorderColor="{Binding situacao, Converter={StaticResource SituacaoProcessoColorConverter}}" CornerRadius="8">
-                                        <Label Text="{Binding situacao, Converter={StaticResource SituacaoProcessoLabelConverter}}" 
+                                                <Label Text="{Binding situacao, Converter={StaticResource SituacaoProcessoLabelConverter}}" 
                                                FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="{Binding situacao, Converter={StaticResource SituacaoProcessoColorConverter}}"/>
-                                    </Frame>
-                                    <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,80,auto" ColumnSpacing="20" Grid.Column="0">
-                                        <!--Chave-->
-                                        <Label Text="{Binding codemitente}" Grid.ColumnSpan="0" FontSize="16" FontAttributes="Bold" />
-                                        <Label Text="{Binding nomeabrev}" Grid.Column="1" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
-                                        <!--Cabecalho-->
-                                        <Label Text="Processo"      Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="0"></Label>
-                                        <Label Text="Ped.Exec"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="1"></Label>
-                                        <Label Text="Situação"       Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="2"></Label>
-                                        <!--Detalhe-->
-                                        <Label Text="{Binding nrprocess}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
-                                        <Label Text="{Binding numpedexec}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
-                                        <Label Text="{Binding descpedexec}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
-                                    </Grid>
-                                </Grid>
-                            </Border>
-                            </SwipeView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                            </Frame>
+                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,80,auto" ColumnSpacing="20" Grid.Column="0">
+                                                <!--Chave-->
+                                                <Label Text="{Binding codemitente}" Grid.ColumnSpan="0" FontSize="16" FontAttributes="Bold" />
+                                                <Label Text="{Binding nomeabrev}" Grid.Column="1" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
+                                                <!--Cabecalho-->
+                                                <Label Text="Processo"      Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="0"></Label>
+                                                <Label Text="Ped.Exec"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="1"></Label>
+                                                <Label Text="Situação"       Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="2"></Label>
+                                                <!--Detalhe-->
+                                                <Label Text="{Binding nrprocess}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
+                                                <Label Text="{Binding numpedexec}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
+                                                <Label Text="{Binding descpedexec}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
             </Border>
         </Grid>
 
