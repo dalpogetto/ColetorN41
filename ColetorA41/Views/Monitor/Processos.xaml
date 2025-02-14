@@ -84,7 +84,7 @@
 
 
         <Grid Grid.Row="1">
-            <Border Margin="0,120,0,0" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="400">
+            <Border Margin="0,120,0,0" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="Transparent" Grid.Row="1" HorizontalOptions="Center" WidthRequest="400">
                 <RefreshView IsRefreshing="{Binding IsRefreshing}"
                              Command="{Binding AtualizarListaProcessosCommand}">
 
@@ -110,14 +110,15 @@
                                     </SwipeView.RightItems>
 
 
-                                    <Border HeightRequest="90" StrokeShape="RoundRectangle 10" BackgroundColor="White" HorizontalOptions="Center" Margin="0,0,0,10">
-                                        <Grid ColumnDefinitions="*,auto" >
-                                            <Frame Grid.Column="1" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start" 
+                                    <Border HeightRequest="90" StrokeShape="RoundRectangle 10" HorizontalOptions="CenterAndExpand" Margin="0,0,0,10" Background="{StaticResource dnWhite}">
+                                        <Grid ColumnDefinitions="8,*,auto" >
+                                            <Border Background="{Binding situacao, Converter={StaticResource SituacaoProcessoColorConverter}}"></Border>
+                                            <Frame Grid.Column="2" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start" 
                                            BorderColor="{Binding situacao, Converter={StaticResource SituacaoProcessoColorConverter}}" CornerRadius="8">
                                                 <Label Text="{Binding situacao, Converter={StaticResource SituacaoProcessoLabelConverter}}" 
                                                FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="{Binding situacao, Converter={StaticResource SituacaoProcessoColorConverter}}"/>
                                             </Frame>
-                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,80,auto" ColumnSpacing="20" Grid.Column="0">
+                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,80,auto" ColumnSpacing="20" Grid.Column="1">
                                                 <!--Chave-->
                                                 <Label Text="{Binding codemitente}" Grid.ColumnSpan="0" FontSize="16" FontAttributes="Bold" />
                                                 <Label Text="{Binding nomeabrev}" Grid.Column="1" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />

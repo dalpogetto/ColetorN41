@@ -59,14 +59,6 @@ namespace ColetorA41.ViewModel
         async Task ChamarPopup()
         {
            
-            var popup = new Mensagem("Atenção", "Deseja ?");
-            var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
-            if (result is bool ok)
-            {
-                if (ok) {
-                    await Shell.Current.DisplayAlert("", "ok", "ok");
-                }
-            }
         }
 
         public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
@@ -165,7 +157,7 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ImprimirConferencia()
         {
-            var popup = new Mensagem("Arquivo Conferência", "Confirma Geração Arquivo Conferência ?");
+            var popup = new MensagemSimNao("Arquivo Conferência", "Confirma Geração Arquivo Conferência ?");
             var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
             if (result is bool ok)
             {
@@ -176,8 +168,6 @@ namespace ColetorA41.ViewModel
                     IsBusy = false;
                 }
             }
-
-            
         }
 
         [RelayCommand]
@@ -186,11 +176,12 @@ namespace ColetorA41.ViewModel
 
             if (ArquivoResumo == null)
             {
-                await Shell.Current.DisplayAlert("ERRO", "Arquivo de conferência precisa ser gerado !", "ok");
+                var erro = new Mensagem("erro", "Erro Validação", "Arquivo de Conferência ainda não foi gerado!");
+                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
                 return;
             }
 
-            var popup = new Mensagem("Encerramento Processo", "Confirma Encerramento do Processo ?");
+            var popup = new MensagemSimNao("Encerramento Processo", "Confirma Encerramento do Processo ?");
             var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
             if (result is bool ok)
             {
@@ -198,8 +189,10 @@ namespace ColetorA41.ViewModel
                 {
                     IsBusy = true;
                     await _service.EncerrarProcesso(ProcessoEstabSelecionado.codestabel, ProcessoEstabSelecionado.nrprocess.ToString());
-                    await Shell.Current.GoToAsync($"{nameof(Processos)}");
                     IsBusy = false;
+                    await CarregarProcessosEstabelecimento();
+                    await Shell.Current.GoToAsync($"{nameof(Processos)}");
+                   
                 }
             }
         }

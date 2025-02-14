@@ -5,16 +5,34 @@ namespace ColetorA41.Views;
 
 public partial class Mensagem:Popup 
 {
-    
 
-	public Mensagem(string header, string mensagem)
+    private string tipoMensagem; 
+
+    public string TipoMensagem
+    { // property
+        get { return tipoMensagem; } 
+        set { 
+            tipoMensagem = value;
+            if (TipoMensagem.ToUpper() == "OK")
+            {
+                this.icone.Source = "info.png";
+
+                
+            }
+            else
+            {
+                this.icone.Source = "erro.png";
+            }
+        } 
+    }
+
+
+    public Mensagem(string tipo, string header, string mensagem)
 	{
 		InitializeComponent();
         this.header.Text = header.ToUpper();
         this.mensagem.Text = mensagem;
-        
-        
-      
+        TipoMensagem = tipo;
 	}
 
     async void OnYesButtonClicked(object? sender, EventArgs e)

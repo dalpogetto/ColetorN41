@@ -8,6 +8,7 @@ using ColetorA41.Views.Calculo;
 using Microsoft.Extensions.Configuration;
 using ColetorA41.Views;
 using ColetorA41.Extensions;
+using CommunityToolkit.Maui.Views;
 
 namespace ColetorA41.ViewModel
 {
@@ -259,7 +260,10 @@ namespace ColetorA41.ViewModel
             else
             {
                 this.IsBusy = false;
-                await Shell.Current.DisplayAlert("Erro Login", ok.mensagem, "ok");
+                var erro = new Mensagem("erro", "Erro Login", ok.mensagem);
+                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
+                return;
+               // await Shell.Current.DisplayAlert("Erro Login", ok.mensagem, "ok");
                 
             }
 
@@ -367,8 +371,8 @@ namespace ColetorA41.ViewModel
         {
             if ((this.EstabSelecionado == null) || (this.TecnicoSelecionado == null))
             {
-                await Shell.Current.DisplayAlert("Erro!", "Dados do estabelecimento e técnicos não preenchidos corretamente", "OK");
-                //await Shell.Current.GoToAsync($"/{nameof(EstabTec)}");
+                var erro = new Mensagem("erro", "Erro Validação", "Dados do estabelecimento e técnicos não preenchidos corretamente!");
+                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
                 return;
             }
             await this.ObterParametrosEstab();
@@ -420,7 +424,9 @@ namespace ColetorA41.ViewModel
             
             var lpendente = listaEnc.Where(o => o.flag != "OK").FirstOrDefault();
             if (lpendente != null) {
-                await Shell.Current.DisplayAlert("FICHAS PENDENTES", "Verifique a leitura das etiquetas antes de continuar", "OK");
+
+                var erro = new Mensagem("erro", "Fichas Pendentes", "Verifique a leitura das etiquetas antes de continuar!");
+                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
                 return;
             }
 
@@ -442,7 +448,8 @@ namespace ColetorA41.ViewModel
             if (item.flag.ToUpper() == "ERRO")
             {
                 this.IsBusy = false;
-                await Shell.Current.DisplayAlert("Erro ENC", item.mensagem, "OK");
+                var erro = new Mensagem("erro", "Erro Enc", item.mensagem);
+                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
                 return;
             }
 
@@ -517,20 +524,27 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task GerarInforme()
         {
-            bool ok = await Shell.Current.DisplayAlert("GERAR INFORME ?", "DESEJA GERAR O INFORME DE OS", "Sim", "Não");
-            if (ok)
+            var mensa = new MensagemSimNao("Gerar Informe", "Deseja gerar o Informe de OS ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+            if (result is bool ok)
             {
-                IsBusy = true;
-                LabelLoading = "Gerando Arquivo de Informe";
-                await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
-
-                var informe = await _service46.ImprimirOS(RowIdOS);
-                if (informe != null)
+                if (ok)
                 {
-                    
-                    IsBusy = false;
-                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
-                    await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+
+                    IsBusy = true;
+                    LabelLoading = "Gerando Arquivo de Informe";
+                    await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
+
+                    var informe = await _service46.ImprimirOS(RowIdOS);
+                    if (informe != null)
+                    {
+
+                        IsBusy = false;
+                        var erro = new Mensagem("ok", "Impressão OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}");
+                        await Shell.Current.CurrentPage.ShowPopupAsync(erro);
+//                        await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
+                        await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                    }
                 }
             }
             IsBusy = false;
@@ -554,23 +568,27 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task AprovarCalculo()
         {
-            bool ok = await Shell.Current.DisplayAlert("EXECUÇÃO CÁLCULO ?", "CONFIRMA EXECUÇÃO DO CÁLCULO", "Sim", "Não");
-            if (ok)
+            var mensa = new MensagemSimNao("Execução Cálculo", "Confirma a execução do cálculo ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+            if (result is bool ok)
             {
-                /*
-                IsBusy = true;
-                LabelLoading = "Gerando Arquivo de Informe";
-                await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
-
-                var informe = await _service46.ImprimirOS(RowIdOS);
-                if (informe != null)
+                if (ok)
                 {
+                    /*
+                    IsBusy = true;
+                    LabelLoading = "Gerando Arquivo de Informe";
+                    await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
 
-                    IsBusy = false;
-                    await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
-                    await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                    var informe = await _service46.ImprimirOS(RowIdOS);
+                    if (informe != null)
+                    {
+
+                        IsBusy = false;
+                        await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
+                        await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                    }
+                    */
                 }
-                */
             }
             IsBusy = false;
         }
@@ -670,16 +688,10 @@ namespace ColetorA41.ViewModel
             {
 
                 IsBusy = false;
-                await Shell.Current.DisplayAlert("Atenção", ex.Message, "OK");
+                var erro = new Mensagem("erro", "Erro", ex.Message);
+                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
             }
 
-
-            /*
-            foreach (var item in lista.OrderBy(x => x.identific))
-            {
-                this.listaTecnico.Add(item);
-            }
-            */
             this.IsBusy = false;
         }
 
