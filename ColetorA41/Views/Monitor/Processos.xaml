@@ -80,6 +80,8 @@
             </Border>
         </VerticalStackLayout>
 
+       
+
 
         <Grid Grid.Row="1">
             <Border Margin="0,120,0,0" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="400">

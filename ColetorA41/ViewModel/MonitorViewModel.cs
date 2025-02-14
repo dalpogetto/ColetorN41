@@ -12,6 +12,7 @@ using ColetorA41.Views.Monitor;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Configuration;
+using CommunityToolkit.Maui.Views;
 
 namespace ColetorA41.ViewModel
 {
@@ -53,6 +54,20 @@ namespace ColetorA41.ViewModel
 
         [ObservableProperty]
         ArquivoResumo arquivoResumo;
+
+        [RelayCommand]
+        async Task ChamarPopup()
+        {
+           
+            var popup = new Mensagem("Atenção", "Deseja ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+            if (result is bool ok)
+            {
+                if (ok) {
+                    await Shell.Current.DisplayAlert("", "ok", "ok");
+                }
+            }
+        }
 
         public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
         public ObservableRangeCollection<ProcessosEstab> listaProcessosEstab { get; private set; } = new();
@@ -150,13 +165,19 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ImprimirConferencia()
         {
-            bool ok = await Shell.Current.DisplayAlert("ARQUIVO CONFERÊNCIA", "CONFIRMA GERAÇÃO ARQUIVO CONFERÊNCIA?", "Sim", "Não");
-            if (ok)
+            var popup = new Mensagem("Arquivo Conferência", "Confirma Geração Arquivo Conferência ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+            if (result is bool ok)
             {
-                IsBusy = true;
-                ArquivoResumo = await _service.ImprimirConfOS("2", ProcessoEstabSelecionado.nrprocess.ToString());
-                IsBusy = false;
+                if (ok)
+                {
+                    IsBusy = true;
+                    ArquivoResumo = await _service.ImprimirConfOS("2", ProcessoEstabSelecionado.nrprocess.ToString());
+                    IsBusy = false;
+                }
             }
+
+            
         }
 
         [RelayCommand]
@@ -169,16 +190,17 @@ namespace ColetorA41.ViewModel
                 return;
             }
 
-            bool ok = await Shell.Current.DisplayAlert("ENCERRAMENTO PROCESSO", "CONFIRMA ENCERRAMENTO PROCESSO?", "Sim", "Não");
-            if (ok)
+            var popup = new Mensagem("Encerramento Processo", "Confirma Encerramento do Processo ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+            if (result is bool ok)
             {
-                IsBusy = true;
-                
-                await _service.EncerrarProcesso(ProcessoEstabSelecionado.codestabel, ProcessoEstabSelecionado.nrprocess.ToString());
-                await Shell.Current.GoToAsync($"{nameof(Processos)}");
-               
-                
-                IsBusy = false;
+                if (ok)
+                {
+                    IsBusy = true;
+                    await _service.EncerrarProcesso(ProcessoEstabSelecionado.codestabel, ProcessoEstabSelecionado.nrprocess.ToString());
+                    await Shell.Current.GoToAsync($"{nameof(Processos)}");
+                    IsBusy = false;
+                }
             }
         }
 
