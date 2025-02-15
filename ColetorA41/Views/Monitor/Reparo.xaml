@@ -21,7 +21,7 @@
 
             <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
                 <Image
-            Source="reparo.png"
+            Source="reparo2.png"
             HeightRequest="60"
             HorizontalOptions="Center" Margin="0,0,0,10">
                     <Image.Shadow>
