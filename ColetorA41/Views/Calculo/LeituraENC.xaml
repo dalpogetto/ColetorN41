@@ -103,12 +103,13 @@
                                         </SwipeItems>
                                     </SwipeView.RightItems>
                                     <Border HeightRequest="90" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" Margin="0,0,0,10">
-                                        <Grid ColumnDefinitions="*,auto" >
-                                            <Frame Grid.Column="1" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start"  
+                                        <Grid ColumnDefinitions="6,*,auto" >
+                                            <Border Grid.Column="0" Background="{Binding flag, Converter={StaticResource  StringToColor}}"></Border>
+                                            <Frame Grid.Column="2" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start"  
                                                    BackgroundColor="{Binding flag, Converter={StaticResource  StringToColor}}" CornerRadius="10">
                                                 <Label Text="{Binding flag}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="White"/>
                                             </Frame>
-                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto,auto" ColumnSpacing="20" Grid.Column="0">
+                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto,auto" ColumnSpacing="20" Grid.Column="1">
                                                 <!--Chave-->
                                                 <Label Text="{Binding itCodigo}" Grid.ColumnSpan="4" FontSize="16" FontAttributes="Bold" />
                                                 <!--Cabecalho-->

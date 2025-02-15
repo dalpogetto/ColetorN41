@@ -79,8 +79,9 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
+                                       
 
-                                    </Grid.RowDefinitions>
+                                </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
@@ -129,6 +130,8 @@
                                                      x:Name="lblQtde"
                                                      />
                                     </Frame>
+
+                               
                                 </Grid>
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup>

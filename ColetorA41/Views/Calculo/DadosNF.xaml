@@ -24,7 +24,7 @@
                 <Image
             Source="informe2.png"
             SemanticProperties.Description="Cute dot net bot waving hi to you!"
-            HeightRequest="80"
+            HeightRequest="60"
             HorizontalOptions="Center" Margin="0,0,0,10">
                     <Image.Shadow>
                         <Shadow Brush="Black"

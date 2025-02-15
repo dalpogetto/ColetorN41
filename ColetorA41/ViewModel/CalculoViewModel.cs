@@ -193,6 +193,11 @@ namespace ColetorA41.ViewModel
             var obj = _service.DownloadVersao();
 
         }
+        [RelayCommand]
+        void DetalheFicha(object obj)
+        {
+
+        }
 
         //Extrakit
         [RelayCommand]

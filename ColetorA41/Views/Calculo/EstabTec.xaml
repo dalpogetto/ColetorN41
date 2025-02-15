@@ -24,7 +24,7 @@
             <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
                     <Image
                     Source="usuario.png"
-                    HeightRequest="80"
+                    HeightRequest="60"
                     HorizontalOptions="Center" Margin="0,0,0,10">
                         <Image.Shadow>
                             <Shadow Brush="Black"
@@ -99,8 +99,8 @@
                    VerticalScrollBarVisibility="Always">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Tecnico">
-                            <Border Margin="0" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White" >
-                                <Grid Padding="5" Margin="0,0">
+                            <Border Margin="0,2" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                                <Grid Padding="10" Margin="0,0">
                                     <!--Chave-->
                                     <Label Text="{Binding identific}" x:Name="nomeAbrev" />
                                 </Grid>

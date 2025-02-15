@@ -37,7 +37,7 @@
             <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
                 <Image
               Source="finalizarprocesso.png"
-              HeightRequest="80"
+              HeightRequest="60"
               HorizontalOptions="Center" Margin="0,0,0,10">
                     <Image.Shadow>
                         <Shadow Brush="Black"
@@ -75,7 +75,7 @@
 
             <Button Text="Gerar Arquivo para Conferência de OS" CornerRadius="20" Background="{StaticResource dnBlue}" Command="{Binding ImprimirConferenciaCommand}" ></Button>
 
-            <Button Text="Finalizar Processo" CornerRadius="20" Background="{StaticResource dnRed}" Margin="0,40" Command="{Binding EncerrarProcessoCommand}"></Button>
+            <Button Text="Finalizar Processo" CornerRadius="20" Background="{StaticResource dnRed}" Margin="0,10" Command="{Binding EncerrarProcessoCommand}"></Button>
 
         </VerticalStackLayout>
 

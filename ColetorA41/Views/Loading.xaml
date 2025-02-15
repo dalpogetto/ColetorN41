@@ -45,9 +45,10 @@
         </StackLayout>
 
         <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" IsVisible="{Binding IsBusyLoading}">
+            <Image Source="dn_logo.png" WidthRequest="200" HeightRequest="200" />
 
             <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusyLoading}" />
-            <Label Text="Verificando autenticação..."/>
+            <Label Text="Verificando autenticação..." HorizontalTextAlignment="Center"/>
 
         </VerticalStackLayout>
 

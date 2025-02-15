@@ -22,7 +22,7 @@
             <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
                 <Image
             Source="embalagem.png"
-            HeightRequest="80"
+            HeightRequest="60"
             HorizontalOptions="Center" Margin="0,0,0,10">
                     <Image.Shadow>
                         <Shadow Brush="Black"

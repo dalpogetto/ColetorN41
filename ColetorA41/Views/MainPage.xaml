@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ColetorA41.Views.MainPage"
              Title="Selecione uma opção"
-             BackgroundColor="WhiteSmoke"
+             BackgroundColor="{StaticResource WhiteSmoke}"
              Shell.BackgroundColor="{StaticResource WhiteSmoke}"
              Shell.ForegroundColor="{StaticResource dnBlue}"
              Shell.TitleColor="{StaticResource dnBlue}"
+            
              >
 
    
@@ -58,7 +59,7 @@
             />
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110">
+                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource dnWhite}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
                     </Frame.GestureRecognizers>
@@ -70,7 +71,7 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110">
+                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource dnWhite}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarMonitorCommand}" />
                     </Frame.GestureRecognizers>
