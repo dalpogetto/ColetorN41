@@ -2,9 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ColetorA41.Views.Monitor.Reparo"
-               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+              xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
+             xmlns:models="clr-namespace:ColetorA41.Models"
   Shell.NavBarIsVisible="False"
              Title="Reparo">
+    <ContentPage.Resources>
+      
+
+        <Style x:Key="lblCabec" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{StaticResource dnBlue}" />
+        </Style>
+
+        <Style x:Key="lblDet" TargetType="Label">
+            <Setter Property="FontSize" Value="Small" />
+            <Setter Property="FontAttributes" Value="Bold" />
+
+        </Style>
+    </ContentPage.Resources>
     <Grid RowDefinitions="200,*,60,8">
         <StackLayout>
             <Grid RowDefinitions="100,200">
@@ -19,11 +36,8 @@
                 </Ellipse>
             </Grid>
 
-            <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
-                <Image
-            Source="reparo2.png"
-            HeightRequest="60"
-            HorizontalOptions="Center" Margin="0,0,0,10">
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0" Grid.Row="1">
+                <Image Source="reparo2.png" HeightRequest="60" HorizontalOptions="Center" Margin="0,0,0,10">
                     <Image.Shadow>
                         <Shadow Brush="Black"
                             Offset="10,10"
@@ -42,8 +56,44 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <VerticalStackLayout Grid.Row="1" Padding="20" Margin="0,80" Spacing="10">
-           
+        <VerticalStackLayout Grid.Row="1" Padding="0" HorizontalOptions="Center" >
+            <CollectionView x:Name="lista" 
+                    ItemsSource="{Binding listaReparos}" 
+                    SelectedItems="{Binding listaExtrakitSelecionados}"
+                   
+                  >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ReparoItem">
+                        <Border HeightRequest="100" Margin="10,2" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                            <VerticalStackLayout HorizontalOptions="FillAndExpand">
+                            <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="50,50,*,*">
+                                    <!--Cabecalho-->
+                                    <Label Text="Estab"      Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="0"></Label>
+                                    <Label Text="Filial"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="1"></Label>
+                                    <Label Text="Item"  Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="2"></Label>
+                                    <Label Text="Qtde Rep"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="3"></Label>
+                                    <!--Detalhe-->
+                                    <Label Text="{Binding codestabel}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
+                                    <Label Text="{Binding CodFilial}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
+                                    <Label Text="{Binding itcodigo}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
+                                    <Label Text="{Binding qtreparos}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="3"></Label>
+                            </Grid>
+                                <Border Background="{StaticResource Gray100}" HeightRequest="1"></Border>
+                            <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="*,*,*">
+                                <!--Cabecalho-->
+                                <Label Text="Item Equi"      Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="0"></Label>
+                                <Label Text="Qtde Equi"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="1"></Label>
+                                <Label Text="Num Serie Garantia"  Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="2"></Label>
+                                <!--Detalhe-->
+                                <Label Text="{Binding itcodigoequiv}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
+                                <Label Text="{Binding qtequiv}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
+                                <Label Text="{Binding numserieit}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
+                            </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
 
@@ -57,20 +107,18 @@
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarProcessoCommand}" />
                     </Image.GestureRecognizers>
-
-
                 </Image>
 
             </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
                 <ActivityIndicator
-         Grid.Column="0"
-         IsVisible="{Binding IsBusy}"
-         HorizontalOptions="Center"
-         IsRunning="{Binding IsBusy}"
-         VerticalOptions="Center"
-        />
+                             Grid.Column="0"
+                             IsVisible="{Binding IsBusy}"
+                             HorizontalOptions="Center"
+                             IsRunning="{Binding IsBusy}"
+                             VerticalOptions="Center"
+                            />  
             </VerticalStackLayout>
 
         </Grid>

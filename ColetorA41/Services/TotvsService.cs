@@ -223,7 +223,13 @@ namespace ColetorA41.Services
         {
             var param = new NameValueCollection { { "codEstabel", codEstabel }, { "nrProcess", nrProcess } };
             var response = await GetAsync<EncerrarResponse>("apiesaa041/EncerrarProcesso", param);
-            
+        }
+
+        public async Task<List<ReparoItem>> ObterItensParaReparo(string codEmitente, string nrProcess)
+        {
+            var param = new NameValueCollection { { "codEmitente", codEmitente }, { "nrProcess", nrProcess } };
+            var response = await GetAsync<ReparoItemResponse>("apiesaa041/ObterItensParaReparo", param);
+            return response.items;
         }
     }
 }

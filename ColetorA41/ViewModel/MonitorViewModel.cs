@@ -63,6 +63,7 @@ namespace ColetorA41.ViewModel
 
         public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
         public ObservableRangeCollection<ProcessosEstab> listaProcessosEstab { get; private set; } = new();
+        public ObservableRangeCollection<ReparoItem> listaReparos { get; private set; } = new();
 
         public async Task ObterEstabelecimentos()
         {
@@ -147,7 +148,10 @@ namespace ColetorA41.ViewModel
             }
 
             else if (obj.situacao == "R")
+            {
+                await this.ObterItensParaReparo();
                 await Shell.Current.GoToAsync($"{nameof(Reparo)}");
+            }
 
             else if (obj.situacao == "B")
                 await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
@@ -195,6 +199,16 @@ namespace ColetorA41.ViewModel
                    
                 }
             }
+        }
+
+        [RelayCommand]
+        async Task ObterItensParaReparo()
+        {
+            IsBusy = true;
+            this.listaReparos.Clear();
+            listaReparos.AddRange(await _service.ObterItensParaReparo(ProcessoEstabSelecionado.codemitente.ToString(), ProcessoEstabSelecionado.nrprocess.ToString()));
+            IsBusy = false;
+
         }
 
     }
