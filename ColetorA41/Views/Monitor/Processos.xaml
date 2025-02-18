@@ -65,7 +65,7 @@
 
         <VerticalStackLayout Grid.Row="1" Padding="20">
 
-            <Border Margin="0,0" Padding="10" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource dnWhite}">
+            <Border Margin="0,0" Padding="10" StrokeShape="RoundRectangle 20" BackgroundColor="White">
                 <StackLayout>
                     <Label Text="Estabelecimento" TextColor="{StaticResource dnBlue}"/>
                     <Picker Title="Selecione um Estabelecimento"

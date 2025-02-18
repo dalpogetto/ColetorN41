@@ -74,5 +74,15 @@ namespace ColetorA41.Services
             return response;
         }
 
+        public async Task<Serie> ValidarSerie(string itCodigo, string numSerieItem)
+        {
+            var param = new NameValueCollection {
+                {"itCodigo", itCodigo },
+                {"numSerieItem", numSerieItem }
+            };
+            var response = await GetAsync<Serie>("apiesaa046/ValidarSerie", param);
+            return response;
+        }
+
     }
 }

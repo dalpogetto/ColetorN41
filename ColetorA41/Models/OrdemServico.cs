@@ -36,4 +36,9 @@ public class OrdemServicoResponse: BaseModel
         public string Serie { get; set; }
     }
 
+    public class Serie: BaseModel
+    {
+        public string serieFormatada { get; set; }
+    }
+
 }

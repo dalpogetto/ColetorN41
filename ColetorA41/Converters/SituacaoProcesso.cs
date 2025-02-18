@@ -14,13 +14,13 @@ namespace ColetorA41.Converters
         {
             var situacao = ((string)value);
             
-            if (situacao == "E") return new Color(0, 178, 176);
+            if (situacao == "E") return new Color(0, 136, 185);
             if (situacao == "S") return new Color(0, 122, 135);
             if (situacao == "R") return new Color(1, 73, 134);
             if (situacao == "B") return new Color(80, 19, 104);
             if (situacao == "L") return new Color(166, 24, 46);
 
-            return new Color(1, 73, 134);
+            else return new Color(1, 73, 134);
 
         }
 

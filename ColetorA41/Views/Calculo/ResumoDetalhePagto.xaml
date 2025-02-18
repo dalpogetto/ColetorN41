@@ -79,8 +79,8 @@
                                   VerticalScrollBarVisibility="Always">
             <CollectionView.Header>
                 <HorizontalStackLayout HorizontalOptions="Center" Margin="0,5" VerticalOptions="Center" Spacing="5">
-                    <Image  Source="attention.png" HeightRequest="25"  HorizontalOptions="Center"/>
-                    <Label Text="Arraste a ficha para esquerda para opções" FontAttributes="Bold" FontSize="16" TextColor="{StaticResource dnGreen}"></Label>
+                    <Image  Source="attention.png" HeightRequest="20"  HorizontalOptions="Center"/>
+                    <Label Text="Arraste a ficha para esquerda para opções" FontAttributes="Bold" TextColor="{StaticResource dnBlue}"></Label>
                 </HorizontalStackLayout>
                 
             </CollectionView.Header>
@@ -108,7 +108,7 @@
                             
                         </SwipeView.RightItems>
 
-                        <Border HeightRequest="90" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                        <Border HeightRequest="90" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
 
                             <VerticalStackLayout>
 

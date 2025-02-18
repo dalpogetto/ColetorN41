@@ -207,6 +207,7 @@ namespace ColetorA41.ViewModel
             IsBusy = true;
             this.listaReparos.Clear();
             listaReparos.AddRange(await _service.ObterItensParaReparo(ProcessoEstabSelecionado.codemitente.ToString(), ProcessoEstabSelecionado.nrprocess.ToString()));
+            
             IsBusy = false;
 
         }

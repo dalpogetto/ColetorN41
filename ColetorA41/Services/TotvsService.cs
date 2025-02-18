@@ -231,5 +231,19 @@ namespace ColetorA41.Services
             var response = await GetAsync<ReparoItemResponse>("apiesaa041/ObterItensParaReparo", param);
             return response.items;
         }
+
+        public async Task<bool> ValidarItensReparo(List<ReparoItem> lista)
+        {
+            var request = new ReparoItemRequest { itemsReparo = lista };
+            var response = await PostAsync<ReparoItemRequest, ReparoItemResponse>("apiesaa041/ValidarItensReparo", request);
+            return response.ok == "ok";
+        }
+
+        public async Task<ReparoItemResponse> AbrirReparos(List<ReparoItem> lista)
+        {
+            var request = new ReparoItemRequest { itemsReparo = lista };
+            var response = await PostAsync<ReparoItemRequest, ReparoItemResponse>("apiesaa041/AbrirReparos", request);
+            return response;
+        }
     }
 }

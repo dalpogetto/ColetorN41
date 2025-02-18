@@ -69,7 +69,7 @@
             </VerticalStackLayout>
         </StackLayout>
         <StackLayout Grid.Row="1" Padding="20">
-        <Border Margin="10,55" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+        <Border Margin="10,55" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="White">
 
             <VerticalStackLayout>
 

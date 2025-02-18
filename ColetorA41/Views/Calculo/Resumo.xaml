@@ -114,7 +114,7 @@
 
             <HorizontalStackLayout HorizontalOptions="Center">
                
-                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Geral" />
                         </Frame.GestureRecognizers>
@@ -129,7 +129,7 @@
                     </Frame>
                 
 
-                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Renovar" />
                     </Frame.GestureRecognizers>
@@ -146,7 +146,7 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
-                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalhePagtoCommand}" CommandParameter="Pagto" />
                     </Frame.GestureRecognizers>
@@ -160,7 +160,7 @@
                     </Grid>
                     </Frame>
 
-                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke" >
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White" >
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="ET" />
                     </Frame.GestureRecognizers>
@@ -176,7 +176,7 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
-                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke">
+                    <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="SoEntrada" />
                     </Frame.GestureRecognizers>
@@ -190,7 +190,7 @@
                     </Grid>
                     </Frame>
 
-                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="WhiteSmoke" >
+                <Frame CornerRadius="10" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White" >
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="SemSaldo" />
                     </Frame.GestureRecognizers>

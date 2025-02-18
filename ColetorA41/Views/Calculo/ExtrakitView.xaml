@@ -72,7 +72,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Extrakit">
 
-                            <Border HeightRequest="80" Margin="10,2" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke">
+                            <Border HeightRequest="80" Margin="10,2" StrokeShape="RoundRectangle 10" BackgroundColor="White">
 
                                 <Grid Padding="5" >
                                     <Grid.RowDefinitions>

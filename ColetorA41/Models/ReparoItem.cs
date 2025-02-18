@@ -187,6 +187,14 @@ namespace ColetorA41.Models
     public class ReparoItemResponse
     {
         public List<ReparoItem> items { get; set; }
+        public string ok { get; set; }
+        public int NumPedExec { get; set; }
+    }
+
+   
+    public class ReparoItemRequest
+    {
+        public List<ReparoItem> itemsReparo { get; set; }
     }
 
 }
