@@ -55,6 +55,10 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         ArquivoResumo arquivoResumo;
 
+        [ObservableProperty]
+        ReparoItem reparoItemDados;
+
+
         [RelayCommand]
         async Task ChamarPopup()
         {
@@ -64,6 +68,7 @@ namespace ColetorA41.ViewModel
         public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
         public ObservableRangeCollection<ProcessosEstab> listaProcessosEstab { get; private set; } = new();
         public ObservableRangeCollection<ReparoItem> listaReparos { get; private set; } = new();
+        
 
         public async Task ObterEstabelecimentos()
         {
@@ -207,9 +212,55 @@ namespace ColetorA41.ViewModel
             IsBusy = true;
             this.listaReparos.Clear();
             listaReparos.AddRange(await _service.ObterItensParaReparo(ProcessoEstabSelecionado.codemitente.ToString(), ProcessoEstabSelecionado.nrprocess.ToString()));
-            
             IsBusy = false;
+        }
 
+        [RelayCommand]
+        async Task EditarReparoItem(ReparoItem item)
+        {
+            ReparoItemDados = item;
+            await Shell.Current.GoToAsync($"{nameof(ReparoEdicaoItemReparo)}");
+
+        }
+
+        [RelayCommand]
+        async Task EliminarReparoItem(ReparoItem item)
+        {
+            listaReparos.Remove(item);
+        }
+
+        [RelayCommand]
+        async Task EliminarTodosReparoItem()
+        {
+            var dialog = new MensagemSimNao("Eliminar todos", "Confirma Eliminação de Todos ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(dialog);
+            if (result is bool ok)
+            {
+                if (ok)
+                {
+                    listaReparos.Clear();
+                }
+            }
+        }
+
+        [RelayCommand]
+        async Task AbrirReparos()
+        {
+            var dialog = new MensagemSimNao("Abertura Reparos", "Confirma Abertura de Reparos ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(dialog);
+            if (result is bool ok)
+            {
+                if (ok)
+                {
+                    
+                }
+            }
+        }
+
+        [RelayCommand]
+        async Task ChamarReparo()
+        {
+            await Shell.Current.GoToAsync($"{nameof(Reparo)}");
         }
 
     }

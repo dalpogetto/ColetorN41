@@ -163,6 +163,9 @@
 	  <MauiXaml Update="Views\Monitor\Reparo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Monitor\ReparoEdicaoItemReparo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Monitor\ResumoFinal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

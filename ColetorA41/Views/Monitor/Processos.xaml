@@ -158,15 +158,14 @@
 
             </VerticalStackLayout>
 
-            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+            <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
                 <ActivityIndicator
               Grid.Column="0"
               IsVisible="{Binding IsBusy}"
               HorizontalOptions="Center"
               IsRunning="{Binding IsBusy}"
-              VerticalOptions="Center"
-             />
-            </VerticalStackLayout>
+              VerticalOptions="Center"/>
+            </StackLayout>
             
         </Grid>
         <Grid Grid.Row="3" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="-1,-1">
