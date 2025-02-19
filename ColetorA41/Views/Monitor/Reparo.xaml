@@ -111,9 +111,9 @@
                                         <Label Text="Qtde Equivalente"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="1"></Label>
                                         <Label Text="Num Serie Garantia"  Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="2"></Label>
                                         <!--Detalhe-->
-                                        <Label Text="{Binding itcodigoequiv}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
-                                        <Label Text="{Binding qtequiv}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
-                                        <Label Text="{Binding numserieit}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
+                                        <Label Text="{Binding itcodigoequiv}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0" TextColor="{StaticResource dnRed}"></Label>
+                                        <Label Text="{Binding qtequiv}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1" TextColor="{StaticResource dnRed}"></Label>
+                                        <Label Text="{Binding numserieit}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2" ></Label>
                                     </Grid>
                                 </VerticalStackLayout>
                             </Border>
@@ -125,7 +125,7 @@
             <Border Grid.Row="1" HeightRequest="90" WidthRequest="380" Margin="10" Padding="10" StrokeShape="RoundRectangle 0" Background="White">
                 <VerticalStackLayout>
                     <Label Text="Justificativa da Equivalência" TextColor="{StaticResource dnBlue}" FontAttributes="Bold"></Label>
-                    <Editor Placeholder="Adicione a justificativa"  HeightRequest="150"></Editor>
+                    <Editor Placeholder="Adicione a justificativa"  HeightRequest="150" Text="{Binding Justificativa}"></Editor>
                 </VerticalStackLayout>
                 
             </Border>

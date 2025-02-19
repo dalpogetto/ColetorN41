@@ -19,13 +19,16 @@ namespace ColetorA41.ViewModel
     public partial class MonitorViewModel:BaseViewModel
     {
         private readonly TotvsService _service;
+        private readonly TotvsService46 _service46;
         private readonly IConfiguration _config;
 
 
         public MonitorViewModel(TotvsService totvsService,
+                                TotvsService46 totvsService46,
                                 IConfiguration config)
         {
             _service = totvsService;
+            _service46 = totvsService46;
             _config = config;
         }
 
@@ -57,6 +60,12 @@ namespace ColetorA41.ViewModel
 
         [ObservableProperty]
         ReparoItem reparoItemDados;
+
+        [ObservableProperty]
+        ReparoItem reparoOriginal;
+
+        [ObservableProperty]
+        string justificativa;
 
 
         [RelayCommand]
@@ -219,14 +228,49 @@ namespace ColetorA41.ViewModel
         async Task EditarReparoItem(ReparoItem item)
         {
             ReparoItemDados = item;
-            await Shell.Current.GoToAsync($"{nameof(ReparoEdicaoItemReparo)}");
 
+            //Guardar valor original para retornar aos campos qdo houver erro
+            ReparoOriginal = new ReparoItem { itcodigoequiv = item.itcodigoequiv, qtequiv = item.qtequiv, numserieit = item.numserieit };
+            await Shell.Current.GoToAsync($"{nameof(ReparoEdicaoItemReparo)}");
+        }
+
+        [RelayCommand]
+        async Task SalvarItemReparo()
+        {
+            //Testar numero de serie
+            IsBusy=true;
+            var ok = await _service46.ValidarSerie(ReparoItemDados.itcodigo, ReparoItemDados.numserieit);
+            if (ok.type == "error")
+            {
+                IsBusy = false;
+                var erro = new Mensagem("error", ok.detailedMessage, ok.message);
+                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
+                //Num serie original
+                ReparoItemDados.numserieit = ReparoOriginal.numserieit;
+                return;
+            }
+
+            
+            ReparoItemDados.lequivalente = ReparoItemDados.itcodigoequiv != string.Empty;
+            if (ReparoItemDados.lequivalente)
+            {
+                ReparoItemDados.descitemequiv = Justificativa;
+            }
         }
 
         [RelayCommand]
         async Task EliminarReparoItem(ReparoItem item)
         {
-            listaReparos.Remove(item);
+            var dialog = new MensagemSimNao("Exclusão Reparo", "Confirma Exclusão ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(dialog);
+            if (result is bool ok)
+            {
+                if (ok)
+                {
+                    listaReparos.Remove(item);
+                }
+            }
+            
         }
 
         [RelayCommand]
@@ -246,20 +290,83 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task AbrirReparos()
         {
+            var lexcecao = true;
             var dialog = new MensagemSimNao("Abertura Reparos", "Confirma Abertura de Reparos ?");
             var result = await Shell.Current.CurrentPage.ShowPopupAsync(dialog);
             if (result is bool ok)
             {
                 if (ok)
                 {
-                    
+                    //justificativa
+                    foreach (var item in listaReparos)
+                    {
+                        item.descitemequiv = Justificativa;
+                        if (!item.lequivalente)
+                            lexcecao = false;
+                        else if (item.lequivalente && item.itcodigo.Substring(0, 6) == item.itcodigoequiv.Substring(0, 6) && item.itcodigo.Substring(0, 2) == "98")
+                            lexcecao = false;
+                    }
+
+                    if (lexcecao && listaReparos.Count > 0)
+                    {
+
+                        var dialog2 = new MensagemSimNao("Equivalência por Exceção", "Confirma Equivalência por Exceção ?");
+                        var result2 = await Shell.Current.CurrentPage.ShowPopupAsync(dialog2);
+                        if (result2 is bool ok2)
+                        {
+                            if (ok2)
+                            {
+                                var res = await _service.ValidarItensReparo(listaReparos.ToList());
+                                if (res)
+                                {
+                                   await ChamarCriacaoReparo();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var res = await _service.ValidarItensReparo(listaReparos.ToList());
+                        if (res)
+                        {
+                            await ChamarCriacaoReparo();
+                        }
+
+                    }
                 }
             }
         }
 
+        async Task ChamarCriacaoReparo()
+        {
+            var dialog = new MensagemSimNao("Geração e Impressao Reparos", "Deseja Gerar e Imprimir os Reparos ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(dialog);
+            if (result is bool ok)
+            {
+                if (ok)
+                {
+                    //Caso nao exista nenhum registro no grid retornar valores padrao
+                    if (listaReparos.Count == 0)
+                    {
+                        listaReparos.Add(new ReparoItem { itcodigo = "", codestabel = ProcessoEstabSelecionado.codestabel, nrprocess = ProcessoEstabSelecionado.nrprocess });
+                    }
+                    var res = await _service.AbrirReparos(listaReparos.ToList());
+                    if(res.NumPedExec > 0)
+                    {
+                        var mensa = new Mensagem("info", "Gerado Pedido Execução", string.Format("Pedido de Execução:{0}", res.NumPedExec));
+                        await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+                    }
+                }
+            }
+        }
+
+       
+
         [RelayCommand]
         async Task ChamarReparo()
         {
+            //Voltar os campos originais
+
             await Shell.Current.GoToAsync($"{nameof(Reparo)}");
         }
 
