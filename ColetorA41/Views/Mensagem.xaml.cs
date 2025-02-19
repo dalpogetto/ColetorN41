@@ -15,9 +15,11 @@ public partial class Mensagem:Popup
             tipoMensagem = value;
             if (TipoMensagem.ToUpper() == "OK")
             {
+                this.icone.Source = "success.png";
+            }
+            else if(TipoMensagem.ToUpper() == "INFO")
+            {
                 this.icone.Source = "info.png";
-
-                
             }
             else
             {

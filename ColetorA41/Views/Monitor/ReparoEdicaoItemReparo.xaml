@@ -97,7 +97,9 @@
 
                         <VerticalStackLayout>
                             <Label Text="Num. Série Garantia" Style="{StaticResource lblCabec}"></Label>
-                            <Entry Placeholder="Num Serie" Keyboard="Numeric" Text="{Binding ReparoItemDados.numserieit}"></Entry>
+                            <Entry Placeholder="Num Serie" Keyboard="Numeric" Text="{Binding ReparoItemDados.numserieit}">
+                                
+                            </Entry>
                         </VerticalStackLayout>
 
                         <Button Text="Salvar" CornerRadius="20" Background="{StaticResource dnGreen}" Command="{Binding SalvarItemReparoCommand}"></Button>

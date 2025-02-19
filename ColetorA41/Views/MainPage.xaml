@@ -18,9 +18,9 @@
             <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
                 <Ellipse.Shadow>
                     <Shadow Brush="{StaticResource dnPurple}"
-                             Offset="10,10"
-                             Radius="40"
-                             Opacity="0.8"/>
+                             Offset="0,10"
+                             Radius="30"
+                             Opacity="1"/>
                 </Ellipse.Shadow>
               
                

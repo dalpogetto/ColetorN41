@@ -104,20 +104,16 @@ namespace ColetorA41.Services
             var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(Ambiente.PrefixoUrl, metodo)) };
             if (requestBody != null)
             {
-                var json = System.Text.Json.JsonSerializer.Serialize(requestBody);
+               // var json = System.Text.Json.JsonSerializer.Serialize(requestBody);
+                var json = JsonConvert.SerializeObject(requestBody);
                 request.Content = new StringContent(json, Encoding.UTF8, "application/json");
             }
             try
             {
                 var response = await _httpClient.SendAsync(request);
-                if (!response.IsSuccessStatusCode)
+                var responseStream = await response.Content.ReadAsStringAsync();
                 {
-                    throw new HttpRequestException($"Erro: {response.StatusCode}");
-                }
-
-                using (var responseStream = await response.Content.ReadAsStreamAsync())
-                {
-                    var data = await System.Text.Json.JsonSerializer.DeserializeAsync<TResponse>(responseStream);
+                    var data = JsonConvert.DeserializeObject<TResponse>(responseStream);
                     return data;
                 }
 

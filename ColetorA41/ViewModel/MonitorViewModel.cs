@@ -67,6 +67,9 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         string justificativa;
 
+        [ObservableProperty]
+        notafiscal dadosNotaFiscal;
+
 
         [RelayCommand]
         async Task ChamarPopup()
@@ -163,12 +166,15 @@ namespace ColetorA41.ViewModel
 
             else if (obj.situacao == "R")
             {
-                await this.ObterItensParaReparo();
                 await Shell.Current.GoToAsync($"{nameof(Reparo)}");
+                await this.ObterItensParaReparo();
             }
 
             else if (obj.situacao == "B")
+            {
                 await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
+                await this.ObterDadosPrimeiraNota();
+            }
 
         }
 
@@ -225,6 +231,21 @@ namespace ColetorA41.ViewModel
         }
 
         [RelayCommand]
+        async Task ObterDadosPrimeiraNota()
+        {
+            IsBusy = true;
+            var resp = await _service.ObterPrimeiraNota(new DadosEmbalagem
+            {
+                CodEstab = ProcessoEstabSelecionado.codestabel,
+                CodTecnico = ProcessoEstabSelecionado.codemitente,
+                NrProcess = ProcessoEstabSelecionado.nrprocess
+            });
+
+            DadosNotaFiscal = resp.nfs[0];
+            IsBusy = false;
+        }
+
+        [RelayCommand]
         async Task EditarReparoItem(ReparoItem item)
         {
             ReparoItemDados = item;
@@ -242,20 +263,18 @@ namespace ColetorA41.ViewModel
             var ok = await _service46.ValidarSerie(ReparoItemDados.itcodigo, ReparoItemDados.numserieit);
             if (ok.type == "error")
             {
-                IsBusy = false;
+                
                 var erro = new Mensagem("error", ok.detailedMessage, ok.message);
                 await Shell.Current.CurrentPage.ShowPopupAsync(erro);
                 //Num serie original
-                ReparoItemDados.numserieit = ReparoOriginal.numserieit;
-                return;
+                ReparoItemDados.numserieit = "000000000000";
+                //return;
             }
 
-            
+            IsBusy = false;
             ReparoItemDados.lequivalente = ReparoItemDados.itcodigoequiv != string.Empty;
-            if (ReparoItemDados.lequivalente)
-            {
-                ReparoItemDados.descitemequiv = Justificativa;
-            }
+            await this.ChamarReparo();
+           
         }
 
         [RelayCommand]
@@ -270,7 +289,6 @@ namespace ColetorA41.ViewModel
                     listaReparos.Remove(item);
                 }
             }
-            
         }
 
         [RelayCommand]
@@ -303,7 +321,7 @@ namespace ColetorA41.ViewModel
                         item.descitemequiv = Justificativa;
                         if (!item.lequivalente)
                             lexcecao = false;
-                        else if (item.lequivalente && item.itcodigo.Substring(0, 6) == item.itcodigoequiv.Substring(0, 6) && item.itcodigo.Substring(0, 2) == "98")
+                        else if (item.lequivalente && (item.itcodigo.Substring(0, 6) == item.itcodigoequiv.Substring(0, 6)) && (item.itcodigo.Substring(0, 2) == "98"))
                             lexcecao = false;
                     }
 
@@ -317,7 +335,13 @@ namespace ColetorA41.ViewModel
                             if (ok2)
                             {
                                 var res = await _service.ValidarItensReparo(listaReparos.ToList());
-                                if (res)
+                                if (res.type == "error")
+                                {
+                                    var mensa = new Mensagem("error", res.detailedMessage, res.message);
+                                    await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+                                    return;
+                                }
+                                if (res.ok == "ok")
                                 {
                                    await ChamarCriacaoReparo();
                                 }
@@ -327,7 +351,13 @@ namespace ColetorA41.ViewModel
                     else
                     {
                         var res = await _service.ValidarItensReparo(listaReparos.ToList());
-                        if (res)
+                        if (res.type == "error")
+                        {
+                            var mensa = new Mensagem("error", res.detailedMessage, res.message);
+                            await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+                            return;
+                        }
+                        if (res.ok == "ok")
                         {
                             await ChamarCriacaoReparo();
                         }
@@ -351,10 +381,21 @@ namespace ColetorA41.ViewModel
                         listaReparos.Add(new ReparoItem { itcodigo = "", codestabel = ProcessoEstabSelecionado.codestabel, nrprocess = ProcessoEstabSelecionado.nrprocess });
                     }
                     var res = await _service.AbrirReparos(listaReparos.ToList());
-                    if(res.NumPedExec > 0)
+                    if (res.type == "error")
                     {
-                        var mensa = new Mensagem("info", "Gerado Pedido Execução", string.Format("Pedido de Execução:{0}", res.NumPedExec));
+                        var mensa = new Mensagem("error", res.detailedMessage, res.message);
                         await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+                        return;
+                    }
+
+                    if (res.NumPedExec > 0)
+                    {
+                        var mensa = new Mensagem("ok", "Gerado Pedido Execução", string.Format("Pedido de Execução:{0}", res.NumPedExec));
+                        await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+
+                        //Atualizar grid e chamar lista de processos
+                        await CarregarProcessosEstabelecimento();
+                        await Shell.Current.GoToAsync($"{nameof(Processos)}");
                     }
                 }
             }

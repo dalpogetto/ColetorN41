@@ -184,7 +184,7 @@ namespace ColetorA41.Models
         public object DataRRAnt { get; set; }
     }
 
-    public class ReparoItemResponse
+    public class ReparoItemResponse:BaseModel
     {
         public List<ReparoItem> items { get; set; }
         public string ok { get; set; }
@@ -194,6 +194,7 @@ namespace ColetorA41.Models
    
     public class ReparoItemRequest
     {
+        public List<ReparoItem> reparos { get; set; }
         public List<ReparoItem> itemsReparo { get; set; }
     }
 
