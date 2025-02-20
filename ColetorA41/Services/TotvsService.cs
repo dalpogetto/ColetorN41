@@ -252,5 +252,12 @@ namespace ColetorA41.Services
             var response = await PostAsync<DadosEmbalagem, NotaFiscalEmbalagemResponse>("apiesaa041/ObterPrimeiraNota", request);
             return response;
         }
+
+        public async Task<NotaFiscalPagtoResponse> ObterNotasPagto(string nrProcess)
+        {
+            var request = new NotaFiscalPagtoRequest { nrProcess = nrProcess };
+            var response = await PostAsync<NotaFiscalPagtoRequest, NotaFiscalPagtoResponse>("apiesaa041/ObterNotasPagto", request);
+            return response;
+        }
     }
 }

@@ -80,7 +80,8 @@ namespace ColetorA41.ViewModel
         public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
         public ObservableRangeCollection<ProcessosEstab> listaProcessosEstab { get; private set; } = new();
         public ObservableRangeCollection<ReparoItem> listaReparos { get; private set; } = new();
-        
+        public ObservableRangeCollection<NotaFiscalPagto> listaNotaPagto { get; private set; } = new();
+
 
         public async Task ObterEstabelecimentos()
         {
@@ -173,7 +174,8 @@ namespace ColetorA41.ViewModel
             else if (obj.situacao == "B")
             {
                 await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
-                await this.ObterDadosPrimeiraNota();
+                //await this.ObterDadosPrimeiraNota();
+                await this.ObterNotasPagto();
             }
 
         }
@@ -242,6 +244,16 @@ namespace ColetorA41.ViewModel
             });
 
             DadosNotaFiscal = resp.nfs[0];
+            IsBusy = false;
+        }
+
+        [RelayCommand]
+        async Task ObterNotasPagto()
+        {
+            IsBusy = true;
+            listaNotaPagto.Clear();
+            var resp = await _service.ObterNotasPagto(ProcessoEstabSelecionado.nrprocess.ToString());
+            listaNotaPagto.AddRange(resp.items);
             IsBusy = false;
         }
 
