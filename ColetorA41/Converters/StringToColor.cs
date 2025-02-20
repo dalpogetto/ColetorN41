@@ -13,7 +13,7 @@ namespace ColetorA41.Converters
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if ((string)value == "OK")
-                return new Color(1, 73, 134);
+                return new Color(0, 122, 135);
             else
                 return new Color(166, 24, 46);
         }

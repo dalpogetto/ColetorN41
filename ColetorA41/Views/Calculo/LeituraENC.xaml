@@ -45,7 +45,7 @@
             <VerticalStackLayout Padding="20,5" Margin="0,-300,0,0">
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,20" >
                     <Image
-                        Source="scanner.png"
+                        Source="scanner3.png"
                         HeightRequest="60"
                         HorizontalOptions="Center">
                         <Image.Shadow>
@@ -66,11 +66,14 @@
                
                 <Border HeightRequest="70" Margin="10,0" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke"  >
                     <Entry x:Name="entry"
+                       toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
+                       ReturnType="Next"
                        Margin="20,10"
                        FontSize="18"
+                       
                        Text="{Binding NumEnc}"
                        Placeholder="Aguardando leitura de etiqueta...."
-                       PlaceholderColor="{StaticResource dnRed}"
+                       PlaceholderColor="{StaticResource Gray300}"
                        ReturnCommand="{Binding LeituraENCCommand}"
                        ReturnCommandParameter="{Binding NumEnc}"
                        TextColor="Black"></Entry>

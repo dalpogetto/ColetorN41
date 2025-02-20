@@ -13,7 +13,7 @@
   
         <Grid RowDefinitions="50,*,60,8">
 
-            <Grid RowDefinitions="100, 200">
+            <Grid RowDefinitions="80, 200">
             <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                 <Ellipse.Shadow>
@@ -45,7 +45,7 @@
 
             </HorizontalStackLayout>
         
-            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,20,0,0" Grid.Row="1" HorizontalOptions="Center">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,30,0,0" Grid.Row="1" HorizontalOptions="Center">
             <Button Text="Impressão Informe" WidthRequest="250" 
                     BackgroundColor="{StaticResource dnGreen}" 
                     Command="{Binding GerarInformeCommand}" 
@@ -55,7 +55,7 @@
                
 
             </HorizontalStackLayout>
-            <HorizontalStackLayout Margin="0,50,0,-10" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
+            <HorizontalStackLayout Margin="0,20,0,0" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
                 <RadioButton Content="Renov.Total" Value="1" IsChecked="{Binding IsTotal}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior

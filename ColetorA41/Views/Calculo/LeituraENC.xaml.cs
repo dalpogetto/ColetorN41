@@ -1,4 +1,5 @@
 using ColetorA41.ViewModel;
+using CommunityToolkit.Maui.Core.Platform;
 
 namespace ColetorA41.Views.Calculo;
 

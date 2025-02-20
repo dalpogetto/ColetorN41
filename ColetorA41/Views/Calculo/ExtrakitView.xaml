@@ -10,7 +10,7 @@
              Title="Extrakit">
     <Grid RowDefinitions="200,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="100,200">
+            <Grid RowDefinitions="80,200">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
                 <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
@@ -51,10 +51,10 @@
                         WidthRequest="230" 
                         CornerRadius="20"/>
 
-                <VerticalStackLayout Spacing="5" HorizontalOptions="Center" >
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" >
                     <Label Text="{Binding QtdeETSelecionadas, StringFormat='Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"></Label>
                     <Label Text="{Binding QtdeETNaoSelecionadas, StringFormat='Não Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"></Label>
-                </VerticalStackLayout>
+                </HorizontalStackLayout>
 
 
             </VerticalStackLayout>
@@ -72,9 +72,9 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Extrakit">
 
-                            <Border HeightRequest="80" Margin="10,2" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                            <Border HeightRequest="80" Margin="10,2" StrokeShape="RoundRectangle 10" BackgroundColor="White" Padding="10">
 
-                                <Grid Padding="5" >
+                                <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
