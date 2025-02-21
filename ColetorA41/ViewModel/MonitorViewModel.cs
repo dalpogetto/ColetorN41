@@ -263,6 +263,7 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ObterNotasPagto()
         {
+
             IsBusy = true;
             await Shell.Current.GoToAsync($"{nameof(EmbalagemLoading)}");
             listaNotaPagto.Clear();

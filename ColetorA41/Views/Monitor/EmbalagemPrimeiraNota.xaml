@@ -7,6 +7,7 @@
             xmlns:converters="clr-namespace:ColetorA41.Converters"
             xmlns:local="clr-namespace:ColetorA41.Converters"
              Shell.NavBarIsVisible="False"
+             HideSoftInputOnTapped="True"
              Title="EmbalagemPrimeiraNota">
     <ContentPage.Resources>
         <Style x:Key="lblCabec" TargetType="Label">

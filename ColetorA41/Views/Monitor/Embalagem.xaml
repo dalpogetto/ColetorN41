@@ -7,6 +7,7 @@
               xmlns:local="clr-namespace:ColetorA41.Converters"
               xmlns:models="clr-namespace:ColetorA41.Models"
              Shell.NavBarIsVisible="False"
+             HideSoftInputOnTapped="True"
              x:Name="leituraItem"
              Title="Embalagem">
     
