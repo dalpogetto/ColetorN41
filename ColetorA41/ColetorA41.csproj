@@ -157,6 +157,12 @@
 	  <MauiXaml Update="Views\Monitor\Embalagem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Monitor\EmbalagemLoading.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Monitor\EmbalagemPrimeiraNota.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Monitor\Processos.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

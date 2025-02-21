@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColetorA41.Views.Monitor.EmbalagemPrimeiraNota"
+              xmlns:models="clr-namespace:ColetorA41.Models"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            xmlns:converters="clr-namespace:ColetorA41.Converters"
+            xmlns:local="clr-namespace:ColetorA41.Converters"
+             Shell.NavBarIsVisible="False"
+             Title="EmbalagemPrimeiraNota">
+    <ContentPage.Resources>
+        <Style x:Key="lblCabec" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{StaticResource dnBlue}" />
+           
+        </Style>
+
+        <Style x:Key="lblDet" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontAttributes" Value="Bold" />
+
+        </Style>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="200,*,60,8">
+        <StackLayout>
+            <Grid RowDefinitions="100,200">
+                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
+                    <Ellipse.Shadow>
+                        <Shadow Brush="Black"
+                            Offset="1,1"
+                            Radius="5"
+                            Opacity="0.8" />
+                    </Ellipse.Shadow>
+                </Ellipse>
+            </Grid>
+
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
+                <Image
+               Source="embalageminfo.png"
+               HeightRequest="60"
+               HorizontalOptions="Center" Margin="0,0,0,10">
+                    <Image.Shadow>
+                        <Shadow Brush="Black"
+                               Offset="10,10"
+                               Radius="40"
+                               Opacity="0.8" />
+                    </Image.Shadow>
+                </Image>
+
+                <Label 
+                       Text="Dados Embalagem"
+                       TextColor="{StaticResource White}"
+                       FontAttributes="Bold"
+                       FontSize="22"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" Margin="0,0,0,0"/>
+            </VerticalStackLayout>
+        </StackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Margin="10,0">
+            <Border Margin="0,0" StrokeShape="RoundRectangle 10" BackgroundColor="White" Padding="10">
+                <Grid RowDefinitions="*,*" ColumnDefinitions="50,50,*,*" HorizontalOptions="Center" ColumnSpacing="20">
+
+                    <!--Cabecalho-->
+                    <Label Text="Estab"      Style="{StaticResource lblCabec}" Grid.Column="0"></Label>
+                    <Label Text="Serie"       Style="{StaticResource lblCabec}" Grid.Column="1"></Label>
+                    <Label Text="Nota Fiscal"  Style="{StaticResource lblCabec}"  Grid.Column="2"></Label>
+                    <Label Text="Nat Operacao"  Style="{StaticResource lblCabec}"  Grid.Column="3"></Label>
+                    <!--Detalhe-->
+                    <Label Text="{Binding DadosNotaFiscal.codestabel}" Style="{StaticResource lblDet}" Grid.Row="1" Grid.Column="0"></Label>
+                    <Label Text="{Binding DadosNotaFiscal.serie}"   Style="{StaticResource lblDet}" Grid.Row="1" Grid.Column="1"></Label>
+                    <Label Text="{Binding DadosNotaFiscal.nrnotafis}"        Style="{StaticResource lblDet}" Grid.Row="1" Grid.Column="2"></Label>
+                    <Label Text="{Binding DadosNotaFiscal.natoperacao}"        Style="{StaticResource lblDet}" Grid.Row="1" Grid.Column="3"></Label>
+                </Grid>
+            </Border>
+
+            <Border Margin="10,10" StrokeShape="RoundRectangle 20" BackgroundColor="White" HeightRequest="400" Padding="20">
+                <Grid>
+                    <VerticalStackLayout VerticalOptions="Start">
+                        <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*" RowSpacing="20">
+                            <Label Grid.Row="0" Text="Volumes" Style="{StaticResource lblCabec}"></Label>
+                            <Entry Grid.Row="0" HeightRequest="50"></Entry>
+
+                            <Label Grid.Row="1" Text="Modalidade Embalagem" Style="{StaticResource lblCabec}" Margin="10"></Label>
+                            <Border Grid.Row="1" Grid.ColumnSpan="2" StrokeShape="RoundRectangle 10">
+                                <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" 
+                                                   Margin="0,30,0,0" 
+                                                   Spacing="50" 
+                                                   RadioButtonGroup.GroupName="TipoModalidade" 
+                                                   RadioButtonGroup.SelectedValue="{Binding TipoModalidade}" HorizontalOptions="Center">
+                                    <RadioButton Content="Aéreo" Value="1" IsChecked="{Binding IsAereo}">
+                                        <RadioButton.Behaviors>
+                                            <toolkit:EventToCommandBehavior
+                                               Command="{Binding RadioTipoCalculoCommand}"
+                                               CommandParameter="1"/>
+                                        </RadioButton.Behaviors>
+                                        <RadioButton.Triggers>
+                                            <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                                                <Setter Property="FontSize" Value="16" />
+                                                <Setter Property="FontAttributes" Value="Bold" />
+                                            </Trigger>
+                                            <Trigger TargetType="RadioButton" Property="IsChecked" Value="False">
+                                                <Setter Property="FontSize" Value="12" />
+                                                <Setter Property="FontAttributes" Value="None" />
+                                            </Trigger>
+                                        </RadioButton.Triggers>
+                                    </RadioButton>
+                                    <RadioButton Content="Rodoviário" Value="2" IsChecked="{Binding IsRodoviario}" FontSize="20" >
+                                        <RadioButton.Behaviors>
+                                            <toolkit:EventToCommandBehavior
+                                                 EventName="CheckedChanged"
+                                                 Command="{Binding RadioTipoCalculoCommand}"
+                                                 CommandParameter="2"/>
+                                        </RadioButton.Behaviors>
+                                        <RadioButton.Triggers>
+                                            <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                                                <Setter Property="FontSize" Value="16" />
+                                                <Setter Property="FontAttributes" Value="Bold" />
+                                            </Trigger>
+                                            <Trigger TargetType="RadioButton" Property="IsChecked" Value="False">
+                                                <Setter Property="FontSize" Value="12" />
+                                                <Setter Property="FontAttributes" Value="None" />
+                                            </Trigger>
+                                        </RadioButton.Triggers>
+                                    </RadioButton>
+
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <Label Grid.Row="2" Text="Embalagem" Style="{StaticResource lblCabec}"> </Label>
+                            <Entry Grid.Row="2" HeightRequest="50" IsEnabled="{Binding IsAereo}" Text="{Binding DadosNotaFiscal.volume}"></Entry>
+
+                            <Label Grid.Row="2" Grid.Column="1" Text="Qde Embalagem" Style="{StaticResource lblCabec}"></Label>
+                            <Entry Grid.Row="2" Grid.Column="1" HeightRequest="50" IsEnabled="{Binding IsAereo}"></Entry>
+
+                            <Label Grid.Row="3" Text="Peso Líquido" Style="{StaticResource lblCabec}"></Label>
+                            <Entry Grid.Row="3" HeightRequest="50" Text="{Binding DadosNotaFiscal.pesoliq}"></Entry>
+
+                            <Label Grid.Row="3" Grid.Column="1" Text="Peso Bruto" Style="{StaticResource lblCabec}"></Label>
+                            <Entry Grid.Row="3" Grid.Column="1" HeightRequest="50" Text="{Binding DadosNotaFiscal.pesobru}"></Entry>
+                        </Grid>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout VerticalOptions="End">
+                        <Button Text="Salvar" Background="{StaticResource dnBlue}" HeightRequest="50" CornerRadius="20" Command="{Binding SalvarEmbalagemNotaCommand}"></Button>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,*,*" >
+            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
+                <Image Source="seta_esquerda" WidthRequest="50">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
+                    </Image.Behaviors>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarProcessoCommand}" />
+                    </Image.GestureRecognizers>
+
+
+                </Image>
+
+            </VerticalStackLayout>
+
+            <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                <ActivityIndicator
+            Grid.Column="0"
+            IsVisible="{Binding IsBusy}"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsBusy}"
+            VerticalOptions="Center"/>
+            </StackLayout>
+
+        </Grid>
+        <Grid Grid.Row="3" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="-1,-1">
+            <Rectangle>
+                <Rectangle.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="{StaticResource dnBlue}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource dnPurple}"  Offset="0.5" />
+                        <GradientStop Color="{StaticResource dnRed}"  Offset="1.0" />
+                    </LinearGradientBrush>
+                </Rectangle.Background>
+            </Rectangle>
+
+        </Grid>
+
+
+    </Grid>
+</ContentPage>

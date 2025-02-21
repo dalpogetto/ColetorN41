@@ -259,5 +259,19 @@ namespace ColetorA41.Services
             var response = await PostAsync<NotaFiscalPagtoRequest, NotaFiscalPagtoResponse>("apiesaa041/ObterNotasPagto", request);
             return response;
         }
+
+        public async Task<int> ImpressaoEtiquetaItemPago(string codEstabel, string itCodigo, int qtde)
+        {
+            var param = new NameValueCollection { { "codEstabel", codEstabel }, { "itCodigo", itCodigo }, { "qtde", qtde.ToString() } };
+            var response = await GetAsync<int>("apiesaa041/ImpressaoEtiquetaItemPago", param);
+            return response;
+        }
+
+        public async Task<NotaFiscalPagtoResponse> LeituraItemPagto(string nrProcess, string itCodigo)
+        {
+            var request = new NotaFiscalPagtoRequest { nrProcess = nrProcess, itCodigo = itCodigo };
+            var response = await PostAsync<NotaFiscalPagtoRequest, NotaFiscalPagtoResponse>("apiesaa041/LeituraItemPagto", request);
+            return response;
+        }
     }
 }

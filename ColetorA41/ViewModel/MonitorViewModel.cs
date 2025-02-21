@@ -70,6 +70,18 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         notafiscal dadosNotaFiscal;
 
+        [ObservableProperty]
+        string codigoItem;
+
+        [ObservableProperty]
+        bool isAereo=false;
+
+        [ObservableProperty]
+        bool isRodoviario = true;
+
+        [ObservableProperty]
+        int tipoModalidade = 2;
+
 
         [RelayCommand]
         async Task ChamarPopup()
@@ -173,8 +185,9 @@ namespace ColetorA41.ViewModel
 
             else if (obj.situacao == "B")
             {
-                await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
+                //await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
                 //await this.ObterDadosPrimeiraNota();
+                //O método ObterNotasPagto decidira pelas telas Embalagem ou EmbalagemPrimeiraNota
                 await this.ObterNotasPagto();
             }
 
@@ -251,10 +264,41 @@ namespace ColetorA41.ViewModel
         async Task ObterNotasPagto()
         {
             IsBusy = true;
+            await Shell.Current.GoToAsync($"{nameof(EmbalagemLoading)}");
             listaNotaPagto.Clear();
             var resp = await _service.ObterNotasPagto(ProcessoEstabSelecionado.nrprocess.ToString());
             listaNotaPagto.AddRange(resp.items);
+
+            //Verificar Para qual tela direcionar
+            if (listaNotaPagto.Count > 0)
+            {
+                var existePendencia = listaNotaPagto.Where(x => x.situacao.ToUpper() == "PENDENTE").FirstOrDefault();
+                if (existePendencia != null)
+                    await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
+                else
+                {
+                    //Setar Combo modalidade
+                    IsRodoviario = true;
+                    IsAereo = false;
+                    TipoModalidade = 2;
+                   
+                    await this.ObterDadosPrimeiraNota();
+                    await Shell.Current.GoToAsync($"{nameof(EmbalagemPrimeiraNota)}");
+                }
+            }
             IsBusy = false;
+        }
+
+        [RelayCommand]
+        async Task ImpressaoEtiquetaItemPago(NotaFiscalPagto nf)
+        {
+            IsBusy = true;
+            listaNotaPagto.Clear();
+            var resp = await _service.ImpressaoEtiquetaItemPago(nf.codestabel, nf.itcodigo, nf.qtfaturada);
+            var mensa = new Mensagem("ok", "Impressão Etiqueta", String.Format("Gerado Num Ped Exec:{0}", resp));
+            await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+            IsBusy = false;
+            return;
         }
 
         [RelayCommand]
@@ -413,7 +457,24 @@ namespace ColetorA41.ViewModel
             }
         }
 
-       
+        [RelayCommand]
+        async Task LeituraItemPago(string itCodigo)
+        {
+            this.IsBusy = true;
+            if (string.IsNullOrEmpty(itCodigo))
+            {
+                this.IsBusy = false;
+                return;
+            }
+
+            var resp = await _service.LeituraItemPagto(ProcessoEstabSelecionado.nrprocess.ToString(), itCodigo);
+            await this.ObterNotasPagto();
+            CodigoItem = string.Empty;
+
+
+        }
+
+
 
         [RelayCommand]
         async Task ChamarReparo()
@@ -421,6 +482,20 @@ namespace ColetorA41.ViewModel
             //Voltar os campos originais
 
             await Shell.Current.GoToAsync($"{nameof(Reparo)}");
+        }
+
+        [RelayCommand]
+        async Task ChamarEmbalagemPrimeiraNota()
+        {
+            //Voltar os campos originais
+
+            await Shell.Current.GoToAsync($"{nameof(EmbalagemPrimeiraNota)}");
+        }
+
+        [RelayCommand]
+        async Task SalvarEmbalagemNota()
+        {
+            var obj = DadosNotaFiscal;
         }
 
     }

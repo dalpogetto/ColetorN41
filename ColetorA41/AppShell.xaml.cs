@@ -35,6 +35,8 @@ namespace ColetorA41
             Routing.RegisterRoute(nameof(Processos), typeof(Processos));
             Routing.RegisterRoute(nameof(ResumoFinal), typeof(ResumoFinal));
             Routing.RegisterRoute(nameof(Embalagem), typeof(Embalagem));
+            Routing.RegisterRoute(nameof(EmbalagemLoading), typeof(EmbalagemLoading));
+            Routing.RegisterRoute(nameof(EmbalagemPrimeiraNota), typeof(EmbalagemPrimeiraNota));
             Routing.RegisterRoute(nameof(Reparo), typeof(Reparo));
             Routing.RegisterRoute(nameof(ReparoEdicaoItemReparo), typeof(ReparoEdicaoItemReparo));
 

@@ -80,6 +80,8 @@ namespace ColetorA41
             builder.Services.AddTransient<Processos>();
             builder.Services.AddTransient<ResumoFinal>();
             builder.Services.AddTransient<Embalagem>();
+            builder.Services.AddTransient<EmbalagemLoading>();
+            builder.Services.AddTransient<EmbalagemPrimeiraNota>();
             builder.Services.AddTransient<Reparo>();
             builder.Services.AddTransient<ReparoEdicaoItemReparo>();
             #endregion

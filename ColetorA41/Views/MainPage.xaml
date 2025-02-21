@@ -19,8 +19,8 @@
                 <Ellipse.Shadow>
                     <Shadow Brush="{StaticResource dnPurple}"
                              Offset="0,10"
-                             Radius="30"
-                             Opacity="1"/>
+                             Radius="10"
+                             Opacity="0.8"/>
                 </Ellipse.Shadow>
               
                
