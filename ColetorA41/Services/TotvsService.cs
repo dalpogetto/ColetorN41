@@ -260,10 +260,10 @@ namespace ColetorA41.Services
             return response;
         }
 
-        public async Task<int> ImpressaoEtiquetaItemPago(string codEstabel, string itCodigo, int qtde)
+        public async Task<EtiquetaResponse> ImpressaoEtiquetaItemPago(string codEstabel, string itCodigo, int qtde)
         {
             var param = new NameValueCollection { { "codEstabel", codEstabel }, { "itCodigo", itCodigo }, { "qtde", qtde.ToString() } };
-            var response = await GetAsync<int>("apiesaa041/ImpressaoEtiquetaItemPago", param);
+            var response = await GetAsync<EtiquetaResponse>("apiesaa041/ImpressaoEtiquetaItemPago", param);
             return response;
         }
 

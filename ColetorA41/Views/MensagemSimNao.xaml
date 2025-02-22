@@ -5,8 +5,8 @@
             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
     <Grid RowDefinitions="200,*,60" WidthRequest="320" VerticalOptions="Center" HorizontalOptions="Center">
         <StackLayout>
-            <Grid RowDefinitions="130">
-                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnLightBlue}"  >
+            <Grid RowDefinitions="130" Padding="5">
+                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnLightBlue}" RadiusX="10" >
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
                                Offset="0,10"
@@ -45,19 +45,19 @@
         </StackLayout>
 
         <VerticalStackLayout Grid.Row="1" Padding="20" Margin="0,-50,0,80" Spacing="10">
-            <Label x:Name="mensagem" TextColor="{StaticResource dnBlue}" FontSize="Large" ></Label>
+            <Label x:Name="mensagem" TextColor="{StaticResource Gray900}" FontSize="Medium" ></Label>
 
         </VerticalStackLayout>
 
 
         <Grid Grid.Row="2" ColumnDefinitions="*,*" HorizontalOptions="Center" ColumnSpacing="20" Margin="10,0,0,10">
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
-                <Button Text="Não" Clicked="OnNoButtonClicked" Background="{StaticResource dnBlue}" WidthRequest="120" />
+                <Button Text="Não" Clicked="OnNoButtonClicked" Background="{StaticResource dnBlue}" WidthRequest="120" CornerRadius="20" />
 
             </VerticalStackLayout>
             <VerticalStackLayout  Grid.Column="1" HorizontalOptions="Center">
                 <Button Text="Sim" 
-                       Clicked="OnYesButtonClicked" Background="{StaticResource dnBlue}"  WidthRequest="120"/>
+                       Clicked="OnYesButtonClicked" Background="{StaticResource dnBlue}"  WidthRequest="120" CornerRadius="20"/>
 
             </VerticalStackLayout>
 

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using ColetorA41.Views;
 using ColetorA41.Extensions;
 using CommunityToolkit.Maui.Views;
+using ColetorA41.Views.Monitor;
 
 namespace ColetorA41.ViewModel
 {
@@ -365,7 +366,9 @@ namespace ColetorA41.ViewModel
             {
 
                 IsBusy = false;
-                await Shell.Current.DisplayAlert("Atenção", ex.Message, "OK");
+                var msg = new Mensagem("erro", "Erro", ex.Message);
+                await Shell.Current.ShowPopupAsync(msg);
+               
             }
             
 
@@ -390,7 +393,9 @@ namespace ColetorA41.ViewModel
             catch (Exception ex)
             {
                 IsBusy = false;
-                await Shell.Current.DisplayAlert("Erro", ex.Message, "OK");
+                var msg = new Mensagem("erro", "Erro", ex.Message);
+                await Shell.Current.ShowPopupAsync(msg);
+              
             }
            
             
@@ -401,7 +406,7 @@ namespace ColetorA41.ViewModel
         {
             IsBusy = true;
             QtdeETNaoSelecionadas = 0;
-            qtdeETNaoSelecionadas = 0;
+            QtdeETNaoSelecionadas = 0;
             await this.ObterExtrakit();
             this.ListaETSelecionada();
             await Shell.Current.GoToAsync($"{nameof(ExtrakitView)}");
@@ -547,7 +552,6 @@ namespace ColetorA41.ViewModel
                         IsBusy = false;
                         var erro = new Mensagem("ok", "Impressão OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}");
                         await Shell.Current.CurrentPage.ShowPopupAsync(erro);
-//                        await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
                         await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
                     }
                 }
@@ -882,6 +886,7 @@ namespace ColetorA41.ViewModel
                 this.listaEnc.Add(item);
             }
             this.IsBusy = false;
+           
 
         }
 

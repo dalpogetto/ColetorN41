@@ -95,4 +95,9 @@ namespace ColetorA41.Models
         public string nrProcess { get; set; }
         public string itCodigo { get; set; }
     }
+
+    public class EtiquetaResponse
+    {
+        public string numPedExec { get; set; }
+    }
 }

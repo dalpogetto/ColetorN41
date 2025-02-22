@@ -294,12 +294,11 @@ namespace ColetorA41.ViewModel
         async Task ImpressaoEtiquetaItemPago(NotaFiscalPagto nf)
         {
             IsBusy = true;
-            listaNotaPagto.Clear();
             var resp = await _service.ImpressaoEtiquetaItemPago(nf.codestabel, nf.itcodigo, nf.qtfaturada);
-            var mensa = new Mensagem("ok", "Impressão Etiqueta", String.Format("Gerado Num Ped Exec:{0}", resp));
-            await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
             IsBusy = false;
-            return;
+            var mensa = new Mensagem("ok", "Impressão Etiqueta", String.Format("Item: {0} - Qtde:{1}\n\nNumPedExec:{2}", nf.itcodigo, nf.qtfaturada,resp.numPedExec));
+            await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+           
         }
 
         [RelayCommand]

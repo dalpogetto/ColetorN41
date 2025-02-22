@@ -77,6 +77,12 @@
                               SelectedItem="{Binding EstabSelecionado}"
                   />
                 </StackLayout>
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray500}"
+       Offset="1,1"
+       Radius="1"
+       Opacity="0.8" />
+                </Border.Shadow>
             </Border>
         </VerticalStackLayout>
 
