@@ -25,23 +25,34 @@
             </Ellipse>
         </Grid>
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,20,0,0">
-            <Image
-                    Source="resumo2.png"
-                    HeightRequest="50"
-                    HorizontalOptions="Center">
-                <Image.Shadow>
-                    <Shadow Brush="Black"
-                    Offset="10,10"
-                    Radius="40"
-                    Opacity="0.8" />
-                </Image.Shadow>
-            </Image>
-            <Label Text="Resumo do Cálculo"
-                   TextColor="White"
-                    FontAttributes="Bold"
-                    FontSize="22"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Center" />
+                <Image
+                        Source="resumo2.png"
+                        HeightRequest="60"
+                        HorizontalOptions="Center">
+                    <Image.Shadow>
+                        <Shadow Brush="Black"
+                        Offset="10,1"
+                        Radius="40"
+                        Opacity="0.8" />
+                    </Image.Shadow>
+                </Image>
+                <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-20">
+                    <Label Text="Resumo do Cálculo"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           FontSize="22"
+                            />
+                    <Label Text="{Binding EstabSelecionado.identific, StringFormat='{0}'}"
+                            TextColor="White"
+                            FontAttributes="None"
+                            FontSize="14"/>
+
+                    <Label Text="{Binding TecnicoSelecionado.identific, StringFormat='{0}'}"
+                            TextColor="White"
+                            FontAttributes="None"
+                            FontSize="14"/> 
+            </VerticalStackLayout>
+           
 
             </HorizontalStackLayout>
         
@@ -181,7 +192,7 @@
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="SoEntrada" />
                     </Frame.GestureRecognizers>
                     <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*,6">
-                        <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="60" HeightRequest="40" BackgroundColor="{StaticResource dnWhite}" Padding="1"  BorderColor="{StaticResource dnGreen}">
+                        <Frame CornerRadius="10" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="60" HeightRequest="40" BackgroundColor="{StaticResource dnWhite}" Padding="1"  BorderColor="{StaticResource dnLightGreen}">
                             <Label Text="{Binding Fichas.SomenteEntrada}" TextColor="{StaticResource dnLightGreen}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
                             <Label Text="Notas de Entrada + ET + Qtde Ruins" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>

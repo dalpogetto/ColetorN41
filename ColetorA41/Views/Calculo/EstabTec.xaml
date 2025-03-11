@@ -150,7 +150,6 @@
 
                     
                 </Image>
-
             </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">

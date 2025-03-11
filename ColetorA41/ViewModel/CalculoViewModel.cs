@@ -269,12 +269,8 @@ namespace ColetorA41.ViewModel
                 var erro = new Mensagem("erro", "Erro Login", ok.mensagem);
                 await Shell.Current.CurrentPage.ShowPopupAsync(erro);
                 return;
-               // await Shell.Current.DisplayAlert("Erro Login", ok.mensagem, "ok");
                 
             }
-
-            //Esconder o teclado
-            
 
         }
 
