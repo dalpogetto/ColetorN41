@@ -20,9 +20,9 @@
     </ContentPage.Resources>
 
 
-    <Grid RowDefinitions="200,auto,*,60,8">
+    <Grid RowDefinitions="140,auto,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="100,200">
+            <Grid RowDefinitions="60,200">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
                 <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
@@ -34,7 +34,7 @@
                 </Ellipse>
             </Grid>
 
-            <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-250,0,0">
                 <Image
               Source="finalizarprocesso.png"
               HeightRequest="60"
@@ -57,7 +57,7 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <HorizontalStackLayout HorizontalOptions="Center" Margin="20,20,0,0" VerticalOptions="Center" Spacing="15" Grid.Row="1" WidthRequest="350">
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="20,50,0,0" VerticalOptions="Center" Spacing="15" Grid.Row="1" WidthRequest="350">
             <Image  Source="attention.png" HeightRequest="40"  HorizontalOptions="Center"/>
             <Label Text="Realize a geração do arquivo de conferência antes de finalizar o processo !" FontAttributes="Bold" LineBreakMode="WordWrap" FontSize="18" TextColor="{StaticResource dnBlue}" WidthRequest="300"></Label>
         </HorizontalStackLayout>

@@ -4,7 +4,7 @@
              x:Class="ColetorA41.Views.Login"
              Title="Login"
              Shell.NavBarIsVisible="False">
-    <Grid RowDefinitions="*,400,120" >
+    <Grid RowDefinitions="*,*,160" >
         <Grid RowDefinitions="100,200">
             <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
@@ -41,7 +41,7 @@
         </VerticalStackLayout>
 
         <Grid Grid.Row="2">
-            <Image Source="dn_logo.png" />
+            <Image Source="dn_logo.png" WidthRequest="120" HeightRequest="120" />
 
         </Grid>
     </Grid>

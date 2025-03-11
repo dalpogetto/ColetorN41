@@ -190,6 +190,12 @@ namespace ColetorA41.ViewModel
                 //O método ObterNotasPagto decidira pelas telas Embalagem ou EmbalagemPrimeiraNota
                 await this.ObterNotasPagto();
             }
+            else
+            {
+                var mensa = new Mensagem("info", "Entradas e Saídas", "Aguarde o término do processamento da Entrada ou Saída");
+                await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+
+            }
 
         }
 
@@ -271,7 +277,7 @@ namespace ColetorA41.ViewModel
             listaNotaPagto.AddRange(resp.items);
 
             //Verificar Para qual tela direcionar
-            if (listaNotaPagto.Count > 0)
+            if (listaNotaPagto.Count >= 0)
             {
                 var existePendencia = listaNotaPagto.Where(x => x.situacao.ToUpper() == "PENDENTE").FirstOrDefault();
                 if (existePendencia != null)
@@ -496,6 +502,12 @@ namespace ColetorA41.ViewModel
         async Task SalvarEmbalagemNota()
         {
             var obj = DadosNotaFiscal;
+        }
+
+        [RelayCommand]
+        async Task InformarEmbalagem()
+        {
+
         }
 
     }

@@ -30,9 +30,9 @@
     </ContentPage.Resources>
 
 
-    <Grid RowDefinitions="120,auto,*,60,8">
+    <Grid RowDefinitions="100,auto,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="100,200">
+            <Grid RowDefinitions="60,200">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
                 <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
                     <Ellipse.Shadow>
@@ -44,7 +44,7 @@
                 </Ellipse>
             </Grid>
 
-            <VerticalStackLayout Padding="20,10" Margin="0,-300,0,0">
+            <VerticalStackLayout Padding="20,10" Margin="0,-260,0,0">
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
                         Source="pagto.png"

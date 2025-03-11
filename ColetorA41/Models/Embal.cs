@@ -73,8 +73,6 @@ namespace ColetorA41.Models
         [JsonProperty("nat-operacao")]
         public string natoperacao { get; set; }
 
-       
-
         [JsonProperty("peso-liq")]
         public string pesoliq { get; set; }
 

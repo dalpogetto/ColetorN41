@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ColetorA41.Views.MainPage"
              Title="Selecione uma opção"
-             BackgroundColor="{StaticResource WhiteSmoke}"
-             Shell.BackgroundColor="{StaticResource WhiteSmoke}"
+             BackgroundColor="{StaticResource dnWhite}"
+             Shell.BackgroundColor="{StaticResource dnWhite}"
              Shell.ForegroundColor="{StaticResource dnBlue}"
              Shell.TitleColor="{StaticResource dnBlue}"
             
@@ -14,8 +14,8 @@
     <Grid RowDefinitions="*,400,8" >
         
         <Grid RowDefinitions="100, 200">
-            <Rectangle Fill="{StaticResource MenuCabec}"  Stroke="{StaticResource MenuCabec}"/>
-            <Ellipse Grid.Row="1" Fill="{StaticResource MenuCabec}" TranslationY="-110">
+            <Rectangle Fill="{StaticResource dnWhite}"  Stroke="{StaticResource dnWhite}"/>
+            <Ellipse Grid.Row="1" Fill="{StaticResource dnWhite}" TranslationY="-110">
                 <Ellipse.Shadow>
                     <Shadow Brush="{StaticResource dnPurple}"
                              Offset="0,10"
@@ -59,7 +59,7 @@
             />
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource dnWhite}">
+                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource WhiteSmoke}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
                     </Frame.GestureRecognizers>
@@ -71,7 +71,7 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource dnWhite}">
+                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource WhiteSmoke}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarMonitorCommand}" />
                     </Frame.GestureRecognizers>
