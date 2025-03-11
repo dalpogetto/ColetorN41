@@ -302,6 +302,7 @@ namespace ColetorA41.ViewModel
                 tipoFichaSelecionado = tipoFicha;
 
             }
+            listaItensFicha.Clear();
             await this.CarregarFichas();
             await Shell.Current.GoToAsync($"{nameof(ResumoDetalhe)}");
         }
@@ -322,10 +323,16 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task CarregarFichas()
         {
-           // if (IsBusy) return;
+
+            if (this.tipoFichaSelecionado == "SemSaldo" && this.listaItensFicha.Count > 0)
+                return;
+
+
+            // if (IsBusy) return;
             IsBusy = true;
 
-            listaItensFicha.Clear();
+            
+
             var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20, BuscaItemFicha);
             listaItensFicha.AddRange(lista.items);
             IsBusy = false;
@@ -435,6 +442,9 @@ namespace ColetorA41.ViewModel
                 await Shell.Current.CurrentPage.ShowPopupAsync(erro);
                 return;
             }
+
+            this.UsuarioAlmoxa_ = 0;
+            this.SenhaAlmoxa = string.Empty;
 
             await Shell.Current.GoToAsync($"{nameof(LoginAlmoxa)}");
         }
@@ -819,6 +829,7 @@ namespace ColetorA41.ViewModel
             this.listaPagtos.Clear();
             foreach (var item in calculo.pagto)
             {
+                if (!item.soEntrada)
                 this.listaPagtos.Add(item);
             }
 

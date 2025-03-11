@@ -39,18 +39,18 @@
                 <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-20">
                     <Label Text="Resumo do Cálculo"
                            TextColor="White"
-                           FontAttributes="Bold"
-                           FontSize="22"
+                           FontAttributes="None"
+                           FontSize="14"
                             />
                     <Label Text="{Binding EstabSelecionado.identific, StringFormat='{0}'}"
                             TextColor="White"
-                            FontAttributes="None"
-                            FontSize="14"/>
+                            FontAttributes="Bold"
+                            FontSize="18"/>
 
                     <Label Text="{Binding TecnicoSelecionado.identific, StringFormat='{0}'}"
                             TextColor="White"
-                            FontAttributes="None"
-                            FontSize="14"/> 
+                            FontAttributes="Bold"
+                            FontSize="18"/> 
             </VerticalStackLayout>
            
 

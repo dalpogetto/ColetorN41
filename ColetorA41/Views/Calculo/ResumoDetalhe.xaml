@@ -120,7 +120,7 @@
 
                             <VerticalStackLayout>
 
-                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
+                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="20" Margin="0,0">
                                     <!--Chave-->
                                     <Label Text="{Binding itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
                                     <Label Text="{Binding itPrincipal}" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16" HorizontalTextAlignment="End"/>
@@ -131,6 +131,7 @@
                                     <Label Text="QtRenovar"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
                                     <Label Text="QtExtrakit"  Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="2"></Label>
                                     <Label Text="QtRuim"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="3"></Label>
+                                    <Label Text="Saldo"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="4"></Label>
                                    
 
                                     <!--Detalhe-->
@@ -138,6 +139,7 @@
                                     <Label Text="{Binding qtRenovar}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1"></Label>
                                     <Label Text="{Binding qtExtrakit}"        Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2"></Label>
                                     <Label Text="{Binding qtRuim}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="3"></Label>
+                                    <Label Text="{Binding qtSaldo}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="4"></Label>
                                     
                                 </Grid>
 
