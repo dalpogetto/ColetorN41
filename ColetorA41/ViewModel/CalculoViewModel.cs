@@ -323,17 +323,36 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task CarregarFichas()
         {
+            //Adicionar Extrakit fora do processo na selecao do Geral
+            if (this.TipoFichaSelecionado == "Geral" && this.listaItensFicha.Count <= 0)
+            {
+                foreach (var item in this.listaExtrakitNaoSelecionados)
+                {
+                    listaItensFicha.Add(new ItemFicha
+                    {
+                        itCodigo = item.itCodigo,
+                        itPrincipal = item.itCodigo,
+                        tipo = item.tipo,
+                        descItem = item.descItem,
+                        qtPagar = 0,
+                        qtRenovar = 0,
+                        qtRuim = item.qtRuim,
+                        qtSaldo = item.qtSaldo,
+                        qtExtrakit = item.qtSaldo,
+                        notaAnt = item.nroDocto
+                    });
+                }
+            }
 
-            if (this.tipoFichaSelecionado == "SemSaldo" && this.listaItensFicha.Count > 0)
+            //Itens sem saldo nao sera paginado
+            if (this.TipoFichaSelecionado == "SemSaldo" && this.listaItensFicha.Count > 0)
                 return;
 
 
             // if (IsBusy) return;
             IsBusy = true;
 
-            
-
-            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20, BuscaItemFicha);
+            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, TipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20, BuscaItemFicha);
             listaItensFicha.AddRange(lista.items);
             IsBusy = false;
         }
