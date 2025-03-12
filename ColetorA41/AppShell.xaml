@@ -9,7 +9,7 @@
     Shell.FlyoutBehavior="Flyout"
     Title="ColetorA41">
 
-   
+  
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid RowDefinitions="200,*">

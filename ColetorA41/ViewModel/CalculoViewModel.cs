@@ -10,6 +10,7 @@ using ColetorA41.Views;
 using ColetorA41.Extensions;
 using CommunityToolkit.Maui.Views;
 using ColetorA41.Views.Monitor;
+using Microsoft.Maui.Controls.Platform.Compatibility;
 
 namespace ColetorA41.ViewModel
 {
@@ -521,6 +522,9 @@ namespace ColetorA41.ViewModel
         {
             IsBusy = true;
             var item = this.listaPagtos.Where(o=>o.cRowId==obj.cRowId).First();
+
+            await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
+
             this.listaPagtos.Remove(item);
             Fichas.Geral = Fichas.Geral - item.qtPagar;
 
@@ -624,7 +628,7 @@ namespace ColetorA41.ViewModel
         }
 
         [RelayCommand]
-        async Task AprovarCalculo()
+        async Task AprovarCalculo(string tipoAprovacao)
         {
             var mensa = new MensagemSimNao("Execução Cálculo", "Confirma a execução do cálculo ?");
             var result = await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
@@ -632,6 +636,38 @@ namespace ColetorA41.ViewModel
             {
                 if (ok)
                 {
+                    var paramTela = new ParamCalculo
+                    {
+                         opcao = TipoCalculo,
+                         tipoAprovacao= Convert.ToInt32(tipoAprovacao),
+                         nrProcess= NrProcessSelecionado,
+                         codEstab=EstabSelecionado.codEstab,
+                         codEmitente= TecnicoSelecionado.codTec,
+                         codEntrega=EntregaSelecionada.codEntrega,
+                         serieEntra=SerieEntra,
+                         serieSai=SerieSaida,
+                         codTranspEntra=TranspEntraSelecionado.codTransp,
+                         codTranspSai=TranspSaidaSelecionado.codTransp,
+                    };
+
+                    //Executar o calculo
+                    var resp = await this._service.AprovarCalculo(paramTela);
+                    if(resp.type != null && resp.type == "error")
+                    {
+                        var mensaCalc = new Mensagem("error", "Cálculo Execução", "Erro execução do cálculo");
+                        await Shell.Current.CurrentPage.ShowPopupAsync(mensaCalc);
+                        return;
+
+                    }
+                    else
+                    {
+                        var mensaCalc = new Mensagem("ok", "Cálculo Execução", "Execução do cálculo realizada com sucesso! Processo RPW: " + resp.rpw);
+                        await Shell.Current.CurrentPage.ShowPopupAsync(mensaCalc);
+                        await ChamarEstabTec();
+                    }
+
+                   
+
                     /*
                     IsBusy = true;
                     LabelLoading = "Gerando Arquivo de Informe";

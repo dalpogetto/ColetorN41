@@ -6,6 +6,38 @@ using System.Threading.Tasks;
 
 namespace ColetorA41.Models
 {
+    public class ParamCalculo
+    {
+        public int opcao { get; set; }
+        public int tipoAprovacao { get; set; }
+        public string codEstab { get; set; }
+        public int codEmitente { get; set; }
+        public int nrProcess { get; set; }
+        public string serieEntra { get; set; }
+        public string serieSai { get; set; }
+        public int codTranspEntra { get; set; }
+        public int codTranspSai { get; set; }
+        public string codEntrega { get; set; }
+
+    }
+
+    public class EliminarPagtoRequest
+    {
+        public int id { get; set; } = 0;
+        public string codEstabel { get; set; }
+        public int codTecnico { get; set; }
+    }
+
+    public class ParamCalculoRequest
+    {
+        public ParamCalculo paramsTela { get; set; }
+    }
+
+    public class CalculoResponse:BaseModel
+    {
+        public int rpw { get; set; }
+    }
+
     public class Resumo
     {
         public int id { get; set; }

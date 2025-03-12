@@ -288,5 +288,19 @@ namespace ColetorA41.Services
             return response;
         }
 
+        public async Task<CalculoResponse> AprovarCalculo(ParamCalculo parametros)
+        {
+            var request = new ParamCalculoRequest { paramsTela = parametros };
+            var response = await PostAsync<ParamCalculoRequest, CalculoResponse>("apiesaa041/AprovarCalculo", request);
+            return response;
+        }
+
+        public async Task EliminarPorId(int id, string codEstabel, int codTecnico)
+        {
+            var request = new EliminarPagtoRequest {id=id, codEstabel=codEstabel, codTecnico=codTecnico};
+            var response = await PostAsync<EliminarPagtoRequest, CalculoResponse>("apiesaa041/EliminarPorId", request);
+           
+        }
+
     }
 }
