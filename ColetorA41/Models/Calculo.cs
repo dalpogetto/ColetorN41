@@ -31,7 +31,13 @@ namespace ColetorA41.Models
 
     }
 
-    public class PrepararCalculoRequest
+    public class TipoCalculoResponse
+    {
+        public bool btnAprovar { get; set; }
+        public bool btnAprovarSS { get; set; }
+    }
+
+        public class PrepararCalculoRequest
     {
         public string CodEstab { get; set; }
         public int CodTecnico { get; set; }

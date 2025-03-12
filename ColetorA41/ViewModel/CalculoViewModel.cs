@@ -174,10 +174,19 @@ namespace ColetorA41.ViewModel
         bool isTotal = false;
 
         [ObservableProperty]
+        bool isBtnAprovar = true;
+
+        [ObservableProperty]
+        bool isBtnAprovarSS = true;
+
+        [ObservableProperty]
         bool isParcial = true;
 
         [ObservableProperty]
         bool isET = false;
+
+        [ObservableProperty]
+        int iRadio=1;
 
         #endregion
 
@@ -548,6 +557,7 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarResumo()
         {
+           
             IsTotal = TipoCalculo == 1;
             IsParcial = TipoCalculo == 2 ;
             IsET = TipoCalculo == 3;
@@ -590,11 +600,25 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(ResumoDetalhe)}");
         }
 
+        
+
         [RelayCommand]
         async Task RadioTipoCalculo(string tipoCalculo)
         {
+            //Por algum motivo o componente esta chamando a rotina duas vezes
+            //Criada gambiarra para controlar isso, assim que solucionado o problema 
+            //Retirar a condicao iRadio
+            if (iRadio == 1)
+            {
+                iRadio++;
+                return;
+            }
+            iRadio = 1;
+
+
             var tipo = Convert.ToInt32(tipoCalculo);
             TipoCalculo = tipo;
+
             await this.AtualizaLblBotoes(tipo);
             await this.AtualizarLabelsContadores(tipo);
         }
@@ -897,6 +921,24 @@ namespace ColetorA41.ViewModel
 
             //Sem Saldo
             Fichas.SemSaldo = item.qtSemSaldo;
+
+            IsBtnAprovar = true;
+            IsBtnAprovarSS = true;
+
+            if (TipoCalculo >= 2)
+            {
+
+                var resp = await this._service.AlteracaoTipoCalculoMobile(TipoCalculo.ToString(), this.NrProcessSelecionado.ToString());
+                IsBtnAprovar = resp.btnAprovar;
+                IsBtnAprovarSS = resp.btnAprovarSS;
+
+                if (!IsBtnAprovar && !IsBtnAprovarSS)
+                {
+                    var mensa = new Mensagem("error", "Tipo de Cálculo", "Existe OS Informada para Nota Fiscal de Kit. Usar as opções Renovação Total ou Renovação Parcial");
+                    await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+                }
+            }
+
 
             this.IsBusy = false;
 

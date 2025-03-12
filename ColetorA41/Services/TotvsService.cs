@@ -280,5 +280,13 @@ namespace ColetorA41.Services
             var response = await PostAsync<NotaFiscalPagtoRequest, NotaFiscalPagtoResponse>("apiesaa041/InformarEmbalagem", request);
             return response;
         }
+
+        public async Task<TipoCalculoResponse> AlteracaoTipoCalculoMobile(string tipoCalculo, string nrProcess)
+        {
+            var param = new NameValueCollection { { "tipoCalculo", tipoCalculo }, { "nrProcess", nrProcess } };
+            var response = await GetAsync<TipoCalculoResponse>("apiesaa041/AlteracaoTipoCalculoMobile", param);
+            return response;
+        }
+
     }
 }

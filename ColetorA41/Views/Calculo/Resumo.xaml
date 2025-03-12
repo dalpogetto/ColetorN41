@@ -217,8 +217,8 @@
                 </HorizontalStackLayout>
 
                 <StackLayout Padding="20" Spacing="10" WidthRequest="320">
-                    <Button Text="{Binding LblAprovar, StringFormat='Aprovar - {0}'} " CornerRadius="20" Background="{StaticResource dnBlue}"></Button>
-                <Button Text="{Binding LblAprovarSemEntrada, StringFormat='Aprovar Sem Saída - {0}'} " CornerRadius="20" Background="{StaticResource dnBlue}"></Button>
+                    <Button Text="{Binding LblAprovar, StringFormat='Aprovar - {0}'} " CornerRadius="20" Background="{StaticResource dnBlue}" IsEnabled="{Binding IsBtnAprovar}"></Button>
+                    <Button Text="{Binding LblAprovarSemEntrada, StringFormat='Aprovar Sem Saída - {0}'} " CornerRadius="20" Background="{StaticResource dnBlue}" IsEnabled="{Binding IsBtnAprovarSS}"></Button>
                 </StackLayout>
             </VerticalStackLayout>
 
