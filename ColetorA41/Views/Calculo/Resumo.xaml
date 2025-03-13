@@ -50,13 +50,18 @@
                     <Label Text="{Binding TecnicoSelecionado.identific, StringFormat='{0}'}"
                             TextColor="White"
                             FontAttributes="Bold"
-                            FontSize="18"/> 
+                            FontSize="18"/>
+
+                <Label Text="{Binding NrProcessSelecionado, StringFormat='{0}'}"
+                         TextColor="White"
+                         FontAttributes="Bold"
+                         FontSize="18"/>    
             </VerticalStackLayout>
            
 
             </HorizontalStackLayout>
         
-            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,30,0,0" Grid.Row="1" HorizontalOptions="Center">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,50,0,0" Grid.Row="1" HorizontalOptions="Center">
             <Button Text="Impressão Informe" WidthRequest="250" 
                     BackgroundColor="{StaticResource dnGreen}" 
                     Command="{Binding GerarInformeCommand}" 
