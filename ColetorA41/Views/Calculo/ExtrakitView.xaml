@@ -45,11 +45,17 @@
 
                 </HorizontalStackLayout>
 
-                <Button Text="Selecionar Todos" Command="{Binding SelecionarTodosExtrakitCommand}" 
-                        Background="{StaticResource dnButton}"
-                        Margin="0,0,0,10" 
-                        WidthRequest="230" 
-                        CornerRadius="20"/>
+                <HorizontalStackLayout Margin="0,0,0,10" HorizontalOptions="Center" Spacing="5">
+                    <Button Text="Todos" Command="{Binding SelecionarTodosExtrakitCommand}" 
+                            Background="{StaticResource dnButton}"
+                            WidthRequest="120" 
+                            CornerRadius="20"/>
+
+                    <Button Text="Nenhum" Command="{Binding SelecionarNenhumExtrakitCommand}" 
+                            Background="{StaticResource dnRed}"
+                            WidthRequest="120" 
+                            CornerRadius="20"/> 
+                </HorizontalStackLayout>
 
                 <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" >
                     <Label Text="{Binding QtdeETSelecionadas, StringFormat='Selecionadas: {0}'}" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center"></Label>

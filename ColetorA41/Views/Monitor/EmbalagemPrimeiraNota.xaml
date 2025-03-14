@@ -14,7 +14,6 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="{StaticResource dnBlue}" />
-           
         </Style>
 
         <Style x:Key="lblDet" TargetType="Label">
@@ -37,7 +36,7 @@
                 </Ellipse>
             </Grid>
 
-            <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0">
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-280,0,0" WidthRequest="300" HorizontalOptions="Center">
                 <Image
                Source="embalageminfo.png"
                HeightRequest="60"
@@ -51,10 +50,11 @@
                 </Image>
 
                 <Label 
-                       Text="Primeiro Nota Fiscal"
+                       Text="Dados de Embalagem Primeira Nota Fiscal"
                        TextColor="{StaticResource White}"
                        FontAttributes="Bold"
                        FontSize="22"
+                       HorizontalTextAlignment="Center"
                        VerticalOptions="Center" 
                        HorizontalOptions="Center" Margin="0,0,0,0"/>
             </VerticalStackLayout>
@@ -88,7 +88,7 @@
                     <VerticalStackLayout VerticalOptions="Start">
                         <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*" RowSpacing="20">
                             <Label Grid.Row="0" Text="Volumes" Style="{StaticResource lblCabec}"></Label>
-                            <Entry Grid.Row="0" HeightRequest="50"></Entry>
+                            <Entry Grid.Row="0" HeightRequest="50" Text="{Binding DadosNotaFiscal.volume}" Keyboard="Numeric"></Entry>
 
                             <Label Grid.Row="1" Text="Modalidade Embalagem" Style="{StaticResource lblCabec}" Margin="10"></Label>
                             <Border Grid.Row="1" Grid.ColumnSpan="2" StrokeShape="RoundRectangle 10">
@@ -137,16 +137,16 @@
                             </Border>
 
                             <Label Grid.Row="2" Text="Embalagem" Style="{StaticResource lblCabec}"> </Label>
-                            <Entry Grid.Row="2" HeightRequest="50" IsEnabled="{Binding IsAereo}" Text="{Binding DadosNotaFiscal.volume}"></Entry>
+                            <Entry Grid.Row="2" HeightRequest="50" IsEnabled="{Binding IsAereo}" Text="{Binding DadosNotaFiscal.cod}"></Entry>
 
                             <Label Grid.Row="2" Grid.Column="1" Text="Qde Embalagem" Style="{StaticResource lblCabec}"></Label>
-                            <Entry Grid.Row="2" Grid.Column="1" HeightRequest="50" IsEnabled="{Binding IsAereo}"></Entry>
+                            <Entry Grid.Row="2" Grid.Column="1" HeightRequest="50" IsEnabled="{Binding IsAereo}" Keyboard="Numeric"></Entry>
 
                             <Label Grid.Row="3" Text="Peso Líquido" Style="{StaticResource lblCabec}"></Label>
-                            <Entry Grid.Row="3" HeightRequest="50" Text="{Binding DadosNotaFiscal.pesoliq}"></Entry>
+                            <Entry Grid.Row="3" HeightRequest="50" Text="{Binding DadosNotaFiscal.pesoliq}" Keyboard="Numeric"></Entry>
 
-                            <Label Grid.Row="3" Grid.Column="1" Text="Peso Bruto" Style="{StaticResource lblCabec}"></Label>
-                            <Entry Grid.Row="3" Grid.Column="1" HeightRequest="50" Text="{Binding DadosNotaFiscal.pesobru}"></Entry>
+                            <Label Grid.Row="3" Grid.Column="1" Text="Peso Bruto" Style="{StaticResource lblCabec}" ></Label>
+                            <Entry Grid.Row="3" Grid.Column="1" HeightRequest="50" Text="{Binding DadosNotaFiscal.pesobru}" Keyboard="Numeric"></Entry>
                         </Grid>
                     </VerticalStackLayout>
                     <VerticalStackLayout VerticalOptions="End">
@@ -154,7 +154,21 @@
                     </VerticalStackLayout>
                 </Grid>
             </Border>
+
+            <Border VerticalOptions="End" HorizontalOptions="End" Margin="10,10,20,0" StrokeShape="RoundRectangle 10">
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="End" Padding="10">
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Image Source="scanner3.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40"/>
+                        <Label Text="Leituras Realizadas para Pagamentos" FontSize="14" WidthRequest="130"  FontAttributes="Bold" TextColor="{StaticResource Gray500}"></Label>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ListaEtiquetasLidasCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
         </VerticalStackLayout>
+            
 
         <Grid Grid.Row="2" ColumnDefinitions="*,*,*" >
             <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">

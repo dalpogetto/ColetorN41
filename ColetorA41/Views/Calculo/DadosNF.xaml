@@ -65,8 +65,7 @@
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
 
                 <VerticalStackLayout>
-                    <Label Text="RPW"/>
-                    <Entry Text="{Binding Rpw}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
+                  
                 </VerticalStackLayout>
 
             </HorizontalStackLayout>

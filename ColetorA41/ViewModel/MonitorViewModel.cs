@@ -263,6 +263,7 @@ namespace ColetorA41.ViewModel
             });
 
             DadosNotaFiscal = resp.nfs[0];
+            DadosNotaFiscal.nrprocess = ProcessoEstabSelecionado.nrprocess.ToString();
             IsBusy = false;
         }
 
@@ -293,6 +294,20 @@ namespace ColetorA41.ViewModel
                     await Shell.Current.GoToAsync($"{nameof(EmbalagemPrimeiraNota)}");
                 }
             }
+            IsBusy = false;
+        }
+
+        [RelayCommand]
+        async Task ListaEtiquetasLidas()
+        {
+
+            IsBusy = true;
+            await Shell.Current.GoToAsync($"{nameof(EmbalagemLoading)}");
+            listaNotaPagto.Clear();
+            var resp = await _service.ObterNotasPagto(ProcessoEstabSelecionado.nrprocess.ToString());
+            listaNotaPagto.AddRange(resp.items);
+            await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
+
             IsBusy = false;
         }
 
@@ -501,7 +516,34 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task SalvarEmbalagemNota()
         {
-            var obj = DadosNotaFiscal;
+            var dialog = new MensagemSimNao("Dados de Embalagem", "Confirma Efetivação ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(dialog);
+            if (result is bool ok)
+            {
+                if (ok)
+                {
+                    this.IsBusy = true;
+
+                    var obj = DadosNotaFiscal;
+                    var resp = await _service.InformarEmbalagem(obj);
+                    if(resp.ok == "ok")
+                    {
+                        await CarregarProcessosEstabelecimento();
+                        await Shell.Current.GoToAsync($"{nameof(Processos)}");
+                        this.IsBusy = false;
+                    }
+                    else
+                    {
+                        var mensa = new Mensagem("error", "Efetivação Embalagem", string.Format("Erro:{0} - Detail:{1}", resp.message + resp.detailedMessage));
+                        await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+                        this.IsBusy = false;
+
+                    }
+                    
+                }
+               
+            }
+
         }
 
         [RelayCommand]

@@ -302,5 +302,13 @@ namespace ColetorA41.Services
            
         }
 
+        public async Task<notafiscalResponse> InformarEmbalagem(notafiscal dadosNota)
+        {
+            var request = new notafiscalRequest { paramsTela = dadosNota };
+            var response = await PostAsync<notafiscalRequest, notafiscalResponse>("apiesaa041/InformarEmbalagem", request);
+            return response;
+
+        }
+
     }
 }

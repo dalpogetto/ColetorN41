@@ -24,10 +24,10 @@
                 </Ellipse.Shadow>
             </Ellipse>
         </Grid>
-            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,20,0,0">
-                <Image
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,35,0,0">
+                <Image Margin="0,15,0,0"
                         Source="resumo2.png"
-                        HeightRequest="60"
+                        HeightRequest="70"
                         HorizontalOptions="Center">
                     <Image.Shadow>
                         <Shadow Brush="Black"
@@ -37,11 +37,7 @@
                     </Image.Shadow>
                 </Image>
                 <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-20">
-                    <Label Text="Resumo do Cálculo"
-                           TextColor="White"
-                           FontAttributes="None"
-                           FontSize="14"
-                            />
+                    
                     <Label Text="{Binding EstabSelecionado.identific, StringFormat='{0}'}"
                             TextColor="White"
                             FontAttributes="Bold"
@@ -61,8 +57,8 @@
 
             </HorizontalStackLayout>
         
-            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,50,0,0" Grid.Row="1" HorizontalOptions="Center">
-            <Button Text="Impressão Informe" WidthRequest="250" 
+            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,40,0,0" Grid.Row="1" HorizontalOptions="Center">
+            <Button Text="Impressão Informe" WidthRequest="230" Margin="0,10,0,0"
                     BackgroundColor="{StaticResource dnGreen}" 
                     Command="{Binding GerarInformeCommand}" 
                     CornerRadius="20"></Button>
@@ -71,13 +67,14 @@
                
 
             </HorizontalStackLayout>
-            <HorizontalStackLayout Margin="0,20,0,0" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
+            <HorizontalStackLayout Margin="0,0,0,0" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
                 <RadioButton Content="Renov.Total" Value="1" IsChecked="{Binding IsTotal}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                                  EventName="CheckedChanged"
+                                 BindingContext=""
                                  Command="{Binding RadioTipoCalculoCommand}"
-                                 CommandParameter="1"/>
+                                 CommandParameter="{Binding Source={Reference this}}"/>
                     </RadioButton.Behaviors>
                     <RadioButton.Triggers>
                         <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
@@ -95,7 +92,7 @@
                         <toolkit:EventToCommandBehavior
                                   EventName="CheckedChanged"
                                   Command="{Binding RadioTipoCalculoCommand}"
-                                  CommandParameter="2"/>  
+                                  CommandParameter="{Binding Source={Reference this}}"/>  
                     </RadioButton.Behaviors>
                     <RadioButton.Triggers>
                         <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
@@ -113,7 +110,7 @@
                         <toolkit:EventToCommandBehavior
                                   EventName="CheckedChanged"
                                   Command="{Binding RadioTipoCalculoCommand}"
-                                  CommandParameter="3"/>
+                                  CommandParameter="{Binding Source={Reference this}}"/>
                     </RadioButton.Behaviors>
                     <RadioButton.Triggers>
                         <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">

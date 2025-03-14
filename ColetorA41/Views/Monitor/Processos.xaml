@@ -116,7 +116,7 @@
                                     </SwipeView.RightItems>
 
 
-                                    <Border HeightRequest="100" StrokeShape="RoundRectangle 10" HorizontalOptions="CenterAndExpand" Margin="0,0,0,8" Background="{StaticResource dnWhite}">
+                                    <Border HeightRequest="90" StrokeShape="RoundRectangle 10" HorizontalOptions="CenterAndExpand" Margin="0,0,0,8" Background="{StaticResource dnWhite}">
                                         <Grid ColumnDefinitions="8,*,auto" >
                                             <Border Background="{Binding situacao, Converter={StaticResource SituacaoProcessoColorConverter}}"></Border>
                                             <Frame Grid.Column="2" HeightRequest="30" WidthRequest="120" Margin="2,2" Padding="5" HasShadow="true" VerticalOptions="Start" 
@@ -124,7 +124,7 @@
                                                 <Label Text="{Binding situacao, Converter={StaticResource SituacaoProcessoLabelConverter}}" 
                                                FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="{Binding situacao, Converter={StaticResource SituacaoProcessoColorConverter}}"/>
                                             </Frame>
-                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto" ColumnSpacing="10" Grid.Column="1">
+                                            <Grid Padding="5" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,160,auto" ColumnSpacing="10" Grid.Column="1">
                                                 <!--Chave-->
                                                 <Label Text="{Binding codemitente}" Grid.ColumnSpan="0" FontSize="16" FontAttributes="Bold" />
                                                 <Label Text="{Binding nomeabrev}" Grid.Column="1" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
@@ -137,7 +137,7 @@
                                                 <Label Text="{Binding nrprocess}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
                                                 <Label Text="{Binding numpedexec}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>
                                                 <Label Text="{Binding descpedexec}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="2"></Label>
-                                                <Label Text="{Binding numpedexec}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="3"></Label>
+                                                <Label Text="{Binding nomealmoxa}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="3"></Label>
                                             </Grid>
                                         </Grid>
                                     </Border>

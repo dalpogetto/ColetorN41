@@ -39,6 +39,16 @@ namespace ColetorA41.Models
         public string nrprocess { get; set; }
     }
 
+    public class notafiscalRequest
+    {
+        public notafiscal paramsTela { get; set; }
+    }
+
+    public class notafiscalResponse : BaseModel
+    {
+        public string ok { get; set; }
+    }
+
     public class NotaFiscalEmbalagemResponse: BaseModel
     {
         public List<notafiscal> nfs { get; set; }

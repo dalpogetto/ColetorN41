@@ -223,6 +223,12 @@ namespace ColetorA41.ViewModel
         }
 
         [RelayCommand]
+        void SelecionarNenhumExtrakit()
+        {
+            this.listaExtrakitSelecionados.Clear();
+        }
+
+        [RelayCommand]
         async Task BuscarTecnico(string criterio)
         {
             await Task.Run(async ()=> {
@@ -607,22 +613,9 @@ namespace ColetorA41.ViewModel
         
 
         [RelayCommand]
-        async Task RadioTipoCalculo(string tipoCalculo)
+        async Task RadioTipoCalculo(object opcao)
         {
-            //Por algum motivo o componente esta chamando a rotina duas vezes
-            //Criada gambiarra para controlar isso, assim que solucionado o problema 
-            //Retirar a condicao iRadio
-            if (iRadio == 1)
-            {
-                iRadio++;
-                return;
-            }
-            iRadio = 1;
-
-
-            var tipo = Convert.ToInt32(tipoCalculo);
-            TipoCalculo = tipo;
-
+            var tipo = TipoCalculo;
             await this.AtualizaLblBotoes(tipo);
             await this.AtualizarLabelsContadores(tipo);
         }
@@ -666,22 +659,6 @@ namespace ColetorA41.ViewModel
                         await ChamarEstabTec();
                     }
 
-                   
-
-                    /*
-                    IsBusy = true;
-                    LabelLoading = "Gerando Arquivo de Informe";
-                    await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
-
-                    var informe = await _service46.ImprimirOS(RowIdOS);
-                    if (informe != null)
-                    {
-
-                        IsBusy = false;
-                        await Shell.Current.DisplayAlert("IMPRESSÃO OS", $"NumPedExec: {informe.NumPedExec} \nArquivo: {informe.Arquivo}", "OK");
-                        await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
-                    }
-                    */
                 }
             }
             IsBusy = false;
