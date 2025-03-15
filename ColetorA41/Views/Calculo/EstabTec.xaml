@@ -51,7 +51,7 @@
                 <Label Text="Estabelecimento" TextColor="{StaticResource dnBlue}"/>
                 <Picker Title="Selecione um Estabelecimento"
                      TextColor="{StaticResource dnBlue}"   
-                     TitleColor="White"
+                     TitleColor="{StaticResource Gray200}"
                      FontAttributes="Bold" FontSize="16"
                      ItemsSource="{Binding listaEstab}"  
                      ItemDisplayBinding="{Binding identific}"
