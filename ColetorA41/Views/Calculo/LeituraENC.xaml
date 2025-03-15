@@ -112,7 +112,7 @@
                                                    BackgroundColor="{Binding flag, Converter={StaticResource  StringToColor}}" CornerRadius="10">
                                                 <Label Text="{Binding flag}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="White"/>
                                             </Frame>
-                                            <Grid Padding="3" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto,auto" ColumnSpacing="25" Grid.Column="1">
+                                            <Grid Padding="3" RowDefinitions="35,auto,*" ColumnDefinitions="auto,auto,auto,auto,auto" ColumnSpacing="15" Grid.Column="1">
                                                 <!--Chave-->
                                                 <Label Text="{Binding itCodigo}" Grid.ColumnSpan="4" FontSize="16" FontAttributes="Bold" />
                                                 <!--Cabecalho-->

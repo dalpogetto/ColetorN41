@@ -58,7 +58,7 @@
             </HorizontalStackLayout>
         
             <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,40,0,0" Grid.Row="1" HorizontalOptions="Center">
-            <Button Text="Impressão Informe" WidthRequest="230" Margin="0,10,0,0"
+            <Button Text="Impressão Informe" WidthRequest="180" Margin="0,10,0,0"
                     BackgroundColor="{StaticResource dnGreen}" 
                     Command="{Binding GerarInformeCommand}" 
                     CornerRadius="20"></Button>
