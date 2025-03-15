@@ -168,7 +168,7 @@
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" />
+                        <TapGestureRecognizer Command="{Binding ChamarDadosNFCommand}" CommandParameter="false" />
                     </Image.GestureRecognizers>
 
                     

@@ -413,7 +413,7 @@ namespace ColetorA41.ViewModel
         }
 
         [RelayCommand]
-        async Task ChamarDadosNF()
+        async Task ChamarDadosNF(string botaoVoltar="false")
         {
             if ((this.EstabSelecionado == null) || (this.TecnicoSelecionado == null))
             {
@@ -424,7 +424,9 @@ namespace ColetorA41.ViewModel
             await this.ObterParametrosEstab();
             try
             {
-                await this.ObterDados();
+                if(botaoVoltar=="false")
+                   await this.ObterDados();
+
                 await Shell.Current.GoToAsync($"{nameof(DadosNF)}");
 
             }
@@ -440,13 +442,16 @@ namespace ColetorA41.ViewModel
         }
 
         [RelayCommand]
-        async Task ChamarExtrakit()
+        async Task ChamarExtrakit(string botaoVoltar="false")
         {
             IsBusy = true;
-            QtdeETNaoSelecionadas = 0;
-            QtdeETNaoSelecionadas = 0;
-            await this.ObterExtrakit();
-            this.ListaETSelecionada();
+            if (botaoVoltar == "false")
+            {
+                QtdeETNaoSelecionadas = 0;
+                QtdeETNaoSelecionadas = 0;
+                await this.ObterExtrakit();
+                this.ListaETSelecionada();
+            }
             await Shell.Current.GoToAsync($"{nameof(ExtrakitView)}");
             IsBusy = false;
         }
@@ -891,6 +896,11 @@ namespace ColetorA41.ViewModel
 
             //Chamar Tela
             await Task.Delay(100);
+            TipoCalculo = 2;
+            IsTotal = false;
+            IsParcial = true;
+            IsET = false;
+
             await this.AtualizaLblBotoes(2);
             await this.AtualizarLabelsContadores(2);
 
