@@ -54,7 +54,7 @@
                 </Image>
 
                 <Label 
-                         Text="Processos em Andamento"
+                         Text="Monitor de Processos"
                          TextColor="{StaticResource White}"
                          FontAttributes="Bold"
                          FontSize="22"
@@ -132,7 +132,7 @@
                                                 <Label Text="Processo"      Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="0"></Label>
                                                 <Label Text="Ped.Exec"  Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="1"></Label>
                                                 <Label Text="Situação"       Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="2"></Label>
-                                                <Label Text="Almox"       Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="3"></Label>
+                                                <Label Text="Almoxarife"       Style="{StaticResource lblCabec}" Grid.Row="1" Grid.Column="3"></Label>
                                                 <!--Detalhe-->
                                                 <Label Text="{Binding nrprocess}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>
                                                 <Label Text="{Binding numpedexec}"        Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="1"></Label>

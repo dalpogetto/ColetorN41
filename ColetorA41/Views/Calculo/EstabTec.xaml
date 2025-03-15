@@ -23,7 +23,7 @@
 
             <VerticalStackLayout VerticalOptions="Center" Margin="0,-250,0,0">
                     <Image
-                    Source="usuario.png"
+                    Source="company.png"
                     HeightRequest="60"
                     HorizontalOptions="Center" Margin="0,0,0,10">
                         <Image.Shadow>
@@ -64,7 +64,8 @@
                        Radius="1"
                        Opacity="0.8" />
                 </Border.Shadow>
-            </Border>
+
+             </Border>
 
         </VerticalStackLayout>
         <Grid Grid.Row="1" Margin="0,50" Padding="40" RowDefinitions="auto,450">
@@ -106,9 +107,11 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Tecnico">
                             <Border Margin="0,2" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
-                                <Grid Padding="10" Margin="0,0">
+                                <Grid Padding="10" Margin="0,0" RowDefinitions="*,*" ColumnDefinitions="60,*">
+                                    <Image Source="usuario.png" Grid.Row="0" Grid.RowSpan="2" WidthRequest="40"></Image>
                                     <!--Chave-->
-                                    <Label Text="{Binding identific}" x:Name="nomeAbrev" />
+                                    <Label Text="{Binding codTec}" x:Name="codTec"  Grid.Row="0" Grid.Column="1"/>
+                                    <Label Text="{Binding nomeAbrev}" x:Name="nomeAbrev"  Grid.Row="1" Grid.Column="1"/>
                                 </Grid>
 
                                 <VisualStateManager.VisualStateGroups>
@@ -116,6 +119,7 @@
                                         <VisualState Name="Selected">
                                             <VisualState.Setters>
                                                 <Setter Property="BackgroundColor" Value="{StaticResource dnBlue}" />
+                                                <Setter TargetName="codTec" Property="Label.TextColor" Value="White"/>
                                                 <Setter TargetName="nomeAbrev" Property="Label.TextColor" Value="White"/>
                                                 <Setter TargetName="nomeAbrev" Property="Label.FontAttributes" Value="Bold"/>
                                                 <Setter TargetName="nomeAbrev" Property="Label.FontSize" Value="18"/>

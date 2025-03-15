@@ -23,10 +23,8 @@
                     <Shadow Brush="{StaticResource dnPurple}"
                              Offset="0,10"
                              Radius="10"
-                             Opacity="0.8"/>
+                             Opacity="0.5"/>
                 </Ellipse.Shadow>
-              
-               
             </Ellipse>
         </Grid>
         <VerticalStackLayout Margin="0,0,0,0">
@@ -52,23 +50,29 @@
                 HorizontalOptions="Center" />
         </VerticalStackLayout>
         
-        <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,0,0,200">
-            <!-- ActivityIndicator
+        <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,200,0,0">
+            <ActivityIndicator
              Grid.Column="0"
              IsVisible="{Binding IsBusy}"
              HorizontalOptions="Center"
              IsRunning="True"
              VerticalOptions="Center"
-            / -->
+            />
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
                 <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource dnWhite}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
                     </Frame.GestureRecognizers>
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="{StaticResource dnWhite}" Offset="0.1" />
+                            <GradientStop Color="{StaticResource WhiteSmoke}"  Offset="0.9" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
                     <VerticalStackLayout HorizontalOptions="Center" >
                         <Image Source="calculo.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
-                        <Label  Text="Cálculo de Necessidades" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label  Text="Cálculo de Necessidades" FontAttributes="None" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
             </HorizontalStackLayout>
@@ -78,9 +82,15 @@
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarMonitorCommand}" />
                     </Frame.GestureRecognizers>
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="{StaticResource dnWhite}" Offset="0.1" />
+                            <GradientStop Color="{StaticResource WhiteSmoke}"  Offset="0.9" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
                     <VerticalStackLayout HorizontalOptions="Center" >
                         <Image Source="monitor.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
-                        <Label  Text="Monitor Acompanhamento" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label  Text="Monitor Acompanhamento" FontAttributes="None" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
             </HorizontalStackLayout>

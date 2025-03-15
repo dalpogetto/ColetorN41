@@ -30,7 +30,9 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarMonitor()
         {
+            this.IsBusy = true;
             await Shell.Current.GoToAsync($"{nameof(Processos)}");
+            this.IsBusy = false;
         }
 
         [RelayCommand]
