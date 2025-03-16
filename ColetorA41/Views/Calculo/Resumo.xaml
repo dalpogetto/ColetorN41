@@ -10,8 +10,46 @@
               Shell.NavBarIsVisible="False"
              x:Name="resumo"
              HideSoftInputOnTapped="True">
-  
-        <Grid RowDefinitions="50,*,60,8">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="TipoCalculoTemplate">
+                <Border WidthRequest="100" HeightRequest="30" StrokeShape="RoundRectangle 20" StrokeThickness="0" BackgroundColor="White">
+                    <Label x:Name="lblTipoCalculo" Text="{TemplateBinding Content }" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="tipoCalculoSelecionado">
+                                <VisualState x:Name="Checked">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="{StaticResource dnBlue}"/>
+                                        <Setter Property="WidthRequest" Value="180"/>
+                                        <Setter Property="HeightRequest" Value="40"/>
+                                        <Setter TargetName="lblTipoCalculo" Property="Label.Opacity" Value="1" />
+                                        <Setter TargetName="lblTipoCalculo" Property="Label.FontSize" Value="14" />
+                                        <Setter TargetName="lblTipoCalculo" Property="Label.TextColor" Value="White" />
+                                        <Setter TargetName="lblTipoCalculo" Property="Label.FontAttributes" Value="Bold" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="LightGray"/>
+                                        <Setter Property="WidthRequest" Value="90"/>
+                                        <Setter Property="HeightRequest" Value="30"/>
+                                        <Setter TargetName="lblTipoCalculo" Property="Label.Opacity" Value="0.6" />
+                                        <Setter TargetName="lblTipoCalculo" Property="Label.FontSize" Value="12" />
+                                        <Setter TargetName="lblTipoCalculo" Property="Label.FontAttributes" Value="None" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Border>
+            </ControlTemplate>
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="50,*,60,8">
 
             <Grid RowDefinitions="80, 200">
             <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
@@ -48,10 +86,14 @@
                             FontAttributes="Bold"
                             FontSize="18"/>
 
+                
+
                 <Label Text="{Binding NrProcessSelecionado, StringFormat='{0}'}"
                          TextColor="White"
                          FontAttributes="Bold"
                          FontSize="18"/>    
+                    
+                    
             </VerticalStackLayout>
            
 
@@ -68,7 +110,7 @@
 
             </HorizontalStackLayout>
             <HorizontalStackLayout Margin="0,0,0,0" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
-                <RadioButton Content="Renov.Total" Value="1" IsChecked="{Binding IsTotal}">
+                <RadioButton Content="Renov.Total" Value="1" IsChecked="{Binding IsTotal}" ControlTemplate="{StaticResource TipoCalculoTemplate}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                                  EventName="CheckedChanged"
@@ -76,52 +118,25 @@
                                  Command="{Binding RadioTipoCalculoCommand}"
                                  CommandParameter="{Binding Source={Reference this}}"/>
                     </RadioButton.Behaviors>
-                    <RadioButton.Triggers>
-                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
-                            <Setter Property="FontSize" Value="22" />
-                            <Setter Property="FontAttributes" Value="Bold" />
-                        </Trigger>
-                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="False">
-                            <Setter Property="FontSize" Value="12" />
-                            <Setter Property="FontAttributes" Value="None" />
-                        </Trigger>
-                    </RadioButton.Triggers>
+                    
                 </RadioButton>
-                <RadioButton Content="Renov.Parcial" Value="2" IsChecked="{Binding IsParcial}" FontSize="20" >
+                <RadioButton Content="Renov.Parcial" Value="2" IsChecked="{Binding IsParcial}" FontSize="20" ControlTemplate="{StaticResource TipoCalculoTemplate}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                                   EventName="CheckedChanged"
                                   Command="{Binding RadioTipoCalculoCommand}"
                                   CommandParameter="{Binding Source={Reference this}}"/>  
                     </RadioButton.Behaviors>
-                    <RadioButton.Triggers>
-                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
-                            <Setter Property="FontSize" Value="22" />
-                            <Setter Property="FontAttributes" Value="Bold" />
-                        </Trigger>
-                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="False">
-                            <Setter Property="FontSize" Value="12" />
-                            <Setter Property="FontAttributes" Value="None" />
-                        </Trigger>
-                    </RadioButton.Triggers>
+                    
                 </RadioButton>
-                <RadioButton Content="Dev.Extrakit" Value="3" IsChecked="{Binding IsET}" >
+                <RadioButton Content="Dev.Extrakit" Value="3" IsChecked="{Binding IsET}" ControlTemplate="{StaticResource TipoCalculoTemplate}">
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                                   EventName="CheckedChanged"
                                   Command="{Binding RadioTipoCalculoCommand}"
                                   CommandParameter="{Binding Source={Reference this}}"/>
                     </RadioButton.Behaviors>
-                    <RadioButton.Triggers>
-                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
-                            <Setter Property="FontSize" Value="22" />
-                            <Setter Property="FontAttributes" Value="Bold" />
-                        </Trigger>
-                        <Trigger TargetType="RadioButton" Property="IsChecked" Value="False">
-                            <Setter Property="FontSize" Value="12" />
-                            <Setter Property="FontAttributes" Value="None" />
-                        </Trigger>
-                    </RadioButton.Triggers>
+                    
                 </RadioButton>
             </HorizontalStackLayout>
 

@@ -9,8 +9,6 @@
              Shell.TitleColor="{StaticResource dnBlue}"
             
              >
-
-   
     <Grid RowDefinitions="*,400" >
 
         <Image Source="backg.png"  Grid.Row="1" Aspect="AspectFill" VerticalOptions="EndAndExpand"/>
@@ -23,7 +21,7 @@
                     <Shadow Brush="{StaticResource dnPurple}"
                              Offset="0,10"
                              Radius="10"
-                             Opacity="0.5"/>
+                             Opacity="0.8"/>
                 </Ellipse.Shadow>
             </Ellipse>
         </Grid>
