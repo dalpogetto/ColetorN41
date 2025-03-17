@@ -14,16 +14,16 @@
         <Image Source="backg.png"  Grid.Row="1" Aspect="AspectFill" VerticalOptions="EndAndExpand"/>
 
 
-        <Grid RowDefinitions="100, 200">
-            <Rectangle Fill="{StaticResource dnWhite}"  Stroke="{StaticResource dnWhite}"/>
-            <Ellipse Grid.Row="1" Fill="{StaticResource dnWhite}" TranslationY="-110">
-                <Ellipse.Shadow>
+        <Grid RowDefinitions="160, 200">
+            <Rectangle Fill="{StaticResource dnWhite}"  Stroke="{StaticResource dnWhite}">
+                <Rectangle.Shadow>
                     <Shadow Brush="{StaticResource dnPurple}"
                              Offset="0,10"
                              Radius="10"
-                             Opacity="0.8"/>
-                </Ellipse.Shadow>
-            </Ellipse>
+                             Opacity="0.8"/>    
+                </Rectangle.Shadow>
+            </Rectangle>
+
         </Grid>
         <VerticalStackLayout Margin="0,0,0,0">
 

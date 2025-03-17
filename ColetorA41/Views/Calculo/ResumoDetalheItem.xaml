@@ -30,19 +30,19 @@
 
     <Grid RowDefinitions="100,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="60,200">
-                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}"/>
-                <Ellipse Grid.Row="1" Fill="{StaticResource dnBlue}" TranslationY="-110">
-                    <Ellipse.Shadow>
-                        <Shadow Brush="Black"
-             Offset="1,1"
-             Radius="5"
-             Opacity="0.8" />
-                    </Ellipse.Shadow>
-                </Ellipse>
+            <Grid RowDefinitions="200">
+                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
+                    <Rectangle.Shadow>
+                        <Shadow Brush="{StaticResource Gray500}"
+              Offset="0,10"
+              Radius="10"
+              Opacity="0.8"/>
+                    </Rectangle.Shadow>
+                </Rectangle>
+
             </Grid>
 
-            <VerticalStackLayout Padding="20,10" Margin="0,-230,0,0">
+            <VerticalStackLayout Padding="20,10" Margin="0,-150,0,0">
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
                         Source="folder2.png"

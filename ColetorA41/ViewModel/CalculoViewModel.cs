@@ -425,7 +425,7 @@ namespace ColetorA41.ViewModel
             try
             {
                 if(botaoVoltar=="false")
-                   await this.ObterDados();
+                  await this.ObterDados();
 
                 await Shell.Current.GoToAsync($"{nameof(DadosNF)}");
 
