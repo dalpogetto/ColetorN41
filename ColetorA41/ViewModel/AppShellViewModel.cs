@@ -10,6 +10,7 @@ namespace ColetorA41.ViewModel
 
     public partial class AppShellViewModel: BaseViewModel
     {
+        private const string InfoLogin = "UsuarioSenhaBase64";
         private readonly TotvsService _service;
         public AppShellViewModel(TotvsService srv)
         {
@@ -24,6 +25,9 @@ namespace ColetorA41.ViewModel
             Preferences.Default.Clear();
             Shell.Current.GoToAsync($"{nameof(Login)}");
         }
+
+        [ObservableProperty]
+        string usuarioLogado;
 
         [ObservableProperty]
         Estabelecimento estabSelecionado;

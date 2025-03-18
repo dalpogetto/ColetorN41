@@ -24,27 +24,25 @@ public partial class Loading : ContentPage
         try
         {
             _vm.IsBusyLoading = true;
-            if (await _srv.VerificarVersaoMobile(AppInfo.Current.VersionString))
+           
+            if (await _srv.IsAuthenticatedAsync())
             {
-                
-                if (await _srv.IsAuthenticatedAsync())
+                if (!await _srv.VerificarVersaoMobile(AppInfo.Current.VersionString))
                 {
-                    // User is logged in
-                    // redirect to main page
-                    await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                    _vm.IsError = true;
+                    _vm.IsBusyLoading = false;
+                    throw new Exception("Versão Inválida");
                 }
-                else
-                {
-                    // User is not logged in 
-                    // Redirect to LoginPage
-                    await Shell.Current.GoToAsync($"{nameof(Login)}");
-                }
+                await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             }
             else
             {
-                _vm.IsError = true;
-                _vm.IsBusyLoading = false;
+                // User is not logged in 
+                // Redirect to LoginPage
+                await Shell.Current.GoToAsync($"{nameof(Login)}");
             }
+
+            
         }
         catch (Exception ex)
         {

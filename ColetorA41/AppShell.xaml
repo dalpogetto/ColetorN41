@@ -130,7 +130,7 @@
 
                     <VerticalStackLayout HorizontalOptions="CenterAndExpand" Spacing="10" >
 
-                        <Label Text="Usuário: SUPER" TextColor="{StaticResource dnBlue}"  FontAttributes="Bold"/>
+                        <Label Text="{Binding UsuarioLogado, StringFormat='Usuário: {0}'}" TextColor="{StaticResource dnBlue}"  FontAttributes="Bold"/>
                         <Button Text="Logout" Command="{Binding LogoutCommand}" Background="{StaticResource dnBlue}"></Button>
                     </VerticalStackLayout>
 

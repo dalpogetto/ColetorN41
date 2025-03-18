@@ -33,7 +33,7 @@
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
-                              Offset="0,10"
+                              Offset="0,5"
                               Radius="10"
                               Opacity="0.8"/>
                     </Rectangle.Shadow>

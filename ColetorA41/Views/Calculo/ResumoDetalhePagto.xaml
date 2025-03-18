@@ -36,7 +36,7 @@
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
-              Offset="0,10"
+              Offset="0,5"
               Radius="10"
               Opacity="0.8"/>
                     </Rectangle.Shadow>
@@ -107,28 +107,28 @@
                             
                         </SwipeView.RightItems>
 
-                        <Border HeightRequest="90" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                        <Border HeightRequest="100" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
 
                             <VerticalStackLayout>
 
-                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,*" ColumnSpacing="20" Margin="0,0">
+                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,auto" ColumnSpacing="20" Margin="0,0">
                                     <!--Chave-->
                                     <Label Text="{Binding itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
-                                    <Label Text="{Binding itPrincipal}" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16" HorizontalTextAlignment="End"/>
+                                   
                                     <Label Text="{Binding descItem}" Grid.Row="1" Grid.ColumnSpan="4" FontSize="12"  FontAttributes="Bold"/>
                                     <Rectangle HeightRequest="1" Fill="LightGray" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.ColumnSpan="5"/>
                                     <!--Cabecalho-->
-                                    <Label Text="QtPagar"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0"></Label>
+                                    <Label Text="QtPagar"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0" TextColor="{StaticResource dnGreen}" FontSize="16" ></Label>
                                     <Label Text="QtRenovar"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
                                     <Label Text="QtExtrakit"  Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="2"></Label>
-                                    <Label Text="QtRuim"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="3"></Label>
+                                    <Label Text="Localizacao"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="3"></Label>
                                    
 
                                     <!--Detalhe-->
-                                    <Label Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0"></Label>
+                                    <Label Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0" TextColor="{StaticResource dnGreen}" FontSize="18"></Label>
                                     <Label Text="{Binding qtRenovar}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1"></Label>
                                     <Label Text="{Binding qtExtrakit}"        Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2"></Label>
-                                    <Label Text="{Binding qtRuim}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="3"></Label>
+                                    <Label Text="{Binding codLocaliza}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="3"></Label>
                                     
                                 </Grid>
 

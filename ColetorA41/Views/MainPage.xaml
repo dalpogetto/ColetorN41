@@ -19,7 +19,7 @@
             <Ellipse Grid.Row="1" Fill="{StaticResource dnWhite}" TranslationY="-110">
                 <Ellipse.Shadow>
                     <Shadow Brush="{StaticResource dnPurple}"
-                             Offset="0,10"
+                             Offset="0,5"
                              Radius="10"
                              Opacity="0.8"/>
                 </Ellipse.Shadow>

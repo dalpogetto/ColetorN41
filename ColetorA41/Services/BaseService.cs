@@ -22,8 +22,10 @@ namespace ColetorA41.Services
         /// An instance of <see cref="HttpClient"/>.
         /// </summary>
         protected readonly IHttpClientFactory _httpClientFactory;
-        protected readonly HttpClient _httpClient;
+        public HttpClient _httpClient;
         private readonly IConfiguration _config;
+
+        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseService"/> class.
@@ -34,8 +36,9 @@ namespace ColetorA41.Services
             _config = config;
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient("coletor");
-            _httpClient.BaseAddress = new Uri(Ambiente.PrefixoUrl);
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _config["USUARIO_SENHA_BASE64"]);
+            _httpClient.BaseAddress = new Uri(_config["BASE_URL"]);
+           // _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _config["USUARIO_SENHA_BASE64"]);
+          //  _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", UsuarioSenha64);
             _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", _config["ALIAS_APPSERVER"]);
             _httpClient.DefaultRequestHeaders.Add("CompanyId", _config["EMPRESA_PADRAO"]);
             _httpClient.Timeout = Timeout.InfiniteTimeSpan;

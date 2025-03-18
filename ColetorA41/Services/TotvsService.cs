@@ -1,7 +1,11 @@
 ﻿using ColetorA41.Models;
+using ColetorA41.ViewModel;
+using ColetorA41.Views;
+using CommunityToolkit.Maui.Views;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Specialized;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace ColetorA41.Services
@@ -11,9 +15,11 @@ namespace ColetorA41.Services
 
         private const string AuthStateKey = "AuthState";
         private const string InfoLogin = "UsuarioSenhaBase64";
+        private const string UserName = "UserName";
 
         public TotvsService(IHttpClientFactory httpClientFactory, IConfiguration config) : base(httpClientFactory, config)
         {
+            
         }
 
         public async Task<bool> IsAuthenticatedAsync()
@@ -22,18 +28,33 @@ namespace ColetorA41.Services
 
             var authState = Preferences.Default.Get<bool>(AuthStateKey, false);
             var dadosLogin = Preferences.Default.Get(InfoLogin, String.Empty);
-            //Setar Informacoes Usuario e Senha para Chamar APIs TOTVS
+            var userName = Preferences.Default.Get(UserName, String.Empty);
             Ambiente.UsuarioSenhaBase64 = dadosLogin;
+
+           // Autenticado Setar Header
+           if (authState)
+            this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
 
             return authState;
         }
         public async Task<bool> Login(string usuario, string senha)
         {
-            var byteArray = new UTF8Encoding().GetBytes($"{usuario}:{senha}");
-            Ambiente.UsuarioSenhaBase64 = Convert.ToBase64String(byteArray);
 
             try
             {
+                var usuarioSenha = string.Empty;
+                if (usuario.ToUpper() == "SUPER")
+                    usuarioSenha = $"{usuario}:{senha}";
+                else 
+                    usuarioSenha = $"{usuario}@DIEBOLD_MASTER:{senha}";
+
+                //Basic Login
+                var byteArray = new UTF8Encoding().GetBytes(usuarioSenha);
+                Ambiente.UsuarioSenhaBase64 = Convert.ToBase64String(byteArray);
+            
+                //Setar Header
+                this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
+
 
                 if (!await Login("101"))
                 {
@@ -43,15 +64,15 @@ namespace ColetorA41.Services
 
 
                 Preferences.Default.Set<bool>(AuthStateKey, true);
-                // var byteArray = new UTF8Encoding().GetBytes($"{usuario}:{senha}");
-                // Ambiente.UsuarioSenhaBase64 = Convert.ToBase64String(byteArray);
                 Preferences.Default.Set(InfoLogin, Ambiente.UsuarioSenhaBase64);
+                Preferences.Default.Set(UserName, usuario);
+                
                 return true;
             }
             catch (Exception ex)
             {
-
-                await Shell.Current.DisplayAlert("Erro!", "Usuário e senha inválidos", "OK");
+                var mensa = new Mensagem("error", "Erro Login", "Usuário e Senha inválidos!");
+                await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
                 return false;
             }
 
