@@ -620,9 +620,11 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task RadioTipoCalculo(object opcao)
         {
+            IsBusy = true;
             var tipo = TipoCalculo;
             await this.AtualizaLblBotoes(tipo);
             await this.AtualizarLabelsContadores(tipo);
+            IsBusy = false;
         }
 
         [RelayCommand]

@@ -29,7 +29,7 @@
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
-              Offset="0,10"
+              Offset="0,5"
               Radius="10"
               Opacity="0.8"/>
                     </Rectangle.Shadow>
@@ -64,7 +64,7 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <Grid Grid.Row="1" Padding="0" HorizontalOptions="Center" RowDefinitions="*,100">
+        <Grid Grid.Row="1" Padding="0" HorizontalOptions="Center" RowDefinitions="*,100" Margin="0,20">
             <CollectionView x:Name="lista" 
                     ItemsSource="{Binding listaReparos}" 
                     SelectedItems="{Binding listaExtrakitSelecionados}"
@@ -90,7 +90,7 @@
                             </SwipeView.RightItems>
                             <Border HeightRequest="110" Margin="10,2" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="White">
                                 <VerticalStackLayout HorizontalOptions="FillAndExpand">
-                                    <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="50,50,140,*,*">
+                                    <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="50,50,140,*,auto">
                                         <!--Cabecalho-->
                                         <Label Text="Estab"      Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="0"></Label>
                                         <Label Text="Filial"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="1"></Label>

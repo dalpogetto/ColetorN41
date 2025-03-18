@@ -57,12 +57,14 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <HorizontalStackLayout HorizontalOptions="Center" Margin="20,50,0,0" VerticalOptions="Center" Spacing="15" Grid.Row="1" WidthRequest="350">
-            <Image  Source="attention.png" HeightRequest="40"  HorizontalOptions="Center"/>
-            <Label Text="Realize a geração do arquivo de conferência antes de finalizar o processo !" FontAttributes="Bold" LineBreakMode="WordWrap" FontSize="18" TextColor="{StaticResource dnBlue}" WidthRequest="300"></Label>
-        </HorizontalStackLayout>
+        <Frame HorizontalOptions="Center" Margin="20,30" VerticalOptions="Center" Grid.Row="1" HasShadow="True" Background="{StaticResource dnWhite}">
+            <HorizontalStackLayout  WidthRequest="350" Spacing="20">
+                <Image  Source="attention.png" HeightRequest="40"  HorizontalOptions="Center"/>
+                <Label Text="Realize a geração do arquivo de conferência antes de finalizar o processo !" FontAttributes="Bold" LineBreakMode="WordWrap" FontSize="18" TextColor="{StaticResource dnBlue}" WidthRequest="300"></Label>
+            </HorizontalStackLayout>
+        </Frame>
 
-        <VerticalStackLayout Grid.Row="2" Padding="20" Margin="0,80" Spacing="10">
+        <VerticalStackLayout Grid.Row="2" Padding="20" Margin="0,0" Spacing="10">
 
             <Border HeightRequest="70" StrokeShape="RoundRectangle 10" HorizontalOptions="Center" Grid.Row="1">
                     <Grid Padding="5" RowDefinitions="25,*" ColumnDefinitions="100,250" ColumnSpacing="10">

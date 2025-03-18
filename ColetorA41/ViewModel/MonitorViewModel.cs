@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using ColetorA41.Extensions;
 using ColetorA41.Models;
 using ColetorA41.Services;
@@ -528,6 +523,7 @@ namespace ColetorA41.ViewModel
                     var resp = await _service.InformarEmbalagem(obj);
                     if(resp.ok == "ok")
                     {
+                        this.IsBusy=false;
                         await CarregarProcessosEstabelecimento();
                         await Shell.Current.GoToAsync($"{nameof(Processos)}");
                         this.IsBusy = false;

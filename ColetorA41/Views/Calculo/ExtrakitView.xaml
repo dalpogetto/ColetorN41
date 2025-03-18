@@ -56,24 +56,13 @@
 
                 <VerticalStackLayout Margin="0,0,0,10" HorizontalOptions="CenterAndExpand">
 
-                    <Border BackgroundColor="{StaticResource dnWhite}" StrokeShape="RoundRectangle 10" Padding="10">
+                    <Frame BackgroundColor="{StaticResource dnWhite}" CornerRadius="10" Padding="10" HasShadow="True">
                         <VerticalStackLayout Spacing="10">
-                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-                            <Button Text="Todos" Command="{Binding SelecionarTodosExtrakitCommand}" 
-                                  Background="{StaticResource dnBlue}"
-                                  WidthRequest="120"
-                                  CornerRadius="20"/>
-
-                            <Button Text="Nenhum" Command="{Binding SelecionarNenhumExtrakitCommand}" 
-                                      TextColor="{StaticResource dnBlue}"
-                                      Background="{StaticResource Gray100}"
-                                      WidthRequest="120" 
-                                      CornerRadius="20"/>
-                        </HorizontalStackLayout>
+                       
 
                             <HorizontalStackLayout Spacing="30" HorizontalOptions="Center">
                                 <HorizontalStackLayout HorizontalOptions="Start" Spacing="10">
-                                    <Border StrokeShape="RoundRectangle 50" BackgroundColor="{StaticResource dnBlue}" WidthRequest="30" HeightRequest="30">
+                                    <Border StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource dnBlue}" WidthRequest="40" HeightRequest="30">
                                         <Label Text="{Binding QtdeETSelecionadas}" TextColor="{StaticResource dnWhite}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                     </Border>
                                     <Label Text="Selecionados" FontAttributes="Bold" VerticalOptions="Center" VerticalTextAlignment="Center"/>
@@ -81,14 +70,27 @@
 
                                 <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
                                     <Label Text="Não Selecionados" FontAttributes="Bold" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                    <Border StrokeShape="RoundRectangle 50" BackgroundColor="{StaticResource Gray100}" WidthRequest="30" HeightRequest="30">
+                                    <Border StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource Gray100}" WidthRequest="40" HeightRequest="30">
                                         <Label Text="{Binding QtdeETNaoSelecionadas}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                                     </Border>
 
                                 </HorizontalStackLayout>
                             </HorizontalStackLayout>
+
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                                <Button Text="Todos" Command="{Binding SelecionarTodosExtrakitCommand}" 
+                                           Background="{StaticResource dnBlue}"
+                                           WidthRequest="120"
+                                           CornerRadius="20"/>
+
+                                <Button Text="Nenhum" Command="{Binding SelecionarNenhumExtrakitCommand}" 
+                                           TextColor="Black"
+                                           Background="{StaticResource Gray100}"
+                                           WidthRequest="120" 
+                                           CornerRadius="20"/>  
+                            </HorizontalStackLayout>
                         </VerticalStackLayout>
-                    </Border>
+                    </Frame>
                    
                 </VerticalStackLayout>
 
@@ -176,6 +178,7 @@
                                         <VisualState Name="Normal">
                                             <VisualState.Setters>
                                                 <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+                                                <Setter TargetName="qtde" Property="BackgroundColor" Value="{StaticResource Gray100}"/>
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
