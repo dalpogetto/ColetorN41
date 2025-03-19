@@ -26,6 +26,7 @@ namespace ColetorA41.Services
         {
             await Task.Delay(2000);
 
+            //Obter Informacoes do Ultimo Login
             var authState = Preferences.Default.Get<bool>(AuthStateKey, false);
             var dadosLogin = Preferences.Default.Get(InfoLogin, String.Empty);
             var userName = Preferences.Default.Get(UserName, String.Empty);

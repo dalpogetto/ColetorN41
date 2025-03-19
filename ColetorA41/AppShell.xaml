@@ -62,19 +62,24 @@
 
     </Shell.FlyoutHeaderTemplate>
 
+   
+
+   
     <ShellContent
+       Title="Login"
+       ContentTemplate="{DataTemplate views:Login}"
+         Shell.FlyoutBehavior="Disabled"
+       Shell.FlyoutItemIsVisible="False"/>
+
+
+ <ShellContent
         Title="Loading"
         ContentTemplate="{DataTemplate views:Loading}"
        
         Shell.FlyoutBehavior="Disabled"
         Shell.FlyoutItemIsVisible="False" />
 
-    <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate views:Login}"
-        
-        Shell.FlyoutBehavior="Disabled"
-        Shell.FlyoutItemIsVisible="False"/>
+
 
     <ShellContent
         Icon="home"
