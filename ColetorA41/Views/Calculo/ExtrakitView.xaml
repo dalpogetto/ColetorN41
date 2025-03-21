@@ -8,9 +8,9 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
               Shell.NavBarIsVisible="False"
              Title="Extrakit">
-    <Grid RowDefinitions="140,*,60,8">
+    <Grid RowDefinitions="auto,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="200">
+            <Grid RowDefinitions="100">
                     <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                         <Rectangle.Shadow>
                             <Shadow Brush="{StaticResource Gray500}"
@@ -22,11 +22,11 @@
 
             </Grid>
 
-            <VerticalStackLayout VerticalOptions="Center" Margin="0,-180,0,0">
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-100,0,0">
                 <Image
                         Source="folder2.png"
-                        HeightRequest="60"
-                        HorizontalOptions="Center" Margin="0,0,0,10">   
+                        HeightRequest="40"
+                        HorizontalOptions="Center" Margin="0,0,0,5">   
                     <Image.Shadow>
                         <Shadow Brush="Black"
                     Offset="10,10"
@@ -51,15 +51,13 @@
 
 
 
-        <Grid Grid.Row="1" Margin="0,20">
+        <Grid Grid.Row="1" Margin="0,10">
             <VerticalStackLayout>
 
                 <VerticalStackLayout Margin="0,0,0,10" HorizontalOptions="CenterAndExpand">
 
                     <Frame BackgroundColor="{StaticResource dnWhite}" CornerRadius="10" Padding="10" HasShadow="True">
                         <VerticalStackLayout Spacing="10">
-                       
-
                             <HorizontalStackLayout Spacing="30" HorizontalOptions="Center">
                                 <HorizontalStackLayout HorizontalOptions="Start" Spacing="10">
                                     <Border StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource dnBlue}" WidthRequest="40" HeightRequest="30">

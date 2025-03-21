@@ -27,9 +27,9 @@
         </Style>
     </ContentPage.Resources>
     
-    <Grid RowDefinitions="200,*,60,8">
+    <Grid RowDefinitions="auto,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="200">
+            <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
@@ -41,11 +41,11 @@
 
             </Grid>
 
-            <VerticalStackLayout VerticalOptions="Center" Margin="0,-170,0,0">
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-100,0,0">
                 <Image
              Source="scanner3.png"
-             HeightRequest="60"
-             HorizontalOptions="Center" Margin="0,0,0,10">
+             HeightRequest="40"
+             HorizontalOptions="Center" Margin="0,0,0,5">
                     <Image.Shadow>
                         <Shadow Brush="Black"
          Offset="10,10"
@@ -65,7 +65,7 @@
            />
 
 
-                <Border HeightRequest="70" Margin="20,30" Padding="0" StrokeShape="RoundRectangle 50" BackgroundColor="White"  >
+                <Border HeightRequest="70" Margin="20,10" Padding="0" StrokeShape="RoundRectangle 50" BackgroundColor="White"  >
                     <Entry x:Name="entry"
                        toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
                        ReturnType="Next"

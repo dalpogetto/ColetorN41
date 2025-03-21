@@ -22,8 +22,8 @@
                                 <VisualState x:Name="Checked">
                                     <VisualState.Setters>
                                         <Setter Property="BackgroundColor" Value="{StaticResource dnBlue}"/>
-                                        <Setter Property="WidthRequest" Value="180"/>
-                                        <Setter Property="HeightRequest" Value="40"/>
+                                        <Setter Property="WidthRequest" Value="160"/>
+                                        <Setter Property="HeightRequest" Value="30"/>
                                         <Setter TargetName="lblTipoCalculo" Property="Label.Opacity" Value="1" />
                                         <Setter TargetName="lblTipoCalculo" Property="Label.FontSize" Value="14" />
                                         <Setter TargetName="lblTipoCalculo" Property="Label.TextColor" Value="White" />
@@ -33,8 +33,8 @@
                                 <VisualState x:Name="Unchecked">
                                     <VisualState.Setters>
                                         <Setter Property="BackgroundColor" Value="LightGray"/>
-                                        <Setter Property="WidthRequest" Value="90"/>
-                                        <Setter Property="HeightRequest" Value="30"/>
+                                        <Setter Property="WidthRequest" Value="80"/>
+                                        <Setter Property="HeightRequest" Value="20"/>
                                         <Setter TargetName="lblTipoCalculo" Property="Label.Opacity" Value="0.6" />
                                         <Setter TargetName="lblTipoCalculo" Property="Label.FontSize" Value="12" />
                                         <Setter TargetName="lblTipoCalculo" Property="Label.FontAttributes" Value="None" />
@@ -49,9 +49,9 @@
 
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="50,*,60,8">
+    <Grid RowDefinitions="auto,*,60,8">
 
-            <Grid RowDefinitions="140">
+        <Grid RowDefinitions="100">
             <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                 <Rectangle.Shadow>
                     <Shadow Brush="{StaticResource Gray500}"
@@ -62,10 +62,10 @@
             </Rectangle>
 
         </Grid>
-            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,35,0,0">
-                <Image Margin="0,15,0,0"
+            <HorizontalStackLayout HorizontalOptions="Start" VerticalOptions="Center" Spacing="10" Margin="0,-20,0,0">
+                <Image Margin="0,0,0,0"
                         Source="resumo2.png"
-                        HeightRequest="70"
+                        HeightRequest="50"
                         HorizontalOptions="Center">
                     <Image.Shadow>
                         <Shadow Brush="Black"
@@ -74,40 +74,42 @@
                         Opacity="0.8" />
                     </Image.Shadow>
                 </Image>
-                <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-20">
+                <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="Start">
                     
-                    <Label Text="{Binding EstabSelecionado.identific, StringFormat='{0}'}"
+                    <Label Text="{Binding EstabSelecionado.identific, StringFormat='Estabelecimento: {0}'}"
                             TextColor="White"
                             FontAttributes="Bold"
-                            FontSize="18"/>
+                            FontSize="14"/>
 
-                    <Label Text="{Binding TecnicoSelecionado.identific, StringFormat='{0}'}"
+                    <Label Text="{Binding TecnicoSelecionado.identific, StringFormat='Técnico: {0}'}"
                             TextColor="White"
                             FontAttributes="Bold"
-                            FontSize="18"/>
+                            FontSize="14"/>
 
                 
 
-                <Label Text="{Binding NrProcessSelecionado, StringFormat='{0}'}"
+                <Label Text="{Binding NrProcessSelecionado, StringFormat='Processo: {0}'}"
                          TextColor="White"
                          FontAttributes="Bold"
-                         FontSize="18"/>    
-                    
-                    
+                         FontSize="14"/>
+
+                
+
+
             </VerticalStackLayout>
-           
-
-            </HorizontalStackLayout>
-        
-            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,50,0,0" Grid.Row="1" HorizontalOptions="Center">
-
-            <Frame BackgroundColor="White" CornerRadius="50" HeightRequest="80" WidthRequest="80" HasShadow="True" Opacity="0.9">
+            <Frame BackgroundColor="White" CornerRadius="50" HeightRequest="70" WidthRequest="70" HasShadow="True" Opacity="0.9" Margin="65,0">
                 <ImageButton Source="printer2"  Command="{Binding GerarInformeCommand}" HeightRequest="40"></ImageButton>
-               
+
             </Frame>
 
+        </HorizontalStackLayout>
+        
+            <VerticalStackLayout VerticalOptions="Center" Spacing="10" Margin="0,-30,0,0" Grid.Row="1" HorizontalOptions="Center">
 
-            <Border BackgroundColor="{StaticResource Gray100}" StrokeShape="RoundRectangle 20" Padding="-10" Margin="0,0,0,0">
+           
+
+
+            <Border BackgroundColor="{StaticResource Gray100}" StrokeShape="RoundRectangle 20" Padding="-10">
             <HorizontalStackLayout Margin="0,0,0,0" Padding="10" Spacing="5" RadioButtonGroup.GroupName="TipoCalculo" RadioButtonGroup.SelectedValue="{Binding TipoCalculo}" HorizontalOptions="Center">
                 <RadioButton Content="Renov.Total" Value="1" IsChecked="{Binding IsTotal}" ControlTemplate="{StaticResource TipoCalculoTemplate}">
                     <RadioButton.Behaviors>
@@ -142,113 +144,115 @@
 
             <HorizontalStackLayout HorizontalOptions="Center">
                
-                    <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White">
+                    <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="150" HeightRequest="90" Padding="0" BackgroundColor="White">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Geral" />
                         </Frame.GestureRecognizers>
-                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*,6">
-                            <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="60" HeightRequest="40" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource Black}" >
-                                <Label Text="{Binding Fichas.Geral}" TextColor="{StaticResource Gray900}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*,6">
+                            <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="50" HeightRequest="30" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource Black}" >
+                                <Label Text="{Binding Fichas.Geral}" TextColor="{StaticResource Gray900}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
-                            <Label Text="{Binding Fichas.GeralExtrakit, StringFormat='{0} ETs fora do processo'} " Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            <Label Text="VISÃO GERAL" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                        <Label Text="{Binding Fichas.GeralExtrakit, StringFormat='{0} ETs fora do processo'} " Grid.Row="1" HorizontalOptions="End" VerticalOptions="Center" FontSize="12"/>
+                            <Label Text="VISÃO GERAL" Grid.Row="2" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" />
                             <Border Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource Gray900}" StrokeShape="RoundRectangle 10"></Border>
                         </Grid>
                     </Frame>
                 
 
-                <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Renovar" />
-                    </Frame.GestureRecognizers>
-                    <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*,6">
-                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="60" HeightRequest="40" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource dnGreen}" >
+                    <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="150" HeightRequest="90" Padding="0" BackgroundColor="White">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Renovar" />
+                        </Frame.GestureRecognizers>
+                        <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*,6">
+                            <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="50" HeightRequest="30" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource dnGreen}" >
 
-                            <Label Text="{Binding Fichas.Renovacao}" TextColor="{StaticResource dnGreen}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
-                            </Frame>
-                            <Label Text="Entradas e Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
-                        <Label Text="RENOVAÇÕES" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" />
-                        <Border Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource dnGreen}" StrokeShape="RoundRectangle 10"></Border>
-                    </Grid>
+                                <Label Text="{Binding Fichas.Renovacao}" TextColor="{StaticResource dnGreen}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                </Frame>
+                        <Label Text="Entradas e Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" FontSize="12"/>
+                            <Label Text="RENOVAÇÕES" Grid.Row="2" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center"  />
+                            <Border Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource dnGreen}" StrokeShape="RoundRectangle 10"></Border>
+                        </Grid>
                     </Frame>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
-                <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White">
+                <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="150" HeightRequest="90" Padding="0" BackgroundColor="White">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalhePagtoCommand}" CommandParameter="Pagto" />
                     </Frame.GestureRecognizers>
                     <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*,6">
-                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="60" HeightRequest="40" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource dnBlue}">
-                            <Label Text="{Binding Fichas.Pagto}" TextColor="{StaticResource dnBlue}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="50" HeightRequest="30" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource dnBlue}">
+                            <Label Text="{Binding Fichas.Pagto}" TextColor="{StaticResource dnBlue}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
-                            <Label Text="Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
-                        <Label Text="PAGAMENTOS" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" />
+                        <Label Text="Saídas" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" FontSize="12"/>
+                        <Label Text="PAGAMENTOS" Grid.Row="2" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center"  />
                         <Border Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource dnBlue}" StrokeShape="RoundRectangle 10"></Border>
                     </Grid>
-                    </Frame>
+                </Frame>
 
-                <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White" >
+                <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="150" HeightRequest="90" Padding="0" BackgroundColor="White" >
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="ET" />
                     </Frame.GestureRecognizers>
                     <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*,6">
-                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="60" HeightRequest="40" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource dnOrange}">
-                            <Label Text="{Binding Fichas.Extrakit}" TextColor="{StaticResource dnOrange}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="50" HeightRequest="30" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource dnOrange}">
+                            <Label Text="{Binding Fichas.Extrakit}" TextColor="{StaticResource dnOrange}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
-                            <Label Text="Kits convertidos em ETs" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
-                            <Label Text="EXTRAKIT" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" />
+                        <Label Text="Kits convertidos em ETs" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0" FontSize="12"/>
+                            <Label Text="EXTRAKIT" Grid.Row="2" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center"  />
                         <Border Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource dnOrange}" StrokeShape="RoundRectangle 10"></Border>
                     </Grid>
                     </Frame>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout HorizontalOptions="Center" >
-                    <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White">
+                    <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="150" HeightRequest="90" Padding="0" BackgroundColor="White">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="SoEntrada" />
                     </Frame.GestureRecognizers>
                     <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*,6">
-                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="60" HeightRequest="40" BackgroundColor="{StaticResource dnWhite}" Padding="1"  BorderColor="{StaticResource dnLightGreen}">
-                            <Label Text="{Binding Fichas.SomenteEntrada}" TextColor="{StaticResource dnLightGreen}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="50" HeightRequest="30" BackgroundColor="{StaticResource dnWhite}" Padding="1"  BorderColor="{StaticResource dnLightGreen}">
+                            <Label Text="{Binding Fichas.SomenteEntrada}" TextColor="{StaticResource dnLightGreen}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
-                            <Label Text="Notas de Entrada + ET + Qtde Ruins" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
-                        <Label Text="SOMENTE ENTRADA" Grid.Row="2" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" />
+                        <Label Text="Notas de Entrada + ET + Qtde Ruins" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0" FontSize="12"/>
+                        <Label Text="SOMENTE ENTRADA" Grid.Row="2" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" />
                         <Border Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource dnLightGreen}" StrokeShape="RoundRectangle 10"></Border>
                     </Grid>
                     </Frame>
 
-                <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="170" HeightRequest="120" Padding="0" BackgroundColor="White" >
+                <Frame CornerRadius="20" HasShadow="True"  Margin="10,0" WidthRequest="150" HeightRequest="90" Padding="0" BackgroundColor="White" >
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="SemSaldo" />
                     </Frame.GestureRecognizers>
                     <Grid RowDefinitions="*,*,auto" ColumnDefinitions="*,6">
-                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="60" HeightRequest="40" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource dnRed}">
-                            <Label Text="{Binding Fichas.SemSaldo}" TextColor="{StaticResource dnRed}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="50" HeightRequest="30" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource dnRed}">
+                            <Label Text="{Binding Fichas.SemSaldo}" TextColor="{StaticResource dnRed}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
-                            <Label Text="Itens e Alternativos sem saldo" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0"/>
-                        <Label Text="SEM SALDO" Grid.Row="2" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,5" />
+                            <Label Text="Itens e Alternativos sem saldo" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,2,0" FontSize="12"/>
+                        <Label Text="SEM SALDO" Grid.Row="2" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center"  />
                         <Border Grid.Column="1" Grid.RowSpan="3" Background="{StaticResource dnRed}" StrokeShape="RoundRectangle 10"></Border>
                     </Grid>
                     </Frame>
                 </HorizontalStackLayout>
 
-                <StackLayout Padding="20" Spacing="10" WidthRequest="320">
-                    <Button Text="{Binding LblAprovar, StringFormat='Aprovar - {0}'} " 
+                <HorizontalStackLayout Padding="0" Spacing="10" HorizontalOptions="Center">
+                    <Button Text="{Binding LblAprovar, StringFormat='Aprovar'} " 
+                            WidthRequest="150"
                             CornerRadius="20" 
                             Background="{StaticResource dnBlue}" 
                             IsEnabled="{Binding IsBtnAprovar}"
                             Command="{Binding AprovarCalculoCommand}"
                             CommandParameter="1">
                     </Button>
-                    <Button Text="{Binding LblAprovarSemEntrada, StringFormat='Aprovar Sem Saída - {0}'} " 
+                    <Button Text="{Binding LblAprovarSemEntrada, StringFormat='Aprovar Sem Saída'} " 
+                             WidthRequest="150"
                             CornerRadius="20" Background="{StaticResource dnBlue}" 
                             IsEnabled="{Binding IsBtnAprovarSS}"
                             Command="{Binding AprovarCalculoCommand}"
                             CommandParameter="2">
                         
                     </Button>
-                </StackLayout>
+                </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <Grid ColumnDefinitions="*,*,*" Grid.Row="2" >

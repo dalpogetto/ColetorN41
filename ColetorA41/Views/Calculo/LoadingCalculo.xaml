@@ -5,9 +5,9 @@
              Shell.TabBarIsVisible="False"
              Shell.NavBarIsVisible="False"
              Title="LoadingCalculo">
-    <Grid RowDefinitions="140,*,auto,8">
+    <Grid RowDefinitions="auto,*,auto,8">
         <StackLayout>
-            <Grid RowDefinitions="200">
+            <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
@@ -19,11 +19,11 @@
 
             </Grid>
 
-            <VerticalStackLayout VerticalOptions="Center" Margin="0,-180,0,0">
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-100,0,0">
                 <Image
             Source="calculo.png"
             SemanticProperties.Description="Cute dot net bot waving hi to you!"
-            HeightRequest="60"
+            HeightRequest="40"
             HorizontalOptions="Center" Margin="0,0,0,10"/>
 
                 <Label 

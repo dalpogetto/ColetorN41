@@ -5,9 +5,9 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
               Shell.NavBarIsVisible="False"
              Title="Nota Fiscal">
-    <Grid RowDefinitions="140,*,60,8">
+    <Grid RowDefinitions="auto,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="200">
+            <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
@@ -18,12 +18,12 @@
                 </Rectangle>
             </Grid>
 
-            <VerticalStackLayout VerticalOptions="Center" Margin="0,-180,0,0">
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-95,0,0">
                 <Image
                     Source="informe2.png"
                     SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                    HeightRequest="60"
-                    HorizontalOptions="Center" Margin="0,0,0,10">
+                    HeightRequest="40"
+                    HorizontalOptions="Center" Margin="0,0,0,5">
                     <Image.Shadow>
                         <Shadow Brush="Black"
                                 Offset="10,10"
@@ -47,7 +47,7 @@
             
         </StackLayout>
 
-        <Border StrokeShape="RoundRectangle 10" Grid.Row="1" Padding="20" Margin="20,30" BackgroundColor="{StaticResource dnWhite}">
+        <Border StrokeShape="RoundRectangle 10" Grid.Row="1" Padding="20" Margin="20,0" BackgroundColor="{StaticResource dnWhite}">
 
         <VerticalStackLayout >
 

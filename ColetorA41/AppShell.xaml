@@ -62,33 +62,40 @@
 
     </Shell.FlyoutHeaderTemplate>
 
-   
 
-   
+
     <ShellContent
-       Title="Login"
-       ContentTemplate="{DataTemplate views:Login}"
-         Shell.FlyoutBehavior="Disabled"
-       Shell.FlyoutItemIsVisible="False"/>
+ Icon="calculo"
+ Title="Cálculo de Necessidades"
+ ContentTemplate="{DataTemplate viewsCalc:Resumo}"
+ 
+ />
 
 
- <ShellContent
+
+
+    <ShellContent
         Title="Loading"
         ContentTemplate="{DataTemplate views:Loading}"
        
         Shell.FlyoutBehavior="Disabled"
         Shell.FlyoutItemIsVisible="False" />
 
+    <ShellContent
+    Title="Login"
+    ContentTemplate="{DataTemplate views:Login}"
+      Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutItemIsVisible="False"/>
 
 
     <ShellContent
-        Icon="home"
-        Title="Home Page"
-        Route="MainPage"
-        ContentTemplate="{DataTemplate views:MainPage}"
-         />
+  Icon="home"
+  Title="Home Page"
+  Route="MainPage"
+  ContentTemplate="{DataTemplate views:MainPage}"
+   />
 
-   
+
 
     <ShellContent
      Icon="calculo"

@@ -9,12 +9,12 @@
              Shell.TitleColor="{StaticResource dnBlue}"
             
              >
-    <Grid RowDefinitions="*,400" >
+    <Grid RowDefinitions="auto,*" >
 
         <Image Source="backg.png"  Grid.Row="1" Aspect="AspectFill" VerticalOptions="EndAndExpand"/>
 
 
-        <Grid RowDefinitions="100, 200">
+        <Grid RowDefinitions="50, 200">
             <Rectangle Fill="{StaticResource dnWhite}"  Stroke="{StaticResource dnWhite}"/>
             <Ellipse Grid.Row="1" Fill="{StaticResource dnWhite}" TranslationY="-110">
                 <Ellipse.Shadow>
@@ -30,8 +30,8 @@
         </Grid>
         <VerticalStackLayout Margin="0,0,0,0">
 
-            <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,40">
-                <Image Source="dn_logo.png" HeightRequest="160" HorizontalOptions="Center" Margin="0,0,0,40">
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,0">
+                <Image Source="dn_logo.png" HeightRequest="120" HorizontalOptions="Center" Margin="0,0,0,40">
                    
                 </Image>
               
@@ -60,8 +60,8 @@
              VerticalOptions="Center"
             />
 
-            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource dnWhite}">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" >
+                <Frame HasShadow="True" WidthRequest="240" HeightRequest="100" BackgroundColor="{StaticResource dnWhite}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
                     </Frame.GestureRecognizers>
@@ -72,14 +72,14 @@
                         </LinearGradientBrush>
                     </Frame.Background>
                     <VerticalStackLayout HorizontalOptions="Center" >
-                        <Image Source="calculo.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                        <Image Source="calculo.png" HeightRequest="40" HorizontalOptions="Center"/>
                         <Label  Text="Cálculo de Necessidades" FontAttributes="None" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                <Frame HasShadow="True" WidthRequest="240" HeightRequest="110" BackgroundColor="{StaticResource dnWhite}">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" >
+                <Frame HasShadow="True" WidthRequest="240" HeightRequest="100" BackgroundColor="{StaticResource dnWhite}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarMonitorCommand}" />
                     </Frame.GestureRecognizers>
@@ -90,7 +90,7 @@
                         </LinearGradientBrush>
                     </Frame.Background>
                     <VerticalStackLayout HorizontalOptions="Center" >
-                        <Image Source="monitor.png" HeightRequest="40" HorizontalOptions="Center" Margin="0,0,0,5"/>
+                        <Image Source="monitor.png" HeightRequest="40" HorizontalOptions="Center" />
                         <Label  Text="Monitor Acompanhamento" FontAttributes="None" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>

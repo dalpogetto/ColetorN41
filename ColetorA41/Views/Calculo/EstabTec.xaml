@@ -8,9 +8,9 @@
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False"
              Title="EstabTec">
-    <Grid RowDefinitions="140,*,60,8">
+    <Grid RowDefinitions="auto,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="200">
+            <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
@@ -21,32 +21,26 @@
                 </Rectangle>
             </Grid>
 
-            <VerticalStackLayout VerticalOptions="Center" Margin="0,-180,0,0">
+            <VerticalStackLayout VerticalOptions="Center" Margin="0,-95,0,0">
                     <Image
                     Source="company.png"
                     HeightRequest="60"
-                    HorizontalOptions="Center" Margin="0,0,0,10">
+                    HorizontalOptions="Center" Margin="0,0,0,0">
                         <Image.Shadow>
                             <Shadow Brush="Black"
-                                    Offset="10,10"
+                                    Offset="10,5"
                                     Radius="40"
                                     Opacity="0.8" />
                         </Image.Shadow>
                     </Image>
 
-                    <Label 
-                            Text="Estabelecimento e Técnico"
-                            TextColor="{StaticResource White}"
-                            FontAttributes="Bold"
-                            FontSize="22"
-                            VerticalOptions="Center" 
-                            HorizontalOptions="Center" Margin="0,0,0,0"/>
+                   
             </VerticalStackLayout>
         </StackLayout>
 
         <VerticalStackLayout Grid.Row="1" Padding="20">
 
-            <Border Margin="0,0" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource dnWhite}">
+            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource dnWhite}">
                 <StackLayout>
                 <Label Text="Estabelecimento" TextColor="{StaticResource dnBlue}"/>
                 <Picker Title="Selecione um Estabelecimento"
@@ -68,8 +62,8 @@
              </Border>
 
         </VerticalStackLayout>
-        <Grid Grid.Row="1" Margin="0,50" Padding="40" RowDefinitions="auto,450">
-            <VerticalStackLayout Margin="0,20,0,20" HorizontalOptions="Start" WidthRequest="300">
+        <Grid Grid.Row="1" Margin="0,80" Padding="10" RowDefinitions="auto,260">
+            <VerticalStackLayout Margin="0,20,0,10" HorizontalOptions="Start" WidthRequest="300">
                
                 <!--Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" -->
                     <SearchBar x:Name="searchBar"
@@ -91,7 +85,7 @@
 
             </VerticalStackLayout>
 
-            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="360">
+            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="340">
                 
                 <CollectionView x:Name="lista"  
                    ItemsSource="{Binding listaTecnico}" 
