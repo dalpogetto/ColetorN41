@@ -5,14 +5,14 @@
                Shell.NavBarIsVisible="False"
              Title="EmbalagemLoading">
     <VerticalStackLayout VerticalOptions="Center">
-        <Image Source="scanner3.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="120" WidthRequest="120" Margin="0,30"/>
+        <Image Source="scanner3.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="100" WidthRequest="100" Margin="0,30"/>
 
         <Border Background="{StaticResource dnLightBlue}" HeightRequest="80">
         <Label 
             Text="Verificando Pendências..."
             TextColor="White"
             HorizontalTextAlignment="Center"
-            FontSize="22"
+            FontSize="20"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         </Border>

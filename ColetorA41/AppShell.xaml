@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:ColetorA41"
     xmlns:views="clr-namespace:ColetorA41.Views"
     xmlns:viewsCalc="clr-namespace:ColetorA41.Views.Calculo"
+    xmlns:viewsMon="clr-namespace:ColetorA41.Views.Monitor"
     Shell.FlyoutBehavior="Flyout"
     Title="ColetorA41">
 
@@ -63,6 +64,12 @@
     </Shell.FlyoutHeaderTemplate>
 
 
+
+    <ShellContent
+Icon="home"
+Title="Home Page"
+Route="MainPage"
+ContentTemplate="{DataTemplate viewsMon:Processos}"></ShellContent>
 
     <ShellContent
  Icon="calculo"

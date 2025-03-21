@@ -35,7 +35,7 @@ namespace ColetorA41.ViewModel
         private Estabelecimento _estabSelecionado;
         public Estabelecimento EstabSelecionado
         {
-            get => _estabSelecionado;
+            get =>  _estabSelecionado;
             set
             {
                 if (_estabSelecionado != value)
@@ -80,7 +80,7 @@ namespace ColetorA41.ViewModel
         public ObservableCollection<Extrakit> listaExtrakitNaoSelecionados { get; set; } = new();
         public ObservableCollection<Ficha> listaCalculo { get; private set; } = new();
         public ObservableCollection<Semsaldo> listaSemSaldo { get; private set; } = new();
-        public ObservableCollection<Models.Resumo> listaResumo { get; private set; } = new();
+        public ObservableCollection<Models.Resumo> listaResumo { get; private set; } = new ();
         public ObservableRangeCollection<ItemFicha> listaItensFicha { get; private set; } = new();
 
         public ObservableCollection<ItemFicha> listaPagtos { get; private set; }  = new();

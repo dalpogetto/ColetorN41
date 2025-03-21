@@ -62,26 +62,16 @@
             </Rectangle>
 
         </Grid>
-            <HorizontalStackLayout HorizontalOptions="Start" VerticalOptions="Center" Spacing="10" Margin="0,-20,0,0">
-                <Image Margin="0,0,0,0"
-                        Source="resumo2.png"
-                        HeightRequest="50"
-                        HorizontalOptions="Center">
-                    <Image.Shadow>
-                        <Shadow Brush="Black"
-                        Offset="10,1"
-                        Radius="40"
-                        Opacity="0.8" />
-                    </Image.Shadow>
-                </Image>
-                <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="Start">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,-20,0,0">
+
+            <VerticalStackLayout  WidthRequest="250" Margin="0,10">
                     
-                    <Label Text="{Binding EstabSelecionado.identific, StringFormat='Estabelecimento: {0}'}"
+                    <Label Text="{Binding EstabSelecionado.identific, StringFormat='{0}'}"
                             TextColor="White"
                             FontAttributes="Bold"
                             FontSize="14"/>
 
-                    <Label Text="{Binding TecnicoSelecionado.identific, StringFormat='Técnico: {0}'}"
+                    <Label Text="{Binding TecnicoSelecionado.identific, StringFormat='{0}'}"
                             TextColor="White"
                             FontAttributes="Bold"
                             FontSize="14"/>
@@ -97,7 +87,7 @@
 
 
             </VerticalStackLayout>
-            <Frame BackgroundColor="White" CornerRadius="50" HeightRequest="70" WidthRequest="70" HasShadow="True" Opacity="0.9" Margin="65,0">
+            <Frame BackgroundColor="White" CornerRadius="50" HeightRequest="70" WidthRequest="70" HasShadow="True" Opacity="0.9" Margin="0,0">
                 <ImageButton Source="printer2"  Command="{Binding GerarInformeCommand}" HeightRequest="40"></ImageButton>
 
             </Frame>

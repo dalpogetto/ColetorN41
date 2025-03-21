@@ -6,32 +6,27 @@
              BackgroundColor="{StaticResource dnWhite}"
              Shell.BackgroundColor="{StaticResource dnWhite}"
              Shell.ForegroundColor="{StaticResource dnBlue}"
-             Shell.TitleColor="{StaticResource dnBlue}"
-            
-             >
+             Shell.TitleColor="{StaticResource dnBlue}" >
+    
     <Grid RowDefinitions="auto,*" >
 
         <Image Source="backg.png"  Grid.Row="1" Aspect="AspectFill" VerticalOptions="EndAndExpand"/>
-
-
-        <Grid RowDefinitions="50, 200">
-            <Rectangle Fill="{StaticResource dnWhite}"  Stroke="{StaticResource dnWhite}"/>
-            <Ellipse Grid.Row="1" Fill="{StaticResource dnWhite}" TranslationY="-110">
-                <Ellipse.Shadow>
+        <Grid RowDefinitions="120">
+            <Rectangle Fill="{StaticResource dnWhite}"  Stroke="{StaticResource dnWhite}">
+                <Rectangle.Shadow>
                     <Shadow Brush="{StaticResource dnPurple}"
-                             Offset="0,5"
-                             Radius="10"
-                             Opacity="0.8"/>
-                </Ellipse.Shadow>
+                          Offset="0,5"
+                          Radius="20"
+                          Opacity="0.6"/>   
+                </Rectangle.Shadow>
+            </Rectangle>
 
-
-            </Ellipse>
 
         </Grid>
-        <VerticalStackLayout Margin="0,0,0,0">
+        <VerticalStackLayout>
 
-            <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,0">
-                <Image Source="dn_logo.png" HeightRequest="120" HorizontalOptions="Center" Margin="0,0,0,40">
+            <VerticalStackLayout HorizontalOptions="Center">
+                <Image Source="dn_logo.png" HeightRequest="140" HorizontalOptions="Center" Margin="0,-20,0,20">
                    
                 </Image>
               
@@ -39,7 +34,7 @@
             <Label
                 Text="Auto Atendimento"
                 SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
+                FontSize="28"
                 FontFamily="Gottham"
                 HorizontalOptions="Center" />
 
@@ -61,7 +56,7 @@
             />
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" >
-                <Frame HasShadow="True" WidthRequest="240" HeightRequest="100" BackgroundColor="{StaticResource dnWhite}">
+                <Frame HasShadow="True" WidthRequest="210" HeightRequest="100" BackgroundColor="{StaticResource dnWhite}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarCalculoCommand}" />
                     </Frame.GestureRecognizers>
@@ -79,7 +74,7 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" >
-                <Frame HasShadow="True" WidthRequest="240" HeightRequest="100" BackgroundColor="{StaticResource dnWhite}">
+                <Frame HasShadow="True" WidthRequest="210" HeightRequest="100" BackgroundColor="{StaticResource dnWhite}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChamarMonitorCommand}" />
                     </Frame.GestureRecognizers>
