@@ -50,8 +50,17 @@ namespace ColetorA41.Services
                 {"codEstabel", codEstabel },
                 {"codTecnico", codTecnico.ToString() },
             };
-            var response = await GetAsync<EncResponse>("apiesaa046/ObterEncs", param);
-            return response.items;
+            try
+            {
+                var response = await GetAsync<EncResponse>("apiesaa046/ObterEncs", param);
+                return response.items;
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+            
         }
 
         public async Task<bool> Desmarcar(string cRowId, string cItemRowId)

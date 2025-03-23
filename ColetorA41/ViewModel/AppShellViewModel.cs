@@ -20,10 +20,18 @@ namespace ColetorA41.ViewModel
         public AppShellViewModel() { }
 
         [RelayCommand]
-        public void Logout()
+        public async void Logout()
         {
+            //Limpar dados usuarios
             Preferences.Default.Clear();
-            Shell.Current.GoToAsync($"{nameof(Login)}");
+            this.UsuarioLogado = string.Empty;
+
+            //Fechar Janela e aguardar 
+            Shell.Current.FlyoutIsPresented = false;
+            await Task.Delay(500);
+
+            //Chamar Tela de Login
+            await Shell.Current.GoToAsync($"{nameof(Login)}");
         }
 
         [ObservableProperty]

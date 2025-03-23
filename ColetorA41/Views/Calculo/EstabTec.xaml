@@ -63,7 +63,7 @@
 
         </VerticalStackLayout>
         <Grid Grid.Row="1" Margin="0,80" Padding="10" RowDefinitions="auto,260">
-            <VerticalStackLayout Margin="0,20,0,10" HorizontalOptions="Start" WidthRequest="300">
+            <VerticalStackLayout Margin="0,20,0,10" HorizontalOptions="Center" WidthRequest="300">
                
                 <!--Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" -->
                     <SearchBar x:Name="searchBar"
@@ -85,7 +85,7 @@
 
             </VerticalStackLayout>
 
-            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="340">
+            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="360">
                 
                 <CollectionView x:Name="lista"  
                    ItemsSource="{Binding listaTecnico}" 

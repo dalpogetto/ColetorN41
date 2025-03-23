@@ -1,3 +1,4 @@
+using ColetorA41.Models;
 using ColetorA41.ViewModel;
 
 namespace ColetorA41.Views.Monitor;
@@ -15,8 +16,8 @@ public partial class Processos : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-      //  if(!_vm.IsBack)
-      //     await _vm.ObterEstabelecimentos();
+        if(!_vm.IsBack)
+           await _vm.ObterEstabelecimentos();
         
 
     }

@@ -253,7 +253,7 @@ namespace ColetorA41.ViewModel
         }
 
         [RelayCommand]
-        public void ListaETSelecionada()
+        public async void ListaETSelecionada()
         {
             this.listaExtrakitNaoSelecionados.Clear();
             foreach(var item in this.listaExtrakit)
@@ -270,23 +270,32 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         public async Task LoginAlmoxa()
         {
-            this.IsBusy = true;
-            var ok = await _service.LoginAlmoxa(this.EstabSelecionado.codEstab,
-                                                this.UsuarioAlmoxa_,
-                                                this.SenhaAlmoxa);
-            if (ok.senhaValida)
+            try
             {
-                //await ChamarResumo();
-                await ChamarLoadingCalculo();
+                this.IsBusy = true;
+                var ok = await _service.LoginAlmoxa(this.EstabSelecionado.codEstab,
+                                                    this.UsuarioAlmoxa_,
+                                                    this.SenhaAlmoxa);
+                if (ok.senhaValida)
+                {
+                    //await ChamarResumo();
+                    await ChamarLoadingCalculo();
+                }
+                else
+                {
+                    this.IsBusy = false;
+                    var erro = new Mensagem("erro", "Erro Login", ok.mensagem);
+                    await Shell.Current.CurrentPage.ShowPopupAsync(erro);
+                    return;
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.IsBusy = false;
-                var erro = new Mensagem("erro", "Erro Login", ok.mensagem);
-                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
-                return;
-                
+
+                throw;
             }
+           
 
         }
 
@@ -474,13 +483,17 @@ namespace ColetorA41.ViewModel
         async Task ChamarLoginAlmoxa()
         {
             //Verificar se existe alguma etiqueta sem leitura
-            
-            var lpendente = listaEnc.Where(o => o.flag != "OK").FirstOrDefault();
-            if (lpendente != null) {
 
-                var erro = new Mensagem("erro", "Fichas Pendentes", "Verifique a leitura das etiquetas antes de continuar!");
-                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
-                return;
+            if (listaEnc != null)
+            {
+                var lpendente = listaEnc.Where(o => o.flag != "OK").FirstOrDefault();
+                if (lpendente != null)
+                {
+
+                    var erro = new Mensagem("erro", "Fichas Pendentes", "Verifique a leitura das etiquetas antes de continuar!");
+                    await Shell.Current.CurrentPage.ShowPopupAsync(erro);
+                    return;
+                }
             }
 
             this.UsuarioAlmoxa_ = 0;
@@ -820,9 +833,11 @@ namespace ColetorA41.ViewModel
             this.IsBusy = true;
             this.listaExtrakit.Clear();
             var lista = await _service.ObterExtrakit(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, this.NrProcessSelecionado);
-            foreach (var item in lista)
-            {
-                this.listaExtrakit.Add(item);
+            if (lista != null) {
+                foreach (var item in lista)
+                {
+                    this.listaExtrakit.Add(item);
+                }
             }
             this.IsBusy = false;
         }
@@ -974,9 +989,12 @@ namespace ColetorA41.ViewModel
             this.IsBusy = true;
             var lista = await _service46.ObterEncs(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec);
             this.listaEnc.Clear();
-            foreach (var item in lista)
+            if (lista != null)
             {
-                this.listaEnc.Add(item);
+                foreach (var item in lista)
+                {
+                    this.listaEnc.Add(item);
+                }
             }
             this.IsBusy = false;
            

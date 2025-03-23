@@ -83,7 +83,7 @@ namespace ColetorA41
             #endregion
 
             #region ViewModel
-            builder.Services.AddTransient<AppShellViewModel>();
+            builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<CalculoViewModel>();
             builder.Services.AddTransient<LoginPageViewModel>();
             builder.Services.AddTransient<MainPageViewModel>();

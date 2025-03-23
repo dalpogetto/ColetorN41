@@ -20,7 +20,7 @@
             <Image Source="login.png" HeightRequest="40" HorizontalOptions="Center" />
             <Label  Text="Login Totvs" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"/>
         </VerticalStackLayout>
-        <VerticalStackLayout Padding="25" Spacing="25" Grid.Row="1">
+        <VerticalStackLayout Padding="25" Spacing="15" Grid.Row="1">
 
             <ActivityIndicator
         
@@ -30,8 +30,12 @@
                 VerticalOptions="Center"
                 />
 
-            <Entry Text="{Binding Usuario}" Placeholder="Digite seu usuario"  FontAttributes="Bold" FontSize="16"/>
-            <Entry Text="{Binding Senha}" Placeholder="Senha" IsPassword="true" FontAttributes="Bold" FontSize="16"/>
+            <Entry Text="{Binding Usuario}" Placeholder="Digite seu usuario"  FontAttributes="Bold" FontSize="16"  />
+            <Entry Text="{Binding Senha}" Placeholder="Senha" IsPassword="{Binding IsSenha}" FontAttributes="Bold" FontSize="16"  />
+            <HorizontalStackLayout VerticalOptions="Center" Margin="-10,-10,10,0">
+                <CheckBox x:Name="hidePassword" IsChecked="{Binding IsSenha}"></CheckBox>
+                <Label Text="Ocultar senha" VerticalTextAlignment="Center"></Label>
+            </HorizontalStackLayout>
             <Label Text="Domínio: DIEBOLD_MASTER"/>
 
             <Button Text="Login"

@@ -23,7 +23,7 @@ namespace ColetorA41.Services
             
         }
 
-        public async Task<bool> IsAuthenticatedAsync()
+        public async Task<bool> AutenticacaoUsuario()
         {
             await Task.Delay(2000);
 
@@ -31,11 +31,16 @@ namespace ColetorA41.Services
             var authState = Preferences.Default.Get<bool>(AuthStateKey, false);
             var dadosLogin = Preferences.Default.Get(InfoLogin, String.Empty);
             var userName = Preferences.Default.Get(UserName, String.Empty);
+
+            //Setar Ambiente
             Ambiente.UsuarioSenhaBase64 = dadosLogin;
 
-           // Autenticado Setar Header
-           if (authState)
-            this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
+            // Autenticado Setar Header
+            if (authState)
+            {
+                this._httpClient.DefaultRequestHeaders.Authorization = null;
+                this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
+            }
 
             return authState;
         }
@@ -44,27 +49,25 @@ namespace ColetorA41.Services
 
             try
             {
+                //Montar o Basic Authorization
                 var usuarioSenha = string.Empty;
                 if (usuario.ToUpper() == "SUPER")
                     usuarioSenha = $"{usuario}:{senha}";
                 else 
                     usuarioSenha = $"{usuario}@DIEBOLD_MASTER:{senha}";
 
-                //Basic Login
+                //Base64
                 var byteArray = new UTF8Encoding().GetBytes(usuarioSenha);
                 Ambiente.UsuarioSenhaBase64 = Convert.ToBase64String(byteArray);
-            
-                //Setar Header
+
+                //Setar Header - Basic Authentication
+                this._httpClient.DefaultRequestHeaders.Authorization = null;
                 this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
 
+                //Chamar qualquer método a api vai responder pelo usuario
+                var lista = await ObterEstabelecimentos();
 
-                if (!await Login("101"))
-                {
-                    await Shell.Current.DisplayAlert("Erro!", "Usuário e senha inválidos", "OK");
-                    return default;
-                }
-
-
+                //Setar Usuario Ambiente para manter logado
                 Preferences.Default.Set<bool>(AuthStateKey, true);
                 Preferences.Default.Set(InfoLogin, Ambiente.UsuarioSenhaBase64);
                 Preferences.Default.Set(UserName, usuario);
@@ -88,7 +91,6 @@ namespace ColetorA41.Services
         {
             var response = await GetAsync<Versao>("apiesaa041/DownloadVersao");
             using var reader = new StreamReader(response.arquivo);
-
 
         }
 
@@ -173,9 +175,18 @@ namespace ColetorA41.Services
 
         public async Task<List<Extrakit>> ObterExtrakit(string codEstabel, int codTecnico, int nrProcess )
         {
-            var request = new ExtrakitRequest { CodEstab = codEstabel, CodTecnico = codTecnico, NrProcess = nrProcess };
-            var response = await PostAsync<ExtrakitRequest, ExtrakitResponse>("apiesaa041/ObterExtrakit", request);
-            return response.items;
+            try
+            {
+                var request = new ExtrakitRequest { CodEstab = codEstabel, CodTecnico = codTecnico, NrProcess = nrProcess };
+                var response = await PostAsync<ExtrakitRequest, ExtrakitResponse>("apiesaa041/ObterExtrakit", request);
+                return response.items;
+            }
+            catch(Exception ex) 
+            {
+
+                return null;
+            }
+            
         }
 
         public async Task<int> ObterNrProcesso(string codEstabel, int codTecnico)
@@ -185,11 +196,20 @@ namespace ColetorA41.Services
             return response.nrProcesso;
         }
 
-        public async Task<AlmoxaResponse> LoginAlmoxa(string codEstabel, int usuarioAlmoxa=1888, string senhaAlmoxa = "guigui" )
+        public async Task<AlmoxaResponse> LoginAlmoxa(string codEstabel, int usuarioAlmoxa, string senhaAlmoxa )
         {
-            var request = new AlmoxaRequest { CodEstabel = codEstabel, CodUsuario = usuarioAlmoxa, Senha = senhaAlmoxa };
-            var response = await PostAsync<AlmoxaRequest, AlmoxaResponse>("apiesaa041/LoginAlmoxa", request);
-            return response;
+            try
+            {
+                var request = new AlmoxaRequest { CodEstabel = codEstabel, CodUsuario = usuarioAlmoxa, Senha = senhaAlmoxa };
+                var response = await PostAsync<AlmoxaRequest, AlmoxaResponse>("apiesaa041/LoginAlmoxa", request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
 
         public async Task<bool> Login(string codEstabel, int usuarioAlmoxa = 1888, string senhaAlmoxa = "guigui")

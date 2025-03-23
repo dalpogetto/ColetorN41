@@ -18,27 +18,28 @@ public partial class Loading : ContentPage
     {
         base.OnNavigatedTo(args);
 
-        //Na inicializacao a rotina verifica a versao utilizada para direcionar para 
-        //MainPage ou Login e caso aconteca qualquer erro interrompe a navegacao e 
-        //mostra a tela de Erro
+        //Verificar Usuario Logado
         try
         {
             _vm.IsBusyLoading = true;
            
-            if (await _srv.IsAuthenticatedAsync())
+            //Verificar se ja existe usuario autenticado
+            if (await _srv.AutenticacaoUsuario())
             {
+                //Testar a versao utilizada
                 if (!await _srv.VerificarVersaoMobile(AppInfo.Current.VersionString))
                 {
                     _vm.IsError = true;
                     _vm.IsBusyLoading = false;
                     throw new Exception("Versão Inválida");
                 }
+
+                //Chamar Menu
                 await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             }
             else
             {
-                // User is not logged in 
-                // Redirect to LoginPage
+                //Chamar tela login
                 await Shell.Current.GoToAsync($"{nameof(Login)}");
             }
 
@@ -46,9 +47,11 @@ public partial class Loading : ContentPage
         }
         catch (Exception ex)
         {
+            //Caso aconteca algum erro ir para tela de erro e mostrar mensagem
             _vm.LabelErro = ex.Message;
             await Shell.Current.GoToAsync($"{nameof(Erro)}");
             _vm.IsBusyLoading = false;
+            _srv.Logout();
            
         }
         finally

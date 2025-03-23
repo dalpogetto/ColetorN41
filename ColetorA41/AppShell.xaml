@@ -63,35 +63,17 @@
 
     </Shell.FlyoutHeaderTemplate>
 
-
-
-    <ShellContent
-Icon="home"
-Title="Home Page"
-Route="MainPage"
-ContentTemplate="{DataTemplate viewsMon:Processos}"></ShellContent>
-
-    <ShellContent
- Icon="calculo"
- Title="Cálculo de Necessidades"
- ContentTemplate="{DataTemplate viewsCalc:Resumo}"
- 
- />
-
-
-
-
+   
     <ShellContent
         Title="Loading"
         ContentTemplate="{DataTemplate views:Loading}"
-       
         Shell.FlyoutBehavior="Disabled"
         Shell.FlyoutItemIsVisible="False" />
 
     <ShellContent
     Title="Login"
     ContentTemplate="{DataTemplate views:Login}"
-      Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Disabled"
     Shell.FlyoutItemIsVisible="False"/>
 
 
@@ -99,6 +81,7 @@ ContentTemplate="{DataTemplate viewsMon:Processos}"></ShellContent>
   Icon="home"
   Title="Home Page"
   Route="MainPage"
+  Shell.FlyoutItemIsVisible="False"      
   ContentTemplate="{DataTemplate views:MainPage}"
    />
 
@@ -149,7 +132,7 @@ ContentTemplate="{DataTemplate viewsMon:Processos}"></ShellContent>
 
                     <VerticalStackLayout HorizontalOptions="CenterAndExpand" Spacing="10" >
 
-                        <Label Text="{Binding UsuarioLogado, StringFormat='Usuário: {0}'}" TextColor="{StaticResource dnBlue}"  FontAttributes="Bold"/>
+                        <Label Text="{Binding UsuarioLogado}" TextColor="{StaticResource dnBlue}"  FontAttributes="Bold"/>
                         <Button Text="Logout" Command="{Binding LogoutCommand}" Background="{StaticResource dnBlue}"></Button>
                     </VerticalStackLayout>
 

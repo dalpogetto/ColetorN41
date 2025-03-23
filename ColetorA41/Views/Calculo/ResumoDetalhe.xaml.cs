@@ -10,6 +10,7 @@ public partial class ResumoDetalhe : ContentPage
 	{
 		InitializeComponent();
         this.BindingContext = viewModel;
+       
         this.vm = viewModel;
     }
 
