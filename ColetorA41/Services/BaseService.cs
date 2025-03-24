@@ -37,7 +37,6 @@ namespace ColetorA41.Services
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient("coletor");
             _httpClient.BaseAddress = new Uri(_config["BASE_URL"]);
-           // _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _config["USUARIO_SENHA_BASE64"]);
             _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", _config["ALIAS_APPSERVER"]);
             _httpClient.DefaultRequestHeaders.Add("CompanyId", _config["EMPRESA_PADRAO"]);
             _httpClient.Timeout = Timeout.InfiniteTimeSpan;
@@ -67,18 +66,13 @@ namespace ColetorA41.Services
             {
                 var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
                 var responseStream = await response.Content.ReadAsStringAsync();
-                //var data = await JsonSerializer.DeserializeAsync<T>(responseStream, options);
-                //var datastr = StreamToString(responseStream);
                 var data = JsonConvert.DeserializeObject<T>(responseStream);
-
                 return data;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Impossível obter dados: {ex.Message}");
-                //await Shell.Current.DisplayAlert("Erro!", ex.Message, "OK");
                 throw new Exception(ex.Message);
-                // return default;
             }
             finally
             {
@@ -100,7 +94,7 @@ namespace ColetorA41.Services
         protected async Task<TResponse?> PostAsync<TRequest, TResponse>(string metodo, TRequest requestBody = default)
         {
             /*Montar Request*/
-            var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(Ambiente.PrefixoUrl, metodo)) };
+            var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(_config["BASE_URL"], metodo)) };
             if (requestBody != null)
             {
                // var json = System.Text.Json.JsonSerializer.Serialize(requestBody);
@@ -116,23 +110,15 @@ namespace ColetorA41.Services
                     return data;
                 }
 
-                //var responseJson = await response.Content.ReadAsStringAsync();
-                //var responseData = JsonSerializer.Deserialize<TResponse>(responseJson);
-                //return responseData;
-
             }
             catch (Exception ex)
             {
 
                 Debug.WriteLine($"Impossível obter dados: {ex.Message}");
-                // await Shell.Current.DisplayAlert("Erro!", ex.Message, "OK");
                 throw new Exception(ex.Message);
-
-                // return default;
             }
             finally
             {
-               // request.Dispose();
             }
         }
 

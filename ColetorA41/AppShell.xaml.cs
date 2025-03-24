@@ -11,10 +11,12 @@ namespace ColetorA41
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        private readonly AppShellViewModel vm;
+
+        public AppShell(AppShellViewModel vm)
         {
             InitializeComponent();
-            BindingContext = new AppShellViewModel();
+            BindingContext = vm;
             
             //Adicionar Rotas das Views
             Routing.RegisterRoute(nameof(Loading)       , typeof(Loading));
@@ -39,7 +41,9 @@ namespace ColetorA41
             Routing.RegisterRoute(nameof(EmbalagemPrimeiraNota), typeof(EmbalagemPrimeiraNota));
             Routing.RegisterRoute(nameof(Reparo), typeof(Reparo));
             Routing.RegisterRoute(nameof(ReparoEdicaoItemReparo), typeof(ReparoEdicaoItemReparo));
-
+            
         }
+
+       
     }
 }

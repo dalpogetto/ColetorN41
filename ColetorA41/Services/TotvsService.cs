@@ -38,8 +38,9 @@ namespace ColetorA41.Services
             // Autenticado Setar Header
             if (authState)
             {
-                this._httpClient.DefaultRequestHeaders.Authorization = null;
                 this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
+                var ctx = Shell.Current.BindingContext as AppShellViewModel;
+                ctx.UsuarioLogado = userName;
             }
 
             return authState;
@@ -61,7 +62,6 @@ namespace ColetorA41.Services
                 Ambiente.UsuarioSenhaBase64 = Convert.ToBase64String(byteArray);
 
                 //Setar Header - Basic Authentication
-                this._httpClient.DefaultRequestHeaders.Authorization = null;
                 this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
 
                 //Chamar qualquer método a api vai responder pelo usuario

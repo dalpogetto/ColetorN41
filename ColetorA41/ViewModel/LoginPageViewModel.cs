@@ -39,7 +39,7 @@ namespace ColetorA41.ViewModel
         public async void Login()
         {
             this.IsBusy = true;
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             if (await _srv.Login(Usuario, Senha))
             {
                 _shell.UsuarioLogado = Usuario;

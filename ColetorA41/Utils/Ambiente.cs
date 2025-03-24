@@ -14,14 +14,7 @@ namespace ColetorA41.Utils
         public static Empresa EmpresaSelecionada { get; set; } = new Empresa { CodEmpresa = "1" };
         public static Estabelecimento EstabelecimentoSelecionado { get; set; } = new Estabelecimento { codEstab = "101" };
         public static string VersaoAtual { get; set; }
-        public static string PrefixoUrl
-        {
-            get
-            {
-                return @"https://hawebdev.dieboldnixdorf.com.br:8543/api/integracao/aat/v1/"; // Desenv
-                
-            }
-        }
+        
         public static string AliasAppServer { get => "interfcol"; }
         public static string UsuarioSenhaBase64 { get; set; }
 
