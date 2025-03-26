@@ -33,14 +33,15 @@ namespace ColetorA41.Services
         public BaseService(IHttpClientFactory httpClientFactory, IConfiguration config)
         {
 
+            
             _config = config;
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient("coletor");
             _httpClient.BaseAddress = new Uri(_config["BASE_URL"]);
             _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", _config["ALIAS_APPSERVER"]);
             _httpClient.DefaultRequestHeaders.Add("CompanyId", _config["EMPRESA_PADRAO"]);
-            _httpClient.Timeout = Timeout.InfiniteTimeSpan;
-            //_httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
+          //  _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
+            
         }
 
         protected async Task<T?> GetAsync<T>(string endpoint, NameValueCollection parameters = null)
@@ -64,6 +65,9 @@ namespace ColetorA41.Services
 
             try
             {
+
+                //Montar httpclient
+               
                 var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
                 var responseStream = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<T>(responseStream);
@@ -93,6 +97,9 @@ namespace ColetorA41.Services
 
         protected async Task<TResponse?> PostAsync<TRequest, TResponse>(string metodo, TRequest requestBody = default)
         {
+
+            //Montar httpclient
+      
             /*Montar Request*/
             var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(_config["BASE_URL"], metodo)) };
             if (requestBody != null)

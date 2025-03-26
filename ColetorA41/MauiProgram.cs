@@ -49,10 +49,14 @@ namespace ColetorA41
             builder.Services.AddHttpClient("coletor", httpClient =>
             {
 
-            }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (m, c, ch, e) => true
             });
+            
+            //DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
+            
             #endregion
 
             #region Views

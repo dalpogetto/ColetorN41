@@ -9,8 +9,8 @@
     <Grid RowDefinitions="80,*,100">
         <StackLayout IsVisible="{Binding IsError}">
             <Grid RowDefinitions="80, 200">
-                <Rectangle Fill="{StaticResource Vermelho}"  Stroke="{StaticResource Vermelho}"/>
-                <Ellipse Grid.Row="1" Fill="{StaticResource Vermelho}" TranslationY="-110">
+                <Rectangle Fill="{StaticResource dnRed}"  Stroke="{StaticResource dnRed}"/>
+                <Ellipse Grid.Row="1" Fill="{StaticResource dnRed}" TranslationY="-110">
                     <Ellipse.Shadow>
                         <Shadow Brush="Black"
                              Offset="1,1"
@@ -53,7 +53,7 @@
         </VerticalStackLayout>
 
         <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="End" Grid.Row="2" Margin="10" IsVisible="{Binding IsError}">
-            <Button Text="Baixar Arquivo Instalação" Background="{StaticResource Vermelho}" CornerRadius="20" Command="{Binding DownloadVersaoCommand}"></Button>
+            <Button Text="Baixar Arquivo Instalação" Background="{StaticResource dnRed}" CornerRadius="20" Command="{Binding DownloadVersaoCommand}"></Button>
         </HorizontalStackLayout>
 
     </Grid>

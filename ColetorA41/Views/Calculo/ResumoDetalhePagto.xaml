@@ -32,7 +32,7 @@
 
     <Grid RowDefinitions="100,auto,*,60,8">
         <StackLayout>
-            <Grid RowDefinitions="200">
+            <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
                     <Rectangle.Shadow>
                         <Shadow Brush="{StaticResource Gray500}"
@@ -43,11 +43,11 @@
                 </Rectangle>
             </Grid>
 
-            <VerticalStackLayout Padding="20,10" Margin="0,-180,0,0">
+            <VerticalStackLayout Padding="20,10" Margin="0,-100,0,0">
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
                         Source="pagto.png"
-                        HeightRequest="60"
+                        HeightRequest="40"
                         HorizontalOptions="Center">
                         <Image.Shadow>
                             <Shadow Brush="Black"
@@ -65,7 +65,7 @@
 
                 </HorizontalStackLayout>
 
-                <Label Margin="10,20" Text="Realize a manutenção para os itens de pagamento" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="200" TextColor="White"></Label>
+                <Label Margin="10,0" Text="Realize a manutenção para os itens de pagamento" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="200" TextColor="White"></Label>
 
 
                 
@@ -73,7 +73,7 @@
             </VerticalStackLayout>
         </StackLayout>
        
-        <CollectionView x:Name="lista" Grid.Row="2" Margin="0,120"
+        <CollectionView x:Name="lista" Grid.Row="2" Margin="0,0"
                                   ItemsSource="{Binding listaPagtos}" 
                                   VerticalScrollBarVisibility="Always">
             <CollectionView.Header>
@@ -107,11 +107,11 @@
                             
                         </SwipeView.RightItems>
 
-                        <Border HeightRequest="100" Margin="10,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                        <Border HeightRequest="100" Margin="5,5" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
 
                             <VerticalStackLayout>
 
-                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,auto" ColumnSpacing="20" Margin="0,0">
+                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*,auto" ColumnSpacing="10" Margin="0,0">
                                     <!--Chave-->
                                     <Label Text="{Binding itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
                                    

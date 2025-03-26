@@ -625,7 +625,8 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarDetalheResumo()
         {
-            await Shell.Current.GoToAsync($"{nameof(ResumoDetalhe)}");
+            //await Shell.Current.GoToAsync($"{nameof(ResumoDetalhe)}");
+            await Shell.Current.GoToAsync("..");
         }
 
         

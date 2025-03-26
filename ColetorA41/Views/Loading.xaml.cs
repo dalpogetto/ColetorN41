@@ -26,13 +26,14 @@ public partial class Loading : ContentPage
             //Verificar se ja existe usuario autenticado
             if (await _srv.AutenticacaoUsuario())
             {
-                //Testar a versao utilizada
+                /*Testar a versao utilizada*/
                 if (!await _srv.VerificarVersaoMobile(AppInfo.Current.VersionString))
                 {
                     _vm.IsError = true;
                     _vm.IsBusyLoading = false;
                     throw new Exception("Versão Inválida");
                 }
+                
 
                 //Chamar Menu
                 await Shell.Current.GoToAsync($"//{nameof(MainPage)}");

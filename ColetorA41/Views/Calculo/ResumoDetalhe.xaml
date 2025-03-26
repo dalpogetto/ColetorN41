@@ -30,7 +30,7 @@
     </ContentPage.Resources>
 
 
-    <Grid RowDefinitions="180,*,60,8">
+    <Grid RowDefinitions="100,*,60,8">
         <StackLayout>
             <Grid RowDefinitions="120">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
@@ -76,7 +76,7 @@
 
             </VerticalStackLayout>
         </StackLayout>
-        <Border HeightRequest="70" Margin="20,50,20,0" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" >
+        <Border HeightRequest="70" Margin="20,80,20,0" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" >
             <SearchBar x:Name="searchBar"  
                        Placeholder="Buscar item..."
                        
@@ -89,7 +89,7 @@
         </Border>
 
 
-        <CollectionView x:Name="lista" Grid.Row="1" Margin="0,0" HorizontalOptions="Center" HeightRequest="580"
+        <CollectionView x:Name="lista" Grid.Row="1" Margin="0,20" HorizontalOptions="Center" 
                                   ItemsSource="{Binding listaItensFicha}" 
                                   RemainingItemsThreshold="4"
                                   ItemsUpdatingScrollMode="KeepItemsInView"
@@ -116,11 +116,11 @@
                             </SwipeItems>
                         </SwipeView.RightItems>
 
-                        <Border HeightRequest="95" Margin="10,3" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                        <Border HeightRequest="95" Margin="5,3" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White">
 
                             <VerticalStackLayout>
 
-                                <Grid Padding="5" RowDefinitions="*,22,*,*,*" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="20" Margin="0,0">
+                                <Grid Padding="5" RowDefinitions="*,22,*,*,*" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="5">
                                     <!--Chave-->
                                     <Label Text="{Binding itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
                                     <Label Text="{Binding itPrincipal}" Grid.Column="2" Grid.ColumnSpan="3" FontSize="16" HorizontalTextAlignment="End"/>

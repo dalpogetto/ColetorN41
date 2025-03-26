@@ -65,7 +65,13 @@ namespace ColetorA41.Services
                 this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
 
                 //Chamar qualquer método a api vai responder pelo usuario
-                var lista = await ObterEstabelecimentos();
+                //var lista = await ObterEstabelecimentos();
+
+                //Testar Versao
+                if (!await VerificarVersaoMobile(AppInfo.Current.VersionString))
+                {
+                    throw new Exception("Versão Inválida");
+                }
 
                 //Setar Usuario Ambiente para manter logado
                 Preferences.Default.Set<bool>(AuthStateKey, true);
@@ -76,7 +82,7 @@ namespace ColetorA41.Services
             }
             catch (Exception ex)
             {
-                var mensa = new Mensagem("error", "Erro Login", "Usuário e Senha inválidos!");
+                var mensa = new Mensagem("error", "Erro Login", ex.Message);
                 await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
                 return false;
             }
