@@ -254,10 +254,16 @@ namespace ColetorA41.ViewModel
             {
                 CodEstab = ProcessoEstabSelecionado.codestabel,
                 CodTecnico = ProcessoEstabSelecionado.codemitente,
-                NrProcess = ProcessoEstabSelecionado.nrprocess
+                NrProcess = ProcessoEstabSelecionado.nrprocess,
+                
             });
 
             DadosNotaFiscal = resp.nfs[0];
+            //Popular Dados Nota Fiscal
+            DadosNotaFiscal.volume = DadosNotaFiscal.volume ?? "";
+            DadosNotaFiscal.pesobru = DadosNotaFiscal.pesobru ?? "0";
+            DadosNotaFiscal.pesoliq = DadosNotaFiscal.pesoliq ?? "0";
+
             DadosNotaFiscal.nrprocess = ProcessoEstabSelecionado.nrprocess.ToString();
             IsBusy = false;
         }

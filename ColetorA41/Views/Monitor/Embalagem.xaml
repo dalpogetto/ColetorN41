@@ -66,7 +66,7 @@
 
                     </HorizontalStackLayout>
 
-                    <Border HeightRequest="70" Margin="10,0" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke"  >
+                    <Border HeightRequest="70" Margin="10,-10,0,0" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke"  >
                         <Entry x:Name="entry"
                        toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
                        ReturnType="Next"
@@ -87,7 +87,7 @@
 
             </StackLayout>
 
-            <ScrollView Grid.Row="1"  Margin="10,80,10,0" HorizontalOptions="Center">
+            <ScrollView Grid.Row="1"  Margin="10,0,10,0" HorizontalOptions="Center">
                 <StackLayout>
 
                     <CollectionView x:Name="collectionParam"

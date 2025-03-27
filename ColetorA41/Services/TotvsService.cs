@@ -65,7 +65,7 @@ namespace ColetorA41.Services
                 this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
 
                 //Chamar qualquer método a api vai responder pelo usuario
-                //var lista = await ObterEstabelecimentos();
+               // var lista = await ObterEstabelecimentos();
 
                 //Testar Versao
                 if (!await VerificarVersaoMobile(AppInfo.Current.VersionString))

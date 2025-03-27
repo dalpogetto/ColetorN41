@@ -80,14 +80,14 @@
 
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Border HeightRequest="100" Margin="10,2" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="White">
+                            <Border HeightRequest="100" Margin="5,2" Padding="5" StrokeShape="RoundRectangle 10" BackgroundColor="White">
                                 <VerticalStackLayout HorizontalOptions="FillAndExpand">
                                     <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="50,50,140,*,auto">
                                         <!--Cabecalho-->
                                         <Label Text="Estab"      Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="0"></Label>
                                         <Label Text="Filial"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="1"></Label>
                                         <Label Text="Item"  Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="2"></Label>
-                                        <Label Text="Qtde Rep"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="3"></Label>
+                                        <Label Text="Rep"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="3"></Label>
                                         <Label Text="Enc"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="4"></Label>
                                         <!--Detalhe-->
                                         <Label Text="{Binding codestabel}" Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="0"></Label>

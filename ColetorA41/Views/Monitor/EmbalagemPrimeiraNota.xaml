@@ -57,7 +57,7 @@
                     <Label Text="Estab"      Style="{StaticResource lblCabec}" Grid.Column="0"></Label>
                     <Label Text="Serie"       Style="{StaticResource lblCabec}" Grid.Column="1"></Label>
                     <Label Text="Nota Fiscal"  Style="{StaticResource lblCabec}"  Grid.Column="2"></Label>
-                    <Label Text="Nat Operacao"  Style="{StaticResource lblCabec}"  Grid.Column="3"></Label>
+                    <Label Text="Nat Oper"  Style="{StaticResource lblCabec}"  Grid.Column="3"></Label>
                     <!--Detalhe-->
                     <Label Text="{Binding DadosNotaFiscal.codestabel}" Style="{StaticResource lblDet}" Grid.Row="1" Grid.Column="0"></Label>
                     <Label Text="{Binding DadosNotaFiscal.serie}"   Style="{StaticResource lblDet}" Grid.Row="1" Grid.Column="1"></Label>

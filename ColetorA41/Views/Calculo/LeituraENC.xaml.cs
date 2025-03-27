@@ -15,6 +15,12 @@ public partial class LeituraENC : ContentPage
         this.vm = viewModel;
     }
 
+    protected override void OnAppearing()
+    {
+      //  base.OnAppearing();
+      //  this.entry.Focus();
+    }
+
     protected override bool OnBackButtonPressed()
     {
         var mensa = new Mensagem("info", "Navegação", "Utilize a navegação incluída no cálculo");

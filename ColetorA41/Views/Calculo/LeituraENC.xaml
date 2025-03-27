@@ -77,7 +77,21 @@
                        PlaceholderColor="{StaticResource Gray300}"
                        ReturnCommand="{Binding LeituraENCCommand}"
                        ReturnCommandParameter="{Binding NumEnc}"
-                       TextColor="Black"></Entry>
+                       TextColor="Black">
+
+                        <Entry.Behaviors>
+                            <toolkit:UserStoppedTypingBehavior 
+                                    BindingContext="{Binding Path=BindingContext, Source={x:Reference entry}, x:DataType=Entry}"
+                                    Command="{Binding SearchEncCommand}"
+                                    CommandParameter="{Binding NumEnc}"
+                               
+                                    StoppedTypingTimeThreshold="2000"
+                                    MinimumLengthThreshold="6"
+                                    ShouldDismissKeyboardAutomatically="True" />    
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    
                 </Border>
 
                
