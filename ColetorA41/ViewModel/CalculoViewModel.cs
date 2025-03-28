@@ -273,7 +273,8 @@ namespace ColetorA41.ViewModel
             try
             {
                 this.IsBusy = true;
-                var ok = await _service.LoginAlmoxa(this.EstabSelecionado.codEstab,
+                var ok = await _service.LoginAlmoxa(this.NrProcessSelecionado,
+                                                    this.EstabSelecionado.codEstab,
                                                     this.UsuarioAlmoxa_,
                                                     this.SenhaAlmoxa);
                 if (ok.senhaValida)
@@ -502,64 +503,49 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(LoginAlmoxa)}");
         }
 
-        [RelayCommand]
-        async Task SearchEnc(string numEnc)
-        {
-            await leituraENC(numEnc);
-        }
+       
 
         [RelayCommand]
-        async Task leituraENC(string numEnc)
+        async Task LeituraENC(string numEnc)
         {
-            this.IsBusy = true;
-            if (string.IsNullOrEmpty(numEnc))
-            {
-                this.IsBusy = false;
-                return;
-            }
 
-            var item = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.EntregaSelecionada.nrProcesso.ToString());
-            item.numEnc = numEnc;
-            if (item.flag.ToUpper() == "ERRO")
+            await Task.Run(() =>
             {
-                this.IsBusy = false;
-                var erro = new Mensagem("erro", "Erro Enc", item.mensagem);
-                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
-                return;
-            }
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                this.IsBusy = true;
+                if (string.IsNullOrEmpty(numEnc))
+                {
+                    this.IsBusy = false;
+                    return;
+                }
 
-            //this.listaEnc.Add(item);
-            this.listaEnc.Clear();
-            await this.ObterEncs();
-            this.NumEnc = string.Empty;
-           
+                var item = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.NrProcessSelecionado.ToString());
+                item.numEnc = numEnc;
+                if (item.flag.ToUpper() == "ERRO")
+                {
+                    this.IsBusy = false;
+                    var erro = new Mensagem("erro", "Erro Enc", item.mensagem);
+                    await Shell.Current.CurrentPage.ShowPopupAsync(erro);
+                   // this.listaEnc.Add(new Enc { flag = "Erro Leitura", numEnc = numEnc, itCodigo = item.mensagem });
+                    this.NumEnc = string.Empty;
+
+                    return;
+                }
+
+                //this.listaEnc.Add(item);
+                this.listaEnc.Clear();
+                await this.ObterEncs();
+                this.NumEnc = string.Empty;
+
+            });
+
+            });
+
+
         }
 
-        async Task leituraEtiquetaEnc(string numEnc)
-        {
-            this.IsBusy = true;
-            if (string.IsNullOrEmpty(numEnc))
-            {
-                this.IsBusy = false;
-                return;
-            }
-
-            var item = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.EntregaSelecionada.nrProcesso.ToString());
-            item.numEnc = numEnc;
-            if (item.flag.ToUpper() == "ERRO")
-            {
-                this.IsBusy = false;
-                var erro = new Mensagem("erro", "Erro Enc", item.mensagem);
-                await Shell.Current.CurrentPage.ShowPopupAsync(erro);
-                return;
-            }
-
-            //this.listaEnc.Add(item);
-            this.listaEnc.Clear();
-            await this.ObterEncs();
-            this.NumEnc = string.Empty;
-
-        }
+       
 
         [RelayCommand]
         async Task EliminarEnc(Enc objEnc)

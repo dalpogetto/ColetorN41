@@ -33,8 +33,16 @@
                                     Opacity="0.8" />
                         </Image.Shadow>
                     </Image>
+                <Label 
+                     Text="Estabelecimento e Técnico"
+                     TextColor="White"
+                     VerticalOptions="Center" 
+                     FontAttributes="Bold"
+                     FontSize="22"
+                     HorizontalOptions="Center" 
+                     />     
 
-                   
+
             </VerticalStackLayout>
         </StackLayout>
 
@@ -62,7 +70,7 @@
              </Border>
 
         </VerticalStackLayout>
-        <Grid Grid.Row="1" Margin="0,80" Padding="10" RowDefinitions="auto,260">
+        <Grid Grid.Row="1" Margin="0,80" Padding="10" RowDefinitions="auto,*">
             <VerticalStackLayout Margin="0,20,0,10" HorizontalOptions="Center" WidthRequest="300">
                
                 <!--Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" -->

@@ -482,17 +482,58 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task LeituraItemPago(string itCodigo)
         {
-            this.IsBusy = true;
-            if (string.IsNullOrEmpty(itCodigo))
+            await Task.Run(() => 
             {
-                this.IsBusy = false;
-                return;
-            }
+                listaNotaPagto.Clear();
+                MainThread.BeginInvokeOnMainThread(async () => 
+                {
 
-            var resp = await _service.LeituraItemPagto(ProcessoEstabSelecionado.nrprocess.ToString(), itCodigo);
-            await this.ObterNotasPagto();
-            CodigoItem = string.Empty;
+                    this.IsBusy = true;
+                    if (string.IsNullOrEmpty(itCodigo))
+                    {
+                        this.IsBusy = false;
+                        return;
+                    }
 
+                    var resp = await _service.LeituraItemPagto(ProcessoEstabSelecionado.nrprocess.ToString(), itCodigo);
+
+
+                    //inicio
+
+                    IsBusy = true;
+                    await Shell.Current.GoToAsync($"{nameof(EmbalagemLoading)}");
+                    listaNotaPagto.Clear();
+                    var resp2 = await _service.ObterNotasPagto(ProcessoEstabSelecionado.nrprocess.ToString());
+                    listaNotaPagto.AddRange(resp2.items);
+
+                    //Verificar Para qual tela direcionar
+                    if (listaNotaPagto.Count >= 0)
+                    {
+                        var existePendencia = listaNotaPagto.Where(x => x.situacao.ToUpper() == "PENDENTE").FirstOrDefault();
+                        if (existePendencia != null)
+                            await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
+                        else
+                        {
+                            //Setar Combo modalidade
+                            IsRodoviario = true;
+                            IsAereo = false;
+                            TipoModalidade = 2;
+
+                            await this.ObterDadosPrimeiraNota();
+                            await Shell.Current.GoToAsync($"{nameof(EmbalagemPrimeiraNota)}");
+                        }
+                    }
+                    IsBusy = false;
+
+                    //fim
+
+
+                    //await this.ObterNotasPagto();
+                    CodigoItem = string.Empty;
+                });
+
+            });
+               
 
         }
 

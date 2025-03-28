@@ -123,8 +123,12 @@
                                 <Grid Padding="5" RowDefinitions="*,22,*,*,*" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="5">
                                     <!--Chave-->
                                     <Label Text="{Binding itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
-                                    <Label Text="{Binding itPrincipal}" Grid.Column="2" Grid.ColumnSpan="3" FontSize="16" HorizontalTextAlignment="End"/>
-                                    <Label Text="{Binding descItem}" Grid.Row="1" Grid.ColumnSpan="5" FontSize="12"  FontAttributes="Bold"/>
+                                    <Label Text="Localização" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource dnBlue}" Grid.Column="2" Grid.ColumnSpan="3"  HorizontalTextAlignment="End"></Label>
+                                    <Label Text="{Binding codLocaliza}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="End" Margin="0,-5,0,0"/>
+
+                                    <Label Text="{Binding descItem}" Grid.Row="1" Grid.ColumnSpan="3" FontSize="12" LineBreakMode="NoWrap"/>
+
+                                    
                                     <Rectangle HeightRequest="1" Fill="LightGray" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.ColumnSpan="5"/>
                                     <!--Cabecalho-->
                                     <Label Text="QtPagar"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0"></Label>

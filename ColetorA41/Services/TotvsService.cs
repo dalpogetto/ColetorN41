@@ -202,11 +202,11 @@ namespace ColetorA41.Services
             return response.nrProcesso;
         }
 
-        public async Task<AlmoxaResponse> LoginAlmoxa(string codEstabel, int usuarioAlmoxa, string senhaAlmoxa )
+        public async Task<AlmoxaResponse> LoginAlmoxa(int nrProcess, string codEstabel, int usuarioAlmoxa, string senhaAlmoxa )
         {
             try
             {
-                var request = new AlmoxaRequest { CodEstabel = codEstabel, CodUsuario = usuarioAlmoxa, Senha = senhaAlmoxa };
+                var request = new AlmoxaRequest { NrProcess= nrProcess, CodEstabel = codEstabel, CodUsuario = usuarioAlmoxa, Senha = senhaAlmoxa };
                 var response = await PostAsync<AlmoxaRequest, AlmoxaResponse>("apiesaa041/LoginAlmoxa", request);
                 return response;
             }

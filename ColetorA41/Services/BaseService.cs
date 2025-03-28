@@ -40,8 +40,10 @@ namespace ColetorA41.Services
             _httpClient.BaseAddress = new Uri(_config["BASE_URL"]);
             _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", _config["ALIAS_APPSERVER"]);
             _httpClient.DefaultRequestHeaders.Add("CompanyId", _config["EMPRESA_PADRAO"]);
+            _httpClient.Timeout = Timeout.InfiniteTimeSpan;
+
           //  _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
-            
+
         }
 
         protected async Task<T?> GetAsync<T>(string endpoint, NameValueCollection parameters = null)

@@ -16,6 +16,7 @@ namespace ColetorA41.Models
 
     public class AlmoxaRequest
     {
+        public int NrProcess { get; set; }
         public string CodEstabel { get; set; }
         public int CodUsuario { get; set; }
         public string Senha { get; set; }

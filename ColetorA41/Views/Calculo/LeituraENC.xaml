@@ -71,7 +71,6 @@
                        ReturnType="Next"
                        Margin="20,10"
                        FontSize="18"
-                       
                        Text="{Binding NumEnc}"
                        Placeholder="Aguardando leitura de etiqueta...."
                        PlaceholderColor="{StaticResource Gray300}"
@@ -82,12 +81,11 @@
                         <Entry.Behaviors>
                             <toolkit:UserStoppedTypingBehavior 
                                     BindingContext="{Binding Path=BindingContext, Source={x:Reference entry}, x:DataType=Entry}"
-                                    Command="{Binding SearchEncCommand}"
+                                    Command="{Binding LeituraENCCommand, Mode=OneTime}"
                                     CommandParameter="{Binding NumEnc}"
-                               
-                                    StoppedTypingTimeThreshold="2000"
+                                    StoppedTypingTimeThreshold="1000"
                                     MinimumLengthThreshold="6"
-                                    ShouldDismissKeyboardAutomatically="True" />    
+                                    ShouldDismissKeyboardAutomatically="False" />    
                         </Entry.Behaviors>
                     </Entry>
 
@@ -170,7 +168,7 @@
             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
                 <ActivityIndicator
                  Grid.Column="0"
-                 IsVisible="{Binding IsBusy}"
+                 IsVisible="True"
                  HorizontalOptions="Center"
                  IsRunning="{Binding IsBusy}"
                  VerticalOptions="Center"

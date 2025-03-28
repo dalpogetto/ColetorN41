@@ -16,8 +16,7 @@ public partial class Processos : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if(!_vm.IsBack)
-           await _vm.ObterEstabelecimentos();
+        await _vm.ObterEstabelecimentos();
         
 
     }

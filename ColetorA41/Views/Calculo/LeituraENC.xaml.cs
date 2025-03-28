@@ -15,11 +15,7 @@ public partial class LeituraENC : ContentPage
         this.vm = viewModel;
     }
 
-    protected override void OnAppearing()
-    {
-      //  base.OnAppearing();
-      //  this.entry.Focus();
-    }
+   
 
     protected override bool OnBackButtonPressed()
     {

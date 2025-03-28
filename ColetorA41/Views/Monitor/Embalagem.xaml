@@ -67,19 +67,31 @@
                     </HorizontalStackLayout>
 
                     <Border HeightRequest="70" Margin="10,-10,0,0" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke"  >
-                        <Entry x:Name="entry"
-                       toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
-                       ReturnType="Next"
-                       Margin="20,10"
-                       FontSize="18"
+                    <Entry x:Name="entry"
+                           toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
+                           ReturnType="Next"
+                           Margin="20,10"
+                           FontSize="18"
                        
-                       Text="{Binding CodigoItem}"
-                       Placeholder="Aguardando leitura de etiqueta...."
-                       PlaceholderColor="{StaticResource Gray300}"
-                       ReturnCommand="{Binding LeituraItemPagoCommand}"
-                       ReturnCommandParameter="{Binding CodigoItem}"
-                       TextColor="Black"></Entry>
-                    </Border>
+                           Text="{Binding CodigoItem}"
+                           Placeholder="Aguardando leitura de etiqueta...."
+                           PlaceholderColor="{StaticResource Gray300}"
+                           ReturnCommand="{Binding LeituraItemPagoCommand}"
+                           ReturnCommandParameter="{Binding CodigoItem}"
+                           TextColor="Black">
+
+                        <Entry.Behaviors>
+                            <toolkit:UserStoppedTypingBehavior 
+                                BindingContext="{Binding Path=BindingContext, Source={x:Reference entry}, x:DataType=Entry}"
+                                Command="{Binding LeituraItemPagoCommand, Mode=OneTime}"
+                                CommandParameter="{Binding CodigoItem}"
+                                StoppedTypingTimeThreshold="1000"
+                                MinimumLengthThreshold="12"
+                                ShouldDismissKeyboardAutomatically="False" />
+                        </Entry.Behaviors>
+
+                    </Entry>   
+                </Border>
 
 
 
