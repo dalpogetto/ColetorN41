@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ColetorA41.Services
@@ -37,12 +38,14 @@ namespace ColetorA41.Services
             _config = config;
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient("coletor");
-            _httpClient.BaseAddress = new Uri(_config["BASE_URL"]);
+            _httpClient.BaseAddress = new Uri(_config["BASE_URL"] ?? string.Empty);
             _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", _config["ALIAS_APPSERVER"]);
             _httpClient.DefaultRequestHeaders.Add("CompanyId", _config["EMPRESA_PADRAO"]);
             _httpClient.Timeout = Timeout.InfiniteTimeSpan;
+            
+          
 
-          //  _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
+            //  _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
 
         }
 
@@ -103,7 +106,7 @@ namespace ColetorA41.Services
             //Montar httpclient
       
             /*Montar Request*/
-            var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(_config["BASE_URL"], metodo)) };
+            var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(_config["BASE_URL"] ?? string.Empty, metodo)) };
             if (requestBody != null)
             {
                // var json = System.Text.Json.JsonSerializer.Serialize(requestBody);
@@ -112,12 +115,32 @@ namespace ColetorA41.Services
             }
             try
             {
-                var response = await _httpClient.SendAsync(request);
+                var cts = new CancellationTokenSource(new TimeSpan(0, 2, 5));
+                var response = await _httpClient.SendAsync(request, cts.Token).ConfigureAwait(false);
+
+                /*
                 var responseStream = await response.Content.ReadAsStringAsync();
-                {
-                    var data = JsonConvert.DeserializeObject<TResponse>(responseStream);
+                  {
+                      var data = JsonConvert.DeserializeObject<TResponse>(responseStream);
+                      return data;
+                  }
+                */
+
+                var responseStream = await response.Content.ReadAsStreamAsync();
+                { 
+                    // convert stream to string
+                    StreamReader reader = new StreamReader(responseStream);
+                    string text = reader.ReadToEnd();
+
+                    Debug.WriteLine($"Retorno API:");
+
+                    var data = JsonConvert.DeserializeObject<TResponse>(text);
+
+                    Debug.WriteLine($"APOS CONVERSAO  API:");
                     return data;
-                }
+                };
+
+
 
             }
             catch (Exception ex)

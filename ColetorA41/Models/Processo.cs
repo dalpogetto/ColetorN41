@@ -12,7 +12,7 @@ namespace ColetorA41.Models
         public int statusProcesso { get; set; }
         public int nrProcesso { get; set; }
         public int tempoProcesso { get; set; }
-        public string situacaoProcesso { get; set; }
+        public string? situacaoProcesso { get; set; }
     }
 
 
@@ -21,7 +21,7 @@ namespace ColetorA41.Models
         public int statusProcesso { get; set; }
         public int nrProcesso { get; set; }
         public int tempoProcesso { get; set; }
-        public string situacaoProcesso { get; set; }
+        public string? situacaoProcesso { get; set; }
     }
 
 }

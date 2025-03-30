@@ -7,7 +7,7 @@
              x:DataType="viewmodel:CalculoViewModel"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Cálculo de Necessidades"
-              Shell.NavBarIsVisible="False"
+             Shell.NavBarIsVisible="False"
              x:Name="resumo"
              HideSoftInputOnTapped="True">
 
@@ -107,7 +107,7 @@
                                  EventName="CheckedChanged"
                                  BindingContext=""
                                  Command="{Binding RadioTipoCalculoCommand}"
-                                 CommandParameter="{Binding Source={Reference this}}"/>
+                                />
                     </RadioButton.Behaviors>
                     
                 </RadioButton>
@@ -116,7 +116,7 @@
                         <toolkit:EventToCommandBehavior
                                   EventName="CheckedChanged"
                                   Command="{Binding RadioTipoCalculoCommand}"
-                                  CommandParameter="{Binding Source={Reference this}}"/>  
+                                  />  
                     </RadioButton.Behaviors>
                     
                 </RadioButton>
@@ -125,7 +125,7 @@
                         <toolkit:EventToCommandBehavior
                                   EventName="CheckedChanged"
                                   Command="{Binding RadioTipoCalculoCommand}"
-                                  CommandParameter="{Binding Source={Reference this}}"/>
+                                  />
                     </RadioButton.Behaviors>
                     
                 </RadioButton>
@@ -139,7 +139,7 @@
                             <TapGestureRecognizer Command="{Binding ChamarResumoDetalheCommand}" CommandParameter="Geral" />
                         </Frame.GestureRecognizers>
                         <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*,6">
-                            <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="50" HeightRequest="30" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="{StaticResource Black}" >
+                            <Frame CornerRadius="20" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="50" HeightRequest="30" BackgroundColor="{StaticResource dnWhite}" Padding="1" BorderColor="Black" >
                                 <Label Text="{Binding Fichas.Geral}" TextColor="{StaticResource Gray900}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
                         <Label Text="{Binding Fichas.GeralExtrakit, StringFormat='{0} ETs fora do processo'} " Grid.Row="1" HorizontalOptions="End" VerticalOptions="Center" FontSize="12"/>

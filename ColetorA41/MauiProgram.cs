@@ -50,12 +50,15 @@ namespace ColetorA41
             {
 
             })
-            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            .ConfigurePrimaryHttpMessageHandler(() => 
+            
+            /*new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (m, c, ch, e) => true
             });
+            */
             
-            //DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
+            DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
             
             #endregion
 

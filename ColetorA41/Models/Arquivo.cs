@@ -8,12 +8,12 @@ namespace ColetorA41.Models
 {
     public class ArquivoResumo
     {
-        public string Arquivo { get; set; }
+        public string? Arquivo { get; set; }
         public int NumPedExec { get; set; }
     }
 
     public class EncerrarResponse
     {
-        public string ok { get; set; }
+        public string? ok { get; set; }
     }
 }

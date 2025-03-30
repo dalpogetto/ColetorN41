@@ -11,7 +11,7 @@ namespace ColetorA41
 {
     public partial class AppShell : Shell
     {
-        private readonly AppShellViewModel vm;
+       
 
         public AppShell(AppShellViewModel vm)
         {

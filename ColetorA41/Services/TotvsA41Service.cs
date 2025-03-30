@@ -14,13 +14,13 @@ namespace ColetorA41.Services
         {
         }
 
-        public async Task<List<Estabelecimento>> ObterEstabelecimentos()
+        public async Task<List<Estabelecimento>?> ObterEstabelecimentos()
         {
             var lista = await GetAsync<List<Estabelecimento>>("ObterEstab");
             return lista;
         }
 
-        public async Task<List<Estabelecimento>> ObterEmitentesDoEstabelecimento(string id)
+        public async Task<List<Estabelecimento>?> ObterEmitentesDoEstabelecimento(string id)
         {
             return await GetAsync<List<Estabelecimento>>($"ObterTecEstab/{id}");
         }

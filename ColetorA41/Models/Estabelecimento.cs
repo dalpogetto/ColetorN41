@@ -11,11 +11,11 @@
 
     public class Estabelecimento
     {
-        public string codEstab { get; set; }
-        public string codFilial { get; set; }
-        public string nome { get; set; }
+        public string? codEstab { get; set; }
+        public string? codFilial { get; set; }
+        public string? nome { get; set; }
 
-        public string identific => $"{codEstab} - {nome}";
+        public string? identific => $"{codEstab} - {nome}";
     }
 
 }

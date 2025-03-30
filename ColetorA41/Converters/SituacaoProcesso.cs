@@ -12,7 +12,7 @@ namespace ColetorA41.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            var situacao = ((string)value);
+            var situacao = ((string?)value);
             
             if (situacao == "E") return new Color(0, 136, 185);
             if (situacao == "S") return new Color(0, 122, 135);
@@ -34,7 +34,7 @@ namespace ColetorA41.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            var situacao = ((string)value);
+            var situacao = ((string?)value);
             switch (situacao){
                 case "R": return "Reparo";
                 case "B": return "Embalagem";
@@ -58,7 +58,7 @@ namespace ColetorA41.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            var situacao = ((string)value);
+            var situacao = ((string?)value);
             return (situacao != "E" && situacao != "S");
 
         }

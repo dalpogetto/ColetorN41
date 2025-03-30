@@ -2,7 +2,7 @@ using ColetorA41.ViewModel;
 using CommunityToolkit.Maui.Views;
 
 namespace ColetorA41.Views.Calculo;
-
+[XamlCompilation(XamlCompilationOptions.Skip)]
 public partial class Resumo : ContentPage
 {
 	public Resumo(CalculoViewModel viewModel)

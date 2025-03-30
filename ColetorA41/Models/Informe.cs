@@ -8,7 +8,7 @@ namespace ColetorA41.Models
 {
     public class InformeResponse
     {
-        public string Arquivo { get; set; }
+        public string? Arquivo { get; set; }
         public int NumPedExec { get; set; }
     }
 }

@@ -11,27 +11,27 @@ namespace ColetorA41.Models
     public class ProcessosEstab
     {
         [JsonProperty("nome-almoxa")]
-        public string nomealmoxa { get; set; }
+        public string? nomealmoxa { get; set; }
 
         [JsonProperty("nome-abrev")]
-        public string nomeabrev { get; set; }
-        public string situacao { get; set; }
-        public string fase { get; set; }
+        public string? nomeabrev { get; set; }
+        public string? situacao { get; set; }
+        public string? fase { get; set; }
 
         [JsonProperty("cod-emitente")]
         public int codemitente { get; set; }
 
         [JsonProperty("cod-estabel")]
-        public string codestabel { get; set; }
+        public string? codestabel { get; set; }
 
         [JsonProperty("num-ped-exec")]
-        public string numpedexec { get; set; }
+        public string? numpedexec { get; set; }
 
         [JsonProperty("nr-process")]
         public int nrprocess { get; set; }
 
         [JsonProperty("desc-ped-exec")]
-        public string descpedexec { get; set; }
+        public string? descpedexec { get; set; }
     }
 
     public class ProcessosEstabResponse

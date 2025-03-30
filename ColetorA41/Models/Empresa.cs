@@ -8,6 +8,6 @@ namespace ColetorA41.Models
 {
     public class Empresa
     {
-        public string CodEmpresa { get; set; }
+        public string? CodEmpresa { get; set; }
     }
 }

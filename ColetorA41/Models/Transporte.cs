@@ -17,8 +17,8 @@ namespace ColetorA41.Models
     public class Transporte
     {
         public int codTransp { get; set; }
-        public string nomeAbrev { get; set; }
-        public string identific => $"{codTransp} - {nomeAbrev}";
+        public string? nomeAbrev { get; set; }
+        public string? identific => $"{codTransp} - {nomeAbrev}";
     }
 
 }

@@ -8,9 +8,9 @@ namespace ColetorA41.Models
 {
     public  class BaseModel
     {
-        public string detailedMessage { get; set; }
-        public string code { get; set; }
-        public string message { get; set; }
-        public string type { get; set; }
+        public string? detailedMessage { get; set; }
+        public string? code { get; set; }
+        public string? message { get; set; }
+        public string? type { get; set; }
     }
 }

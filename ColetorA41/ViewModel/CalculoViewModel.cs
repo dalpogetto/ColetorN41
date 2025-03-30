@@ -586,15 +586,25 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task ChamarLoadingCalculo()
         {
-            this.IsBusy = true;
-            //Apagar os calculos anteriores
-            this.Fichas = new();
-            LabelLoading = "Gerando Resumo Cálculo";
-            await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
-            await this.PrepararCalculo();
+            try
+            {
+                this.IsBusy = true;
+                //Apagar os calculos anteriores
+                this.Fichas = new();
+                LabelLoading = "Gerando Resumo Cálculo";
+                await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
+                await this.PrepararCalculo();
 
-            this.IsBusy = false;
-            await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                this.IsBusy = false;
+                await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+            }
+            catch (Exception ex)
+            {
+
+                await Application.Current.MainPage.DisplayAlert("Erro", ex.Message , "OK");
+                await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+            }
+            
 
         }
 
@@ -648,7 +658,7 @@ namespace ColetorA41.ViewModel
         
 
         [RelayCommand]
-        async Task RadioTipoCalculo(object opcao)
+        async Task RadioTipoCalculo()
         {
             IsBusy = true;
             var tipo = TipoCalculo;
@@ -717,7 +727,7 @@ namespace ColetorA41.ViewModel
         }
 
         private string buscaItemFicha;
-        public string BuscaItemFicha
+        public string? BuscaItemFicha
         {
             get
             {
@@ -738,7 +748,7 @@ namespace ColetorA41.ViewModel
         }
 
         private string buscaTecnico;
-        public string BuscaTecnico
+        public string? BuscaTecnico
         {
             get
             {
@@ -906,6 +916,7 @@ namespace ColetorA41.ViewModel
                                                                this.NrProcessSelecionado,
                                                                this.listaExtrakitSelecionados.OfType<Extrakit>().ToList());
 
+            
             //Montar Fichar
             this.listaCalculo.Clear();
             foreach (var item in calculo.items)
@@ -937,6 +948,7 @@ namespace ColetorA41.ViewModel
 
             await this.AtualizaLblBotoes(2);
             await this.AtualizarLabelsContadores(2);
+            
 
             this.IsBusy = false;
             //await this.ChamarResumo();

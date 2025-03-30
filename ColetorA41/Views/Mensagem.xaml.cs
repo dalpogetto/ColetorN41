@@ -8,7 +8,7 @@ public partial class Mensagem:Popup
 
     private string tipoMensagem; 
 
-    public string TipoMensagem
+    public string? TipoMensagem
     { // property
         get { return tipoMensagem; } 
         set { 

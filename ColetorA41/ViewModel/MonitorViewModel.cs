@@ -589,11 +589,7 @@ namespace ColetorA41.ViewModel
 
         }
 
-        [RelayCommand]
-        async Task InformarEmbalagem()
-        {
-
-        }
+       
 
     }
 }

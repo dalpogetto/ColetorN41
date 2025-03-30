@@ -18,13 +18,13 @@ namespace ColetorA41.Models
         /// Gets or sets the username for login.
         /// </summary>
         [JsonPropertyName("username")]
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         /// <summary>
         /// Gets or sets the password for login.
         /// </summary>
         [JsonPropertyName("password")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
     }
 
     public class LoginResponse
@@ -33,7 +33,7 @@ namespace ColetorA41.Models
         /// Gets or sets the authentication token for the user.
         /// </summary>
         [JsonPropertyName("token")]
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
         /// <summary>
         /// Gets or sets the user ID.

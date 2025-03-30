@@ -8,7 +8,7 @@ namespace ColetorA41.Models
 {
     public class CorpoPopup
     {
-        public string Header { get; set; }
-        public string Mensagem { get; set; }
+        public string? Header { get; set; }
+        public string? Mensagem { get; set; }
     }
 }

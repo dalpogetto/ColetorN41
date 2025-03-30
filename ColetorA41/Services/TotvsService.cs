@@ -225,11 +225,21 @@ namespace ColetorA41.Services
             return response.senhaValida;
         }
 
-        public async Task<PrepararCalculoResponse> PrepararCalculoMobile(string codEstabel, int codTecnico, int nrProcess, List<Extrakit> listaET)
+        public async Task<PrepararCalculoResponse?> PrepararCalculoMobile(string codEstabel, int codTecnico, int nrProcess, List<Extrakit> listaET)
         {
-            var request = new PrepararCalculoRequest { CodEstab = codEstabel, CodTecnico = codTecnico, NrProcess = nrProcess, Extrakit=listaET };
-            var response = await PostAsync<PrepararCalculoRequest, PrepararCalculoResponse>("apiesaa041/PrepararCalculoMobile", request);
-            return response;
+            try
+            {
+                var request = new PrepararCalculoRequest { CodEstab = codEstabel, CodTecnico = codTecnico, NrProcess = nrProcess, Extrakit = listaET };
+                var response = await PostAsync<PrepararCalculoRequest, PrepararCalculoResponse>("apiesaa041/PrepararCalculoMobile", request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+
+                await Application.Current.MainPage.DisplayAlert("Erro2", ex.Message, "OK");
+            }
+            return null;
+           
         }
 
         public async Task<bool> EliminarParametrosEstabel(string codEstabel)

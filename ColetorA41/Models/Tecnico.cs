@@ -11,15 +11,15 @@ namespace ColetorA41.Models
     {
         public int total { get; set; }
         public bool hasNext { get; set; }
-        public List<Tecnico> items { get; set; }
+        public List<Tecnico> items { get; set; } = new();
     }
 
     public class Tecnico
     {
         public int codTec { get; set; }
-        public string nomeAbrev { get; set; }
+        public string? nomeAbrev { get; set; }
 
-        public string identific => $"{codTec} - {nomeAbrev}";
+        public string? identific => $"{codTec} - {nomeAbrev}";
     }
 
 }

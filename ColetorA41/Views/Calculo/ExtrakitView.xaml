@@ -97,6 +97,7 @@
                                   SelectionMode="Multiple" 
                                   SelectedItems="{Binding listaExtrakitSelecionados}"
                                   SelectionChangedCommand="{Binding ListaETSelecionadaCommand}"
+                                  HeightRequest="350"
                                  
                                 >
                     <CollectionView.ItemTemplate>
@@ -124,7 +125,7 @@
                                                FontAttributes="Bold" />
 
                                     <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End"  >
-                                        <Label Text="{Binding serieDocto}" FontAttributes="Bold"/>
+                                        <Label Text="{Binding serieDocto, StringFormat='NF: {0}'}" FontAttributes="Bold"/>
                                         <Label Text=" - " FontAttributes="Bold"/>
                                         <Label Text="{Binding nroDocto}" FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
@@ -134,10 +135,11 @@
                                                  Grid.ColumnSpan="2"
                                                  Grid.RowSpan="2"
                                                  Text="{Binding descItem}"
+                                                 LineBreakMode="NoWrap"
                                                  
                                                HorizontalOptions="Start"
                                                  VerticalOptions="Start"
-                                               WidthRequest="300"/>
+                                               WidthRequest="220"/>
 
                                     <Frame CornerRadius="10" 
                                                  HasShadow="True" 

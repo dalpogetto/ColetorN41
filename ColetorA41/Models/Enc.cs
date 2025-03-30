@@ -15,19 +15,19 @@ namespace ColetorA41.Models
     }
     public class Enc
     {
-        public string numEnc { get; set; }
+        public string? numEnc { get; set; }
         public int numOS { get; set; }
-        public string chamado { get; set; }
-        public string itCodigo { get; set; }
-        public string itDescricao { get; set; }
-        public string mensagem { get; set; }
-        public string flag { get; set; }
-        public string cRowId { get; set; }
+        public string? chamado { get; set; }
+        public string? itCodigo { get; set; }
+        public string? itDescricao { get; set; }
+        public string? mensagem { get; set; }
+        public string? flag { get; set; }
+        public string? cRowId { get; set; }
 
-        public string cItemRowId { get; set; }
-        public string notaSaida { get; set; }
+        public string? cItemRowId { get; set; }
+        public string? notaSaida { get; set; }
 
-        public string natOper { get; set; }
+        public string? natOper { get; set; }
 
     }
 }

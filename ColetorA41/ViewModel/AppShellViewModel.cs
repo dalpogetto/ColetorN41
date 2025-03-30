@@ -46,7 +46,7 @@ namespace ColetorA41.ViewModel
         [ObservableProperty]
         Processo processoSelecionado;
 
-        public string ObterVersao { get; set; } = AppInfo.Current.VersionString;
+        public string? ObterVersao { get; set; } = AppInfo.Current.VersionString;
 
 
     }
