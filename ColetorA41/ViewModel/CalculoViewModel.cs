@@ -41,16 +41,20 @@ namespace ColetorA41.ViewModel
                 if (_estabSelecionado != value)
                 {
                     _estabSelecionado = value;
+                    Task.Run(async () =>
+                    {
 
-                    Task.Run(async () => {
                         IsBusy = false;
                         this.listaTecnico.Clear();
                         await this.CarregarTecnicosEstabelecimento();
                         await this.ObterTransporte();
-                        });
+                    });
+                       
                 }
             }
         }
+
+        
 
         private Tecnico _tecnicoSelecionado;
         public Tecnico TecnicoSelecionado
@@ -67,13 +71,18 @@ namespace ColetorA41.ViewModel
             }
         }
 
+      
+
         #endregion
 
         #region Lista Compartilhadas
         public ObservableCollection<Estabelecimento> listaEstab { get; private set; } = new();
         public ObservableRangeCollection<Tecnico> listaTecnico { get; private set; } = new();
         public ObservableCollection<Enc> listaEnc { get; private set; } = new();
-        public ObservableCollection<Transporte> listaTransporte { get; private set; } = new();
+
+        public ObservableCollection<Transporte> listaTranspCompleta { get; private set; } = new();
+        public ObservableCollection<Transporte> listaTransporteEntra { get; private set; } 
+        public ObservableCollection<Transporte> listaTransporteSai { get; private set; } 
         public ObservableCollection<Entrega> listaEntrega { get; private set; } = new();
         public ObservableCollection<Extrakit> listaExtrakit { get; private set; } = new();
         public ObservableCollection<object> listaExtrakitSelecionados { get; set; } = new();
@@ -197,6 +206,96 @@ namespace ColetorA41.ViewModel
         #endregion
 
         #region Funcoes Compartilhadas
+
+
+        private string buscaTransporteEntra;
+        public string? BuscaTransporteEntra
+        {
+            get
+            {
+                return buscaTransporteEntra;
+            }
+            set
+            {
+                
+                buscaTransporteEntra = value;
+              
+                if (buscaTransporteEntra == string.Empty)
+                {
+                    BuscarTranspEntra(string.Empty);
+                }
+            }
+        }
+
+        private string buscaTransporteSai;
+        public string? BuscaTransporteSai
+        {
+            get
+            {
+                return buscaTransporteSai;
+            }
+            set
+            {
+
+                buscaTransporteSai = value;
+
+                if (buscaTransporteSai == string.Empty)
+                {
+                    BuscarTranspSai(string.Empty);
+                }
+            }
+        }
+
+
+        [RelayCommand]
+        async Task BuscarTranspEntra(string criterio)
+        {
+            IsBusy = true;
+            
+            this.listaTransporteEntra.Clear();
+
+            if (string.IsNullOrEmpty(criterio))
+            {
+                foreach (var item in this.listaTranspCompleta)
+                {
+                    this.listaTransporteEntra.Add(item);
+                }
+            }
+            else
+            {
+                //Localizar registros
+                var listaEncontrada = this.listaTranspCompleta.Where(x => x.identific.ToUpper().Contains(criterio.ToUpper()));
+
+                //Caso existe apenas 1 setar 
+                this.TranspEntraSelecionado = null;
+
+                //Popular Lista
+                foreach (var item in listaEncontrada)
+                {
+                    this.listaTransporteEntra.Add(item);
+                }
+
+                if (listaEncontrada.Count() == 1)
+                {
+                    this.TranspEntraSelecionado = listaEncontrada.First();
+                }
+
+            }
+            IsBusy = false;
+        }
+
+        [RelayCommand]
+        async Task BuscarTranspSai(string criterio)
+        {
+            IsBusy = true;
+            TranspSaidaSelecionado = null;
+            this.listaTransporteSai.Clear();
+            foreach (var item in this.listaTranspCompleta.Where(x => x.identific.ToUpper().Contains(criterio.ToUpper())))
+            {
+                this.listaTransporteSai.Add(item);
+            }
+            IsBusy = false;
+        }
 
         [RelayCommand]
         void DownloadVersao()
@@ -818,12 +917,15 @@ namespace ColetorA41.ViewModel
             this.IsBusy = true;
             var lista = await _service.ObterTransportes();
 
-            this.listaTransporte.Clear();
+            this.listaTranspCompleta.Clear();
             foreach (var item in lista.OrderBy(x => x.identific))
             {
-                this.listaTransporte.Add(item);
+                this.listaTranspCompleta.Add(item);
             }
             this.IsBusy = false;
+
+            listaTransporteEntra = new(this.listaTranspCompleta);
+            listaTransporteSai = new(this.listaTranspCompleta);
         }
 
         public async Task ObterEntrega()
@@ -837,6 +939,8 @@ namespace ColetorA41.ViewModel
                 this.listaEntrega.Add(item);
             }
             this.IsBusy = false;
+
+            
         }
 
         public async Task ObterParametrosEstab()
@@ -845,8 +949,8 @@ namespace ColetorA41.ViewModel
             var parametro = await _service.ObterParametrosEstab(this._estabSelecionado.codEstab);
             if (parametro != null)
             {
-                this.TranspEntraSelecionado = this.listaTransporte.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
-                this.TranspSaidaSelecionado = this.listaTransporte.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
+                this.TranspEntraSelecionado = this.listaTranspCompleta.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
+                this.TranspSaidaSelecionado = this.listaTranspCompleta.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
                 this.EntregaSelecionada = this.listaEntrega.Where(item => item.codEntrega == parametro.codEntrega).FirstOrDefault();
                 this.SerieEntra = parametro.serieEntra;
                 this.SerieSaida = parametro.serieSai;

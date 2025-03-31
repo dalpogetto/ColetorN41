@@ -23,6 +23,7 @@ namespace ColetorA41
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("Gotham-Medium.ttf", "Gottham");
@@ -87,6 +88,7 @@ namespace ColetorA41
             builder.Services.AddTransient<EmbalagemPrimeiraNota>();
             builder.Services.AddTransient<Reparo>();
             builder.Services.AddTransient<ReparoEdicaoItemReparo>();
+            builder.Services.AddTransient<ZoomTransporte>();
             #endregion
 
             #region ViewModel

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ColetorA41.Views.Calculo.DadosNF"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-              Shell.NavBarIsVisible="False"
+             Shell.NavBarIsVisible="False"
              Title="Nota Fiscal">
     <Grid RowDefinitions="auto,*,60,8">
         <StackLayout>
@@ -61,39 +61,71 @@
                     <Entry Text="{Binding SerieSaida}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
 
-                <VerticalStackLayout>
-                  
+
+                <Frame CornerRadius="10" HasShadow="True" Padding="5" BackgroundColor="{StaticResource dnWhite}">
+                    <VerticalStackLayout>
+                        <Label Text="Transportadora Entrada"/>
+                        <SearchBar x:Name="searchTranspEntra"
+                                    Placeholder="Localizar ..."
+                                    BackgroundColor="{StaticResource Gray100}"
+                                    Text="{Binding BuscaTransporteEntra}"
+                                    SearchCommand="{Binding BuscarTranspEntraCommand}"
+                                    SearchCommandParameter="{Binding Text, Source={x:Reference searchTranspEntra}}"
+                                    Margin="10,0"
+                                    
+                                    
+                                   >
+                          
+                        </SearchBar>
+                        
+                    <Picker x:Name="TranspEntra"
+                            Title="Selecione a transportadora" FontAttributes="Bold" FontSize="16"
+                            TitleColor="{StaticResource dnRed}"
+                            ItemsSource="{Binding listaTransporteEntra}"  
+                            ItemDisplayBinding="{Binding identific}"
+                            SelectedItem="{Binding TranspEntraSelecionado}"
+                            Margin="10,0"/>
                 </VerticalStackLayout>
+            </Frame>
 
-            </HorizontalStackLayout>
 
-            <Label Text="Transportadora Entrada"/>
-            <Picker Title="Selecione a transportadora" FontAttributes="Bold" FontSize="16"
-                     TitleColor="LightCoral"
-                     ItemsSource="{Binding listaTransporte}"  
-                     ItemDisplayBinding="{Binding identific}"
-                     SelectedItem="{Binding TranspEntraSelecionado, Mode=TwoWay}"
-                     Margin="0,0,0,20"/>
+            <Frame CornerRadius="10" HasShadow="True" Padding="5" Margin="0,10" BackgroundColor="{StaticResource dnWhite}">
+                 <VerticalStackLayout>
+                        <Label Text="Transportadora Saída"/>
+                        <SearchBar x:Name="searchTranspSai"
+                                 Placeholder="Localizar ..."
+                                 BackgroundColor="{StaticResource Gray100}"
+                                 Text="{Binding BuscaTransporteSai}"
+                                 SearchCommand="{Binding BuscarTranspSaiCommand}"
+                                 SearchCommandParameter="{Binding Text, Source={x:Reference searchTranspSai}}"
+                                 Margin="10,0"  >
+                        </SearchBar>
 
-            <Label Text="Transportadora Saída"/>
-            <Picker Title="Selecione a transportadora" FontAttributes="Bold" FontSize="16"
-                     TitleColor="LightCoral"
-                     ItemsSource="{Binding listaTransporte}"  
-                     ItemDisplayBinding="{Binding identific}"
-                     SelectedItem="{Binding TranspSaidaSelecionado, Mode=TwoWay}"
-                     Margin="0,0,0,20"/>
 
-            <Label Text="Entrega"/>
-            <Picker Title="Selecione entrega" FontAttributes="Bold" FontSize="16"
-                     TitleColor="LightCoral"
-                     ItemsSource="{Binding listaEntrega}"  
-                     ItemDisplayBinding="{Binding identific}"
-                     SelectedItem="{Binding EntregaSelecionada, Mode=TwoWay}"
-                     Margin="0,0,0,20"/>
+                         <Picker Title="Selecione a transportadora" FontAttributes="Bold" FontSize="16"
+                                 TitleColor="{StaticResource dnRed}"
+                                 ItemsSource="{Binding listaTransporteSai}"  
+                                 ItemDisplayBinding="{Binding identific}"
+                                 SelectedItem="{Binding TranspSaidaSelecionado, Mode=TwoWay}"
+                                 Margin="10,0"/>
+                    </VerticalStackLayout>
+                </Frame>
 
-        </VerticalStackLayout>
+                <Frame CornerRadius="10" HasShadow="True" Padding="5" BackgroundColor="{StaticResource dnWhite}">
+                    <VerticalStackLayout>
+
+                        <Label Text="Entrega"/>
+                        <Picker Title="Selecione entrega" FontAttributes="Bold" FontSize="16"
+                         TitleColor="{StaticResource dnRed}"
+                         ItemsSource="{Binding listaEntrega}"  
+                         ItemDisplayBinding="{Binding identific}"
+                         SelectedItem="{Binding EntregaSelecionada, Mode=TwoWay}"
+                         Margin="10,0"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
         </Border>
 
         <Grid ColumnDefinitions="*,*,*" Grid.Row="2" >
