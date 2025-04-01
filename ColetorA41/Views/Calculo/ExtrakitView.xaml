@@ -97,7 +97,7 @@
                                   SelectionMode="Multiple" 
                                   SelectedItems="{Binding listaExtrakitSelecionados}"
                                   SelectionChangedCommand="{Binding ListaETSelecionadaCommand}"
-                                  HeightRequest="300"
+                                  HeightRequest="350"
                                  
                                 >
                     <CollectionView.ItemTemplate>

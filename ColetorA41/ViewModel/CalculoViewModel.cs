@@ -11,6 +11,7 @@ using ColetorA41.Extensions;
 using CommunityToolkit.Maui.Views;
 using ColetorA41.Views.Monitor;
 using Microsoft.Maui.Controls.Platform.Compatibility;
+using Android.Locations;
 
 namespace ColetorA41.ViewModel
 {
@@ -217,8 +218,11 @@ namespace ColetorA41.ViewModel
             }
             set
             {
+                if (buscaTransporteEntra == value) return;
+
                 buscaTransporteEntra = value;
-                if (buscaTransporteEntra == string.Empty)
+
+                if (buscaTransporteEntra == string.Empty )
                 {
                     BuscarTranspEntra(string.Empty);
                 }
@@ -234,10 +238,12 @@ namespace ColetorA41.ViewModel
             }
             set
             {
+                if (buscaTransporteSai == value) return;
                 buscaTransporteSai = value;
                 if (buscaTransporteSai == string.Empty)
                 {
-                    BuscarTranspSai(string.Empty);
+                     BuscarTranspSai(string.Empty);
+                   
                 }
             }
         }
@@ -551,6 +557,10 @@ namespace ColetorA41.ViewModel
             {
                 if (botaoVoltar == "false")
                 {
+                    //Zerar campos de busca
+                    this.buscaTransporteEntra = string.Empty;
+                    this.buscaTransporteSai = string.Empty;
+                        
                     await this.ObterParametrosEstab();
                     await this.ObterDados();
                 }
@@ -997,16 +1007,16 @@ namespace ColetorA41.ViewModel
             if (parametro != null)
             {
                 await Task.Delay(2000);
-                this.TranspEntraSelecionado = this.listaTranspCompleta[0]; //.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
-                this.TranspSaidaSelecionado = this.listaTranspCompleta[0]; //.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
+                this.TranspEntraSelecionado = this.listaTranspCompleta[0]; 
+                this.TranspSaidaSelecionado = this.listaTranspCompleta[0]; 
                 this.EntregaSelecionada = this.listaEntrega.Where(item => item.codEntrega == parametro.codEntrega).FirstOrDefault();
                 this.SerieEntra = parametro.serieEntra;
                 this.SerieSaida = parametro.serieSai;
                 this.Entrega = parametro.codEntrega;
                 this.Rpw = parametro.rpw;
                 
-                TranspEntraSelecionado = this.listaTranspCompleta[0]; //.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
-                TranspSaidaSelecionado = this.listaTranspCompleta[0]; //.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
+                TranspEntraSelecionado = this.listaTranspCompleta.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
+                TranspSaidaSelecionado = this.listaTranspCompleta.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
 
             }
             this.IsBusy = false;
