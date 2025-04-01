@@ -63,7 +63,8 @@
 
     </Shell.FlyoutHeaderTemplate>
 
-   
+
+
     <ShellContent
         Title="Loading"
         ContentTemplate="{DataTemplate views:Loading}"
@@ -89,15 +90,15 @@
 
     <ShellContent
      Icon="calculo"
-     Title="Cálculo de Necessidades"
+     Title="Cálculo de Auto Atendimento"
      ContentTemplate="{DataTemplate viewsCalc:EstabTec}"
      
      />
 
     <ShellContent
      Icon="monitor"
-     Title="Monitor Acompanhamento"
-     ContentTemplate="{DataTemplate viewsCalc:EstabTec}"
+     Title="Monitor de Processos"
+     ContentTemplate="{DataTemplate viewsMon:Processos}"
      
      />
 

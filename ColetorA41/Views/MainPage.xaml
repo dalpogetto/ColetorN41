@@ -68,7 +68,7 @@
                     </Frame.Background>
                     <VerticalStackLayout HorizontalOptions="Center" >
                         <Image Source="calculo.png" HeightRequest="40" HorizontalOptions="Center"/>
-                        <Label  Text="Calculo de Auto Atendimento" FontAttributes="None" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label  Text="Cálculo de Auto Atendimento" FontAttributes="None" VerticalOptions="Center" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
             </HorizontalStackLayout>

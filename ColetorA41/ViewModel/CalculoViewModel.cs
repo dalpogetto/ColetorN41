@@ -217,9 +217,7 @@ namespace ColetorA41.ViewModel
             }
             set
             {
-                
                 buscaTransporteEntra = value;
-              
                 if (buscaTransporteEntra == string.Empty)
                 {
                     BuscarTranspEntra(string.Empty);
@@ -236,9 +234,7 @@ namespace ColetorA41.ViewModel
             }
             set
             {
-
                 buscaTransporteSai = value;
-
                 if (buscaTransporteSai == string.Empty)
                 {
                     BuscarTranspSai(string.Empty);
@@ -251,9 +247,7 @@ namespace ColetorA41.ViewModel
         async Task BuscarTranspEntra(string criterio)
         {
             IsBusy = true;
-            
             this.listaTransporteEntra.Clear();
-
             if (string.IsNullOrEmpty(criterio))
             {
                 foreach (var item in this.listaTranspCompleta)
@@ -288,11 +282,33 @@ namespace ColetorA41.ViewModel
         async Task BuscarTranspSai(string criterio)
         {
             IsBusy = true;
-            TranspSaidaSelecionado = null;
             this.listaTransporteSai.Clear();
-            foreach (var item in this.listaTranspCompleta.Where(x => x.identific.ToUpper().Contains(criterio.ToUpper())))
+            if (string.IsNullOrEmpty(criterio))
             {
-                this.listaTransporteSai.Add(item);
+                foreach (var item in this.listaTranspCompleta)
+                {
+                    this.listaTransporteSai.Add(item);
+                }
+            }
+            else
+            {
+                //Localizar registros
+                var listaEncontrada = this.listaTranspCompleta.Where(x => x.identific.ToUpper().Contains(criterio.ToUpper()));
+
+                //Caso existe apenas 1 setar 
+                this.TranspSaidaSelecionado = null;
+
+                //Popular Lista
+                foreach (var item in listaEncontrada)
+                {
+                    this.listaTransporteSai.Add(item);
+                }
+
+                if (listaEncontrada.Count() == 1)
+                {
+                    this.TranspSaidaSelecionado = listaEncontrada.First();
+                }
+
             }
             IsBusy = false;
         }
@@ -530,11 +546,14 @@ namespace ColetorA41.ViewModel
                 await Shell.Current.CurrentPage.ShowPopupAsync(erro);
                 return;
             }
-            await this.ObterParametrosEstab();
+            
             try
             {
-                if(botaoVoltar=="false")
-                  await this.ObterDados();
+                if (botaoVoltar == "false")
+                {
+                    await this.ObterParametrosEstab();
+                    await this.ObterDados();
+                }
 
                 await Shell.Current.GoToAsync($"{nameof(DadosNF)}");
 
@@ -669,6 +688,31 @@ namespace ColetorA41.ViewModel
 
             await AtualizarLabelsContadores(TipoCalculo);
             IsBusy = false;
+
+        }
+
+        [RelayCommand]
+        async Task EliminarTodosPagtos()
+        {
+
+            var mensa = new MensagemSimNao("Eliminar Pagamentos", "Deseja eliminar todos os registros de pagamentos ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+            if (result is bool ok)
+            {
+                if (ok)
+                {
+                    IsBusy = true;
+                    foreach (var item in listaPagtos)
+                    {
+                        await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
+                        Fichas.Geral = Fichas.Geral - item.qtPagar;
+                    }
+                    this.listaPagtos.Clear();
+                    await AtualizarLabelsContadores(TipoCalculo);
+
+                    IsBusy = false;
+                }
+            }
 
         }
 
@@ -878,6 +922,9 @@ namespace ColetorA41.ViewModel
                 this.listaEstab.Add(item);
             }
             this.IsBusy = false;
+
+            
+
         }
 
         public async Task VerificarVersao()
@@ -949,13 +996,18 @@ namespace ColetorA41.ViewModel
             var parametro = await _service.ObterParametrosEstab(this._estabSelecionado.codEstab);
             if (parametro != null)
             {
-                this.TranspEntraSelecionado = this.listaTranspCompleta.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
-                this.TranspSaidaSelecionado = this.listaTranspCompleta.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
+                await Task.Delay(2000);
+                this.TranspEntraSelecionado = this.listaTranspCompleta[0]; //.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
+                this.TranspSaidaSelecionado = this.listaTranspCompleta[0]; //.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
                 this.EntregaSelecionada = this.listaEntrega.Where(item => item.codEntrega == parametro.codEntrega).FirstOrDefault();
                 this.SerieEntra = parametro.serieEntra;
                 this.SerieSaida = parametro.serieSai;
                 this.Entrega = parametro.codEntrega;
                 this.Rpw = parametro.rpw;
+                
+                TranspEntraSelecionado = this.listaTranspCompleta[0]; //.Where(item => item.codTransp == parametro.codTranspEntra).FirstOrDefault();
+                TranspSaidaSelecionado = this.listaTranspCompleta[0]; //.Where(item => item.codTransp == parametro.codTranspSai).FirstOrDefault();
+
             }
             this.IsBusy = false;
         }
@@ -1037,14 +1089,14 @@ namespace ColetorA41.ViewModel
 
             //Montar Pagamentos
             this.listaPagtos.Clear();
-            foreach (var item in calculo.pagto)
+            foreach (var item in calculo.pagto.OrderBy(x=>x.codLocaliza))
             {
                 if (!item.soEntrada)
                 this.listaPagtos.Add(item);
             }
 
             //Chamar Tela
-            await Task.Delay(100);
+            await Task.Delay(500);
             TipoCalculo = 2;
             IsTotal = false;
             IsParcial = true;
@@ -1081,7 +1133,14 @@ namespace ColetorA41.ViewModel
             Fichas.GeralExtrakit = totalET;
 
             //Pagamento
-            Fichas.Pagto = listaPagtos.Sum(o=>o.qtPagar);
+            if (tipoCalculo == 3)
+            {
+                Fichas.Pagto = listaPagtos.Where(o=>o.soEntrada).Sum(o => o.qtPagar);
+            }
+            else
+            {
+                Fichas.Pagto = listaPagtos.Sum(o => o.qtPagar);
+            }
 
             //Renovacoes
             Fichas.Renovacao = item.qtReno;

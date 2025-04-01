@@ -8,7 +8,7 @@
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False"
              Title="EstabTec">
-    <Grid RowDefinitions="auto,*,60,8">
+    <Grid RowDefinitions="100,*,60,8">
         <StackLayout>
             <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
@@ -24,7 +24,7 @@
             <VerticalStackLayout VerticalOptions="Center" Margin="0,-95,0,0">
                     <Image
                     Source="company.png"
-                    HeightRequest="60"
+                    HeightRequest="40"
                     HorizontalOptions="Center" Margin="0,0,0,0">
                         <Image.Shadow>
                             <Shadow Brush="Black"
@@ -38,7 +38,7 @@
                      TextColor="White"
                      VerticalOptions="Center" 
                      FontAttributes="Bold"
-                     FontSize="22"
+                     FontSize="18"
                      HorizontalOptions="Center" 
                      />     
 
@@ -46,7 +46,7 @@
             </VerticalStackLayout>
         </StackLayout>
 
-        <VerticalStackLayout Grid.Row="1" Padding="20">
+        <VerticalStackLayout Grid.Row="1" Padding="20" Margin="0,-40,0,0">
 
             <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource dnWhite}">
                 <StackLayout>
@@ -69,33 +69,35 @@
 
              </Border>
 
-        </VerticalStackLayout>
-        <Grid Grid.Row="1" Margin="0,80" Padding="10" RowDefinitions="auto,*">
-            <VerticalStackLayout Margin="0,20,0,10" HorizontalOptions="Center" WidthRequest="300">
-               
+            <VerticalStackLayout Margin="0,0,0,10" HorizontalOptions="Center" WidthRequest="300">
+
                 <!--Border Margin="0,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" -->
-                    <SearchBar x:Name="searchBar"
-                           Placeholder="Buscar técnico..."
-                           Text="{Binding BuscaTecnico}"
-                           SearchCommand="{Binding BuscarTecnicoCommand}"
-                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
-                           >
+                <SearchBar x:Name="searchBar"
+                Placeholder="Buscar técnico..."
+                Text="{Binding BuscaTecnico}"
+                SearchCommand="{Binding BuscarTecnicoCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                >
                     <SearchBar.Shadow>
                         <Shadow Brush="Black"
-                             Offset="10,10"
-                             Radius="40"
-                             Opacity="0.8" />
+                  Offset="10,10"
+                  Radius="40"
+                  Opacity="0.8" />
                     </SearchBar.Shadow>
 
-                    </SearchBar>
+                </SearchBar>
                 <!-- /Border-->
 
 
             </VerticalStackLayout>
 
-            <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke" Grid.Row="1" HorizontalOptions="Center" WidthRequest="360">
+        
+       
+
+        <Border Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="WhiteSmoke"  HorizontalOptions="Center" WidthRequest="360" Margin="0,0" >
                 
                 <CollectionView x:Name="lista"  
+                                HeightRequest="250"
                    ItemsSource="{Binding listaTecnico}" 
                    SelectedItem="{Binding TecnicoSelecionado}"
                    SelectionMode="Single"
@@ -103,7 +105,7 @@
                    ItemsUpdatingScrollMode="KeepItemsInView"
                    RemainingItemsThresholdReachedCommand="{Binding CarregarTecnicosEstabelecimentoCommand}"
                    EmptyView="Técnicos do Estabelecimento"
-                                HorizontalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"
                    
                    VerticalScrollBarVisibility="Always">
                     <CollectionView.ItemTemplate>
@@ -140,8 +142,9 @@
                 </CollectionView>
                
             </Border>
-            
-        </Grid>
+        </VerticalStackLayout>
+
+
 
 
         <Grid ColumnDefinitions="*,*,*" Grid.Row="2" >

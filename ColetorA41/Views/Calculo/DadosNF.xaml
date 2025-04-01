@@ -22,7 +22,7 @@
                 <Image
                     Source="informe2.png"
                     SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                    HeightRequest="40"
+                    HeightRequest="30"
                     HorizontalOptions="Center" Margin="0,0,0,5">
                     <Image.Shadow>
                         <Shadow Brush="Black"
@@ -37,7 +37,7 @@
                         TextColor="White"
                         VerticalOptions="Center" 
                         FontAttributes="Bold"
-                        FontSize="22"
+                        FontSize="18"
                         HorizontalOptions="Center" Margin="0,0,0,0"
                         />
 
@@ -47,24 +47,24 @@
             
         </StackLayout>
 
-        <Border StrokeShape="RoundRectangle 10" Grid.Row="1" Padding="20" Margin="20,0" BackgroundColor="{StaticResource dnWhite}">
+        <Border StrokeShape="RoundRectangle 10" Grid.Row="1" Padding="10" Margin="20,0" BackgroundColor="{StaticResource dnWhite}">
 
         <VerticalStackLayout >
 
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
                 <VerticalStackLayout>
                     <Label Text="Serie Entrada"/>
-                    <Entry Text="{Binding SerieEntra}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
+                    <Entry Text="{Binding SerieEntra}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,10" WidthRequest="120"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label Text="Serie Saída"/>
-                    <Entry Text="{Binding SerieSaida}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,20" WidthRequest="120"/>
+                    <Entry Text="{Binding SerieSaida}" FontAttributes="Bold" FontSize="16" Margin="0,0,0,10" WidthRequest="120"/>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
 
                 <Frame CornerRadius="10" HasShadow="True" Padding="5" BackgroundColor="{StaticResource dnWhite}">
-                    <VerticalStackLayout>
+                    <VerticalStackLayout >
                         <Label Text="Transportadora Entrada"/>
                         <SearchBar x:Name="searchTranspEntra"
                                     Placeholder="Localizar ..."
@@ -73,6 +73,7 @@
                                     SearchCommand="{Binding BuscarTranspEntraCommand}"
                                     SearchCommandParameter="{Binding Text, Source={x:Reference searchTranspEntra}}"
                                     Margin="10,0"
+                                   HeightRequest="40"
                                     
                                     
                                    >
@@ -99,7 +100,8 @@
                                  Text="{Binding BuscaTransporteSai}"
                                  SearchCommand="{Binding BuscarTranspSaiCommand}"
                                  SearchCommandParameter="{Binding Text, Source={x:Reference searchTranspSai}}"
-                                 Margin="10,0"  >
+                                 Margin="10,0" 
+                                    HeightRequest="40">
                         </SearchBar>
 
 

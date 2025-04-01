@@ -56,7 +56,7 @@
 
         
             <Border Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource dnBlue}" Grid.Row="2" Margin="15,30">
-                <Grid ColumnDefinitions="*,*" HorizontalOptions="Center"  Padding="10" Margin="10,0">
+                <Grid ColumnDefinitions="*,*" HorizontalOptions="Center"  Padding="5">
                     <VerticalStackLayout VerticalOptions="Center">
                         <Label Text="Estabelecimento: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>
                         <Label Text="Técnico: " HorizontalTextAlignment="End"  FontSize="16" TextColor="WhiteSmoke"></Label>

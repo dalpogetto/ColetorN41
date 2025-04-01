@@ -42,8 +42,8 @@ namespace ColetorA41
 #endif
 
             #region Services
-            builder.Services.AddTransient<TotvsService>();
-            builder.Services.AddTransient<TotvsService46>();
+            builder.Services.AddSingleton<TotvsService>();
+            builder.Services.AddSingleton<TotvsService46>();
             #endregion
 
             #region HttpClient
@@ -70,8 +70,6 @@ namespace ColetorA41
             builder.Services.AddTransient<LoginAlmoxa>();
             builder.Services.AddTransient<Loading>();
             builder.Services.AddTransient<LoadingCalculo>();
-            builder.Services.AddTransient<ParamEstabList>();
-            builder.Services.AddTransient<ParamEstabEdit>();
             builder.Services.AddTransient<EstabTec>();
             builder.Services.AddTransient<DadosNF>();
             builder.Services.AddTransient<ExtrakitView>();
@@ -96,7 +94,6 @@ namespace ColetorA41
             builder.Services.AddSingleton<CalculoViewModel>();
             builder.Services.AddTransient<LoginPageViewModel>();
             builder.Services.AddTransient<MainPageViewModel>();
-            builder.Services.AddSingleton<ParamEstabelViewModel>();
             builder.Services.AddSingleton<MonitorViewModel>();
             #endregion
 

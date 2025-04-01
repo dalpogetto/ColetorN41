@@ -21,8 +21,6 @@ namespace ColetorA41
             //Adicionar Rotas das Views
             Routing.RegisterRoute(nameof(Loading)       , typeof(Loading));
             Routing.RegisterRoute(nameof(Login)         , typeof(Login));
-            Routing.RegisterRoute(nameof(ParamEstabList), typeof(ParamEstabList));
-            Routing.RegisterRoute(nameof(ParamEstabEdit), typeof(ParamEstabEdit));
             Routing.RegisterRoute(nameof(EstabTec)      , typeof(EstabTec));
             Routing.RegisterRoute(nameof(DadosNF)       , typeof(DadosNF));
             Routing.RegisterRoute(nameof(ExtrakitView)  , typeof(ExtrakitView));

@@ -76,7 +76,7 @@
 
             </VerticalStackLayout>
         </StackLayout>
-        <Border HeightRequest="70" Margin="20,80,20,0" Padding="0" StrokeShape="RoundRectangle 100" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" >
+        <Border HeightRequest="70" Margin="20,80,20,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" >
             <SearchBar x:Name="searchBar"  
                        Placeholder="Buscar item..."
                        

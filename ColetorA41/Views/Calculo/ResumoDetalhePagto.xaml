@@ -43,29 +43,28 @@
                 </Rectangle>
             </Grid>
 
-            <VerticalStackLayout Padding="20,10" Margin="0,-100,0,0">
+            <VerticalStackLayout Padding="20,10" Margin="0,-110,0,0">
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
                         Source="pagto.png"
-                        HeightRequest="40"
+                        HeightRequest="60"
                         HorizontalOptions="Center">
-                        <Image.Shadow>
-                            <Shadow Brush="Black"
-                                    Offset="10,10"
-                                    Radius="40"
-                                    Opacity="0.8" />
-                        </Image.Shadow>
+                        
                     </Image>
-                    <Label  Text="Pagamentos"
+                    <VerticalStackLayout Spacing="5">
+                    <Label  Text="Lista de Pagamentos"
                         FontAttributes="Bold"
                             TextColor="White"
-                        FontSize="22"
+                        FontSize="18"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center" />
 
+                        <Button Text="Eliminar Todos" HeightRequest="40" Background="{StaticResource dnRed}" Command="{Binding EliminarTodosPagtosCommand}"></Button>
+                    </VerticalStackLayout>
+
                 </HorizontalStackLayout>
 
-                <Label Margin="10,0" Text="Realize a manutenção para os itens de pagamento" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="200" TextColor="White"></Label>
+                <Label Margin="10,0" Text="Realize a manutenção para os itens de pagamento" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  TextColor="White"></Label>
 
 
                 
@@ -127,7 +126,7 @@
                                    
 
                                     <!--Detalhe-->
-                                    <Label Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0" Background="{StaticResource dnGreen}" WidthRequest="50"></Label>
+                                    <Label Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0" Background="{StaticResource dnGreen}" WidthRequest="50" TextColor="{StaticResource dnWhite}"></Label>
                                     <Label Text="{Binding qtRenovar}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1"></Label>
                                     <Label Text="{Binding qtExtrakit}"        Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2"></Label>
                                    
