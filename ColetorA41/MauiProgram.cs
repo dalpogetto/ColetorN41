@@ -87,6 +87,7 @@ namespace ColetorA41
             builder.Services.AddTransient<Reparo>();
             builder.Services.AddTransient<ReparoEdicaoItemReparo>();
             builder.Services.AddTransient<ZoomTransporte>();
+            builder.Services.AddTransient<LeituraPagtos>();
             #endregion
 
             #region ViewModel

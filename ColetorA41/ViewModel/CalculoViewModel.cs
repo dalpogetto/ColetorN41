@@ -9,9 +9,6 @@ using Microsoft.Extensions.Configuration;
 using ColetorA41.Views;
 using ColetorA41.Extensions;
 using CommunityToolkit.Maui.Views;
-using ColetorA41.Views.Monitor;
-using Microsoft.Maui.Controls.Platform.Compatibility;
-using Android.Locations;
 
 namespace ColetorA41.ViewModel
 {
@@ -323,6 +320,9 @@ namespace ColetorA41.ViewModel
         void DownloadVersao()
         {
             var obj = _service.DownloadVersao();
+            //Pendencia:
+            //Transformar obj em Stream e depois gerar um arquivo
+            //Obter permissao Android para geracao arquivo
 
         }
         [RelayCommand]
@@ -749,13 +749,15 @@ namespace ColetorA41.ViewModel
                 await this.PrepararCalculo();
 
                 this.IsBusy = false;
-                await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                //await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                await Shell.Current.GoToAsync($"{nameof(LeituraPagtos)}");
+
             }
             catch (Exception ex)
             {
 
                 await Application.Current.MainPage.DisplayAlert("Erro", ex.Message , "OK");
-                await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+               
             }
             
 

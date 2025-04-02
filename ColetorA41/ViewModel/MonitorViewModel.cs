@@ -183,7 +183,8 @@ namespace ColetorA41.ViewModel
                 //await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
                 //await this.ObterDadosPrimeiraNota();
                 //O método ObterNotasPagto decidira pelas telas Embalagem ou EmbalagemPrimeiraNota
-                await this.ObterNotasPagto();
+               // await this.ObterNotasPagto();
+                await this.ObterDadosPrimeiraNota();
             }
             else
             {

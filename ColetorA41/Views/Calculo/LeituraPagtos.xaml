@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColetorA41.Views.Calculo.LeituraPagtos"
+             xmlns:viewmodel="clr-namespace:ColetorA41.ViewModel"
+             xmlns:models="clr-namespace:ColetorA41.Models"
+             x:DataType="viewmodel:CalculoViewModel"
+             xmlns:local="clr-namespace:ColetorA41.Converters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="False"
+             x:Name="listaPagtos"
+             Title="Resumo Detalhe">
+
+    <ContentPage.Resources>
+        <local:StringToColor x:Key="StringToColor" />
+
+        <Style x:Key="lblCabec" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            <Setter Property="TextColor" Value="{StaticResource dnBlue}" />
+        </Style>
+
+        <Style x:Key="lblDet" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Bold" />
+
+        </Style>
+    </ContentPage.Resources>
+
+
+    <Grid RowDefinitions="140,*,60,8">
+        <StackLayout>
+            <Grid RowDefinitions="100">
+                <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
+                    <Rectangle.Shadow>
+                        <Shadow Brush="{StaticResource Gray500}"
+              Offset="0,5"
+              Radius="10"
+              Opacity="0.8"/>
+                    </Rectangle.Shadow>
+                </Rectangle>
+            </Grid>
+
+            <VerticalStackLayout Padding="20,10" Margin="0,-110,0,0">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
+                    <Image
+                        Source="pagto.png"
+                        HeightRequest="60"
+                        HorizontalOptions="Center">
+
+                    </Image>
+                    <VerticalStackLayout Spacing="5">
+                        <Label  Text="Lista de Pagamentos"
+                        FontAttributes="Bold"
+                            TextColor="White"
+                        FontSize="18"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center" />
+
+                        <Button Text="Eliminar Todos" HeightRequest="40" Background="{StaticResource dnRed}" Command="{Binding EliminarTodosPagtosCommand}"></Button>
+                    </VerticalStackLayout>
+
+                </HorizontalStackLayout>
+
+                <Border Margin="0,0" Padding="20,0,20,0" StrokeShape="RoundRectangle 50" HeightRequest="55" >
+                    <Entry Placeholder="Leitura item..." FontSize="16"></Entry>
+                </Border>
+
+
+
+            </VerticalStackLayout>
+        </StackLayout>
+
+        <CollectionView x:Name="lista" Grid.Row="1" 
+                       
+                                  ItemsSource="{Binding listaPagtos}" 
+                                  VerticalScrollBarVisibility="Always">
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ItemFicha">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem 
+                                        IconImageSource="trash.png"
+                                        BackgroundColor="WhiteSmoke"
+                                        Command="{Binding BindingContext.EliminarPagtoCommand, Source={x:Reference detalhe2}}"
+                                        CommandParameter="{Binding .}" />
+
+                            </SwipeItems>
+
+                        </SwipeView.RightItems>
+
+                        <Border HeightRequest="85" Margin="10,5,10,0" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White" Stroke="{StaticResource dnGreen}" StrokeThickness="1.5">
+
+                            <VerticalStackLayout>
+
+                                <Grid Padding="5" RowDefinitions="*,auto,auto,30" ColumnDefinitions="*,60,*,60" ColumnSpacing="10" Margin="0,0">
+                                    <!--Chave-->
+                                    <Label Text="{Binding itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
+                                    <Label Text="{Binding descItem}" Grid.Row="1" Grid.ColumnSpan="2" FontSize="12"  LineBreakMode="NoWrap"/>
+                                    <Label Text="Localização" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource dnBlue}" Grid.Column="2" Grid.ColumnSpan="3"  HorizontalTextAlignment="End"></Label>
+                                    <Label Text="{Binding codLocaliza}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="End" Margin="0,-5,0,0"/>
+
+                                    <Rectangle HeightRequest="1" Fill="LightGray" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.ColumnSpan="5"/>
+                                    <!--Cabecalho-->
+                                    <Label Text="Qtde Informada"     Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0" HorizontalOptions="End"></Label>
+                                    <Label Text="Qtde Pagar" Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="2" HorizontalOptions="End"></Label>
+                                    
+
+                                    <!--Detalhe-->
+                                    <Entry Margin="5,0" Text="{Binding qtPagarEdicao}" Grid.Row="3" Grid.Column="1" Style="{StaticResource lblDet}" Background="{StaticResource Gray100}" TextColor="{StaticResource Gray950}" HeightRequest="35" Keyboard="Numeric" ></Entry>
+                                    <Label Margin="5,0" Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="3" Grid.Column="3"  Background="{StaticResource dnGreen}" TextColor="{StaticResource dnWhite}" HeightRequest="35" VerticalTextAlignment="Center" Opacity="0.8" ></Label>
+                                </Grid>
+                            </VerticalStackLayout>
+
+                           
+                        </Border>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="2" >
+            <VerticalStackLayout  Grid.Column="0" HorizontalOptions="Center">
+                <Image Source="seta_esquerda" WidthRequest="50">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
+                    </Image.Behaviors>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarLoginAlmoxaCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <ActivityIndicator
+                 Grid.Column="0"
+                 IsVisible="{Binding IsBusy}"
+                 HorizontalOptions="Center"
+                 IsRunning="{Binding IsBusy}"
+                 VerticalOptions="Center"
+                />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
+                <Image Source="seta_direita" WidthRequest="50">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
+                    </Image.Behaviors>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChamarResumoCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </VerticalStackLayout>
+
+
+
+
+        </Grid>
+
+        <Grid Grid.Row="4" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="-1,-1">
+            <Rectangle>
+                <Rectangle.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="{StaticResource dnBlue}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource dnPurple}"  Offset="0.5" />
+                        <GradientStop Color="{StaticResource dnRed}"  Offset="1.0" />
+                    </LinearGradientBrush>
+                </Rectangle.Background>
+            </Rectangle>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

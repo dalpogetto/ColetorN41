@@ -100,8 +100,10 @@ namespace ColetorA41.Models
         public bool soEntrada { get; set; }
         public string? tipo { get; set; }
         public int qtPagar { get; set; }
+        public int qtPagarEdicao { get; set; } = 0;
         public string? itPrincipal { get; set; }
         public bool temPagto { get; set; }
+        public bool situacaoPagto { get; set; } = false;
         public int qtRenovar { get; set; }
         public string? itCodigo { get; set; }
         public int numOS { get; set; }

@@ -39,7 +39,8 @@ namespace ColetorA41
             Routing.RegisterRoute(nameof(EmbalagemPrimeiraNota), typeof(EmbalagemPrimeiraNota));
             Routing.RegisterRoute(nameof(Reparo), typeof(Reparo));
             Routing.RegisterRoute(nameof(ReparoEdicaoItemReparo), typeof(ReparoEdicaoItemReparo));
-            
+            Routing.RegisterRoute(nameof(LeituraPagtos), typeof(LeituraPagtos));
+
         }
 
        

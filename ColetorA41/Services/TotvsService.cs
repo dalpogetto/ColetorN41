@@ -267,7 +267,7 @@ namespace ColetorA41.Services
         public async Task<List<ProcessosEstab>> ObterProcessosEstab(string codEstabel)
         {
             var param = new NameValueCollection { { "codEstabel", codEstabel } };
-            var response = await GetAsync<ProcessosEstabResponse>("apiesaa041/ObterProcessosEstab", param);
+            var response = await GetAsync<ProcessosEstabResponse>("apiesaa041/ObterProcessosEstabMobile", param);
             return response.items;
         }
 
