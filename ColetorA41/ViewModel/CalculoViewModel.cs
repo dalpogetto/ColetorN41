@@ -157,6 +157,9 @@ namespace ColetorA41.ViewModel
         string numEnc;
 
         [ObservableProperty]
+        string itemPagto;
+
+        [ObservableProperty]
         string lblAprovar;
 
         [ObservableProperty]
@@ -673,7 +676,40 @@ namespace ColetorA41.ViewModel
 
         }
 
-       
+        [RelayCommand]
+        async Task LeituraItemPagto(string itemPagto)
+        {
+
+           /* await Task.Run(() =>
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                { */
+                    this.IsBusy = true;
+                    await Task.Delay(500);
+                    if (string.IsNullOrEmpty(itemPagto))
+                    {
+                        this.IsBusy = false;
+                        return;
+                    }
+
+                    var item = this.listaPagtos.Where(x => x.itCodigo == itemPagto).FirstOrDefault();
+                    if (item != null)
+                    {
+                        item.leituraPagto = true;
+                    }
+                    this.IsBusy = false;
+                    this.ItemPagto = string.Empty;
+
+          /*      });
+
+            });
+          */
+
+
+        }
+
+
+
 
         [RelayCommand]
         async Task EliminarEnc(Enc objEnc)
@@ -748,6 +784,12 @@ namespace ColetorA41.ViewModel
                 await Shell.Current.GoToAsync($"{nameof(LoadingCalculo)}");
                 await this.PrepararCalculo();
 
+                //Ajustar a lista de pagamentos
+                foreach (var item in listaPagtos)
+                {
+                    item.qtPagarEdicao = item.qtPagar;
+                }
+
                 this.IsBusy = false;
                 //await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
                 await Shell.Current.GoToAsync($"{nameof(LeituraPagtos)}");
@@ -761,6 +803,13 @@ namespace ColetorA41.ViewModel
             }
             
 
+        }
+
+        [RelayCommand]
+        async Task ChamarLeituraPagtos()
+        {
+
+            await Shell.Current.GoToAsync($"{nameof(LeituraPagtos)}");
         }
 
         [RelayCommand]

@@ -253,7 +253,7 @@
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />
+                                <TapGestureRecognizer Command="{Binding ChamarLeituraPagtosCommand}" />
                             </Image.GestureRecognizers>
                         </Image>
                     </VerticalStackLayout>

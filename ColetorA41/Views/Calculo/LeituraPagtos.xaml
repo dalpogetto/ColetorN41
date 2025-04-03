@@ -12,7 +12,7 @@
              Title="Resumo Detalhe">
 
     <ContentPage.Resources>
-        <local:StringToColor x:Key="StringToColor" />
+        <local:LeituraPagto x:Key="leituraPagto" />
 
         <Style x:Key="lblCabec" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
@@ -64,8 +64,36 @@
 
                 </HorizontalStackLayout>
 
-                <Border Margin="0,0" Padding="20,0,20,0" StrokeShape="RoundRectangle 50" HeightRequest="55" >
-                    <Entry Placeholder="Leitura item..." FontSize="16"></Entry>
+                <Border Margin="0,0" Padding="20,0,20,0" StrokeShape="RoundRectangle 50" Background="{StaticResource dnWhite}" >
+                    <Entry x:Name="entry"
+                            toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
+                            ReturnType="Next"
+                            Margin="20,5"
+                            FontSize="14"
+                            Text="{Binding ItemPagto}"
+                            Placeholder="Aguardando leitura de item...."
+                            PlaceholderColor="{StaticResource Gray300}"
+                            ReturnCommand="{Binding LeituraItemPagtoCommand}"
+                            ReturnCommandParameter="{Binding ItemPagto}"
+                            TextColor="Black">
+
+                        <Entry.Behaviors>
+                            <toolkit:UserStoppedTypingBehavior 
+                                     BindingContext="{Binding Path=BindingContext, Source={x:Reference entry}, x:DataType=Entry}"
+                                     Command="{Binding LeituraItemPagtoCommand, Mode=OneTime}"
+                                     CommandParameter="{Binding ItemPagto}"
+                                     StoppedTypingTimeThreshold="1000"
+                                     MinimumLengthThreshold="6"
+                                     ShouldDismissKeyboardAutomatically="False" />  
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Gray500}"
+                                Offset="1,1"
+                                Radius="3"
+                                Opacity="0.8" />    
+                    </Border.Shadow>
                 </Border>
 
 
@@ -74,9 +102,8 @@
         </StackLayout>
 
         <CollectionView x:Name="lista" Grid.Row="1" 
-                       
-                                  ItemsSource="{Binding listaPagtos}" 
-                                  VerticalScrollBarVisibility="Always">
+                        ItemsSource="{Binding listaPagtos}" 
+                        VerticalScrollBarVisibility="Always">
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ItemFicha">
@@ -86,14 +113,14 @@
                                 <SwipeItem 
                                         IconImageSource="trash.png"
                                         BackgroundColor="WhiteSmoke"
-                                        Command="{Binding BindingContext.EliminarPagtoCommand, Source={x:Reference detalhe2}}"
+                                        Command="{Binding BindingContext.EliminarPagtoCommand, Source={x:Reference listaPagtos}}"
                                         CommandParameter="{Binding .}" />
 
                             </SwipeItems>
 
                         </SwipeView.RightItems>
 
-                        <Border HeightRequest="85" Margin="10,5,10,0" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White" Stroke="{StaticResource dnGreen}" StrokeThickness="1.5">
+                        <Border HeightRequest="85" Margin="10,5,10,0" Padding="0" StrokeShape="RoundRectangle 10" BackgroundColor="White" StrokeThickness="1.5">
 
                             <VerticalStackLayout>
 
@@ -106,13 +133,13 @@
 
                                     <Rectangle HeightRequest="1" Fill="LightGray" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.ColumnSpan="5"/>
                                     <!--Cabecalho-->
-                                    <Label Text="Qtde Informada"     Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0" HorizontalOptions="End"></Label>
-                                    <Label Text="Qtde Pagar" Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="2" HorizontalOptions="End"></Label>
+                                    <Label Text="Qtde Informada"     Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="2" HorizontalOptions="End" ></Label>
+                                    <Label Text="Qtde Pagar Calculada" Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0" HorizontalOptions="End"></Label>
                                     
 
                                     <!--Detalhe-->
-                                    <Entry Margin="5,0" Text="{Binding qtPagarEdicao}" Grid.Row="3" Grid.Column="1" Style="{StaticResource lblDet}" Background="{StaticResource Gray100}" TextColor="{StaticResource Gray950}" HeightRequest="35" Keyboard="Numeric" ></Entry>
-                                    <Label Margin="5,0" Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="3" Grid.Column="3"  Background="{StaticResource dnGreen}" TextColor="{StaticResource dnWhite}" HeightRequest="35" VerticalTextAlignment="Center" Opacity="0.8" ></Label>
+                                    <Entry Margin="5,0" FontSize="14" Text="{Binding qtPagarEdicao}" Grid.Row="3" Grid.Column="3" Style="{StaticResource lblDet}" Background="{Binding leituraPagto, Converter={StaticResource leituraPagto}}" TextColor="{StaticResource dnWhite}" HeightRequest="35" Keyboard="Numeric" ></Entry>
+                                    <Label Margin="5,0" FontSize="14" Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="3" Grid.Column="1"  Background="{StaticResource Gray100}"  HeightRequest="35" VerticalTextAlignment="Center" Opacity="0.8" ></Label>
                                 </Grid>
                             </VerticalStackLayout>
 

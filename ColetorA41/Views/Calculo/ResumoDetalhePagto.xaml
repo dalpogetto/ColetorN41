@@ -44,10 +44,10 @@
             </Grid>
 
             <VerticalStackLayout Padding="20,10" Margin="0,-110,0,0">
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10" >
                     <Image
                         Source="pagto.png"
-                        HeightRequest="60"
+                        HeightRequest="40"
                         HorizontalOptions="Center">
                         
                     </Image>
@@ -59,48 +59,27 @@
                         VerticalOptions="Center" 
                         HorizontalOptions="Center" />
 
-                        <Button Text="Eliminar Todos" HeightRequest="40" Background="{StaticResource dnRed}" Command="{Binding EliminarTodosPagtosCommand}"></Button>
                     </VerticalStackLayout>
 
-                </HorizontalStackLayout>
+                </VerticalStackLayout>
 
-                <Label Margin="10,0" Text="Realize a manutenção para os itens de pagamento" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  TextColor="White"></Label>
-
+            
 
                 
 
             </VerticalStackLayout>
         </StackLayout>
        
-        <CollectionView x:Name="lista" Grid.Row="2" Margin="0,0"
+        <CollectionView x:Name="lista" Grid.Row="2" 
                                   ItemsSource="{Binding listaPagtos}" 
                                   VerticalScrollBarVisibility="Always">
-            <CollectionView.Header>
-                <HorizontalStackLayout HorizontalOptions="Center" Margin="0,5" VerticalOptions="Center" Spacing="5">
-                    <Image  Source="attention.png" HeightRequest="20"  HorizontalOptions="Center"/>
-                    <Label Text="Arraste a ficha para esquerda para opções" FontAttributes="Bold" TextColor="{StaticResource dnBlue}"></Label>
-                </HorizontalStackLayout>
-                
-            </CollectionView.Header>
+           
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:ItemFicha">
                     <SwipeView>
                         <SwipeView.RightItems>
                             <SwipeItems>
-                                <SwipeItem 
-                                        IconImageSource="trash.png"
-                                        BackgroundColor="WhiteSmoke"
-                                        Command="{Binding BindingContext.EliminarPagtoCommand, Source={x:Reference detalhe2}}"
-                                        CommandParameter="{Binding .}" />
-                                
-                                <SwipeItem 
-                                         Text="Detalhes"
-                                         IconImageSource="vermais.png"
-                                         BackgroundColor="WhiteSmoke"
-                                         Command="{Binding BindingContext.DetalheItemFichaCommand, Source={x:Reference detalhe2}}"
-                                         CommandParameter="{Binding .}" />
-
-                                
+                              
 
                             </SwipeItems>
                             
@@ -110,25 +89,23 @@
 
                             <VerticalStackLayout>
 
-                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,0">
+                                <Grid Padding="5" RowDefinitions="*,20,*,*,*" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,0">
                                     <!--Chave-->
                                     <Label Text="{Binding itCodigo}" Grid.ColumnSpan="2" FontSize="16" FontAttributes="Bold" />
-                                    <Label Text="{Binding descItem}" Grid.Row="1" Grid.ColumnSpan="2" FontSize="12"  FontAttributes="Bold" LineBreakMode="NoWrap"/>
+                                    <Label Text="{Binding descItem}" Grid.Row="1" Grid.ColumnSpan="1" FontSize="12"  FontAttributes="Bold" LineBreakMode="NoWrap"/>
                                     <Label Text="Localização" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource dnBlue}" Grid.Column="2" Grid.ColumnSpan="3"  HorizontalTextAlignment="End"></Label>
                                     <Label Text="{Binding codLocaliza}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="End" Margin="0,-5,0,0"/>
 
                                     <Rectangle HeightRequest="1" Fill="LightGray" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.ColumnSpan="5"/>
                                     <!--Cabecalho-->
-                                    <Label Text="QtPagar"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0" ></Label>
-                                    <Label Text="QtRenovar"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
-                                    <Label Text="QtExtrakit"  Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="2"></Label>
+                                    <Label Text="Qtde Pagar"      Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="0" ></Label>
+                                    <Label Text="Qtde Informada"       Style="{StaticResource lblCabec}"  Grid.Row="3" Grid.Column="1"></Label>
                                    
                                    
 
                                     <!--Detalhe-->
-                                    <Label Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0" Background="{StaticResource dnGreen}" WidthRequest="50" TextColor="{StaticResource dnWhite}"></Label>
-                                    <Label Text="{Binding qtRenovar}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1"></Label>
-                                    <Label Text="{Binding qtExtrakit}"        Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="2"></Label>
+                                    <Label Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="0" Background="{StaticResource Gray100}" WidthRequest="100" ></Label>
+                                    <Label Text="{Binding qtPagarEdicao}"   Style="{StaticResource lblDet}" Grid.Row="4" Grid.Column="1" Background="{StaticResource dnGreen}" WidthRequest="100" TextColor="{StaticResource dnWhite}"></Label>
                                    
                                     
                                 </Grid>
