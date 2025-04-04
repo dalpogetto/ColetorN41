@@ -36,6 +36,7 @@ namespace ColetorA41.ViewModel
             get =>  _estabSelecionado;
             set
             {
+
                 if (_estabSelecionado != value)
                 {
                     _estabSelecionado = value;
@@ -43,6 +44,8 @@ namespace ColetorA41.ViewModel
                     {
 
                         IsBusy = false;
+                        this.BuscaTecnico = string.Empty;
+                        this.CriterioBuscaTecnico = string.Empty;
                         this.listaTecnico.Clear();
                         await this.CarregarTecnicosEstabelecimento();
                         await this.ObterTransporte();
@@ -100,6 +103,12 @@ namespace ColetorA41.ViewModel
 
         [ObservableProperty]
         string labelErro = "";
+
+        [ObservableProperty]
+        int qtdePendentesPagto = 0;
+
+        [ObservableProperty]
+        int qtdeTotalPagto = 0;
 
         [ObservableProperty]
         int nrProcessSelecionado;
@@ -176,7 +185,7 @@ namespace ColetorA41.ViewModel
         LabelResumo fichas = new();
 
         [ObservableProperty]
-        string criterioBuscaTecnico = "";
+        string criterioBuscaTecnico;
 
         [ObservableProperty]
         string criterioBuscaItemFicha = "";
@@ -440,6 +449,7 @@ namespace ColetorA41.ViewModel
         async Task ChamarEstabTec()
         {
             //await Shell.Current.DisplayAlert("Aqui", "Entrou", "OK");
+          
             await Shell.Current.GoToAsync($"{nameof(EstabTec)}");
         }
 
@@ -697,6 +707,9 @@ namespace ColetorA41.ViewModel
                     {
                         item.leituraPagto = true;
                     }
+
+                    //Atualizar pendencia na tela
+                    this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
                     this.IsBusy = false;
                     this.ItemPagto = string.Empty;
 
@@ -732,6 +745,11 @@ namespace ColetorA41.ViewModel
             this.listaPagtos.Remove(item);
             Fichas.Geral = Fichas.Geral - item.qtPagar;
 
+            //Mostrar Acompanhamento
+            this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
+            this.QtdeTotalPagto = this.listaPagtos.Count();
+
+
             await AtualizarLabelsContadores(TipoCalculo);
             IsBusy = false;
 
@@ -741,20 +759,34 @@ namespace ColetorA41.ViewModel
         async Task EliminarTodosPagtos()
         {
 
-            var mensa = new MensagemSimNao("Eliminar Pagamentos", "Deseja eliminar todos os registros de pagamentos ?");
+            var mensa = new MensagemSimNao("Eliminar Pagamentos", "Deseja eliminar todos os registros de pagamentos não lidos ?");
             var result = await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
             if (result is bool ok)
             {
+
                 if (ok)
                 {
-                    IsBusy = true;
-                    foreach (var item in listaPagtos)
+
+                    for (int i = listaPagtos.Count - 1; i >= 0; i--)
                     {
-                        await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
-                        Fichas.Geral = Fichas.Geral - item.qtPagar;
+                        var item = listaPagtos[i];
+                        if (!item.leituraPagto)
+                        {
+                            //Para funcionamento online da rotina de leitura o tratamento sera offline
+                            await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
+                            Fichas.Geral = Fichas.Geral - item.qtPagar;
+                            listaPagtos.RemoveAt(i);
+                        }
                     }
-                    this.listaPagtos.Clear();
+                    IsBusy = true;
+                  
+                   // this.listaPagtos.Clear();
                     await AtualizarLabelsContadores(TipoCalculo);
+
+                    //Mostrar Acompanhamento
+                    this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
+                    this.QtdeTotalPagto = this.listaPagtos.Count();
+
 
                     IsBusy = false;
                 }
@@ -790,10 +822,20 @@ namespace ColetorA41.ViewModel
                     item.qtPagarEdicao = item.qtPagar;
                 }
 
-                this.IsBusy = false;
-                //await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
-                await Shell.Current.GoToAsync($"{nameof(LeituraPagtos)}");
+                //Mostrar Acompanhamento
+                this.QtdePendentesPagto = this.listaPagtos.Where(item=>item.leituraPagto).Count();
+                this.QtdeTotalPagto = this.listaPagtos.Count();
 
+
+                this.IsBusy = false;
+                if (this.listaPagtos.Count() == 0)
+                {
+                    await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync($"{nameof(LeituraPagtos)}");
+                }
             }
             catch (Exception ex)
             {
@@ -809,12 +851,29 @@ namespace ColetorA41.ViewModel
         async Task ChamarLeituraPagtos()
         {
 
-            await Shell.Current.GoToAsync($"{nameof(LeituraPagtos)}");
+            if(this.listaPagtos.Count() == 0)
+            {
+                await this.ChamarExtrakit("true");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync($"{nameof(LeituraPagtos)}");
+            }
+            
         }
 
         [RelayCommand]
         async Task ChamarResumo()
         {
+
+            //A tela do resumo só podera ser apresentada se todos os pagamentos foram lidos
+            var lpendente = this.listaPagtos.Where(item => !item.leituraPagto).FirstOrDefault();
+            if (lpendente != null)
+            {
+                var msg = new Mensagem("ERROR", "PAGAMENTOS PENDENTES","Verificar lista de pagamentos !");
+                await Shell.Current.CurrentPage.ShowPopupAsync(msg);
+                return;
+            }
            
             IsTotal = TipoCalculo == 1;
             IsParcial = TipoCalculo == 2 ;
@@ -960,14 +1019,15 @@ namespace ColetorA41.ViewModel
             }
             set
             {
+                SetProperty(ref buscaTecnico, value);
+
+                if (buscaTecnico == value) return;
+
                 buscaTecnico = value;
-                if (buscaTecnico.Length > 2)
+               
+                if (buscaTecnico == string.Empty)
                 {
-                    // Task.Run(async () => { await BuscarTecnico(searchText); }).Wait();
-                }
-                if (buscaTecnico == "")
-                {
-                    Task.Run(async () => { await BuscarTecnico(""); }).Wait();
+                    Task.Run(async () => { await BuscarTecnico(""); });
                 }
             }
         }
@@ -997,6 +1057,8 @@ namespace ColetorA41.ViewModel
 
         public async Task ObterTecnicosEstab()
         {
+            if (this._estabSelecionado == null) return;
+
             this.IsBusy = true;
             try
             {
@@ -1196,11 +1258,11 @@ namespace ColetorA41.ViewModel
             //Pagamento
             if (tipoCalculo == 3)
             {
-                Fichas.Pagto = listaPagtos.Where(o=>o.soEntrada).Sum(o => o.qtPagar);
+                Fichas.Pagto = listaPagtos.Where(o=>o.soEntrada).Sum(o => o.qtPagarEdicao);
             }
             else
             {
-                Fichas.Pagto = listaPagtos.Sum(o => o.qtPagar);
+                Fichas.Pagto = listaPagtos.Sum(o => o.qtPagarEdicao);
             }
 
             //Renovacoes

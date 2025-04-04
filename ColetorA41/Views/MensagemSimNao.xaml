@@ -45,7 +45,7 @@
         </StackLayout>
 
         <VerticalStackLayout Grid.Row="1" Padding="20" Margin="0,-50,0,80" Spacing="10">
-            <Label x:Name="mensagem" TextColor="{StaticResource Gray900}" FontSize="Medium" ></Label>
+            <Label x:Name="mensagem" TextColor="{StaticResource Gray900}" FontSize="16" ></Label>
 
         </VerticalStackLayout>
 

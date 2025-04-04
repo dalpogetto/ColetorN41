@@ -172,6 +172,12 @@
                  IsRunning="{Binding IsBusy}"
                  VerticalOptions="Center"
                 />
+                <HorizontalStackLayout VerticalOptions="Center" HeightRequest="50">
+                    <Label Text="{Binding QtdePendentesPagto, StringFormat='Códigos Lidos: {0}'}" VerticalTextAlignment="Center" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Gray500}"/>
+                    <Label Text=" de " VerticalTextAlignment="Center" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Gray500}"/>
+                    <Label Text="{Binding QtdeTotalPagto}" VerticalTextAlignment="Center" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Gray500}"/>
+                </HorizontalStackLayout>
+               
             </VerticalStackLayout>
 
             <VerticalStackLayout  Grid.Column="2" HorizontalOptions="Center">
