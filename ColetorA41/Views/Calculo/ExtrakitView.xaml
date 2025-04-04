@@ -205,12 +205,11 @@
 
             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
                 <ActivityIndicator
-                 Grid.Column="0"
-                 IsVisible="{Binding IsBusy}"
-                 HorizontalOptions="Center"
-                 IsRunning="{Binding IsBusy}"
-                 VerticalOptions="Center"
-                />
+                                 Grid.Column="0"
+                                 IsVisible="{Binding IsBusy}"
+                                 HorizontalOptions="Center"
+                                 IsRunning="{Binding IsBusy}"
+                                 VerticalOptions="Center" />    
             </VerticalStackLayout>
 
 
@@ -221,7 +220,7 @@
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource dnBlue}" />
                     </Image.Behaviors>
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ChamarLoginAlmoxaCommand}" />
+                        <TapGestureRecognizer Command="{Binding ChamarLeituraENCCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
 

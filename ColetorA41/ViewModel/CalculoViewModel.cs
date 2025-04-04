@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ColetorA41.Models;
-
 using ColetorA41.Services;
 using System.Collections.ObjectModel;
 using ColetorA41.Views.Calculo;
@@ -644,7 +643,7 @@ namespace ColetorA41.ViewModel
             await Shell.Current.GoToAsync($"{nameof(LoginAlmoxa)}");
         }
 
-       
+
 
         [RelayCommand]
         async Task LeituraENC(string numEnc)
@@ -652,76 +651,59 @@ namespace ColetorA41.ViewModel
 
             await Task.Run(() =>
             {
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                this.IsBusy = true;
-                if (string.IsNullOrEmpty(numEnc))
+                MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    this.IsBusy = false;
-                    return;
-                }
+                    this.IsBusy = true;
+                    if (string.IsNullOrEmpty(numEnc))
+                    {
+                        this.IsBusy = false;
+                        return;
+                    }
 
-                var item = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.NrProcessSelecionado.ToString());
-                item.numEnc = numEnc;
-                if (item.flag.ToUpper() == "ERRO")
-                {
-                    this.IsBusy = false;
-                    var erro = new Mensagem("erro", "Erro Enc", item.mensagem);
-                    await Shell.Current.CurrentPage.ShowPopupAsync(erro);
-                   // this.listaEnc.Add(new Enc { flag = "Erro Leitura", numEnc = numEnc, itCodigo = item.mensagem });
+                    var item = await _service46.LeituraEnc(this.EstabSelecionado.codEstab, this.TecnicoSelecionado.codTec, numEnc, this.NrProcessSelecionado.ToString());
+                    item.numEnc = numEnc;
+                    if (item.flag.ToUpper() == "ERRO")
+                    {
+                        this.IsBusy = false;
+                        var erro = new Mensagem("erro", "Erro Enc", item.mensagem);
+                        await Shell.Current.CurrentPage.ShowPopupAsync(erro);
+                        // this.listaEnc.Add(new Enc { flag = "Erro Leitura", numEnc = numEnc, itCodigo = item.mensagem });
+                        this.NumEnc = string.Empty;
+
+                        return;
+                    }
+
+                    //this.listaEnc.Add(item);
+                    this.listaEnc.Clear();
+                    await this.ObterEncs();
                     this.NumEnc = string.Empty;
-
-                    return;
-                }
-
-                //this.listaEnc.Add(item);
-                this.listaEnc.Clear();
-                await this.ObterEncs();
-                this.NumEnc = string.Empty;
-
+                });
             });
-
-            });
-
-
         }
 
         [RelayCommand]
         async Task LeituraItemPagto(string itemPagto)
         {
 
-           /* await Task.Run(() =>
+            this.IsBusy = true;
+            await Task.Delay(500);
+            if (string.IsNullOrEmpty(itemPagto))
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
-                { */
-                    this.IsBusy = true;
-                    await Task.Delay(500);
-                    if (string.IsNullOrEmpty(itemPagto))
-                    {
-                        this.IsBusy = false;
-                        return;
-                    }
+                this.IsBusy = false;
+                return;
+            }
 
-                    var item = this.listaPagtos.Where(x => x.itCodigo == itemPagto && x.leituraPagto==false).FirstOrDefault();
-                    if (item != null)
-                    {
-                        item.leituraPagto = true;
-                    }
+            var item = this.listaPagtos.Where(x => x.itCodigo == itemPagto && x.leituraPagto == false).FirstOrDefault();
+            if (item != null)
+            {
+                item.leituraPagto = true;
+            }
 
-                    //Atualizar pendencia na tela
-                    this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
-                    this.IsBusy = false;
-                    this.ItemPagto = string.Empty;
-
-          /*      });
-
-            });
-          */
-
-
+            //Atualizar pendencia na tela
+            this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
+            this.IsBusy = false;
+            this.ItemPagto = string.Empty;
         }
-
-
 
 
         [RelayCommand]
@@ -867,21 +849,26 @@ namespace ColetorA41.ViewModel
         {
 
             //Quantidade Informada deve ser menor ou igual qtde calculada
+            var listaErros = string.Empty;
             foreach (var item in this.listaPagtos)
             {
-                if (item.qtPagarEdicao >= item.qtPagar)
+                if (item.qtPagarEdicao > item.qtPagar)
                 {
-                    var msg = new Mensagem("ERROR", "Erro de Quantidade", $"Quantidade Informada: {item.qtPagarEdicao} está maior que qtde calculada: {item.qtPagarEdicao}. Item: {item.itCodigo} !");
-                    await Shell.Current.CurrentPage.ShowPopupAsync(msg);
-                    return;
+                    listaErros += $"Item: {item.itCodigo}, qtde Info: {item.qtPagarEdicao} maior que calculada: {item.qtPagar}.\n\n";
                 }
+            }
+            if (listaErros.Length > 5)
+            {
+                var msg = new Mensagem("ERROR", "Erro de Quantidade", listaErros);
+                await Shell.Current.CurrentPage.ShowPopupAsync(msg);
+                return;
             }
 
             //A tela do resumo só podera ser apresentada se todos os pagamentos foram lidos
             var lpendente = this.listaPagtos.Where(item => !item.leituraPagto).FirstOrDefault();
             if (lpendente != null)
             {
-                var msg = new Mensagem("ERROR", "Pagamentos Pendentes","Verificar lista de pagamentos !");
+                var msg = new Mensagem("ERROR", "Leituras Pendentes","Verificar lista de pagamentos !");
                 await Shell.Current.CurrentPage.ShowPopupAsync(msg);
                 return;
             }
