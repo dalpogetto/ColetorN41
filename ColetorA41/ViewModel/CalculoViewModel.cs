@@ -702,7 +702,7 @@ namespace ColetorA41.ViewModel
                         return;
                     }
 
-                    var item = this.listaPagtos.Where(x => x.itCodigo == itemPagto).FirstOrDefault();
+                    var item = this.listaPagtos.Where(x => x.itCodigo == itemPagto && x.leituraPagto==false).FirstOrDefault();
                     if (item != null)
                     {
                         item.leituraPagto = true;
@@ -866,14 +866,27 @@ namespace ColetorA41.ViewModel
         async Task ChamarResumo()
         {
 
+            //Quantidade Informada deve ser menor ou igual qtde calculada
+            foreach (var item in this.listaPagtos)
+            {
+                if (item.qtPagarEdicao >= item.qtPagar)
+                {
+                    var msg = new Mensagem("ERROR", "Erro de Quantidade", $"Quantidade Informada: {item.qtPagarEdicao} está maior que qtde calculada: {item.qtPagarEdicao}. Item: {item.itCodigo} !");
+                    await Shell.Current.CurrentPage.ShowPopupAsync(msg);
+                    return;
+                }
+            }
+
             //A tela do resumo só podera ser apresentada se todos os pagamentos foram lidos
             var lpendente = this.listaPagtos.Where(item => !item.leituraPagto).FirstOrDefault();
             if (lpendente != null)
             {
-                var msg = new Mensagem("ERROR", "PAGAMENTOS PENDENTES","Verificar lista de pagamentos !");
+                var msg = new Mensagem("ERROR", "Pagamentos Pendentes","Verificar lista de pagamentos !");
                 await Shell.Current.CurrentPage.ShowPopupAsync(msg);
                 return;
             }
+
+           
            
             IsTotal = TipoCalculo == 1;
             IsParcial = TipoCalculo == 2 ;
