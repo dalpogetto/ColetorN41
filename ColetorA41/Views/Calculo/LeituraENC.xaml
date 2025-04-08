@@ -65,12 +65,12 @@
            />
 
 
-                <Border HeightRequest="70" Margin="20,10" Padding="0" StrokeShape="RoundRectangle 50" BackgroundColor="White"  >
+                <Border Margin="20,0"  Padding="20,0,20,0" StrokeShape="RoundRectangle 50" BackgroundColor="White"  >
                     <Entry x:Name="entry"
                        toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
                        ReturnType="Next"
-                       Margin="20,10"
-                       FontSize="16"
+                       Margin="20,5"
+                       FontSize="14"
                        Text="{Binding NumEnc}"
                        Placeholder="Aguardando leitura de etiqueta...."
                        PlaceholderColor="{StaticResource Gray300}"

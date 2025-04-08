@@ -133,7 +133,6 @@ namespace ColetorA41.ViewModel
                 return;
             }
 
-            // var lista = await _service.ObterItensCalculoMobile(TipoCalculo, tipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20);
             try
             {
                 listaProcessosEstab.Clear();
@@ -180,10 +179,7 @@ namespace ColetorA41.ViewModel
 
             else if (obj.situacao == "B")
             {
-                //await Shell.Current.GoToAsync($"{nameof(Embalagem)}");
-                //await this.ObterDadosPrimeiraNota();
-                //O método ObterNotasPagto decidira pelas telas Embalagem ou EmbalagemPrimeiraNota
-               // await this.ObterNotasPagto();
+                await Shell.Current.GoToAsync($"{nameof(EmbalagemPrimeiraNota)}");
                 await this.ObterDadosPrimeiraNota();
             }
             else

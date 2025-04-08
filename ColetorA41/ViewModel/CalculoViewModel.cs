@@ -693,7 +693,7 @@ namespace ColetorA41.ViewModel
                 return;
             }
 
-            var item = this.listaPagtos.Where(x => x.itCodigo == itemPagto && x.leituraPagto == false).FirstOrDefault();
+            var item = this.listaPagtos.Where(x => x.itCodigo.ToUpper() == itemPagto.ToUpper() && x.leituraPagto == false).FirstOrDefault();
             if (item != null)
             {
                 item.leituraPagto = true;
@@ -863,6 +863,7 @@ namespace ColetorA41.ViewModel
                 await Shell.Current.CurrentPage.ShowPopupAsync(msg);
                 return;
             }
+         
 
             //A tela do resumo só podera ser apresentada se todos os pagamentos foram lidos
             var lpendente = this.listaPagtos.Where(item => !item.leituraPagto).FirstOrDefault();
@@ -873,13 +874,26 @@ namespace ColetorA41.ViewModel
                 return;
             }
 
-           
-           
+            ObservableRangeCollection<ItemFicha> listaModificada = new();
+            foreach (var item in listaPagtos)
+            {
+                item.qtPagar = item.qtPagarEdicao;
+                listaModificada.Add(item);
+            }
+
+            //Mandar a lista de pagamentos alteradas no front para o back atualizar
+            var resp = this._service.AjustarListaPagtosMobile(new AcertoPagamentoRequest
+            {
+                nrProcess = this.NrProcessSelecionado,
+                items = listaModificada?.ToList()
+            });
+                
             IsTotal = TipoCalculo == 1;
             IsParcial = TipoCalculo == 2 ;
             IsET = TipoCalculo == 3;
 
             await this.AtualizaLblBotoes(TipoCalculo);
+            await this.AtualizarLabelsContadores(TipoCalculo);
             await Shell.Current.GoToAsync($"{nameof(Views.Calculo.Resumo)}");
         }
        

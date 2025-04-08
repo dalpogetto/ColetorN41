@@ -369,5 +369,21 @@ namespace ColetorA41.Services
 
         }
 
+        public async Task<BaseResponse> AjustarListaPagtosMobile(AcertoPagamentoRequest requestTela)
+        {
+            try
+            {
+                var request = requestTela;
+                var response = await PostAsync<AcertoPagamentoRequest, BaseResponse>("apiesaa041/AjustarListaPagtosMobile", request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+
+        }
+
     }
 }

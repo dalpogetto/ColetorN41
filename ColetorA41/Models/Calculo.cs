@@ -87,6 +87,14 @@ namespace ColetorA41.Models
         public List<ItemFicha> pagto { get; set; }
     }
 
+    public class AcertoPagamentoRequest
+    {
+        public int nrProcess { get; set; }
+        public List<ItemFicha> items { get; set; }
+    }
+
+    public class BaseResponse : BaseModel { }
+
     public class Semsaldo
     {
         public int qtPagar { get; set; }

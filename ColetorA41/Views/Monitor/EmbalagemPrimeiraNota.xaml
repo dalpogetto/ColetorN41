@@ -144,17 +144,7 @@
                 </Grid>
             </Border>
 
-            <Border VerticalOptions="End" HorizontalOptions="End" Margin="10,0,20,0" StrokeShape="RoundRectangle 10">
-                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="End" Padding="10">
-                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                        <Image Source="scanner3.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="40"/>
-                        <Label Text="Leituras Realizadas para Pagamentos" FontSize="14" WidthRequest="130"  FontAttributes="Bold" TextColor="{StaticResource Gray500}"></Label>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ListaEtiquetasLidasCommand}" />
-                </Border.GestureRecognizers>
-            </Border>
+           
 
         </VerticalStackLayout>
             

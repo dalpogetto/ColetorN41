@@ -64,7 +64,7 @@
 
                 </HorizontalStackLayout>
 
-                <Border Margin="0,0" Padding="20,0,20,0" StrokeShape="RoundRectangle 50" Background="{StaticResource dnWhite}" >
+                <Border Padding="20,0,20,0" StrokeShape="RoundRectangle 50" Background="{StaticResource dnWhite}" >
                     <Entry x:Name="entry"
                             toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
                             ReturnType="Next"
@@ -83,7 +83,7 @@
                                      Command="{Binding LeituraItemPagtoCommand, Mode=OneTime}"
                                      CommandParameter="{Binding ItemPagto}"
                                      StoppedTypingTimeThreshold="1000"
-                                     MinimumLengthThreshold="6"
+                                     MinimumLengthThreshold="14"
                                      ShouldDismissKeyboardAutomatically="False" />  
                         </Entry.Behaviors>
                     </Entry>
