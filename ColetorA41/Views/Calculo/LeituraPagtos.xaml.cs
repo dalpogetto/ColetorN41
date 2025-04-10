@@ -9,4 +9,20 @@ public partial class LeituraPagtos : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        Task.Run(() =>
+        {
+            while (!entry.IsLoaded)
+            {
+                Task.Delay(500).Wait();
+            }
+            Shell.Current.Dispatcher.Dispatch(() =>
+            {
+                entry.Focus();
+            });
+        });
+    }
 }

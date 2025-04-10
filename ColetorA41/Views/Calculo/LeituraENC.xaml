@@ -98,12 +98,16 @@
             
         </StackLayout>
 
-        <ScrollView Grid.Row="1"  Margin="10,0,10,0" HorizontalOptions="Center">
+        <ScrollView Grid.Row="1"  Margin="10,0,10,0" HorizontalOptions="Center"
+                    toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
+                    >
+            
             <StackLayout>
                 
                 <CollectionView x:Name="collectionParam"
                  ItemsSource="{Binding listaEnc}" 
                  SelectionMode="None" 
+                 toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
                  VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Enc">

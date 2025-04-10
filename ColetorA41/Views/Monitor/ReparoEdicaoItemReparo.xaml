@@ -63,7 +63,7 @@
             
                 <Frame HeightRequest="400" Margin="0,0" Padding="2" BackgroundColor="White" HasShadow="True" CornerRadius="10" HorizontalOptions="Center">
                     <VerticalStackLayout HorizontalOptions="FillAndExpand">
-                        <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="*,*,110,auto,80" ColumnSpacing="10" >
+                        <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="*,*,auto,auto,80" ColumnSpacing="10" >
                             <!--Cabecalho-->
                             <Label Text="Estab"      Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="0"></Label>
                             <Label Text="Filial"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="1"></Label>

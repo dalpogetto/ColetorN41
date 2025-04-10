@@ -513,6 +513,7 @@ namespace ColetorA41.ViewModel
 
             var lista = await _service.ObterItensCalculoMobile(TipoCalculo, TipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20, BuscaItemFicha);
             listaItensFicha.AddRange(lista.items);
+
             IsBusy = false;
         }
 
@@ -699,6 +700,7 @@ namespace ColetorA41.ViewModel
                 item.leituraPagto = true;
             }
 
+
             //Atualizar pendencia na tela
             this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
             this.IsBusy = false;
@@ -724,8 +726,8 @@ namespace ColetorA41.ViewModel
 
             await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
 
-            this.listaPagtos.Remove(item);
             Fichas.Geral = Fichas.Geral - item.qtPagar;
+            this.listaPagtos.Remove(item);
 
             //Mostrar Acompanhamento
             this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
@@ -1262,6 +1264,8 @@ namespace ColetorA41.ViewModel
             {
                 totalET += x.qtDisp;
             }
+
+
 
             //Geral
             Fichas.Geral = item.qtGeral + totalET;

@@ -15,7 +15,21 @@ public partial class LeituraENC : ContentPage
         this.vm = viewModel;
     }
 
-   
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        Task.Run(() =>
+        {
+            while (!entry.IsLoaded)
+            {
+                Task.Delay(500).Wait();
+            }
+            Shell.Current.Dispatcher.Dispatch(() =>
+            {
+                entry.Focus();
+            });
+        });
+    }
 
     protected override bool OnBackButtonPressed()
     {

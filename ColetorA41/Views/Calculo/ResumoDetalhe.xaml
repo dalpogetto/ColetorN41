@@ -12,7 +12,7 @@
              Title="Resumo Detalhe">
 
     <ContentPage.Resources>
-        <local:StringToColor x:Key="StringToColor" />
+        <local:TipoFicha x:Key="TipoFicha" />
 
         <Style x:Key="lblCabec" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
@@ -58,7 +58,7 @@
     Opacity="0.8" />
                         </Image.Shadow>
                     </Image>
-                    <Label  Text="{Binding TipoFichaSelecionado, StringFormat='Lista {0}'}"
+                    <Label  Text="{Binding TipoFichaSelecionado, StringFormat='Lista {0}', Converter={StaticResource TipoFicha}}"
                         FontAttributes="Bold"
                             TextColor="White"
                         FontSize="22"
@@ -76,7 +76,7 @@
 
             </VerticalStackLayout>
         </StackLayout>
-        <Border HeightRequest="70" Margin="20,80,20,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" >
+        <Border HeightRequest="53" Margin="20,80,20,0" Padding="0" StrokeShape="RoundRectangle 20" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" >
             <SearchBar x:Name="searchBar"  
                        Placeholder="Buscar item..."
                        

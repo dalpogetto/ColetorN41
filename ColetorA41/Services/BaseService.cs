@@ -25,7 +25,6 @@ namespace ColetorA41.Services
         protected readonly IHttpClientFactory _httpClientFactory;
         public HttpClient _httpClient;
         private readonly IConfiguration _config;
-
         
 
         /// <summary>
@@ -33,8 +32,6 @@ namespace ColetorA41.Services
         /// </summary>
         public BaseService(IHttpClientFactory httpClientFactory, IConfiguration config)
         {
-
-            
             _config = config;
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient("coletor");
@@ -42,11 +39,6 @@ namespace ColetorA41.Services
             _httpClient.DefaultRequestHeaders.Add("x-totvs-server-alias", _config["ALIAS_APPSERVER"]);
             _httpClient.DefaultRequestHeaders.Add("CompanyId", _config["EMPRESA_PADRAO"]);
             _httpClient.Timeout = Timeout.InfiniteTimeSpan;
-            
-          
-
-            //  _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
-
         }
 
         protected async Task<T?> GetAsync<T>(string endpoint, NameValueCollection parameters = null)
@@ -70,9 +62,6 @@ namespace ColetorA41.Services
 
             try
             {
-
-                //Montar httpclient
-               
                 var response = await _httpClient.GetAsync(endpoint + stringParam.ToString());
                 var responseStream = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<T>(responseStream);
@@ -83,22 +72,9 @@ namespace ColetorA41.Services
                 Debug.WriteLine($"Impossível obter dados: {ex.Message}");
                 throw new Exception(ex.Message);
             }
-            finally
-            {
-                
-                
-            }
-
         }
 
-        public static string StreamToString(Stream stream)
-        {
-            stream.Position = 0;
-            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-            {
-                return reader.ReadToEnd();
-            }
-        }
+       
 
         protected async Task<TResponse?> PostAsync<TRequest, TResponse>(string metodo, TRequest requestBody = default)
         {
@@ -109,7 +85,6 @@ namespace ColetorA41.Services
             var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(_config["BASE_URL"] ?? string.Empty, metodo)) };
             if (requestBody != null)
             {
-               // var json = System.Text.Json.JsonSerializer.Serialize(requestBody);
                 var json = JsonConvert.SerializeObject(requestBody);
                 request.Content = new StringContent(json, Encoding.UTF8, "application/json");
             }
@@ -118,34 +93,17 @@ namespace ColetorA41.Services
                 var cts = new CancellationTokenSource(new TimeSpan(0, 2, 5));
                 var response = await _httpClient.SendAsync(request, cts.Token).ConfigureAwait(false);
 
-                /*
-                var responseStream = await response.Content.ReadAsStringAsync();
-                  {
-                      var data = JsonConvert.DeserializeObject<TResponse>(responseStream);
-                      return data;
-                  }
-                */
-
                 var responseStream = await response.Content.ReadAsStreamAsync();
                 { 
-                    // convert stream to string
                     StreamReader reader = new StreamReader(responseStream);
                     string text = reader.ReadToEnd();
-
-                    Debug.WriteLine($"Retorno API:");
-
                     var data = JsonConvert.DeserializeObject<TResponse>(text);
-
-                    Debug.WriteLine($"APOS CONVERSAO  API:");
                     return data;
                 };
-
-
 
             }
             catch (Exception ex)
             {
-
                 Debug.WriteLine($"Impossível obter dados: {ex.Message}");
                 throw new Exception(ex.Message);
             }
@@ -155,27 +113,13 @@ namespace ColetorA41.Services
         }
 
 
-
-        protected async Task<HttpResponseMessage?> DeleteAsync(string endpoint)
+        public static string StreamToString(Stream stream)
         {
-            if (!IsInternetAvailable())
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
             {
-                return null;
+                return reader.ReadToEnd();
             }
-
-            try
-            {
-                //var _httpClient = _httpClientFactory.CreateClient("coletor");
-                var _httpClient = new HttpClient(DependencyService.Get<IHTTPClientHandlerCreationService>().GetInsecureHandler());
-                return await _httpClient.DeleteAsync(endpoint);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Impossível eliminar registro: {ex.Message}");
-                await Shell.Current.DisplayAlert("Erro!", "Impossível eliminar registro.", "OK");
-                return null;
-            }
-            
         }
 
         /// <summary>
