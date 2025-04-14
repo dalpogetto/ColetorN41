@@ -30,7 +30,7 @@
     </ContentPage.Resources>
 
 
-    <Grid RowDefinitions="140,*,60,8">
+    <Grid RowDefinitions="140,*,60,5">
         <StackLayout>
             <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
@@ -102,7 +102,8 @@
         </StackLayout>
 
         <CollectionView x:Name="lista" Grid.Row="1" 
-                        toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}"
+                       
+                        
                         ItemsSource="{Binding listaPagtos}" 
                         VerticalScrollBarVisibility="Always">
             
@@ -147,7 +148,7 @@
                                            TextColor="{StaticResource dnWhite}" 
                                            HeightRequest="35" 
                                            Keyboard="Numeric" 
-                                           toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference entry}">
+                                          >
                                         
                                     </Entry>
                                     <Label Margin="5,0" FontSize="14" Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="3" Grid.Column="1"  Background="{StaticResource Gray100}"  HeightRequest="35" VerticalTextAlignment="Center" Opacity="0.8" ></Label>

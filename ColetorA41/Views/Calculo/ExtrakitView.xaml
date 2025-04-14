@@ -8,7 +8,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
               Shell.NavBarIsVisible="False"
              Title="Extrakit">
-    <Grid RowDefinitions="auto,*,60,8">
+    <Grid RowDefinitions="auto,*,60,5">
         <StackLayout>
             <Grid RowDefinitions="100">
                     <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">

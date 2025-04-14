@@ -5,7 +5,7 @@
              Shell.TabBarIsVisible="False"
              Shell.NavBarIsVisible="False"
              Title="LoadingCalculo">
-    <Grid RowDefinitions="auto,*,auto,8">
+    <Grid RowDefinitions="auto,*,auto,5">
         <StackLayout>
             <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">

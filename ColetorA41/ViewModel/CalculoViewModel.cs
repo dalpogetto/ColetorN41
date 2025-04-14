@@ -723,10 +723,15 @@ namespace ColetorA41.ViewModel
         {
             IsBusy = true;
             var item = this.listaPagtos.Where(o=>o.cRowId==obj.cRowId).First();
+            
+            var itemCalculo = this.listaCalculo.Where(o => o.tipo == this.TipoCalculo).FirstOrDefault();
+            if (itemCalculo != null){
+                itemCalculo.qtGeral -= item.qtPagar;
+            }
 
             await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
 
-            Fichas.Geral = Fichas.Geral - item.qtPagar;
+           // Fichas.Geral = Fichas.Geral - item.qtPagar;
             this.listaPagtos.Remove(item);
 
             //Mostrar Acompanhamento
@@ -751,6 +756,9 @@ namespace ColetorA41.ViewModel
                 if (ok)
                 {
 
+                    var itemCalculo = this.listaCalculo.Where(o => o.tipo == this.TipoCalculo).FirstOrDefault();
+                   
+
                     for (int i = listaPagtos.Count - 1; i >= 0; i--)
                     {
                         var item = listaPagtos[i];
@@ -758,7 +766,11 @@ namespace ColetorA41.ViewModel
                         {
                             //Para funcionamento online da rotina de leitura o tratamento sera offline
                             await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
-                            Fichas.Geral = Fichas.Geral - item.qtPagar;
+                            if (itemCalculo != null)
+                            {
+                                itemCalculo.qtGeral -= item.qtPagar;
+                            }
+                           // Fichas.Geral = Fichas.Geral - item.qtPagar;
                             listaPagtos.RemoveAt(i);
                         }
                     }

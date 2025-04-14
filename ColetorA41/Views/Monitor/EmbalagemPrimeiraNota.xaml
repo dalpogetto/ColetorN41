@@ -22,7 +22,7 @@
 
         </Style>
     </ContentPage.Resources>
-    <Grid RowDefinitions="auto,*,60,8">
+    <Grid RowDefinitions="auto,*,60,5">
         <StackLayout>
             <Grid RowDefinitions="100">
                 <Rectangle Fill="{StaticResource dnBlue}"  Stroke="{StaticResource dnBlue}">
