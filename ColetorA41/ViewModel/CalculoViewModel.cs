@@ -86,6 +86,7 @@ namespace ColetorA41.ViewModel
         public ObservableCollection<Entrega> listaEntrega { get; private set; } = new();
         public ObservableCollection<Extrakit> listaExtrakit { get; private set; } = new();
         public ObservableCollection<object> listaExtrakitSelecionados { get; set; } = new();
+        public ObservableCollection<object> listaPagtosSelecionados { get; set; } = new();
         public ObservableCollection<Extrakit> listaExtrakitNaoSelecionados { get; set; } = new();
         public ObservableCollection<Ficha> listaCalculo { get; private set; } = new();
         public ObservableCollection<Semsaldo> listaSemSaldo { get; private set; } = new();
@@ -397,6 +398,21 @@ namespace ColetorA41.ViewModel
             }
             QtdeETSelecionadas = listaExtrakitSelecionados.OfType<Extrakit>().Sum(s => s.qtSaldo);
             QtdeETNaoSelecionadas = listaExtrakitNaoSelecionados.Sum(s => s.qtSaldo);
+        }
+
+        [RelayCommand]
+        public async void ListaPagtosSelecionada()
+        {
+            foreach (var item in listaPagtos)
+            {
+
+                var encontrado = this.listaPagtosSelecionados.OfType<ItemFicha>().Where(x => x.id == item.id && x.leituraPagto == false).FirstOrDefault();
+                if(encontrado != null)
+                   encontrado.leituraPagto = true;
+            }
+
+            this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
+
         }
 
         [RelayCommand]

@@ -102,9 +102,10 @@
         </StackLayout>
 
         <CollectionView x:Name="lista" Grid.Row="1" 
-                       
-                        
                         ItemsSource="{Binding listaPagtos}" 
+                        SelectionMode="Multiple" 
+                        SelectedItems="{Binding listaPagtosSelecionados}"
+                        SelectionChangedCommand="{Binding ListaPagtosSelecionadaCommand}"
                         VerticalScrollBarVisibility="Always">
             
             <CollectionView.ItemTemplate>
@@ -140,7 +141,9 @@
                                     
 
                                     <!--Detalhe-->
-                                    <Entry Margin="5,0" FontSize="14" 
+                                    <Entry x:Name="qtdEdit"
+                                           Margin="5,0" 
+                                           FontSize="14" 
                                            Text="{Binding qtPagarEdicao}" 
                                            Grid.Row="3" Grid.Column="3" 
                                            Style="{StaticResource lblDet}" 
@@ -154,10 +157,24 @@
                                     <Label Margin="5,0" FontSize="14" Text="{Binding qtPagar}" Style="{StaticResource lblDet}" Grid.Row="3" Grid.Column="1"  Background="{StaticResource Gray100}"  HeightRequest="35" VerticalTextAlignment="Center" Opacity="0.8" ></Label>
                                 </Grid>
                             </VerticalStackLayout>
-
-                           
                         </Border>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter TargetName="qtdEdit" Property="BackgroundColor" Value="{StaticResource dnGreen}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter TargetName="qtdEdit" Property="BackgroundColor" Value="{StaticResource dnRed}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </SwipeView>
+                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
