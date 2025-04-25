@@ -1,16 +1,12 @@
-﻿using System.Net.Http.Headers;
-using System.Net.Http;
+﻿using System.Reflection;
 using ColetorA41.Services;
 using ColetorA41.ViewModel;
 using ColetorA41.Views;
 using ColetorA41.Views.Calculo;
-using ColetorA41.Views.ParamEstab;
-using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
-using ColetorA41.Models;
-using Microsoft.Extensions.Configuration;
-using System.Reflection;
 using ColetorA41.Views.Monitor;
+using CommunityToolkit.Maui;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 //using ColetorA41.Pages;
 
 namespace ColetorA41
@@ -88,6 +84,7 @@ namespace ColetorA41
             builder.Services.AddTransient<ReparoEdicaoItemReparo>();
             builder.Services.AddTransient<ZoomTransporte>();
             builder.Services.AddTransient<LeituraPagtos>();
+          
             #endregion
 
             #region ViewModel

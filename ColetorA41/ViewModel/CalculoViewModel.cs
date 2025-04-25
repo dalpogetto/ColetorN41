@@ -1,13 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using ColetorA41.Extensions;
 using ColetorA41.Models;
 using ColetorA41.Services;
-using System.Collections.ObjectModel;
-using ColetorA41.Views.Calculo;
-using Microsoft.Extensions.Configuration;
 using ColetorA41.Views;
-using ColetorA41.Extensions;
+using ColetorA41.Views.Calculo;
 using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Configuration;
+
 
 namespace ColetorA41.ViewModel
 {
@@ -17,14 +18,17 @@ namespace ColetorA41.ViewModel
         private readonly TotvsService46 _service46;
         private readonly IConfiguration _config;
        
-      
+
+
         public CalculoViewModel(TotvsService totvsService, 
                                 TotvsService46 totvsService46,
-                                IConfiguration config)
+                                IConfiguration config
+                                )
         {
             _service = totvsService;
             _service46 = totvsService46;
             _config = config;
+          
         }
 
 
@@ -734,20 +738,24 @@ namespace ColetorA41.ViewModel
             IsBusy = false;
         }
 
+       
         [RelayCommand]
-        async Task EliminarPagto(ItemFicha obj)
+        async Task EliminarPagtoSelecionado(ItemFicha obj)
         {
+           
+
             IsBusy = true;
-            var item = this.listaPagtos.Where(o=>o.cRowId==obj.cRowId).First();
-            
+            var item = this.listaPagtos.Where(o => o.cRowId == obj.cRowId).First();
+
             var itemCalculo = this.listaCalculo.Where(o => o.tipo == this.TipoCalculo).FirstOrDefault();
-            if (itemCalculo != null){
+            if (itemCalculo != null)
+            {
                 itemCalculo.qtGeral -= item.qtPagar;
             }
 
             await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
 
-           // Fichas.Geral = Fichas.Geral - item.qtPagar;
+            // Fichas.Geral = Fichas.Geral - item.qtPagar;
             this.listaPagtos.Remove(item);
 
             //Mostrar Acompanhamento
@@ -757,13 +765,53 @@ namespace ColetorA41.ViewModel
 
             await AtualizarLabelsContadores(TipoCalculo);
             IsBusy = false;
+           
+
 
         }
 
         [RelayCommand]
+        async Task EliminarPagto(ItemFicha obj)
+        {
+          
+            var mensa = new MensagemSimNao("Eliminar Pagamento", "Deseja eliminar registro de pagamento ?");
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
+            if (result is bool ok)
+            {
+
+                if (ok)
+                {
+                    IsBusy = true;
+                    var item = this.listaPagtos.Where(o => o.cRowId == obj.cRowId).First();
+
+                    var itemCalculo = this.listaCalculo.Where(o => o.tipo == this.TipoCalculo).FirstOrDefault();
+                    if (itemCalculo != null)
+                    {
+                        itemCalculo.qtGeral -= item.qtPagar;
+                    }
+
+                    await this._service.EliminarPorId(item.id, this._estabSelecionado.codEstab, this._tecnicoSelecionado.codTec);
+
+                    // Fichas.Geral = Fichas.Geral - item.qtPagar;
+                    this.listaPagtos.Remove(item);
+
+                    //Mostrar Acompanhamento
+                    this.QtdePendentesPagto = this.listaPagtos.Where(item => item.leituraPagto).Count();
+                    this.QtdeTotalPagto = this.listaPagtos.Count();
+
+
+                    await AtualizarLabelsContadores(TipoCalculo);
+                    IsBusy = false;
+                }
+            }
+         
+        }
+
+       
+        [RelayCommand]
         async Task EliminarTodosPagtos()
         {
-
+           
             var mensa = new MensagemSimNao("Eliminar Pagamentos", "Deseja eliminar todos os registros de pagamentos não lidos ?");
             var result = await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
             if (result is bool ok)
@@ -803,6 +851,7 @@ namespace ColetorA41.ViewModel
                     IsBusy = false;
                 }
             }
+            
 
         }
 

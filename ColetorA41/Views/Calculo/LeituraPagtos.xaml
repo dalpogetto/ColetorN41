@@ -7,6 +7,7 @@
              x:DataType="viewmodel:CalculoViewModel"
              xmlns:local="clr-namespace:ColetorA41.Converters"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+           
              Shell.NavBarIsVisible="False"
              x:Name="listaPagtos"
              Title="Resumo Detalhe">
@@ -101,6 +102,8 @@
             </VerticalStackLayout>
         </StackLayout>
 
+      
+
         <CollectionView x:Name="lista" Grid.Row="1" 
                         ItemsSource="{Binding listaPagtos}" 
                         SelectionMode="Multiple" 
@@ -110,12 +113,12 @@
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ItemFicha">
-                    <SwipeView>
+                    <SwipeView >
                         <SwipeView.RightItems>
-                            <SwipeItems>
+                            <SwipeItems Mode="Execute">
                                 <SwipeItem 
                                         IconImageSource="trash.png"
-                                        BackgroundColor="WhiteSmoke"
+                                        BackgroundColor="{StaticResource dnRed}"
                                         Command="{Binding BindingContext.EliminarPagtoCommand, Source={x:Reference listaPagtos}}"
                                         CommandParameter="{Binding .}" />
 
@@ -238,6 +241,11 @@
 
         </Grid>
 
+     
+ 
+
     </Grid>
+
+   
 
 </ContentPage>
