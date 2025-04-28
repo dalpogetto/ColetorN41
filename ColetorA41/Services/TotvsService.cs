@@ -64,9 +64,6 @@ namespace ColetorA41.Services
                 //Setar Header - Basic Authentication
                 this._httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Ambiente.UsuarioSenhaBase64);
 
-                //Chamar qualquer método a api vai responder pelo usuario
-               // var lista = await ObterEstabelecimentos();
-
                 //Testar Versao
                 if (!await VerificarVersaoMobile(AppInfo.Current.VersionString))
                 {
@@ -97,7 +94,6 @@ namespace ColetorA41.Services
         {
             var response = await GetAsync<Versao>("apiesaa041/DownloadVersao");
             using var reader = new StreamReader(response.arquivo);
-
         }
 
         public async Task<ItemFichaResponse> ObterItensCalculoMobile(int tipoCalculo, string tipoFicha, int nrProcess, int skip, int pageSize, string criterioBuscaItemFicha)

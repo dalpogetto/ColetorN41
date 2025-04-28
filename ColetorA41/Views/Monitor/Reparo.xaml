@@ -97,7 +97,7 @@
                                         <Label Text="{Binding nrenc}"   Style="{StaticResource lblDet}" Grid.Row="2" Grid.Column="4"></Label>
                                     </Grid>
                                     <Border Background="{StaticResource Gray100}" HeightRequest="1" Margin="0,1,0,1"></Border>
-                                    <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="*,*,*">
+                                    <Grid Padding="5" RowDefinitions="*,*" ColumnDefinitions="auto,*,*">
                                         <!--Cabecalho-->
                                         <Label Text="Item Equivalente"      Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="0"></Label>
                                         <Label Text="Qtde Equivalente"       Style="{StaticResource lblCabec}" Grid.Row="0" Grid.Column="1"></Label>

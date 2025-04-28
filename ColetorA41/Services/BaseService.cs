@@ -79,9 +79,6 @@ namespace ColetorA41.Services
         protected async Task<TResponse?> PostAsync<TRequest, TResponse>(string metodo, TRequest requestBody = default)
         {
 
-            //Montar httpclient
-      
-            /*Montar Request*/
             var request = new HttpRequestMessage { Method = HttpMethod.Post, RequestUri = new Uri(Path.Combine(_config["BASE_URL"] ?? string.Empty, metodo)) };
             if (requestBody != null)
             {

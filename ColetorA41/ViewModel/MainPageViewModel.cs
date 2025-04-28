@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using ColetorA41.Models;
-using ColetorA41.Views.ParamEstab;
 using ColetorA41.Views.Calculo;
-using ColetorA41.Views;
 using ColetorA41.Views.Monitor;
 
 
@@ -32,14 +29,6 @@ namespace ColetorA41.ViewModel
         {
             this.IsBusy = true;
             await Shell.Current.GoToAsync($"{nameof(Processos)}");
-            this.IsBusy = false;
-        }
-
-        [RelayCommand]
-        async Task ChamarCadEstabel()
-        {
-            this.IsBusy = true;
-            await Shell.Current.GoToAsync($"{nameof(ParamEstabList)}");
             this.IsBusy = false;
         }
 

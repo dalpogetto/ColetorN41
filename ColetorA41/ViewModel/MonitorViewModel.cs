@@ -179,8 +179,8 @@ namespace ColetorA41.ViewModel
 
             else if (obj.situacao == "B")
             {
-                await Shell.Current.GoToAsync($"{nameof(EmbalagemPrimeiraNota)}");
                 await this.ObterDadosPrimeiraNota();
+                await Shell.Current.GoToAsync($"{nameof(EmbalagemPrimeiraNota)}");
             }
             else
             {
@@ -258,8 +258,8 @@ namespace ColetorA41.ViewModel
             DadosNotaFiscal = resp.nfs[0];
             //Popular Dados Nota Fiscal
             DadosNotaFiscal.volume = DadosNotaFiscal.volume ?? "";
-            DadosNotaFiscal.pesobru = DadosNotaFiscal.pesobru ?? "0";
-            DadosNotaFiscal.pesoliq = DadosNotaFiscal.pesoliq ?? "0";
+            DadosNotaFiscal.pesobru = "0,001";
+            DadosNotaFiscal.pesoliq = "0,001";
 
             DadosNotaFiscal.nrprocess = ProcessoEstabSelecionado.nrprocess.ToString();
             IsBusy = false;
@@ -348,6 +348,7 @@ namespace ColetorA41.ViewModel
 
             IsBusy = false;
             ReparoItemDados.lequivalente = ReparoItemDados.itcodigoequiv != string.Empty;
+            Justificativa = string.Empty;
             await this.ChamarReparo();
            
         }
@@ -540,7 +541,7 @@ namespace ColetorA41.ViewModel
         async Task ChamarReparo()
         {
             //Voltar os campos originais
-
+            Justificativa = string.Empty;
             await Shell.Current.GoToAsync($"{nameof(Reparo)}");
         }
 
@@ -548,6 +549,8 @@ namespace ColetorA41.ViewModel
         async Task ChamarEmbalagemPrimeiraNota()
         {
             //Voltar os campos originais
+            DadosNotaFiscal.pesobru = "0.0001";
+            DadosNotaFiscal.pesoliq = "0.0001";
 
             await Shell.Current.GoToAsync($"{nameof(EmbalagemPrimeiraNota)}");
         }
@@ -564,6 +567,10 @@ namespace ColetorA41.ViewModel
                     this.IsBusy = true;
 
                     var obj = DadosNotaFiscal;
+
+                    //Replace ,.
+                    obj.pesobru.Replace(',', '.');
+                    obj.pesoliq.Replace(',', '.');
                     var resp = await _service.InformarEmbalagem(obj);
                     if(resp.ok == "ok")
                     {

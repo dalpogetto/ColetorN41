@@ -17,6 +17,8 @@ namespace ColetorA41.ViewModel
         private readonly TotvsService _service;
         private readonly TotvsService46 _service46;
         private readonly IConfiguration _config;
+
+        private int controle = 0;
        
 
 
@@ -502,6 +504,7 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task CarregarFichas()
         {
+            
             //Adicionar Extrakit fora do processo na selecao do Geral
             if (this.TipoFichaSelecionado == "Geral" && this.listaItensFicha.Count <= 0)
             {
@@ -518,9 +521,11 @@ namespace ColetorA41.ViewModel
                         qtRuim = item.qtRuim,
                         qtSaldo = item.qtSaldo,
                         qtExtrakit = item.qtSaldo,
-                        notaAnt = item.nroDocto
+                        notaAnt = item.nroDocto,
+                        material="etforaprocesso"
                     });
                 }
+                this.controle = this.controle + 1;
             }
 
             //Itens sem saldo nao sera paginado
@@ -531,7 +536,7 @@ namespace ColetorA41.ViewModel
             // if (IsBusy) return;
             IsBusy = true;
 
-            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, TipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count(), 20, BuscaItemFicha);
+            var lista = await _service.ObterItensCalculoMobile(TipoCalculo, TipoFichaSelecionado, NrProcessSelecionado, listaItensFicha.Count() - this.controle, 20, BuscaItemFicha);
             listaItensFicha.AddRange(lista.items);
 
             IsBusy = false;
@@ -707,7 +712,7 @@ namespace ColetorA41.ViewModel
         {
 
             this.IsBusy = true;
-            await Task.Delay(500);
+           
             if (string.IsNullOrEmpty(itemPagto))
             {
                 this.IsBusy = false;
@@ -719,6 +724,7 @@ namespace ColetorA41.ViewModel
             {
                 item.leituraPagto = true;
             }
+            await Task.Delay(1000);
 
 
             //Atualizar pendencia na tela
@@ -811,7 +817,7 @@ namespace ColetorA41.ViewModel
         [RelayCommand]
         async Task EliminarTodosPagtos()
         {
-           
+            
             var mensa = new MensagemSimNao("Eliminar Pagamentos", "Deseja eliminar todos os registros de pagamentos não lidos ?");
             var result = await Shell.Current.CurrentPage.ShowPopupAsync(mensa);
             if (result is bool ok)
@@ -819,7 +825,7 @@ namespace ColetorA41.ViewModel
 
                 if (ok)
                 {
-
+                    IsBusy = true;
                     var itemCalculo = this.listaCalculo.Where(o => o.tipo == this.TipoCalculo).FirstOrDefault();
                    
 
@@ -838,7 +844,7 @@ namespace ColetorA41.ViewModel
                             listaPagtos.RemoveAt(i);
                         }
                     }
-                    IsBusy = true;
+                   
                   
                    // this.listaPagtos.Clear();
                     await AtualizarLabelsContadores(TipoCalculo);
@@ -870,6 +876,7 @@ namespace ColetorA41.ViewModel
         {
             try
             {
+                await Task.Delay(500);
                 this.IsBusy = true;
                 //Apagar os calculos anteriores
                 this.Fichas = new();

@@ -1,9 +1,7 @@
 ﻿
 using ColetorA41.ViewModel;
 using ColetorA41.Views;
-using ColetorA41.Views.ParamEstab;
 using ColetorA41.Views.Calculo;
-using ColetorA41.Services;
 using ColetorA41.Views.Monitor;
 
 
