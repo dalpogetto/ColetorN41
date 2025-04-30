@@ -17,10 +17,7 @@ namespace ColetorA41.ViewModel
         private readonly TotvsService _service;
         private readonly TotvsService46 _service46;
         private readonly IConfiguration _config;
-
         private int controle = 0;
-       
-
 
         public CalculoViewModel(TotvsService totvsService, 
                                 TotvsService46 totvsService46,
@@ -524,8 +521,11 @@ namespace ColetorA41.ViewModel
                         notaAnt = item.nroDocto,
                         material="etforaprocesso"
                     });
+
+                    //Sera preciso descontar esta qtidade de registros 
+                    this.controle = this.controle + 1;
                 }
-                this.controle = this.controle + 1;
+                
             }
 
             //Itens sem saldo nao sera paginado
